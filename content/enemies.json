@@ -1,0 +1,44 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Prologue stats from 04_GAMEPLAY_SYSTEMS.md. Not balanced.",
+ "enemies": {
+  "leafling": {
+   "name": "Leafling",
+   "character": "leafling",
+   "stats": {
+    "level": 1,
+    "max_hp": 48,
+    "atk": 9,
+    "def": 8,
+    "mag": 4,
+    "res": 7,
+    "spd": 6
+   },
+   "xp": 5,
+   "attacks": [
+    {
+     "name": "Seed Toss",
+     "kind": "physical",
+     "mult": 1.0
+    }
+   ]
+  }
+ },
+ "encounters": {
+  "leafling_tutorial": {
+   "enemies": [
+    "leafling"
+   ],
+   "can_escape": false,
+   "tutorial": true,
+   "win_flags": [
+    "leafling_tutorial_complete"
+   ],
+   "win_key_items": [
+    "item_bobo_parcel"
+   ],
+   "enemy_first": true,
+   "note": "enemy_first: the Leafling opens with Seed Toss so the tutorial shows dodging first."
+  }
+ }
+}

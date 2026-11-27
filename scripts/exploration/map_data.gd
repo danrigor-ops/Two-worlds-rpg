@@ -61,6 +61,7 @@ static func load_map(map_id: String) -> MapData:
 			"to_map": door.get("to_map", ""),
 			"to_spawn": door.get("to_spawn", ""),
 			"one_way": door.get("one_way", false),
+			"require": door.get("require", []),
 		})
 	for npc: Dictionary in d.get("npcs", []):
 		var n := npc.duplicate()
@@ -136,12 +137,23 @@ func validate_self() -> Array[String]:
 	for door in doors:
 		if tile_name(door["cell"]) not in ["door", "exit"]:
 			e.append(p + "door '%s' at %s is not on a door tile" % [door["id"], door["cell"]])
+		for r: Dictionary in door["require"]:
+			if not Dialogue.has_scene(r.get("else_scene", "")):
+				e.append(p + "door '%s' uses missing scene '%s'" % [door["id"], r.get("else_scene", "")])
 	for npc in npcs:
 		if not is_walkable(npc["cell"]):
 			e.append(p + "npc '%s' at %s is not on a walkable tile" % [npc.get("id", "?"), npc["cell"]])
 		for t: Dictionary in npc.get("talk", []):
 			if not Dialogue.has_scene(t.get("scene", "")):
 				e.append(p + "npc '%s' uses missing scene '%s'" % [npc.get("id", "?"), t.get("scene", "")])
+	for npc in npcs:
+		if npc.has("encounter"):
+			var enc: Dictionary = npc["encounter"]
+			if not JsonUtil.load_dict("res://content/enemies.json").get("encounters", {}).has(enc.get("id", "")):
+				e.append(p + "npc '%s' uses missing encounter '%s'" % [npc.get("id", "?"), enc.get("id", "")])
+			for k in ["intro_scene", "outro_scene"]:
+				if enc.has(k) and not Dialogue.has_scene(enc[k]):
+					e.append(p + "npc '%s' uses missing scene '%s'" % [npc.get("id", "?"), enc[k]])
 	for t: Dictionary in on_enter:
 		if not Dialogue.has_scene(t.get("scene", "")):
 			e.append(p + "on_enter uses missing scene '%s'" % t.get("scene", ""))

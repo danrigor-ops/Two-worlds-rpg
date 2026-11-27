@@ -1,91 +1,364 @@
 {
-  "status": "WORKING_PROPOSAL",
-  "note": "Main-path lines are from 05_PROLOGUE_PRODUCTION.md. Lines marked (placeholder) are stand-ins to be rewritten. Step types: line, choice, set_flag, join, key_item, quest.",
-  "speakers": {
-    "reno": {"name": "Reno", "character": "reno"},
-    "lumi": {"name": "Lumi", "character": "lumi"},
-    "nenek": {"name": "Nenek Rimba", "character": "nenek"},
-    "bobo": {"name": "Bobo", "character": "bobo"},
-    "narrator": {"name": ""}
+ "status": "WORKING_PROPOSAL",
+ "note": "Main-path lines are from 05_PROLOGUE_PRODUCTION.md. Lines marked (placeholder) are stand-ins to be rewritten. Step types: line, choice, set_flag, join, key_item, quest.",
+ "speakers": {
+  "reno": {
+   "name": "Reno",
+   "character": "reno"
   },
-  "scenes": {
-    "P00_wake": [
-      {"speaker": "narrator", "text": "A rail bell rings somewhere in a dark forest."},
-      {"speaker": "narrator", "text": "A train rushes past. Someone hums a lullaby. Two small shapes sit under a tree..."},
-      {"speaker": "reno", "text": "A train! I almost caught it!"},
-      {"speaker": "reno", "text": "Why do my best dreams always end before the exciting part?"},
-      {"speaker": "reno", "text": "Today's the day. I'm going to see a real human train!"},
-      {"speaker": "reno", "text": "...After breakfast."},
-      {"speaker": "narrator", "text": "Reno picks up his old railway token."},
-      {"speaker": "reno", "text": "My lucky token. Nenek says I had it when she found me."},
-      {"speaker": "reno", "text": "She also says I shouldn't ask too many questions. Which is a very suspicious thing to say."},
-      {"key_item": "item_railway_token"},
-      {"set_flag": "reno_token_obtained"},
-      {"set_flag": "p00_seen"}
-    ],
-    "P01_lumi_joins": [
-      {"speaker": "lumi", "text": "You're late."},
-      {"speaker": "reno", "text": "For what?"},
-      {"speaker": "lumi", "text": "For the ridiculous plan you made yesterday."},
-      {"speaker": "reno", "text": "Right! The train!"},
-      {"speaker": "lumi", "text": "You told everyone you were going to ride one."},
-      {"speaker": "reno", "text": "Only Bobo, Pak Gema, the mushroom seller, the beetles..."},
-      {"speaker": "lumi", "text": "And Nenek Rimba."},
-      {"speaker": "reno", "text": "I may have made a tactical mistake."},
-      {"speaker": "lumi", "text": "Several."},
-      {"choice": [
-        {"text": "It'll be an adventure!", "then": [{"speaker": "lumi", "text": "That's what you said before we fell into the mushroom pond."}]},
-        {"text": "I'll be careful. Promise.", "then": [{"speaker": "lumi", "text": "You promised that before the mushroom pond, too."}]},
-        {"text": "I'll buy you a gift!", "then": [{"speaker": "lumi", "text": "You don't even know how human money works."}]}
-      ]},
-      {"speaker": "lumi", "text": "Something has been calling to me from beyond the forest. I want to know what it is."},
-      {"speaker": "reno", "text": "Then it's settled! A great adventure!"},
-      {"speaker": "lumi", "text": "A short, careful visit."},
-      {"speaker": "reno", "text": "A great, short, careful adventure!"},
-      {"join": "lumi"},
-      {"set_flag": "lumi_joined"},
-      {"speaker": "narrator", "text": "Lumi joined the party!"}
-    ],
-    "nenek_no_lumi": [
-      {"speaker": "nenek", "text": "Reno. Lumi was looking for you by the great root. Go and find her. (placeholder)"}
-    ],
-    "P02_nenek": [
-      {"speaker": "nenek", "text": "Why are you carrying a travel bag?"},
-      {"speaker": "reno", "text": "Exercise."},
-      {"speaker": "nenek", "text": "And why is Lumi carrying a map?"},
-      {"speaker": "lumi", "text": "Educational exercise."},
-      {"speaker": "nenek", "text": "The old crossings are not toys. They were sealed for a reason."},
-      {"speaker": "reno", "text": "What reason?"},
-      {"speaker": "nenek", "text": "One you're not ready to understand."},
-      {"speaker": "lumi", "text": "Then how will we ever understand it?"},
-      {"speaker": "nenek", "text": "By learning patience."},
-      {"speaker": "reno", "text": "That sounds terrible."},
-      {"set_flag": "elder_warning_heard"}
-    ],
-    "nenek_after": [
-      {"speaker": "nenek", "text": "Patience, little ones. The forest remembers everything. (placeholder)"}
-    ],
-    "P03_bobo": [
-      {"speaker": "bobo", "text": "Welcome, welcome! Everything is reasonably priced!"},
-      {"speaker": "lumi", "if_flags": ["lumi_joined"], "text": "That's not what your sign says."},
-      {"speaker": "bobo", "text": "The sign is old."},
-      {"speaker": "reno", "text": "We need a lantern!"},
-      {"speaker": "bobo", "text": "One lantern. Very rare. Extremely precious."},
-      {"speaker": "lumi", "if_flags": ["lumi_joined"], "text": "It's covered in dust."},
-      {"speaker": "bobo", "text": "Antique dust!"},
-      {"speaker": "bobo", "text": "But a Leafling ran off with my parcel into the Training Glade. Bring it back and the lantern is yours. (placeholder)"},
-      {"set_flag": "bobo_parcel_quest_started"}
-    ],
-    "bobo_waiting": [
-      {"speaker": "bobo", "text": "My parcel! Training Glade! South of Root Square. Hurry, hurry! (placeholder)"}
-    ],
-    "P03_bobo_return": [
-      {"speaker": "bobo", "text": "My parcel! Only slightly nibbled! (placeholder)"},
-      {"speaker": "bobo", "text": "A deal is a deal. One antique lantern, and two Dewdrop Candies for being brave. (placeholder)"},
-      {"set_flag": "bobo_parcel_returned"}
-    ],
-    "bobo_after": [
-      {"speaker": "bobo", "text": "Come back any time! Prices are reasonable on Tuesdays. (placeholder)"}
-    ]
+  "lumi": {
+   "name": "Lumi",
+   "character": "lumi"
+  },
+  "nenek": {
+   "name": "Nenek Rimba",
+   "character": "nenek"
+  },
+  "bobo": {
+   "name": "Bobo",
+   "character": "bobo"
+  },
+  "narrator": {
+   "name": ""
   }
+ },
+ "scenes": {
+  "P00_wake": [
+   {
+    "speaker": "narrator",
+    "text": "A rail bell rings somewhere in a dark forest."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A train rushes past. Someone hums a lullaby. Two small shapes sit under a tree..."
+   },
+   {
+    "speaker": "reno",
+    "text": "A train! I almost caught it!"
+   },
+   {
+    "speaker": "reno",
+    "text": "Why do my best dreams always end before the exciting part?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Today's the day. I'm going to see a real human train!"
+   },
+   {
+    "speaker": "reno",
+    "text": "...After breakfast."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno picks up his old railway token."
+   },
+   {
+    "speaker": "reno",
+    "text": "My lucky token. Nenek says I had it when she found me."
+   },
+   {
+    "speaker": "reno",
+    "text": "She also says I shouldn't ask too many questions. Which is a very suspicious thing to say."
+   },
+   {
+    "key_item": "item_railway_token"
+   },
+   {
+    "set_flag": "reno_token_obtained"
+   },
+   {
+    "set_flag": "p00_seen"
+   }
+  ],
+  "P01_lumi_joins": [
+   {
+    "speaker": "lumi",
+    "text": "You're late."
+   },
+   {
+    "speaker": "reno",
+    "text": "For what?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "For the ridiculous plan you made yesterday."
+   },
+   {
+    "speaker": "reno",
+    "text": "Right! The train!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "You told everyone you were going to ride one."
+   },
+   {
+    "speaker": "reno",
+    "text": "Only Bobo, Pak Gema, the mushroom seller, the beetles..."
+   },
+   {
+    "speaker": "lumi",
+    "text": "And Nenek Rimba."
+   },
+   {
+    "speaker": "reno",
+    "text": "I may have made a tactical mistake."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Several."
+   },
+   {
+    "choice": [
+     {
+      "text": "It'll be an adventure!",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "That's what you said before we fell into the mushroom pond."
+       }
+      ]
+     },
+     {
+      "text": "I'll be careful. Promise.",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "You promised that before the mushroom pond, too."
+       }
+      ]
+     },
+     {
+      "text": "I'll buy you a gift!",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "You don't even know how human money works."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "Something has been calling to me from beyond the forest. I want to know what it is."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then it's settled! A great adventure!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "A short, careful visit."
+   },
+   {
+    "speaker": "reno",
+    "text": "A great, short, careful adventure!"
+   },
+   {
+    "join": "lumi"
+   },
+   {
+    "set_flag": "lumi_joined"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi joined the party!"
+   }
+  ],
+  "nenek_no_lumi": [
+   {
+    "speaker": "nenek",
+    "text": "Reno. Lumi was looking for you by the great root. Go and find her. (placeholder)"
+   }
+  ],
+  "P02_nenek": [
+   {
+    "speaker": "nenek",
+    "text": "Why are you carrying a travel bag?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Exercise."
+   },
+   {
+    "speaker": "nenek",
+    "text": "And why is Lumi carrying a map?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Educational exercise."
+   },
+   {
+    "speaker": "nenek",
+    "text": "The old crossings are not toys. They were sealed for a reason."
+   },
+   {
+    "speaker": "reno",
+    "text": "What reason?"
+   },
+   {
+    "speaker": "nenek",
+    "text": "One you're not ready to understand."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Then how will we ever understand it?"
+   },
+   {
+    "speaker": "nenek",
+    "text": "By learning patience."
+   },
+   {
+    "speaker": "reno",
+    "text": "That sounds terrible."
+   },
+   {
+    "set_flag": "elder_warning_heard"
+   }
+  ],
+  "nenek_after": [
+   {
+    "speaker": "nenek",
+    "text": "Patience, little ones. The forest remembers everything. (placeholder)"
+   }
+  ],
+  "P03_bobo": [
+   {
+    "speaker": "bobo",
+    "text": "Welcome, welcome! Everything is reasonably priced!"
+   },
+   {
+    "speaker": "lumi",
+    "if_flags": [
+     "lumi_joined"
+    ],
+    "text": "That's not what your sign says."
+   },
+   {
+    "speaker": "bobo",
+    "text": "The sign is old."
+   },
+   {
+    "speaker": "reno",
+    "text": "We need a lantern!"
+   },
+   {
+    "speaker": "bobo",
+    "text": "One lantern. Very rare. Extremely precious."
+   },
+   {
+    "speaker": "lumi",
+    "if_flags": [
+     "lumi_joined"
+    ],
+    "text": "It's covered in dust."
+   },
+   {
+    "speaker": "bobo",
+    "text": "Antique dust!"
+   },
+   {
+    "speaker": "bobo",
+    "text": "But a Leafling ran off with my parcel into the Training Glade. Bring it back and the lantern is yours. (placeholder)"
+   },
+   {
+    "set_flag": "bobo_parcel_quest_started"
+   }
+  ],
+  "bobo_waiting": [
+   {
+    "speaker": "bobo",
+    "text": "My parcel! Training Glade! South of Root Square. Hurry, hurry! (placeholder)"
+   }
+  ],
+  "P03_bobo_return": [
+   {
+    "speaker": "bobo",
+    "text": "My parcel! Only slightly nibbled! (placeholder)"
+   },
+   {
+    "speaker": "bobo",
+    "text": "A deal is a deal. One antique lantern, and two Dewdrop Candies for being brave. (placeholder)"
+   },
+   {
+    "set_flag": "bobo_parcel_quest_started"
+   },
+   {
+    "take_key_item": "item_bobo_parcel"
+   },
+   {
+    "set_flag": "bobo_parcel_returned"
+   }
+  ],
+  "bobo_after": [
+   {
+    "speaker": "bobo",
+    "text": "Come back any time! Prices are reasonable on Tuesdays. (placeholder)"
+   }
+  ],
+  "glade_need_nenek": [
+   {
+    "speaker": "lumi",
+    "text": "Wait. Nenek Rimba wanted to see us first. Elder's Hollow is to the north. (placeholder)"
+   }
+  ],
+  "glade_need_bobo": [
+   {
+    "speaker": "lumi",
+    "text": "We still need a lantern. Bobo's stall is in Root Market, east of here. (placeholder)"
+   }
+  ],
+  "P04_leafling": [
+   {
+    "speaker": "reno",
+    "text": "The parcel is alive!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "That's a Leafling."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then why is it wearing the parcel?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Because you frightened it."
+   },
+   {
+    "speaker": "reno",
+    "text": "I haven't done anything!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Leafling attacks!"
+   }
+  ],
+  "P04_after": [
+   {
+    "speaker": "reno",
+    "text": "Did you see that? We were incredible!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It was one Leafling."
+   },
+   {
+    "speaker": "reno",
+    "text": "An incredibly dangerous Leafling."
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's running away with half a biscuit."
+   },
+   {
+    "speaker": "reno",
+    "text": "...A tactical retreat."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Bobo's Parcel. (Key item)"
+   }
+  ]
+ }
 }

@@ -113,6 +113,8 @@ func _apply(step: Dictionary) -> void:
 		GameState.set_flag(step["set_flag"])
 	if step.has("key_item"):
 		GameState.add_key_item(step["key_item"])
+	if step.has("take_key_item"):
+		GameState.remove_key_item(step["take_key_item"])
 	if step.has("item"):
 		GameState.add_item(step["item"], int(step.get("count", 1)))
 	if step.has("join"):

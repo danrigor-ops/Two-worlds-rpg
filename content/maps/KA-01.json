@@ -45,7 +45,7 @@
   "TT.................=..f......~~~~~....TT",
   "TT.T.........f.....=................f.TT",
   "TT.................=..................TT",
-  "TTTTTTTTTTTTTTTTTTTSTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTTT",
   "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
  ],
  "spawns": {
@@ -68,6 +68,11 @@
    "x": 37,
    "y": 15,
    "facing": "left"
+  },
+  "from_glade": {
+   "x": 19,
+   "y": 27,
+   "facing": "up"
   }
  },
  "doors": [
@@ -91,6 +96,27 @@
    "y": 15,
    "to_map": "KA-04",
    "to_spawn": "from_square"
+  },
+  {
+   "id": "exit_to_glade",
+   "x": 19,
+   "y": 28,
+   "to_map": "KA-06",
+   "to_spawn": "from_square",
+   "require": [
+    {
+     "if_flags": [
+      "elder_warning_heard"
+     ],
+     "else_scene": "glade_need_nenek"
+    },
+    {
+     "if_flags": [
+      "bobo_parcel_quest_started"
+     ],
+     "else_scene": "glade_need_bobo"
+    }
+   ]
   }
  ],
  "npcs": [
@@ -108,15 +134,6 @@
    ]
   }
  ],
- "signs": [
-  {
-   "x": 19,
-   "y": 28,
-   "lines": [
-    "South: Training Glade (KA-06).",
-    "(The glade is built in the next step.)"
-   ]
-  }
- ],
+ "signs": [],
  "on_enter": []
 }

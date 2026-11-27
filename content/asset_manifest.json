@@ -101,12 +101,36 @@
     "accent": "#3f7fc4",
     "legs": "#5a3e2b"
    }
+  },
+  "leafling_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "leafling",
+    "hair": "#2f6b3a",
+    "skin": "#7cc35a",
+    "body": "#7cc35a",
+    "accent": "#c49d62",
+    "legs": "#4b8a3d"
+   }
   }
  },
  "characters": {
   "reno": "reno_overworld",
   "lumi": "lumi_overworld",
   "nenek": "nenek_overworld",
-  "bobo": "bobo_overworld"
+  "bobo": "bobo_overworld",
+  "leafling": "leafling_overworld"
  }
 }

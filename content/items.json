@@ -15,7 +15,8 @@
   "item_dewdrop_candy": {
    "name": "Dewdrop Candy",
    "kind": "consumable",
-   "text": "A sweet spirit candy. (Effect comes with the combat step.)"
+   "text": "A sweet spirit candy. Restores 20 HP in battle.",
+   "heal_hp": 20
   },
   "item_gate_key": {
    "name": "Gate Key",
@@ -26,6 +27,11 @@
    "name": "Guardian Seed",
    "kind": "key",
    "text": "A seed left by the Thornkeeper."
+  },
+  "item_bobo_parcel": {
+   "name": "Bobo's Parcel",
+   "kind": "key",
+   "text": "Slightly nibbled. Missing half a biscuit."
   }
  }
 }

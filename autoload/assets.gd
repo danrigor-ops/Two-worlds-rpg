@@ -224,6 +224,10 @@ func _make_character_sheet(a: Dictionary) -> Image:
 	var lumi: bool = p["style"] == "lumi"
 	var eye := Color("#1a1420")
 	var img := Image.create(fw * order.size(), fh, false, Image.FORMAT_RGBA8)
+	if p["style"] == "leafling":
+		_paint_leafling(img, order, fw, body, hair, acc, eye)
+		_outline(img)
+		return img
 	for i in order.size():
 		var f: String = order[i]
 		var o := i * fw
@@ -270,6 +274,30 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 13, 1, 3, 2, Color("#6fbf4a"))  # leaf
 	_outline(img)
 	return img
+
+
+## A small walking leaf wearing a parcel. Placeholder only.
+static func _paint_leafling(img: Image, order: Array, fw: int, leaf: Color, vein: Color, parcel: Color, eye: Color) -> void:
+	for i in order.size():
+		var o := i * fw
+		var f: String = order[i]
+		for y in range(20, 37):
+			var half := int(7.0 * sin(PI * (y - 19) / 18.0)) + 1
+			_rect(img, o + 16 - half, y, half * 2, 1, leaf)
+		_rect(img, o + 15, 21, 2, 15, vein)
+		_rect(img, o + 15, 17, 2, 4, vein)                   # stem
+		_rect(img, o + 12, 36, 3, 2, vein)                   # feet
+		_rect(img, o + 18, 36, 3, 2, vein)
+		_rect(img, o + 10, 12, 12, 8, parcel)                 # the parcel
+		_rect(img, o + 15, 12, 2, 8, parcel.darkened(0.35))
+		match f:
+			"down":
+				_rect(img, o + 12, 26, 2, 3, eye)
+				_rect(img, o + 18, 26, 2, 3, eye)
+			"left":
+				_rect(img, o + 11, 26, 2, 3, eye)
+			"right":
+				_rect(img, o + 19, 26, 2, 3, eye)
 
 
 static func _outline(img: Image) -> void:
