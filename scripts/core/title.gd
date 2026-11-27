@@ -1,11 +1,12 @@
 extends Control
 ## Title screen: New Game, Continue, Settings.
 
-const ITEMS := [
-	{"label": "New Game", "enabled": true, "note": ""},
-	{"label": "Continue", "enabled": false, "note": "Saving arrives in build step 6."},
-	{"label": "Settings", "enabled": false, "note": "Settings arrive in a later step."},
+const MAIN := [
+	{"label": "New Game", "enabled": true, "note": "", "value": "new"},
+	{"label": "Continue", "enabled": true, "note": "No saves yet.", "value": "continue"},
 ]
+
+var ITEMS: Array = []
 
 var index := 0
 var _labels: Array[Label] = []
@@ -16,6 +17,8 @@ var _time := 0.0
 
 func _ready() -> void:
 	InputManager.set_base_mode(InputManager.Mode.TITLE)
+	ITEMS = MAIN.duplicate(true)
+	ITEMS[1]["enabled"] = Saves.any_save()
 	var bg := ColorRect.new()
 	bg.color = Color("#1a1838")
 	bg.size = Vector2(240, 160)
@@ -44,22 +47,22 @@ func _ready() -> void:
 	sub.size = Vector2(240, 12)
 	add_child(sub)
 
-	for i in ITEMS.size():
+	for i in 5:
 		var l := Label.new()
-		l.position = Vector2(84, 76 + i * 13)
-		l.size = Vector2(90, 12)
+		l.position = Vector2(70, 66 + i * 11)
+		l.size = Vector2(150, 11)
 		l.mouse_filter = Control.MOUSE_FILTER_STOP
 		l.gui_input.connect(_on_item_input.bind(i))
 		add_child(l)
 		_labels.append(l)
 	_note = Label.new()
 	_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_note.position = Vector2(0, 120)
+	_note.position = Vector2(0, 124)
 	_note.size = Vector2(240, 12)
 	_note.add_theme_color_override("font_color", Color("#9fb0d8"))
 	add_child(_note)
 	var footer := Label.new()
-	footer.text = "Placeholder art. Z/Enter: select  F2: touch pad"
+	footer.text = "Placeholder art. Z: select  X: back  F2: touch pad"
 	footer.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	footer.position = Vector2(0, 146)
 	footer.size = Vector2(240, 12)
@@ -83,17 +86,32 @@ func _process(delta: float) -> void:
 		_refresh()
 	elif InputManager.just_pressed("confirm", mode):
 		_activate()
+	elif InputManager.just_pressed("cancel", mode) and ITEMS[0]["value"] != "new":
+		_show(MAIN)
 
 
 func _on_item_input(event: InputEvent, i: int) -> void:
+	if i >= ITEMS.size():
+		return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		index = i
 		_refresh()
 		_activate()
 
 
+func _show(items: Array) -> void:
+	ITEMS = items.duplicate(true)
+	if ITEMS[0]["value"] == "new":
+		ITEMS[1]["enabled"] = Saves.any_save()
+	index = 0
+	_refresh()
+
+
 func _refresh() -> void:
 	for i in _labels.size():
+		_labels[i].visible = i < ITEMS.size()
+		if i >= ITEMS.size():
+			continue
 		var item: Dictionary = ITEMS[i]
 		_labels[i].text = ("> " if i == index else "  ") + item["label"]
 		var c: Color = Assets.UI_GOLD if i == index else Assets.UI_TEXT
@@ -108,5 +126,22 @@ func _activate() -> void:
 	if not item["enabled"]:
 		_note.text = item["note"]
 		return
-	GameState.new_game()
-	get_tree().change_scene_to_file("res://scenes/exploration.tscn")
+	match item["value"]:
+		"new":
+			GameState.new_game()
+			get_tree().change_scene_to_file("res://scenes/exploration.tscn")
+		"continue":
+			var slots: Array = []
+			for slot in Saves.SLOTS:
+				if Saves.has_save(slot):
+					slots.append({"label": "%s  %s" % ["Auto" if slot == "auto" else "Slot " + slot, Saves.summary(slot)], "enabled": true, "note": "", "value": "slot:" + slot})
+			slots.append({"label": "Back", "enabled": true, "note": "", "value": "back"})
+			_show(slots)
+		"back":
+			_show(MAIN)
+		_:
+			var errors := Saves.load_slot(item["value"].trim_prefix("slot:"))
+			if not errors.is_empty():
+				_note.text = "Can't load: " + errors[0]
+				return
+			get_tree().change_scene_to_file("res://scenes/exploration.tscn")

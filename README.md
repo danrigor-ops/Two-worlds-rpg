@@ -21,7 +21,7 @@ All art in this build is **generated placeholder art**. The handover images are 
 | Move | Arrows or WASD | D-pad or left stick | On-screen D-pad |
 | Confirm / talk | Z, Enter, Space | A | A |
 | Cancel | X, Backspace | B | B |
-| Menu (Journal, Items, Party) | Esc or M | Start | M |
+| Menu (Journal, Items, Party, System) | Esc or M | Start | M |
 | Swap Reno and Lumi | C or Tab | Y | S |
 | Show the touch pad on desktop | F2 | | |
 
@@ -44,6 +44,14 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
     - **Echo Sight** (PZ-002): with Lumi leading (press C), check the humming stone to reveal stepping stones.
     - **Gate Key** (PZ-003): after the echo, check the mossy stone across the pond.
     - **Root Bridge** (PZ-004): Lumi traces the old bridge at the post, then Reno pulls the roots.
+
+### Saving
+
+- The game autosaves after every map change and after each battle win.
+- Menu → System: save to slots 1 to 3, load any slot, change the timing windows (Normal, Relaxed, Very relaxed), turn diagonal movement off, or quit to the title.
+- Title → Continue lists your saves.
+- **Export** copies a slot to the `exports` folder in Godot's user data folder (the menu shows the full path). **Import** reads `import.json` from that user data folder into slot 3, only if it's a valid save.
+- Every save has a checksum. A damaged or hand-edited file is refused and nothing is overwritten.
 
 ### Battle basics
 
@@ -73,6 +81,7 @@ The first command only needs running once after cloning. The tests check every m
 | Dialogue | `content/dialogue/*.json`, `scripts/ui/dialogue_box.gd` | Scenes as lists of steps: lines with name and portrait, up to three choices, and story steps (flags, items, party joins). NPCs pick a scene by story flags. |
 | Quests | `content/quests.json`, `autoload/quests.gd` | Quests move locked → active → completed → rewarded when story flags change. Each reward is granted once. |
 | Combat | `scripts/battle/combat.gd`, `scripts/battle/battle.gd`, `content/enemies.json`, `content/skills.json` | Rules (turn order, tokens, damage, timing windows) kept separate from the battle screen so they can be tested. |
+| Saves | `autoload/saves.gd` | Three slots plus autosave, written to a temporary file and then swapped in, with a checksum and full validation on load. |
 | Menu | `scripts/ui/pause_menu.gd` | Journal, Items (money shown as 1963 dollars and cents) and Party tabs. |
 
 Content files are marked `PLACEHOLDER` or `WORKING_PROPOSAL`, following the handover's status rules.
@@ -91,5 +100,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 3. ✅ Dialogue and quests: P00 to P03, journal, items and party menu
 4. ✅ Combat and the Leafling tutorial
 5. ✅ Field abilities and Whispering Roots puzzles
-6. Inventory and saving
+6. ✅ Inventory and saving
 7. The rest of the prologue

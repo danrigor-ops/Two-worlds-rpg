@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 10
+const SECTIONS := 11
 
 
 func check(cond: bool, label: String) -> void:
@@ -21,6 +21,10 @@ func check(cond: bool, label: String) -> void:
 func run(t: SceneTree) -> int:
 	tree = t
 	root = t.root
+	var saves: Node = root.get_node("Saves")
+	saves.save_dir = "user://test_saves/"
+	saves.export_dir = "user://test_exports/"
+	saves.delete_all()
 	var gs: Node = root.get_node("GameState")
 	var im: Node = root.get_node("InputManager")
 	var assets: Node = root.get_node("Assets")
@@ -60,6 +64,9 @@ func run(t: SceneTree) -> int:
 
 	print("Whispering Roots puzzles")
 	await _test_roots(gs, im)
+
+	print("Inventory and saving")
+	await _test_saves(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -641,4 +648,88 @@ func _test_roots(gs: Node, im: Node) -> void:
 	check(scene.map.is_walkable(Vector2i(24, 29)) and gs.has_key_item("item_gate_key"), "and after loading a save")
 	root.remove_child(scene)
 	scene.free()
+	_sections_done += 1
+
+
+
+func _test_saves(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	check(not saves.any_save(), "no saves at first")
+
+	# Money and items.
+	gs.data["wallet"]["human_cents"] = 40
+	check(not gs.buy("item_dewdrop_candy", 15, 3), "can't buy more than you can afford")
+	check(gs.data["wallet"]["human_cents"] == 40 and gs.item_count("item_dewdrop_candy") == 0, "a failed purchase changes nothing")
+	check(gs.buy("item_dewdrop_candy", 15, 2) and gs.data["wallet"]["human_cents"] == 10, "buying takes the money and gives the items")
+	check(gs.sell("item_dewdrop_candy", 15, 1) and gs.data["wallet"]["human_cents"] == 17, "selling gives half price rounded down (7 cents)")
+	gs.add_key_item("item_lantern")
+	check(not gs.sell("item_lantern", 100) and not gs.add_item("item_lantern", 1), "key items can't be sold or stacked")
+	gs.data["members"]["lumi"] = gs.data["members"]["lumi"]
+	gs.add_member("lumi")
+	gs.data["members"]["reno"]["hp"] = 10
+	check(gs.use_heal_item("item_dewdrop_candy") == "" and gs.data["members"]["reno"]["hp"] == 30, "a candy heals the most hurt hero by 20")
+	check(gs.use_heal_item("item_dewdrop_candy") != "", "with none left it says so")
+
+	# Slots.
+	gs.set_flag("lumi_joined")
+	check(saves.save("1").is_empty() and saves.has_save("1"), "saving to slot 1 works")
+	var saved: Dictionary = gs.to_dict()
+	gs.new_game()
+	check(saves.load_slot("1").is_empty(), "loading slot 1 works")
+	check(gs.get_flag("lumi_joined") and gs.data["wallet"]["human_cents"] == 17 and gs.has_key_item("item_lantern"), "loading restores flags, money and key items")
+	check(JSON.stringify(gs.to_dict()) == JSON.stringify(saved), "the loaded state matches what was saved")
+	check(not saves.load_slot("2").is_empty(), "an empty slot can't be loaded")
+
+	# Damaged and tampered files are rejected without touching anything.
+	var good := FileAccess.get_file_as_string(saves.slot_path("1"))
+	check(not saves.load_text("{ not json").is_empty(), "invalid JSON is rejected")
+	check(not saves.load_text(good.replace("\"human_cents\": 17", "\"human_cents\": 99999")).is_empty(), "a hand-edited save fails its checksum")
+	var d: Dictionary = JSON.parse_string(good)
+	d["state"]["wallet"]["human_cents"] = -5
+	d["checksum"] = JSON.stringify(d["state"], "", true).sha256_text()
+	check(not saves.load_text(JSON.stringify(d)).is_empty(), "a save with negative money is rejected even with a matching checksum")
+	check(JSON.stringify(gs.to_dict()) == JSON.stringify(saved), "rejected loads leave the current game untouched")
+	check(not saves.import_into("1", "{\"format\": \"nope\"}").is_empty(), "importing a bad file is refused")
+	check(FileAccess.get_file_as_string(saves.slot_path("1")) == good, "and the good slot is not overwritten")
+	check(saves.import_into("2", good).is_empty() and saves.load_slot("2").is_empty(), "importing a good file into slot 2 works")
+	var ex: Array = saves.export_slot("1")
+	check((ex[0] as Array).is_empty() and FileAccess.file_exists(saves.export_dir + "two-worlds-slot-1.json"), "export writes a backup file")
+
+	# Autosave after a map transition, not during it.
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	gs.set_flag("p00_seen")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(10, 13)), "down")
+	Input.action_press("move_down")
+	var saved_during := false
+	for i in 30:
+		await tree.physics_frame
+		if im.current_mode() == im.Mode.TRANSITION and saves.has_save("auto"):
+			saved_during = true
+	Input.action_release("move_down")
+	await _wait_transition(im)
+	check(not saved_during, "no autosave in the middle of a transition")
+	check(saves.has_save("auto"), "autosave after arriving in a new map")
+	gs.new_game()
+	check(saves.load_slot("auto").is_empty() and gs.data["map_id"] == "KA-01", "the autosave resumes in Root Square")
+	await _finish_dialogue(im)
+
+	# Menu: System tab saves.
+	await _tap("menu")
+	for k in 3:
+		await _tap("move_right")
+	check(scene.menu.TABS[scene.menu.tab] == "System", "the menu has a System tab")
+	await _tap("confirm")
+	check(saves.has_save("1"), "Save to slot 1 from the menu")
+	await _tap("cancel")
+	root.remove_child(scene)
+	scene.free()
+	saves.delete_all()
 	_sections_done += 1
