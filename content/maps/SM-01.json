@@ -1,0 +1,134 @@
+{
+ "id": "SM-01",
+ "name": "Sungai Melor",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  ".": "grass",
+  "=": "laterite",
+  "T": "tree",
+  "~": "water",
+  "H": "shophouse",
+  "F": "fence",
+  "f": "flowers",
+  "V": "veil",
+  "S": "sign"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT.................=S=................TT",
+  "TT.T...............===..T.............TT",
+  "TT..............T..===..............T.TT",
+  "TT.................===................TT",
+  "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
+  "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
+  "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
+  "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
+  "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
+  "TT..HHSHH.HHSHH....===....HHSHH.HHSHH.TT",
+  "TT.................===................TT",
+  "TT......f..........===........f.......TT",
+  "TT====================================TT",
+  "TTS==================================STT",
+  "TT====================================TT",
+  "TT.................===................TT",
+  "TT.................===................TT",
+  "TT...HHHHHH........===.....HHHHHH.....TT",
+  "TT...HHHHHH.FFFFF..===.FFFFHHHHHH.....TT",
+  "TT...HHHHHH........===.....HHHHHH.....TT",
+  "TT...HHHHHH......f.===.....HHHHHH.....TT",
+  "TT...HHHHHH........===.f...HHHHHH.....TT",
+  "TT............T....===...T............TT",
+  "TT.T...............===..............T.TT",
+  "TT.................=V=................TT",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 24,
+   "facing": "up"
+  },
+  "from_veil": {
+   "x": 20,
+   "y": 25,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "veil_to_gate",
+   "x": 20,
+   "y": 26,
+   "to_map": "KA-07",
+   "to_spawn": "from_veil"
+  }
+ ],
+ "npcs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "signs": [
+  {
+   "x": 6,
+   "y": 11,
+   "lines": [
+    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+   ]
+  },
+  {
+   "x": 12,
+   "y": 11,
+   "lines": [
+    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+   ]
+  },
+  {
+   "x": 28,
+   "y": 11,
+   "lines": [
+    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+   ]
+  },
+  {
+   "x": 34,
+   "y": 11,
+   "lines": [
+    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+   ]
+  },
+  {
+   "x": 2,
+   "y": 15,
+   "lines": [
+    "The road goes on. (Chapter 1 isn't built yet.)"
+   ]
+  },
+  {
+   "x": 37,
+   "y": 15,
+   "lines": [
+    "The road goes on. (Chapter 1 isn't built yet.)"
+   ]
+  },
+  {
+   "x": 20,
+   "y": 2,
+   "lines": [
+    "The road goes on. (Chapter 1 isn't built yet.)"
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "P07_arrival",
+   "if_not_flags": [
+    "prologue_completed"
+   ]
+  }
+ ]
+}

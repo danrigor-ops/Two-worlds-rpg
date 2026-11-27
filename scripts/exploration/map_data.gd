@@ -187,7 +187,7 @@ func validate_self() -> Array[String]:
 		if spawns[s]["facing"] not in ["down", "left", "right", "up"]:
 			e.append(p + "spawn '%s' has a bad facing" % s)
 	for door in doors:
-		if tile_name(door["cell"]) not in ["door", "exit"]:
+		if tile_name(door["cell"]) not in ["door", "exit", "gate", "veil"]:
 			e.append(p + "door '%s' at %s is not on a door tile" % [door["id"], door["cell"]])
 		for r: Dictionary in door["require"]:
 			if not Dialogue.has_scene(r.get("else_scene", "")):

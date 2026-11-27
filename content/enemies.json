@@ -22,6 +22,80 @@
      "mult": 1.0
     }
    ]
+  },
+  "thornkeeper": {
+   "name": "Thornkeeper",
+   "character": "thornkeeper",
+   "stats": {
+    "level": 3,
+    "max_hp": 180,
+    "atk": 11,
+    "def": 9,
+    "mag": 8,
+    "res": 10,
+    "spd": 5
+   },
+   "xp": 25,
+   "attacks": [
+    {
+     "name": "Root Strike",
+     "kind": "physical",
+     "mult": 1.0
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Thorn Guard",
+       "guard": true
+      },
+      {
+       "name": "Root Strike",
+       "kind": "physical",
+       "mult": 1.0
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Ground Sweep",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Root Strike",
+       "kind": "physical",
+       "mult": 1.0
+      }
+     ],
+     "enter_text": "The Thornkeeper digs in. The ground starts to shake!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Ground Sweep",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Root Strike",
+       "kind": "physical",
+       "mult": 1.0
+      }
+     ],
+     "enter_text": "Lumi: Reno, together! The echoes are lining up!",
+     "ensure_mp": 4,
+     "hint": "cyclone",
+     "teach_flag": "spirit_cyclone_learned"
+    }
+   ]
   }
  },
  "encounters": {
@@ -39,6 +113,16 @@
    ],
    "enemy_first": true,
    "note": "enemy_first: the Leafling opens with Seed Toss so the tutorial shows dodging first."
+  },
+  "thornkeeper_boss": {
+   "enemies": [
+    "thornkeeper"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "thornkeeper_defeated"
+   ]
   }
  }
 }

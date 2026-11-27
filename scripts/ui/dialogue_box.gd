@@ -5,6 +5,7 @@ extends CanvasLayer
 ## Owns input (DIALOGUE mode) while open.
 
 signal finished
+signal event(name: String)   # story events the field handles (e.g. "prologue_end")
 
 const CHARS_PER_SEC := 45.0
 const HISTORY_MAX := 50
@@ -119,6 +120,8 @@ func _apply(step: Dictionary) -> void:
 		GameState.add_item(step["item"], int(step.get("count", 1)))
 	if step.has("join"):
 		GameState.add_member(step["join"])
+	if step.has("event"):
+		event.emit(step["event"])
 	if step.has("quest"):
 		GameState.set_quest_state(step["quest"], step.get("state", "active"))
 

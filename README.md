@@ -44,6 +44,8 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
     - **Echo Sight** (PZ-002): with Lumi leading (press C), check the humming stone to reveal stepping stones.
     - **Gate Key** (PZ-003): after the echo, check the mossy stone across the pond.
     - **Root Bridge** (PZ-004): Lumi traces the old bridge at the post, then Reno pulls the roots.
+12. Cross the bridge to the Forbidden Gate (KA-07) and face the **Thornkeeper** (P06). It braces with Thorn Guard, then shakes the ground (hits both heroes), and below 30% HP Lumi teaches **Spirit Cyclone**: the Team command uses both heroes' turns and 4 MP each, with three timed presses.
+13. Open the gate with the key (PZ-005) and walk through to **Sungai Melor** (P07). The prologue ends, the game autosaves, and an end screen points to Chapter 1.
 
 ### Saving
 
@@ -101,4 +103,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 4. ✅ Combat and the Leafling tutorial
 5. ✅ Field abilities and Whispering Roots puzzles
 6. ✅ Inventory and saving
-7. The rest of the prologue
+7. ✅ The rest of the prologue: Thornkeeper, Spirit Cyclone, the gate and Sungai Melor
+8. Chapter 1: The Last Train to Bandar Senja (design approved in `docs/chapter-01/`)

@@ -55,6 +55,7 @@ func _ready() -> void:
 	hud.add_child(map_label)
 	dialogue = DialogueBox.new()
 	add_child(dialogue)
+	dialogue.event.connect(_on_story_event)
 	menu = PauseMenu.new()
 	add_child(menu)
 	menu.load_requested.connect(func() -> void: get_tree().change_scene_to_file.call_deferred("res://scenes/exploration.tscn"))
@@ -352,6 +353,26 @@ static func pick_scene(entries: Array) -> String:
 		if GameState.conditions_met(t):
 			return t.get("scene", "")
 	return ""
+
+
+## Story events raised by dialogue steps.
+func _on_story_event(name: String) -> void:
+	if name == "prologue_end":
+		await dialogue.finished
+		await _wait_for_explore()
+		Saves.autosave()
+		var t := create_tween()
+		t.tween_property(fade, "modulate:a", 1.0, 0.6)
+		await t.finished
+		get_tree().change_scene_to_file.call_deferred("res://scenes/end_of_content.tscn")
+
+
+func _wait_for_explore() -> void:
+	# Quest notices may follow the scene; let them finish first.
+	for i in 600:
+		if InputManager.current_mode() == InputManager.Mode.EXPLORE and _notices.is_empty():
+			return
+		await get_tree().process_frame
 
 
 func _run_on_enter() -> void:
