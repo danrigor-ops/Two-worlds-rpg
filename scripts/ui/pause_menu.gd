@@ -3,7 +3,12 @@ extends CanvasLayer
 ## Pause menu with Journal, Items and Party tabs. Owns input (MENU mode).
 ## Left/right switch tabs, up/down pick an entry, cancel or menu closes.
 
-const TABS := ["Journal", "Items", "Party"]
+const TABS := ["Journal", "Items", "Party", "System"]
+const VISIBLE_ROWS := 7
+const TIMING_STEPS := [1.0, 1.5, 2.0]
+const TIMING_NAMES := {1.0: "Normal", 1.5: "Relaxed", 2.0: "Very relaxed"}
+
+signal load_requested
 
 var tab := 0
 var row := 0
@@ -11,7 +16,8 @@ var panel: Panel
 var tab_labels: Array[Label] = []
 var list_label: Label
 var detail_label: Label
-var _rows: Array = []   # [{"text", "detail"}]
+var _rows: Array = []   # [{"text", "detail", "action": Callable -> String}]
+var _feedback := ""
 
 
 func _ready() -> void:
@@ -23,7 +29,7 @@ func _ready() -> void:
 	add_child(panel)
 	for i in TABS.size():
 		var l := Label.new()
-		l.position = Vector2(8 + i * 56, 3)
+		l.position = Vector2(8 + i * 54, 3)
 		panel.add_child(l)
 		tab_labels.append(l)
 	list_label = Label.new()
@@ -58,13 +64,19 @@ func _process(_delta: float) -> void:
 	var m := InputManager.Mode.MENU
 	if InputManager.just_pressed("cancel", m) or InputManager.just_pressed("menu", m):
 		close()
+	elif InputManager.just_pressed("confirm", m) and not _rows.is_empty() and _rows[row].has("action"):
+		_feedback = _rows[row]["action"].call()
+		if visible:
+			_refresh()
 	elif InputManager.just_pressed("move_right", m):
 		tab = (tab + 1) % TABS.size()
 		row = 0
+		_feedback = ""
 		_refresh()
 	elif InputManager.just_pressed("move_left", m):
 		tab = (tab - 1 + TABS.size()) % TABS.size()
 		row = 0
+		_feedback = ""
 		_refresh()
 	elif InputManager.just_pressed("move_down", m) and not _rows.is_empty():
 		row = (row + 1) % _rows.size()
@@ -83,14 +95,21 @@ func _refresh() -> void:
 			_rows = journal_rows()
 		"Items":
 			_rows = item_rows()
-		_:
+		"Party":
 			_rows = party_rows()
+		_:
+			_rows = system_rows()
 	row = clampi(row, 0, maxi(0, _rows.size() - 1))
+	var first := clampi(row - VISIBLE_ROWS / 2, 0, maxi(0, _rows.size() - VISIBLE_ROWS))
 	var lines: PackedStringArray = []
-	for i in _rows.size():
+	for i in range(first, mini(_rows.size(), first + VISIBLE_ROWS)):
 		lines.append(("> " if i == row else "  ") + str(_rows[i]["text"]))
 	list_label.text = "\n".join(lines) if not lines.is_empty() else "  (nothing yet)"
-	detail_label.text = _rows[row]["detail"] if not _rows.is_empty() else ""
+	if _feedback != "":
+		detail_label.text = _feedback
+		_feedback = ""
+	else:
+		detail_label.text = _rows[row]["detail"] if not _rows.is_empty() else ""
 
 
 static func journal_rows() -> Array:
@@ -115,7 +134,13 @@ static func item_rows() -> Array:
 	for k: String in GameState.data["key_items"]:
 		rows.append({"text": "* " + defs.get(k, {}).get("name", k), "detail": defs.get(k, {}).get("text", "")})
 	for i: String in GameState.data["inventory"]:
-		rows.append({"text": "%s x%d" % [defs.get(i, {}).get("name", i), GameState.item_count(i)], "detail": defs.get(i, {}).get("text", "")})
+		var row := {"text": "%s x%d" % [defs.get(i, {}).get("name", i), GameState.item_count(i)], "detail": defs.get(i, {}).get("text", "")}
+		if defs.get(i, {}).has("heal_hp"):
+			row["detail"] += " Press A to use."
+			row["action"] = func() -> String:
+				var why := GameState.use_heal_item(i)
+				return why if why != "" else "Used one. Someone feels better!"
+		rows.append(row)
 	return rows
 
 
@@ -128,4 +153,52 @@ static func party_rows() -> Array:
 			"text": "%s Lv%d  HP %d/%d  MP %d/%d" % [names.get(id, {}).get("name", id), s["level"], s["hp"], s["max_hp"], s["mp"], s["max_mp"]],
 			"detail": "ATK %d  DEF %d  MAG %d  RES %d  SPD %d" % [s["atk"], s["def"], s["mag"], s["res"], s["spd"]],
 		})
+	return rows
+
+
+func system_rows() -> Array:
+	var rows: Array = []
+	for slot in ["1", "2", "3"]:
+		rows.append({"text": "Save to slot %s  %s" % [slot, Saves.summary(slot)], "detail": "Save your progress here.",
+			"action": func() -> String:
+				var e := Saves.save(slot)
+				return "Saved to slot %s." % slot if e.is_empty() else "Couldn't save: " + e[0]})
+	for slot in ["auto", "1", "2", "3"]:
+		var label: String = "Auto" if slot == "auto" else slot
+		rows.append({"text": "Load %s  %s" % [label, Saves.summary(slot)], "detail": "Load this save. Unsaved progress is lost.",
+			"action": func() -> String:
+				var e := Saves.load_slot(slot)
+				if not e.is_empty():
+					return "Couldn't load: " + e[0]
+				close()
+				load_requested.emit()
+				return ""})
+	for slot in ["auto", "1", "2", "3"]:
+		if Saves.has_save(slot):
+			rows.append({"text": "Export %s" % ("Auto" if slot == "auto" else "slot " + slot), "detail": "Copy this save to a file you can back up.",
+				"action": func() -> String:
+					var r := Saves.export_slot(slot)
+					return "Exported to " + r[1] if (r[0] as Array).is_empty() else "Couldn't export: " + r[0][0]})
+	rows.append({"text": "Import into slot 3", "detail": "Reads %s. Slot 3 is only replaced if the file is a valid save." % ProjectSettings.globalize_path(Saves.import_path),
+		"action": func() -> String:
+			if not FileAccess.file_exists(Saves.import_path):
+				return "No file at " + ProjectSettings.globalize_path(Saves.import_path)
+			var e := Saves.import_into("3", FileAccess.get_file_as_string(Saves.import_path))
+			return "Imported into slot 3." if e.is_empty() else "Not imported: " + e[0]})
+	var scale := float(GameState.setting("timing_window_scale"))
+	rows.append({"text": "Timing windows: %s" % TIMING_NAMES.get(scale, str(scale)), "detail": "Wider windows make timed hits and dodges easier.",
+		"action": func() -> String:
+			var i := TIMING_STEPS.find(scale)
+			GameState.data["settings"]["timing_window_scale"] = TIMING_STEPS[(i + 1) % TIMING_STEPS.size()]
+			return ""})
+	var diag: bool = GameState.setting("diagonal_movement")
+	rows.append({"text": "Diagonal moves: %s" % ("On" if diag else "Off"), "detail": "Off keeps movement to four directions.",
+		"action": func() -> String:
+			GameState.data["settings"]["diagonal_movement"] = not diag
+			return ""})
+	rows.append({"text": "Quit to title", "detail": "Unsaved progress is lost.",
+		"action": func() -> String:
+			close()
+			get_tree().change_scene_to_file.call_deferred("res://scenes/title.tscn")
+			return ""})
 	return rows

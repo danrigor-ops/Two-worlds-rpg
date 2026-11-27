@@ -37,7 +37,7 @@ func default_state() -> Dictionary:
 	var quests := {}
 	for q: Dictionary in JsonUtil.load_dict(QUESTS_PATH).get("quests", []):
 		quests[q["id"]] = q.get("start", "locked")
-	return {
+	var d := {
 		"version": SCHEMA_VERSION,
 		"chapter": "prologue",
 		"map_id": NEW_GAME_MAP,
@@ -56,6 +56,8 @@ func default_state() -> Dictionary:
 		"playtime_sec": 0.0,
 		"settings": {"diagonal_movement": true, "timing_window_scale": 1.0, "instant_text": false},
 	}
+	_normalize(d)   # content JSON gives floats; stats are whole numbers
+	return d
 
 
 # --- Flags -------------------------------------------------------------------
@@ -160,6 +162,8 @@ func item_count(item_id: String) -> int:
 
 ## Adds (or with a negative n removes) consumables. Never goes below 0 or above the cap.
 func add_item(item_id: String, n: int = 1) -> bool:
+	if item_defs().get(item_id, {}).get("kind", "") == "key":
+		return false   # key items live in key_items and can't be stacked, used up or sold
 	var now := item_count(item_id)
 	var next := now + n
 	if next < 0 or next > STACK_CAP:
@@ -169,6 +173,51 @@ func add_item(item_id: String, n: int = 1) -> bool:
 	else:
 		data["inventory"][item_id] = next
 	return true
+
+
+## Buying is all-or-nothing: either money and items both change, or neither.
+func buy(item_id: String, price_cents: int, n: int = 1) -> bool:
+	var total := price_cents * n
+	var cents := int(data["wallet"]["human_cents"])
+	if n <= 0 or price_cents < 0 or total > cents or item_count(item_id) + n > STACK_CAP:
+		return false
+	if not add_item(item_id, n):
+		return false
+	data["wallet"]["human_cents"] = cents - total
+	return true
+
+
+## Ordinary shop goods sell for half price, rounded down. Key items can't be sold.
+func sell(item_id: String, price_cents: int, n: int = 1) -> bool:
+	if n <= 0 or item_count(item_id) < n or item_defs().get(item_id, {}).get("kind", "") == "key":
+		return false
+	add_item(item_id, -n)
+	data["wallet"]["human_cents"] = int(data["wallet"]["human_cents"]) + (price_cents / 2) * n
+	return true
+
+
+## Uses a healing item outside battle on the member with the lowest HP share.
+## Returns "" on success, or the reason it couldn't be used.
+func use_heal_item(item_id: String) -> String:
+	var heal := int(item_defs().get(item_id, {}).get("heal_hp", 0))
+	if heal <= 0:
+		return "That can't be used here."
+	if item_count(item_id) <= 0:
+		return "None left."
+	var target := ""
+	var best := 2.0
+	for id: String in party():
+		var m: Dictionary = data["members"][id]
+		var share := float(m["hp"]) / float(m["max_hp"])
+		if share < best:
+			best = share
+			target = id
+	if best >= 1.0:
+		return "Everyone is already full of energy."
+	add_item(item_id, -1)
+	var m: Dictionary = data["members"][target]
+	m["hp"] = mini(int(m["max_hp"]), int(m["hp"]) + heal)
+	return ""
 
 
 func add_dewdrops(n: int) -> bool:

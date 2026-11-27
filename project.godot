@@ -17,6 +17,7 @@ GameState="*res://autoload/game_state.gd"
 InputManager="*res://autoload/input_manager.gd"
 Assets="*res://autoload/assets.gd"
 Quests="*res://autoload/quests.gd"
+Saves="*res://autoload/saves.gd"
 
 [display]
 

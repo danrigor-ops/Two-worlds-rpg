@@ -57,6 +57,7 @@ func _ready() -> void:
 	add_child(dialogue)
 	menu = PauseMenu.new()
 	add_child(menu)
+	menu.load_requested.connect(func() -> void: get_tree().change_scene_to_file.call_deferred("res://scenes/exploration.tscn"))
 	GameState.party_changed.connect(_on_party_changed)
 	GameState.flag_changed.connect(_on_flag_changed)
 	Quests.notice.connect(_on_notice)
@@ -392,6 +393,7 @@ func start_encounter(npc: Dictionary) -> void:
 		if enc.has("outro_scene"):
 			dialogue.play_scene(enc["outro_scene"])
 			await dialogue.finished
+		Saves.autosave()
 	else:
 		# Ran away: step back so the encounter doesn't start again at once.
 		var lead := leader()
@@ -436,6 +438,8 @@ func _use_door(door: Dictionary) -> void:
 	await t.finished
 	InputManager.pop_mode(InputManager.Mode.TRANSITION)
 	transitioning = false
+	# Safe moment to autosave: the transition is over and nothing is mid-change.
+	Saves.autosave()
 	if not notes.is_empty():
 		dialogue.show_lines(notes)
 	_run_on_enter()
