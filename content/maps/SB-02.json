@@ -1,0 +1,298 @@
+{
+ "id": "SB-02",
+ "name": "The Thousand Flowers",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 30,
+ "legend": {
+  "T": "tree",
+  "f": "flowers",
+  ".": "grass",
+  "W": "water",
+  "v": "dead_vine",
+  "B": "blossom",
+  "E": "exit"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffBfffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.ffB.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TffffffffffffvWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Effff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffE",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWffffffffffffvWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWffffffBffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "Tffff.fff.ffffWWWffff.fff.ffffWWWffff.fff.fffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TfffffffffffffWWWfffffffffffffWWWffffffffffffffT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_trail": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_heart": {
+   "x": 46,
+   "y": 14,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_trail",
+   "x": 0,
+   "y": 14,
+   "to_map": "SB-01",
+   "to_spawn": "from_flowers"
+  },
+  {
+   "id": "to_heart",
+   "x": 47,
+   "y": 14,
+   "to_map": "SB-03",
+   "to_spawn": "from_flowers",
+   "require": [
+    {
+     "if_flags": [
+      "ch05_memories_seen"
+     ],
+     "else_scene": "sb02_heart_closed"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "puffs",
+   "character": "pollen_puff",
+   "x": 22,
+   "y": 10,
+   "facing": "down",
+   "hide_if_flag": "sb02_puffs_beaten",
+   "encounter": {
+    "id": "sb02_puffs",
+    "outro_scene": "sb02_puffs_beaten"
+   }
+  },
+  {
+   "id": "mixed",
+   "character": "thorn_sprite",
+   "x": 38,
+   "y": 20,
+   "facing": "left",
+   "hide_if_flag": "sb02_mixed_beaten",
+   "encounter": {
+    "id": "sb02_mixed",
+    "outro_scene": "sb02_mixed_beaten"
+   }
+  },
+  {
+   "id": "bee",
+   "character": "bee_spirit",
+   "x": 8,
+   "y": 20,
+   "facing": "right",
+   "talk": [
+    {
+     "scene": "bee_spirit"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "regrow_1",
+   "x": 13,
+   "y": 8,
+   "talk": [
+    {
+     "if_flags": [
+      "ch05_bridge_1"
+     ],
+     "scene": "regrow_done"
+    },
+    {
+     "scene": "regrow_1"
+    }
+   ]
+  },
+  {
+   "id": "regrow_2",
+   "x": 29,
+   "y": 20,
+   "talk": [
+    {
+     "if_flags": [
+      "ch05_bridge_2"
+     ],
+     "scene": "regrow_done"
+    },
+    {
+     "scene": "regrow_2"
+    }
+   ]
+  },
+  {
+   "id": "blossom_1",
+   "x": 6,
+   "y": 4,
+   "talk": [
+    {
+     "if_flags": [
+      "ch05_memory_1"
+     ],
+     "scene": "blossom_done"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "memory_1"
+    },
+    {
+     "scene": "blossom_look"
+    }
+   ]
+  },
+  {
+   "id": "blossom_2",
+   "x": 23,
+   "y": 24,
+   "talk": [
+    {
+     "if_flags": [
+      "ch05_memory_2"
+     ],
+     "scene": "blossom_done"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "memory_2"
+    },
+    {
+     "scene": "blossom_look"
+    }
+   ]
+  },
+  {
+   "id": "blossom_3",
+   "x": 40,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch05_memory_3"
+     ],
+     "scene": "blossom_done"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "memory_3"
+    },
+    {
+     "scene": "blossom_look"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch05_bridge_1"
+   ],
+   "tile": "vine_bridge",
+   "cells": [
+    [
+     14,
+     8
+    ],
+    [
+     15,
+     8
+    ],
+    [
+     16,
+     8
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch05_bridge_2"
+   ],
+   "tile": "vine_bridge",
+   "cells": [
+    [
+     30,
+     20
+    ],
+    [
+     31,
+     20
+    ],
+    [
+     32,
+     20
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch05_bridge_1"
+   ],
+   "tile": "flowers",
+   "cells": [
+    [
+     13,
+     8
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch05_bridge_2"
+   ],
+   "tile": "flowers",
+   "cells": [
+    [
+     29,
+     20
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C5_03_flowers",
+   "if_not_flags": [
+    "ch05_flowers_seen"
+   ]
+  }
+ ],
+ "movables": []
+}

@@ -20,7 +20,7 @@ const STAGES := [
 ]
 
 ## Chapters whose content exists in this build: the next one past these goes to the title.
-const BUILT_UP_TO := 4
+const BUILT_UP_TO := 5
 
 var _continue := true
 

@@ -53,6 +53,23 @@
    "mult": 1.6,
    "requires_flag": "ch04_whisper_learned",
    "text": "A root bursts up under the target."
+  },
+  "bloom_heal": {
+   "name": "Bloom Heal",
+   "user": "maris",
+   "mp": 6,
+   "kind": "heal",
+   "mult": 1.4,
+   "target": "all",
+   "text": "Petals settle on everyone and close their scrapes. Heals all heroes."
+  },
+  "thorn_lash": {
+   "name": "Thorn Lash",
+   "user": "maris",
+   "mp": 4,
+   "kind": "magical",
+   "mult": 1.3,
+   "text": "A whip of flowering thorns."
   }
  },
  "team": {

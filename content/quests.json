@@ -496,6 +496,59 @@
     "active": "Titis's fear has a shape of its own now. Face it.",
     "completed": "The Fear-Shadow is gone. The grove is quiet."
    }
+  },
+  {
+   "id": "C05-001",
+   "name": "The Wilting Trail",
+   "start": "locked",
+   "start_flags": [
+    "ch05_started"
+   ],
+   "complete_flags": [
+    "ch05_maris_joined"
+   ],
+   "reward": {
+    "dewdrops": 4
+   },
+   "journal": {
+    "active": "Hutan Seribu Bunga is wilting. Someone is calling from the dead vines along the trail.",
+    "completed": "Maris, the sanctuary's keeper, joined us."
+   }
+  },
+  {
+   "id": "C05-002",
+   "name": "What the Flowers Kept",
+   "start": "locked",
+   "start_flags": [
+    "ch05_maris_joined"
+   ],
+   "complete_flags": [
+    "ch05_memories_seen"
+   ],
+   "reward": {
+    "items": {
+     "item_chrysanthemum_tea": 2
+    }
+   },
+   "journal": {
+    "active": "Three memory blossoms in the Thousand Flowers hold what the sanctuary remembers. Maris can Regrow vine bridges over the stream; Lumi can read the blossoms.",
+    "completed": "We saw the Promise, a crying Oathkeeper, and the stranger planting forgetting seeds."
+   }
+  },
+  {
+   "id": "C05-003",
+   "name": "The Forgetting Bloom",
+   "start": "locked",
+   "start_flags": [
+    "ch05_memories_seen"
+   ],
+   "complete_flags": [
+    "ch05_bloom_beaten"
+   ],
+   "journal": {
+    "active": "The forgetting seeds have grown at the Heart of the Sanctuary.",
+    "completed": "The Forgetting Bloom wilted. The sanctuary is breathing again."
+   }
   }
  ]
 }

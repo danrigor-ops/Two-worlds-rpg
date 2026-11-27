@@ -134,6 +134,17 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
     - From 30% it uses Nightfall, announced a round ahead.
 53. At dawn the tappers find every cup full. Titis says the ink-fingered stranger went looking for a forgetting-flower in **Hutan Seribu Bunga**.
 
+**Chapter 5: A Thousand Flowers, One Promise.** Design: `docs/chapter-05/CHAPTER_05_PRODUCTION.md`.
+
+54. From the Chapter 4 screen, press A. Take the new east path from the estate road into **Hutan Seribu Bunga**.
+55. Reno pulls **Maris** free of the dead vines. She's the healer: Bloom Heal heals everyone, plus Thorn Lash, and in the field she can **Regrow** vine bridges. With four in the party, **Menu > Party** marks reserves (R). Press A to move someone to the front. The first three fight.
+56. In **the Thousand Flowers**, Regrow the bridges (PZ-501) and let Lumi read three memory blossoms (PZ-502): the Promise, a crying Oathkeeper in 1951, and the stranger planting forgetting seeds.
+57. **The Forgetting Bloom** (BOSS-501):
+    - Petal Storm and Forget-Me in phase 1.
+    - Thorn Sprites from 60%.
+    - Wilt, announced a round ahead, from 30%.
+58. A carnival ticket stub points to **Pasar Malam Impian**.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -200,4 +211,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
    - ✅ Part B: the Sunken Jetty, the Barnacle Bell, the Tide Song, the Undertow, Nenek Arus, Things the River Kept
 10. ✅ Chapter 3: The Town That Forgot Its Name (Elias joins, three-hero battles)
 11. ✅ Chapter 4: The Rubber Grove at Midnight (Forest Whisper, mediation, Poison)
-12. Chapters 5 to 10 and the epilogue
+12. ✅ Chapter 5: A Thousand Flowers, One Promise (Maris joins, healing, formation)
+13. Chapters 6 to 10 and the epilogue

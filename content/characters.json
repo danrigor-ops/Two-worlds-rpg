@@ -43,6 +43,20 @@
         "res": 10,
         "spd": 9
       }
+    },
+    "maris": {
+      "name": "Maris",
+      "walks": false,
+      "stats": {
+        "level": 1,
+        "max_hp": 40,
+        "max_mp": 24,
+        "atk": 8,
+        "def": 9,
+        "mag": 14,
+        "res": 13,
+        "spd": 10
+      }
     }
   }
 }

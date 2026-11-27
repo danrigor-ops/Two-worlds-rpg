@@ -450,6 +450,27 @@
    "color": "#8a6a48",
    "accent": "#6b4a2f",
    "pattern": "speckle"
+  },
+  "dead_vine": {
+   "index": 64,
+   "solid": true,
+   "color": "#5a4a3a",
+   "accent": "#3a2a1a",
+   "pattern": "roots"
+  },
+  "vine_bridge": {
+   "index": 65,
+   "solid": false,
+   "color": "#4b8a3d",
+   "accent": "#2f6b3a",
+   "pattern": "bridge"
+  },
+  "blossom": {
+   "index": 66,
+   "solid": true,
+   "color": "#5d9e4b",
+   "accent": "#f2a0c8",
+   "pattern": "flowers"
   }
  }
 }

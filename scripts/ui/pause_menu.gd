@@ -147,12 +147,21 @@ static func item_rows() -> Array:
 static func party_rows() -> Array:
 	var rows: Array = []
 	var names: Dictionary = JsonUtil.load_dict(GameState.CHARACTERS_PATH).get("characters", {})
+	var many := GameState.party().size() > GameState.ACTIVE_SIZE
 	for id: String in GameState.party():
 		var s: Dictionary = GameState.data["members"][id]
-		rows.append({
-			"text": "%s Lv%d  HP %d/%d  MP %d/%d" % [names.get(id, {}).get("name", id), s["level"], s["hp"], s["max_hp"], s["mp"], s["max_mp"]],
+		var reserve := not (id in GameState.active_party())
+		var row := {
+			"text": "%s%s Lv%d  HP %d/%d  MP %d/%d" % ["(R) " if reserve else "", names.get(id, {}).get("name", id), s["level"], s["hp"], s["max_hp"], s["mp"], s["max_mp"]],
 			"detail": "ATK %d  DEF %d  MAG %d  RES %d  SPD %d" % [s["atk"], s["def"], s["mag"], s["res"], s["spd"]],
-		})
+		}
+		if many:
+			# Formation: the first three fight. A moves this member to the front.
+			row["detail"] += "\nA: move to the front (the first three fight; (R) waits in reserve)"
+			row["action"] = func() -> String:
+				GameState.move_to_front(id)
+				return "%s moves to the front." % names.get(id, {}).get("name", id)
+		rows.append(row)
 	return rows
 
 

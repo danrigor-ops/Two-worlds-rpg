@@ -235,6 +235,21 @@
     "mag": 3
    },
    "text": "A bead of morning sap, hardened clear. Lumi wears it: MAG +3."
+  },
+  "equip_petal_brooch": {
+   "name": "Petal Brooch",
+   "kind": "charm",
+   "equip_to": "maris",
+   "bonus": {
+    "mag": 2,
+    "res": 2
+   },
+   "text": "A brooch of pressed petals that never fade. Maris wears it: MAG +2, RES +2."
+  },
+  "item_carnival_stub": {
+   "name": "Carnival Ticket Stub",
+   "kind": "key",
+   "text": "PASAR MALAM IMPIAN. ADMIT ONE. The ink on the edge is the same ink."
   }
  }
 }
