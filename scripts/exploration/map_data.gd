@@ -21,6 +21,10 @@ var doors: Array[Dictionary] = []  # {"id", "cell", "to_map", "to_spawn", "one_w
 var npcs: Array[Dictionary] = []
 var signs: Dictionary = {}    # Vector2i -> Array of lines
 var on_enter: Array = []      # [{"scene", "if_flags", "if_not_flags"}]
+var objects: Dictionary = {}  # Vector2i -> {"id", "talk": [...]}  (interactable solid tiles)
+var overrides: Array = []     # [{"if_flags", "tile", "cells": [Vector2i]}]
+var triggers: Array = []      # [{"cells": [Vector2i], "scene", "if_flags", "if_not_flags"}]
+var _override_tiles: Dictionary = {}  # Vector2i -> tile name currently replaced
 
 
 static func tile_defs() -> Dictionary:
@@ -68,9 +72,53 @@ static func load_map(map_id: String) -> MapData:
 		n["cell"] = Vector2i(int(npc["x"]), int(npc["y"]))
 		m.npcs.append(n)
 	m.on_enter = d.get("on_enter", [])
+	for o: Dictionary in d.get("objects", []):
+		m.objects[Vector2i(int(o["x"]), int(o["y"]))] = o
+	for o: Dictionary in d.get("overrides", []):
+		var ov := o.duplicate()
+		ov["cells"] = _cells(o.get("cells", []))
+		m.overrides.append(ov)
+	for t: Dictionary in d.get("triggers", []):
+		var tr := t.duplicate()
+		tr["cells"] = _cells(t.get("cells", []))
+		m.triggers.append(tr)
 	for sign: Dictionary in d.get("signs", []):
 		m.signs[Vector2i(int(sign["x"]), int(sign["y"]))] = sign.get("lines", [])
 	return m
+
+
+static func _cells(list: Array) -> Array[Vector2i]:
+	var out: Array[Vector2i] = []
+	for c: Array in list:
+		out.append(Vector2i(int(c[0]), int(c[1])))
+	return out
+
+
+## Swaps in override tiles whose flags are set (revealed stones, a rebuilt
+## bridge). has_flag is a Callable(String) -> bool. Returns the cells that changed.
+func apply_overrides(has_flag: Callable) -> Array[Vector2i]:
+	var next := {}
+	for ov: Dictionary in overrides:
+		if (ov.get("if_flags", []) as Array).all(has_flag):
+			for c: Vector2i in ov["cells"]:
+				next[c] = ov["tile"]
+	var changed: Array[Vector2i] = []
+	for c: Vector2i in next:
+		if _override_tiles.get(c, "") != next[c]:
+			changed.append(c)
+	for c: Vector2i in _override_tiles:
+		if not next.has(c):
+			changed.append(c)
+	_override_tiles = next
+	return changed
+
+
+func is_pit(cell: Vector2i) -> bool:
+	return tile_name(cell) == "pit"
+
+
+func trigger_at(cell: Vector2i) -> Array:
+	return triggers.filter(func(t: Dictionary) -> bool: return cell in t["cells"])
 
 
 func in_bounds(cell: Vector2i) -> bool:
@@ -80,6 +128,8 @@ func in_bounds(cell: Vector2i) -> bool:
 func tile_name(cell: Vector2i) -> String:
 	if not in_bounds(cell) or cell.y >= rows.size() or cell.x >= rows[cell.y].length():
 		return ""
+	if _override_tiles.has(cell):
+		return _override_tiles[cell]
 	return legend.get(rows[cell.y][cell.x], "")
 
 
@@ -130,6 +180,8 @@ func validate_self() -> Array[String]:
 		var c: Vector2i = spawns[s]["cell"]
 		if not is_walkable(c):
 			e.append(p + "spawn '%s' at %s is not on a walkable tile" % [s, c])
+		elif is_pit(c):
+			e.append(p + "spawn '%s' at %s is over a pit" % [s, c])
 		elif not door_at(c).is_empty():
 			e.append(p + "spawn '%s' at %s is on a door and would re-trigger it" % [s, c])
 		if spawns[s]["facing"] not in ["down", "left", "right", "up"]:
@@ -154,6 +206,24 @@ func validate_self() -> Array[String]:
 			for k in ["intro_scene", "outro_scene"]:
 				if enc.has(k) and not Dialogue.has_scene(enc[k]):
 					e.append(p + "npc '%s' uses missing scene '%s'" % [npc.get("id", "?"), enc[k]])
+	for cell: Vector2i in objects:
+		if not (tile_defs().get(tile_name(cell), {}).get("solid", false)):
+			e.append(p + "object '%s' at %s should sit on a solid tile" % [objects[cell].get("id", "?"), cell])
+		for t: Dictionary in objects[cell].get("talk", []):
+			if not Dialogue.has_scene(t.get("scene", "")):
+				e.append(p + "object '%s' uses missing scene '%s'" % [objects[cell].get("id", "?"), t.get("scene", "")])
+	for ov: Dictionary in overrides:
+		if not tile_defs().has(ov.get("tile", "")):
+			e.append(p + "override uses unknown tile '%s'" % ov.get("tile", ""))
+		for c: Vector2i in ov["cells"]:
+			if not in_bounds(c):
+				e.append(p + "override cell %s is outside the map" % c)
+	for tr: Dictionary in triggers:
+		if not Dialogue.has_scene(tr.get("scene", "")):
+			e.append(p + "trigger uses missing scene '%s'" % tr.get("scene", ""))
+		for c: Vector2i in tr["cells"]:
+			if not is_walkable(c):
+				e.append(p + "trigger cell %s can't be walked on" % c)
 	for t: Dictionary in on_enter:
 		if not Dialogue.has_scene(t.get("scene", "")):
 			e.append(p + "on_enter uses missing scene '%s'" % t.get("scene", ""))

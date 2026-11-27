@@ -1,6 +1,6 @@
 {
  "status": "PLACEHOLDER",
- "note": "Generated 16x16 placeholder tiles. Replace by setting 'tileset' path in asset_manifest.json to a PNG with the same tile order.",
+ "note": "Generated 16x16 placeholder tiles. 'pit' is walkable but you fall in (you're put back on safe ground); Reno can Leaf Leap over up to two pit tiles.",
  "tile_size": 16,
  "tiles": {
   "grass": {
@@ -121,6 +121,76 @@
    "color": "#a87a4a",
    "accent": "#6e4a2a",
    "pattern": "crate"
+  },
+  "dark_grass": {
+   "index": 17,
+   "solid": false,
+   "color": "#2c3a5c",
+   "accent": "#3d4f7a",
+   "pattern": "speckle"
+  },
+  "root_wall": {
+   "index": 18,
+   "solid": true,
+   "color": "#3a2a4a",
+   "accent": "#24182f",
+   "pattern": "roots"
+  },
+  "glowcap": {
+   "index": 19,
+   "solid": false,
+   "color": "#2c3a5c",
+   "accent": "#8fe3d0",
+   "pattern": "flowers"
+  },
+  "pit": {
+   "index": 20,
+   "solid": false,
+   "color": "#0b0814",
+   "accent": "#e8b84a",
+   "pattern": "pit"
+  },
+  "stone": {
+   "index": 21,
+   "solid": false,
+   "color": "#3f7fc4",
+   "accent": "#c9d3f0",
+   "pattern": "stone"
+  },
+  "bridge": {
+   "index": 22,
+   "solid": false,
+   "color": "#0b0814",
+   "accent": "#6b4a2f",
+   "pattern": "bridge"
+  },
+  "echo_marker": {
+   "index": 23,
+   "solid": true,
+   "color": "#2c3a5c",
+   "accent": "#8fc3ef",
+   "pattern": "marker"
+  },
+  "moss_marker": {
+   "index": 24,
+   "solid": true,
+   "color": "#2c3a5c",
+   "accent": "#6fbf4a",
+   "pattern": "marker"
+  },
+  "bridge_post": {
+   "index": 25,
+   "solid": true,
+   "color": "#0b0814",
+   "accent": "#6b4a2f",
+   "pattern": "post"
+  },
+  "gate": {
+   "index": 26,
+   "solid": true,
+   "color": "#3a2a4a",
+   "accent": "#e8b84a",
+   "pattern": "gate"
   }
  }
 }

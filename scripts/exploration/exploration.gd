@@ -5,6 +5,8 @@ const SPEED := 72.0
 const FADE_TIME := 0.25
 const INTERACT_REACH := 12.0
 const CAMERA_LIFT := Vector2(0, -12)
+const MAX_LEAP := 2        # Leaf Leap clears up to this many pit tiles
+const LEAP_TIME := 0.4
 
 var map: MapData
 var tilemap: TileMapLayer
@@ -21,6 +23,8 @@ var _encounter_running := false
 ## Test hooks passed to battles.
 var battle_auto_judge := ""
 var battle_speed := 1.0
+var _last_safe := Vector2.ZERO   # last leader position on solid ground (for falls)
+var _busy := false               # leaping or falling
 var trail := FollowTrail.new()
 var transitioning := false
 var _label_time := 0.0
@@ -54,6 +58,7 @@ func _ready() -> void:
 	menu = PauseMenu.new()
 	add_child(menu)
 	GameState.party_changed.connect(_on_party_changed)
+	GameState.flag_changed.connect(_on_flag_changed)
 	Quests.notice.connect(_on_notice)
 	var fade_layer := CanvasLayer.new()
 	fade_layer.layer = 20
@@ -70,6 +75,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	if GameState.flag_changed.is_connected(_on_flag_changed):
+		GameState.flag_changed.disconnect(_on_flag_changed)
 	if GameState.party_changed.is_connected(_on_party_changed):
 		GameState.party_changed.disconnect(_on_party_changed)
 	if Quests.notice.is_connected(_on_notice):
@@ -100,13 +107,12 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	members.clear()
 	npcs.clear()
 	map = MapData.load_map(map_id)
+	map.apply_overrides(GameState.get_flag)
 
 	tilemap.clear()
 	for y in map.height:
 		for x in map.width:
-			var idx := Assets.tile_index(map.tile_name(Vector2i(x, y)))
-			if idx >= 0:
-				tilemap.set_cell(Vector2i(x, y), 0, Vector2i(idx, 0))
+			_paint_cell(Vector2i(x, y))
 	var px := map.pixel_size()
 	camera.limit_left = 0
 	camera.limit_top = 0
@@ -118,6 +124,7 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	for id: String in GameState.party():
 		members[id] = _spawn_member(id, pos, start["facing"])
 	trail.reset(pos)
+	_last_safe = pos
 
 	for def in map.npcs:
 		if def.has("hide_if_flag") and GameState.get_flag(def["hide_if_flag"]):
@@ -136,6 +143,22 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 
 
 ## Saved tile if it is still valid, else the named spawn, else "start".
+func _paint_cell(cell: Vector2i) -> void:
+	var idx := Assets.tile_index(map.tile_name(cell))
+	if idx >= 0:
+		tilemap.set_cell(cell, 0, Vector2i(idx, 0))
+	else:
+		tilemap.erase_cell(cell)
+
+
+## Story flags can reveal tiles (Echo Sight stones, the root bridge).
+func _on_flag_changed(_flag: String, _value: Variant) -> void:
+	if map == null:
+		return
+	for cell in map.apply_overrides(GameState.get_flag):
+		_paint_cell(cell)
+
+
 func _pick_start(spawn_name: String) -> Dictionary:
 	if spawn_name != "" and map.spawns.has(spawn_name):
 		return map.spawns[spawn_name]
@@ -158,7 +181,7 @@ func _spawn_member(id: String, pos: Vector2, facing: String) -> PartyMember:
 # --- Frame loop --------------------------------------------------------------
 
 func _physics_process(_delta: float) -> void:
-	if transitioning or leader() == null:
+	if transitioning or _busy or leader() == null:
 		return
 	var lead := leader()
 	var dir := InputManager.move_vector(InputManager.Mode.EXPLORE)
@@ -175,10 +198,19 @@ func _physics_process(_delta: float) -> void:
 	GameState.set_position(map.id, cell, lead.facing)
 	if InputManager.current_mode() != InputManager.Mode.EXPLORE:
 		return
+	if map.is_pit(cell):
+		_fall()
+		return
+	if map.is_walkable(cell):
+		_last_safe = lead.global_position
 	var door := map.door_at(cell)
 	if not door.is_empty():
 		_try_door(door, cell)
 		return
+	for tr: Dictionary in map.trigger_at(cell):
+		if GameState.conditions_met(tr):
+			dialogue.play_scene(tr["scene"])
+			return
 	for npc in npcs:
 		if npc["def"].has("encounter") and npc["node"].global_position.distance_to(lead.global_position) < 14.0:
 			start_encounter(npc)
@@ -210,8 +242,12 @@ func _process(delta: float) -> void:
 
 func swap_leader() -> bool:
 	var f := follower()
-	if f == null or transitioning:
+	if f == null or transitioning or _busy:
 		return false
+	if not map.is_walkable(MapData.feet_to_cell(f.global_position)) or map.is_pit(MapData.feet_to_cell(f.global_position)):
+		# The follower is floating over a gap: bring them to the leader first.
+		f.place_at(leader().global_position, f.facing)
+		trail.reset(f.global_position)
 	trail.reverse_for_swap()
 	GameState.set_leader(f.member_id)
 	return true
@@ -227,6 +263,75 @@ func _interact() -> void:
 	var cell := MapData.feet_to_cell(probe)
 	if map.signs.has(cell):
 		dialogue.show_lines(map.signs[cell])
+		return
+	if map.objects.has(cell):
+		var scene_id := pick_scene(map.objects[cell].get("talk", []))
+		if scene_id != "":
+			dialogue.play_scene(scene_id)
+		return
+	_try_leap(lead)
+
+
+# --- Field abilities ---------------------------------------------------------
+
+## Leaf Leap (Reno): facing up to MAX_LEAP pit tiles with solid ground beyond.
+## Contextual: press A facing a gap. Uses no combat MP.
+func _try_leap(lead: PartyMember) -> bool:
+	var dir := Vector2i(lead.facing_vector())
+	var from := MapData.feet_to_cell(lead.global_position)
+	var c := from + dir
+	var pits := 0
+	while map.is_pit(c) and pits <= MAX_LEAP:
+		pits += 1
+		c += dir
+	if pits == 0:
+		return false
+	if lead.member_id != "reno":
+		dialogue.play_scene("leap_lumi")
+	elif pits > MAX_LEAP or not map.is_walkable(c) or map.is_pit(c):
+		dialogue.play_scene("leap_too_far")
+	else:
+		_leap(lead, MapData.cell_to_feet(c))
+	return true
+
+
+func _leap(lead: PartyMember, to: Vector2) -> void:
+	_busy = true
+	InputManager.push_mode(InputManager.Mode.CUTSCENE)
+	var from := lead.global_position
+	var t := create_tween()
+	t.tween_method(func(k: float) -> void:
+		lead.global_position = from.lerp(to, k)
+		lead.sprite.position.y = -sin(k * PI) * 10.0
+		trail.record(lead.global_position)
+		camera.global_position = lead.global_position + CAMERA_LIFT
+		var f := follower()
+		if f:
+			f.follow_to(trail.target()), 0.0, 1.0, LEAP_TIME)
+	await t.finished
+	lead.sprite.position.y = 0
+	_last_safe = to
+	InputManager.pop_mode(InputManager.Mode.CUTSCENE)
+	_busy = false
+
+
+## Stepping onto a pit: drop in, then come back on the last safe ground.
+func _fall() -> void:
+	_busy = true
+	InputManager.push_mode(InputManager.Mode.CUTSCENE)
+	var lead := leader()
+	var t := create_tween()
+	t.tween_property(lead.sprite, "scale", Vector2(0.2, 0.2), 0.3)
+	await t.finished
+	lead.sprite.scale = Vector2.ONE
+	lead.place_at(_last_safe, lead.facing)
+	trail.reset(_last_safe)
+	var f := follower()
+	if f:
+		f.place_at(_last_safe, f.facing)
+	InputManager.pop_mode(InputManager.Mode.CUTSCENE)
+	_busy = false
+	dialogue.play_scene("fall")
 
 
 func _talk_to(npc: Dictionary) -> void:

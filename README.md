@@ -39,6 +39,11 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
 8. Take the south path to the Training Glade (KA-06). It opens once you've heard Nenek and spoken to Bobo.
 9. Walk into the Leafling for the tutorial battle (P04). Press A as the ring closes: on your attacks for a stronger hit, and on the Leafling's Seed Toss to dodge.
 10. Bring the parcel back to Bobo for the lantern and two Dewdrop Candies.
+11. With the lantern, take the glade's south exit into the Whispering Roots (KA-08):
+    - **Leaf Leap** (PZ-001): with Reno leading, face a gold-edged gap and press A. Walk into a gap and you climb back out where you were.
+    - **Echo Sight** (PZ-002): with Lumi leading (press C), check the humming stone to reveal stepping stones.
+    - **Gate Key** (PZ-003): after the echo, check the mossy stone across the pond.
+    - **Root Bridge** (PZ-004): Lumi traces the old bridge at the post, then Reno pulls the roots.
 
 ### Battle basics
 
@@ -85,6 +90,6 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 2. ✅ Exploration (first pass): Root Square and Reno's Home, follow, swap, doors
 3. ✅ Dialogue and quests: P00 to P03, journal, items and party menu
 4. ✅ Combat and the Leafling tutorial
-5. Field abilities and Whispering Roots puzzles
+5. ✅ Field abilities and Whispering Roots puzzles
 6. Inventory and saving
 7. The rest of the prologue

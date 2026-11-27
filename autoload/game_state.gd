@@ -201,8 +201,11 @@ func claim_reward(reward_id: String, reward: Dictionary) -> bool:
 	return true
 
 
-## True when every flag in if_flags is set and none in if_not_flags is.
+## True when every flag in if_flags is set, none in if_not_flags is, and
+## (if given) if_leader is the current leader.
 func conditions_met(def: Dictionary) -> bool:
+	if def.has("if_leader") and def["if_leader"] != leader():
+		return false
 	for f: String in def.get("if_flags", []):
 		if not get_flag(f):
 			return false
