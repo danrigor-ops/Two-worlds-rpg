@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "note": "Every asset here is a generated PLACEHOLDER. To use real art, set 'path' to a res:// PNG with the listed frame layout and change 'status'. Status flow: PLACEHOLDER -> CONCEPT -> CANDIDATE -> APPROVED -> INTEGRATED -> TESTED.",
+  "assets": {
+    "reno_overworld": {
+      "kind": "character_sheet",
+      "status": "PLACEHOLDER",
+      "path": "",
+      "frame_width": 32, "frame_height": 40,
+      "frame_order": ["down", "left", "right", "up"],
+      "origin_x": 0.5, "origin_y": 0.95,
+      "placeholder": {"style": "reno", "hair": "#2b2420", "skin": "#c98d5a", "body": "#4c9a3a", "accent": "#d63a32", "legs": "#7a5a3a"}
+    },
+    "lumi_overworld": {
+      "kind": "character_sheet",
+      "status": "PLACEHOLDER",
+      "path": "",
+      "frame_width": 32, "frame_height": 40,
+      "frame_order": ["down", "left", "right", "up"],
+      "origin_x": 0.5, "origin_y": 0.95,
+      "floats": true,
+      "placeholder": {"style": "lumi", "hair": "#1d1a2a", "skin": "#e9cfb4", "body": "#f2efe6", "accent": "#4fa3e0", "legs": "#f2efe6"}
+    },
+    "tileset_prologue": {
+      "kind": "tileset",
+      "status": "PLACEHOLDER",
+      "path": "",
+      "tile_size": 16,
+      "note": "Tile order follows content/tiles.json indexes, one row."
+    }
+  },
+  "characters": {
+    "reno": "reno_overworld",
+    "lumi": "lumi_overworld"
+  }
+}

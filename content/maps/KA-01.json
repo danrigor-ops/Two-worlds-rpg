@@ -1,0 +1,107 @@
+{
+ "id": "KA-01",
+ "name": "Root Square",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  ".": "grass",
+  "=": "path",
+  "f": "flowers",
+  "T": "tree",
+  "~": "water",
+  "H": "house",
+  "D": "door",
+  "S": "sign",
+  "r": "root"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTSTTTTTTTTTTTTTTTTTTT",
+  "TT..................=.................TT",
+  "TT..HHHHHHHH........=.................TT",
+  "TT..HHHHHHHH.T......=..f..........T...TT",
+  "TT..HHHHHHHH....T...=......T..........TT",
+  "TT..HHHHHHHH........=.................TT",
+  "TT..HHHDHHHH........=.................TT",
+  "TT.....=............=...T......T......TT",
+  "TT.....=............=.................TT",
+  "TT.....=.f..........=.....f...........TT",
+  "TT.....=..f...============............TT",
+  "TT..T..=......============.........T..TT",
+  "TT.....=......============....f.......TT",
+  "TT.....=......====rrrr====............TT",
+  "TT.....===========rrrr================ST",
+  "TT...f........====rrrr====............TT",
+  "TT............============............TT",
+  "TT............============............TT",
+  "TT..........T.============...~~~~~....TT",
+  "TT...T.............=........~~~~~~~...TT",
+  "TT.................=........~~~~~~~...TT",
+  "TT.............f...=........~~~~~~~...TT",
+  "TT........T.....f..=........~~~~~~~...TT",
+  "TT.................=.....T..~~~~~~~...TT",
+  "TT.................=..f......~~~~~....TT",
+  "TT.T.........f.....=................f.TT",
+  "TT.................=..................TT",
+  "TTTTTTTTTTTTTTTTTTTSTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 7,
+   "y": 9,
+   "facing": "down"
+  },
+  "from_home": {
+   "x": 7,
+   "y": 8,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "door_reno_home",
+   "x": 7,
+   "y": 7,
+   "to_map": "KA-02",
+   "to_spawn": "from_square"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "lumi_waiting",
+   "member": "lumi",
+   "x": 15,
+   "y": 12,
+   "facing": "left",
+   "hide_if_flag": "lumi_joined"
+  }
+ ],
+ "signs": [
+  {
+   "x": 20,
+   "y": 1,
+   "lines": [
+    "North: Elder's Hollow (KA-05).",
+    "This map isn't built yet."
+   ]
+  },
+  {
+   "x": 38,
+   "y": 15,
+   "lines": [
+    "East: Root Market (KA-04).",
+    "This map isn't built yet."
+   ]
+  },
+  {
+   "x": 19,
+   "y": 28,
+   "lines": [
+    "South: Training Glade (KA-06).",
+    "This map isn't built yet."
+   ]
+  }
+ ]
+}
