@@ -1,0 +1,87 @@
+{
+ "id": "KA-05",
+ "name": "Elder's Hollow",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 24,
+ "height": 20,
+ "legend": {
+  ".": "grass",
+  "=": "path",
+  "f": "flowers",
+  "T": "tree",
+  "E": "exit",
+  "r": "root",
+  "~": "water"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT......rrrrrrrr......TT",
+  "TT......rrrrrrrr......TT",
+  "TT..T...rrrrrrrr...T..TT",
+  "TT......rrrrrrrr......TT",
+  "TT......rrrrrrrr......TT",
+  "TT.........==.........TT",
+  "TT...T.f...==...f.....TT",
+  "TT......========....T.TT",
+  "TT......========......TT",
+  "TT......========..f...TT",
+  "TT.~~~~....==.........TT",
+  "TT.~~~~....==.........TT",
+  "TT.~~~~..f.==.....T...TT",
+  "TT.~~~~....==..f......TT",
+  "TT.........==.........TT",
+  "TT.f.......==.........TT",
+  "TTTTTTTTTTTETTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 11,
+   "y": 16,
+   "facing": "up"
+  },
+  "from_square": {
+   "x": 11,
+   "y": 17,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "exit_to_square",
+   "x": 11,
+   "y": 18,
+   "to_map": "KA-01",
+   "to_spawn": "from_hollow"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "nenek",
+   "character": "nenek",
+   "x": 12,
+   "y": 8,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "elder_warning_heard"
+     ],
+     "scene": "nenek_after"
+    },
+    {
+     "if_flags": [
+      "lumi_joined"
+     ],
+     "scene": "P02_nenek"
+    },
+    {
+     "scene": "nenek_no_lumi"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "on_enter": []
+}

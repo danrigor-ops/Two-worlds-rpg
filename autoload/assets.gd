@@ -185,6 +185,24 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			_rect(img, ox + 1, 1, 14, 14, Color("#5a3320"))
 			_rect(img, ox + 2, 2, 12, 12, base)
 			_rect(img, ox + 3, 2, 10, 4, acc)
+		"exit":
+			_rect(img, ox, 0, 2, TILE, acc)
+			_rect(img, ox + 14, 0, 2, TILE, acc)
+			for y in [3, 9]:
+				_rect(img, ox + 6, y, 4, 1, base.darkened(0.3))
+				_rect(img, ox + 7, y + 1, 2, 1, base.darkened(0.3))
+		"stall":
+			_rect(img, ox, 0, TILE, TILE, Color("#7a4528"))
+			for x in range(0, TILE, 4):
+				_rect(img, ox + x, 0, 2, 7, acc)
+			_rect(img, ox, 7, TILE, 1, Color("#5a3320"))
+			_rect(img, ox + 3, 10, 3, 3, Color("#f2d45c"))
+			_rect(img, ox + 9, 10, 3, 3, Color("#6fbf4a"))
+		"crate":
+			_rect(img, ox, 0, TILE, TILE, Color("#4b8a3d"))
+			_rect(img, ox + 2, 2, 12, 12, acc)
+			_rect(img, ox + 3, 3, 10, 10, base)
+			_rect(img, ox + 3, 7, 10, 1, acc)
 		"rug":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)
@@ -240,7 +258,13 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 6, 8, 3, 18, hair)          # long hair
 			_rect(img, o + 23, 8, 3, 18, hair)
 			_rect(img, o + 20, 6, 2, 2, acc)           # flower clip
-		elif not lumi:
+		elif p["style"] == "elder" and f != "up":
+			_rect(img, o + 8, 1, 16, 5, hair)          # hair bun
+			_rect(img, o + 12, 0, 8, 2, hair)
+		elif p["style"] == "merchant" and f != "up":
+			_rect(img, o + 6, 2, 20, 3, acc)           # wide hat
+			_rect(img, o + 10, 0, 12, 3, acc)
+		elif p["style"] == "reno":
 			for sx: int in [8, 12, 17, 21]:            # spiky hair
 				_rect(img, o + sx, 2, 2, 2, hair)
 			_rect(img, o + 13, 1, 3, 2, Color("#6fbf4a"))  # leaf

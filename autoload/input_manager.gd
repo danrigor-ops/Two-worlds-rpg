@@ -16,8 +16,9 @@ const KEYS := {
 	"move_left": [KEY_LEFT, KEY_A],
 	"move_right": [KEY_RIGHT, KEY_D],
 	"confirm": [KEY_Z, KEY_ENTER, KEY_SPACE],
-	"cancel": [KEY_X, KEY_ESCAPE, KEY_BACKSPACE],
+	"cancel": [KEY_X, KEY_BACKSPACE],
 	"swap": [KEY_C, KEY_TAB],
+	"menu": [KEY_M, KEY_ESCAPE],
 }
 const PAD_BUTTONS := {
 	"move_up": [JOY_BUTTON_DPAD_UP],
@@ -27,6 +28,7 @@ const PAD_BUTTONS := {
 	"confirm": [JOY_BUTTON_A],
 	"cancel": [JOY_BUTTON_B],
 	"swap": [JOY_BUTTON_Y],
+	"menu": [JOY_BUTTON_START],
 }
 const PAD_AXES := {
 	"move_up": [JOY_AXIS_LEFT_Y, -1.0],
