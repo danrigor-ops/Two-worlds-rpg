@@ -1,0 +1,45 @@
+{
+ "id": "TR-01",
+ "name": "Country Bus",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 24,
+ "height": 10,
+ "legend": {
+  "u": "floor",
+  "b": "bus",
+  "S": "bus_seat"
+ },
+ "rows": [
+  "bbbbbbbbbbbbbbbbbbbbbbbb",
+  "bbbbbbbbbbbbbbbbbbbbbbbb",
+  "buuuuuuuuuuuuuuuuuuuuuub",
+  "buuSuuSuuSuuSuuSuuSuuuub",
+  "buuuuuuuuuuuuuuuuuuuuuub",
+  "buuuuuuuuuuuuuuuuuuuuuub",
+  "buuSuuSuuSuuSuuSuuSuuuub",
+  "buuuuuuuuuuuuuuuuuuuuuub",
+  "buuuuuuuuuuuuuuuuuuuuuub",
+  "bbbbbbbbbbbbbbbbbbbbbbbb"
+ ],
+ "spawns": {
+  "start": {
+   "x": 12,
+   "y": 4,
+   "facing": "down"
+  }
+ },
+ "doors": [],
+ "npcs": [],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C03_bus_ride",
+   "if_not_flags": [
+    "ch01_arrived_bandar_senja"
+   ]
+  }
+ ]
+}

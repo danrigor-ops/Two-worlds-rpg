@@ -45,7 +45,17 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
     - **Gate Key** (PZ-003): after the echo, check the mossy stone across the pond.
     - **Root Bridge** (PZ-004): Lumi traces the old bridge at the post, then Reno pulls the roots.
 12. Cross the bridge to the Forbidden Gate (KA-07) and face the **Thornkeeper** (P06). It braces with Thorn Guard, then shakes the ground (hits both heroes), and below 30% HP Lumi teaches **Spirit Cyclone**: the Team command uses both heroes' turns and 4 MP each, with three timed presses.
-13. Open the gate with the key (PZ-005) and walk through to **Sungai Melor** (P07). The prologue ends, the game autosaves, and an end screen points to Chapter 1.
+13. Open the gate with the key (PZ-005) and walk through to **Sungai Melor** (P07). The prologue ends, the game autosaves, and the end screen carries on into Chapter 1.
+
+**Chapter 1, part A (Sungai Melor).** Humans can't see or hear Reno and Lumi, so everything you hear from them is overheard.
+
+14. A woman walks straight past you (C00). Talk to villagers: they never turn to look.
+15. Enter the kopitiam (west door). Walk in to overhear the train rumour, then talk to **Old Kettle** on the back shelf (C01). Talk again to browse his Dewdrop stall.
+16. Next door, the sundry shop is now open. Sort Encik Lim's spilled coins into piles of exactly 50 cents (PZ-101, C02). Too much in a pile just tips it back; you can also tip the whole jar out and start again.
+17. Back at the kopitiam, Old Kettle pays you (3 Dewdrops, 2 Kaya Toast) and tells you the bus trick.
+18. Take the east road to the bus stop. At the bus door, pick who to follow on (PZ-102). Only the man with two big baskets keeps the door open long enough.
+19. Ride the bus on the luggage rack (C03) to Bandar Senja Station. The game autosaves on arrival.
+20. Optional: the north lane leads to the jetty, where a fisherman has dropped a postcard (C01-S01). It gets posted in part B.
 
 ### Saving
 
@@ -105,3 +115,6 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 6. ✅ Inventory and saving
 7. ✅ The rest of the prologue: Thornkeeper, Spirit Cyclone, the gate and Sungai Melor
 8. Chapter 1: The Last Train to Bandar Senja (design approved in `docs/chapter-01/`)
+   - ✅ Part A: Sungai Melor, Old Kettle, the Coin Jar, the bus (plus level growth, MP items, Dewdrop stalls)
+   - Part B: Bandar Senja, the Clockkeeper's parcels, Paper Moth Monarch
+   - Part C: the Veil train, the Forgotten Conductor, the Veil Halt

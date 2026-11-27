@@ -147,6 +147,213 @@
     "accent": "#e8b84a",
     "legs": "#24182f"
    }
+  },
+  "basket_woman_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c08a5e",
+    "body": "#3f7fc4",
+    "accent": "#d9b77e",
+    "legs": "#2f4f7a"
+   }
+  },
+  "kopitiam_owner_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#1d1a2a",
+    "skin": "#d6a57a",
+    "body": "#f4ecd2",
+    "accent": "#3a3a3a",
+    "legs": "#3a3a3a"
+   }
+  },
+  "encik_lim_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a3a3a",
+    "skin": "#e0b48a",
+    "body": "#d9d3c0",
+    "accent": "#5a5a5a",
+    "legs": "#2a2a40"
+   }
+  },
+  "rambutan_man_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#a8714a",
+    "body": "#c94f4f",
+    "accent": "#e04a3a",
+    "legs": "#4a3a2a"
+   }
+  },
+  "passenger_a_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c98d5a",
+    "body": "#6b8f4a",
+    "accent": "#6b8f4a",
+    "legs": "#3a2a1a"
+   }
+  },
+  "passenger_b_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#d8d4cc",
+    "skin": "#d6a57a",
+    "body": "#8f6bb0",
+    "accent": "#8f6bb0",
+    "legs": "#4a3466"
+   }
+  },
+  "fisherman_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#9c6b3e",
+    "body": "#5a7a9e",
+    "accent": "#d9b77e",
+    "legs": "#3a4a5a"
+   }
+  },
+  "old_kettle_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "kettle",
+    "hair": "#7a8a9a",
+    "skin": "#aab8c4",
+    "body": "#8a98a6",
+    "accent": "#e8b84a",
+    "legs": "#5a6672"
+   }
+  },
+  "postcard_marker_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#f4ecd2",
+    "skin": "#f4ecd2",
+    "body": "#f4ecd2",
+    "accent": "#c94f4f",
+    "legs": "#f4ecd2"
+   }
   }
  },
  "characters": {
@@ -155,6 +362,15 @@
   "nenek": "nenek_overworld",
   "bobo": "bobo_overworld",
   "leafling": "leafling_overworld",
-  "thornkeeper": "thornkeeper_overworld"
+  "thornkeeper": "thornkeeper_overworld",
+  "basket_woman": "basket_woman_overworld",
+  "kopitiam_owner": "kopitiam_owner_overworld",
+  "encik_lim": "encik_lim_overworld",
+  "rambutan_man": "rambutan_man_overworld",
+  "passenger_a": "passenger_a_overworld",
+  "passenger_b": "passenger_b_overworld",
+  "fisherman": "fisherman_overworld",
+  "old_kettle": "old_kettle_overworld",
+  "postcard_marker": "postcard_marker_overworld"
  }
 }

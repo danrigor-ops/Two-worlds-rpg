@@ -14,6 +14,8 @@ var actors: Node2D
 var camera: Camera2D
 var dialogue: DialogueBox
 var menu: PauseMenu
+var shop: ShopMenu
+var coin_jar: CoinJarView
 var fade: ColorRect
 var map_label: Label
 var members := {}           # member id -> PartyMember (in the party)
@@ -59,6 +61,11 @@ func _ready() -> void:
 	menu = PauseMenu.new()
 	add_child(menu)
 	menu.load_requested.connect(func() -> void: get_tree().change_scene_to_file.call_deferred("res://scenes/exploration.tscn"))
+	shop = ShopMenu.new()
+	add_child(shop)
+	coin_jar = CoinJarView.new()
+	add_child(coin_jar)
+	coin_jar.closed.connect(_on_coin_jar_closed)
 	GameState.party_changed.connect(_on_party_changed)
 	GameState.flag_changed.connect(_on_flag_changed)
 	Quests.notice.connect(_on_notice)
@@ -159,6 +166,10 @@ func _on_flag_changed(_flag: String, _value: Variant) -> void:
 		return
 	for cell in map.apply_overrides(GameState.get_flag):
 		_paint_cell(cell)
+	for npc in npcs.duplicate():
+		if npc["def"].has("hide_if_flag") and GameState.get_flag(npc["def"]["hide_if_flag"]):
+			npcs.erase(npc)
+			npc["node"].queue_free()
 
 
 func _pick_start(spawn_name: String) -> Dictionary:
@@ -341,7 +352,9 @@ func _talk_to(npc: Dictionary) -> void:
 		start_encounter(npc)
 		return
 	var node: PartyMember = npc["node"]
-	node.face(leader().global_position - node.global_position)
+	if not npc["def"].get("unaware", false):
+		# Humans can't see the spirits, so they don't turn to look.
+		node.face(leader().global_position - node.global_position)
 	var scene_id := pick_scene(npc["def"].get("talk", []))
 	if scene_id != "":
 		dialogue.play_scene(scene_id)
@@ -356,7 +369,31 @@ static func pick_scene(entries: Array) -> String:
 
 
 ## Story events raised by dialogue steps.
+## "travel:MAP:SPAWN" moves the party after the scene (the bus, the train).
+## "shop:ID" opens a spirit stall and "coin_jar" the PZ-101 puzzle.
 func _on_story_event(name: String) -> void:
+	var parts := name.split(":")
+	match parts[0]:
+		"travel":
+			await dialogue.finished
+			await _wait_for_explore()
+			travel(parts[1], parts[2])
+			return
+		"shop":
+			await dialogue.finished
+			await _wait_for_explore()
+			shop.open(parts[1])
+			return
+		"autosave":
+			await dialogue.finished
+			await _wait_for_explore()
+			Saves.autosave()
+			return
+		"coin_jar":
+			await dialogue.finished
+			await _wait_for_explore()
+			coin_jar.open()
+			return
 	if name == "prologue_end":
 		await dialogue.finished
 		await _wait_for_explore()
@@ -365,6 +402,15 @@ func _on_story_event(name: String) -> void:
 		t.tween_property(fade, "modulate:a", 1.0, 0.6)
 		await t.finished
 		get_tree().change_scene_to_file.call_deferred("res://scenes/end_of_content.tscn")
+
+
+func _on_coin_jar_closed(solved: bool) -> void:
+	if solved:
+		coin_jar.queue_free()
+		coin_jar = CoinJarView.new()
+		add_child(coin_jar)
+		coin_jar.closed.connect(_on_coin_jar_closed)
+		dialogue.play_scene("C02_coin_jar_solved")
 
 
 func _wait_for_explore() -> void:
@@ -449,11 +495,19 @@ func _use_door(door: Dictionary) -> void:
 		# Handover rule: the railway token is added before Reno leaves home.
 		GameState.set_flag("reno_token_obtained")
 		notes.append("Got the Old Railway Token. (Key item)")
+	await travel(door["to_map"], door["to_spawn"], notes)
+
+
+## Fades to another map, autosaves once it's safe, then runs its on_enter scene.
+func travel(map_id: String, spawn: String, notes: Array = []) -> void:
+	if not transitioning:
+		transitioning = true
+		InputManager.push_mode(InputManager.Mode.TRANSITION)
 	var t := create_tween()
 	t.tween_property(fade, "modulate:a", 1.0, FADE_TIME)
 	await t.finished
-	GameState.set_spawn(door["to_map"], door["to_spawn"])
-	load_map(door["to_map"], door["to_spawn"])
+	GameState.set_spawn(map_id, spawn)
+	load_map(map_id, spawn)
 	t = create_tween()
 	t.tween_property(fade, "modulate:a", 0.0, FADE_TIME)
 	await t.finished

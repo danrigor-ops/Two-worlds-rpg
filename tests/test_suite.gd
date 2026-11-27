@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 13
+const SECTIONS := 14
 
 
 func check(cond: bool, label: String) -> void:
@@ -73,6 +73,9 @@ func run(t: SceneTree) -> int:
 
 	print("Full prologue run (regression)")
 	await _test_full_prologue(gs, im)
+
+	print("Chapter 1 part A: Sungai Melor to Bandar Senja")
+	await _test_chapter1_a(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -675,7 +678,7 @@ func _test_saves(gs: Node, im: Node) -> void:
 	gs.data["members"]["lumi"] = gs.data["members"]["lumi"]
 	gs.add_member("lumi")
 	gs.data["members"]["reno"]["hp"] = 10
-	check(gs.use_heal_item("item_dewdrop_candy") == "" and gs.data["members"]["reno"]["hp"] == 30, "a candy heals the most hurt hero by 20")
+	check(gs.use_heal_item("item_dewdrop_candy") == "" and gs.data["members"]["reno"]["hp"] == 20, "a candy heals the most hurt hero by 10")
 	check(gs.use_heal_item("item_dewdrop_candy") != "", "with none left it says so")
 
 	# Slots.
@@ -928,6 +931,7 @@ func _test_full_prologue(gs: Node, im: Node) -> void:
 		"bobo_parcel_returned", "lantern_obtained", "gate_key_collected", "echo_path_revealed", "root_bridge_restored",
 		"thornkeeper_defeated", "forbidden_gate_open", "prologue_completed", "chapter_01_unlocked"]
 	check(flags_in_order.all(gs.get_flag), "all 14 required prologue flags are set")
+	check(int(gs.data["members"]["reno"]["level"]) == 2 and int(gs.data["members"]["lumi"]["level"]) == 2, "the prologue's 30 XP makes both heroes level 2")
 	if is_instance_valid(scene):
 		if scene.is_inside_tree():
 			root.remove_child(scene)
@@ -936,5 +940,146 @@ func _test_full_prologue(gs: Node, im: Node) -> void:
 	if end_screen:
 		root.remove_child(end_screen)
 		end_screen.free()
+	saves.delete_all()
+	_sections_done += 1
+
+
+func _test_chapter1_a(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	# Levels: XP to reach L is 10*(L-1)^2, with the 7.2 growth table.
+	gs.new_game()
+	gs.add_member("lumi")
+	check(gs.xp_for_level(3) == 40 and gs.xp_for_level(6) == 250, "XP curve is 10*(L-1)^2")
+	var ups: Array[String] = gs.gain_xp("reno", 40)
+	var r: Dictionary = gs.data["members"]["reno"]
+	check(ups.size() == 2 and int(r["level"]) == 3, "40 XP takes Reno from level 1 to 3")
+	check([r["max_hp"], r["max_mp"], r["atk"], r["def"], r["mag"], r["res"], r["spd"]] == [54, 18, 18, 11, 8, 10, 14], "Reno Lv3 stats match the growth table")
+	gs.gain_xp("lumi", 250)
+	var l: Dictionary = gs.data["members"]["lumi"]
+	check([l["level"], l["max_hp"], l["max_mp"], l["atk"], l["def"], l["mag"], l["res"], l["spd"]] == [6, 52, 39, 12, 12, 26, 17, 15], "Lumi Lv6 stats match the growth table")
+	var old: Dictionary = gs.to_dict()
+	old["members"]["reno"] = {"level": 1, "max_hp": 42, "max_mp": 14, "atk": 14, "def": 9, "mag": 6, "res": 8, "spd": 12, "hp": 42, "mp": 14, "xp": 30}
+	check(gs.load_from_dict(old).is_empty() and int(gs.data["members"]["reno"]["level"]) == 2, "an older save with 30 XP loads at level 2")
+
+	# Items and the spirit stall.
+	gs.new_game()
+	gs.add_member("lumi")
+	gs.data["members"]["lumi"]["mp"] = 5
+	gs.add_item("item_firefly_tea", 1)
+	check(gs.use_heal_item("item_firefly_tea") == "" and int(gs.data["members"]["lumi"]["mp"]) == 17, "Firefly Tea restores 12 MP")
+	check(gs.use_heal_item("item_kaya_toast") == "None left.", "can't use what you don't have")
+	gs.data["wallet"]["dewdrops"] = 3
+	var stall := ShopMenu.new()
+	root.add_child(stall)
+	check(stall.buy("item_firefly_tea") == "Bought a Firefly Tea." and int(gs.data["wallet"]["dewdrops"]) == 1, "buying at a stall takes Dewdrops")
+	check(stall.buy("item_starfruit_dumpling") == "Not enough Dewdrops." and gs.item_count("item_starfruit_dumpling") == 0, "a stall won't sell without enough Dewdrops")
+	check(stall.buy("item_kaya_toast") == "That's not for sale.", "gift items aren't sold")
+	stall.free()
+
+	# PZ-101 rules.
+	var jar := CoinJar.new()
+	check(jar.piles_needed() == 4 and jar.still_possible(), "the jar holds 200 cents, four piles")
+	check(jar.add(50) == "pile", "a single fifty is a pile")
+	check(jar.add(20) == "added" and jar.add(20) == "added" and jar.add(20) == "over" and jar.wrong == 1 and jar.pile.is_empty(), "too much tips the pile back with no other penalty")
+	check(jar.remaining[20] == 3, "tipped coins go back")
+	jar.repour()
+	check(jar.piles_done == 0 and jar.remaining[50] == 1, "re-pouring starts again")
+
+	# Integration: the whole of part A.
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "chapter_01_unlocked", "lumi_joined"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	gs.data["wallet"]["dewdrops"] = 8
+	gs.set_spawn("SM-01", "start")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	check(im.current_mode() == im.Mode.DIALOGUE, "C00 plays when Chapter 1 starts")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_started") and gs.quest_state("C01-001") == "active", "C01-001 Unseen begins")
+	var woman: Dictionary = scene.npcs.filter(func(n: Dictionary) -> bool: return n["def"]["id"] == "basket_woman")[0]
+	await _talk(scene, Vector2i(24, 15), im)
+	check(woman["node"].facing == "left", "humans don't turn to look at the spirits")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(12, 12)), "up")
+	await _press_for("move_up", 12)
+	await _wait(2)
+	check(scene.map.id == "SM-01" and im.current_mode() == im.Mode.DIALOGUE, "the sundry shop is shut before Old Kettle's favour")
+	await _finish_dialogue(im)
+
+	scene.warp("SM-03", "from_square")
+	await _press_for("move_up", 12)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_kopitiam_overheard"), "C01: the train rumour is overheard")
+	await _talk(scene, Vector2i(9, 3), im)
+	check(gs.get_flag("ch01_visibility_learned") and gs.get_flag("ch01_kettle_favour_asked"), "C01: Old Kettle explains and asks a favour")
+	await _talk(scene, Vector2i(9, 3), im, 0)
+	await _wait(5)
+	check(scene.shop.visible and im.current_mode() == im.Mode.MENU, "Old Kettle's shelf opens as a Dewdrop stall")
+	scene.shop.buy("item_moonleaf_bun")
+	await _tap("cancel")
+	check(not scene.shop.visible and int(gs.data["wallet"]["dewdrops"]) == 7 and gs.item_count("item_moonleaf_bun") == 1, "bought a Moonleaf Bun for 1 Dewdrop")
+
+	scene.warp("SM-04", "from_square")
+	await _talk(scene, Vector2i(9, 7), im)
+	await _wait(5)
+	check(scene.coin_jar.visible, "PZ-101: the Coin Jar opens")
+	scene.coin_jar.choose(50)
+	scene.coin_jar.choose(50)
+	check(scene.coin_jar.msg_label.text.contains("no 50"), "no coins left of a kind is explained")
+	for c in [20, 20, 10, 20, 10, 10, 5, 5, 10, 10, 10, 10, 5, 1, 1, 1, 1]:
+		scene.coin_jar.choose(c)
+	check(not gs.get_flag("ch01_coin_jar_solved"), "")
+	scene.coin_jar.choose(1)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_coin_jar_solved") and gs.get_flag("pz101_coin_jar_solved"), "C02: the coins are sorted")
+
+	scene.warp("SM-03", "from_square")
+	await _talk(scene, Vector2i(9, 3), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.quest_state("C01-001") == "rewarded" and int(gs.data["wallet"]["dewdrops"]) == 10 and gs.item_count("item_kaya_toast") == 2, "C01-001 done: 3 Dewdrops and 2 Kaya Toast")
+	check(gs.quest_state("C01-002") == "active", "C01-002 The Bus begins")
+	_milestone(gs, "kettle tip")
+
+	scene.warp("SM-05", "from_village")
+	await _talk(scene, Vector2i(17, 7), im, 0)
+	await _wait(3)
+	check(scene.map.id == "SM-05" and not gs.get_flag("ch01_bus_boarded"), "PZ-102: following the wrong passenger misses the bus, no penalty")
+	await _talk(scene, Vector2i(17, 7), im, 1)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "TR-01" and gs.get_flag("pz102_bus_boarded"), "PZ-102: the man with the rambutans gets us on")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BS-01", "C03: the bus arrives at Bandar Senja")
+	await _finish_dialogue(im)
+	await _wait(5)
+	await _finish_dialogue(im)
+	await _wait(5)
+	check(gs.get_flag("ch01_arrived_bandar_senja") and gs.quest_state("C01-002") in ["completed", "rewarded"], "C01-002 done")
+	gs.new_game()
+	saves.load_slot("auto")
+	check(gs.data["map_id"] == "BS-01" and gs.get_flag("ch01_arrived_bandar_senja"), "the arrival at Bandar Senja is autosaved")
+
+	# Optional postcard on the jetty.
+	scene.warp("SM-02", "from_village")
+	var before: int = scene.npcs.size()
+	await _face_and_press(scene, Vector2i(26, 5), "right", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_postcard") and gs.quest_state("C01-S01") == "active", "C01-S01: the postcard is picked up")
+	check(scene.npcs.size() == before - 1, "the postcard is gone from the jetty")
+	root.remove_child(scene)
+	scene.free()
 	saves.delete_all()
 	_sections_done += 1

@@ -244,6 +244,29 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			for x in [1, 6, 11]:
 				_rect(img, ox + x, 3, 3, 12, acc)
 			_rect(img, ox, 6, TILE, 2, acc.darkened(0.15))
+		"checker":
+			for y in [0, 8]:
+				for x in [0, 8]:
+					if (x + y) % 16 == 0:
+						_rect(img, ox + x, y, 8, 8, acc)
+		"shelf":
+			_rect(img, ox, 0, TILE, TILE, Color("#3e2a1c"))
+			_rect(img, ox, 5, TILE, 2, base)
+			_rect(img, ox, 13, TILE, 2, base)
+			_rect(img, ox + 2, 1, 3, 4, acc)
+			_rect(img, ox + 9, 2, 4, 3, Color("#c94f4f"))
+			_rect(img, ox + 4, 9, 4, 4, Color("#6fbf4a"))
+			_rect(img, ox + 11, 8, 3, 5, acc)
+		"coins":
+			for p2: Vector2i in [Vector2i(2, 3), Vector2i(8, 2), Vector2i(5, 8), Vector2i(11, 9), Vector2i(3, 12), Vector2i(10, 13)]:
+				_rect(img, ox + p2.x, p2.y, 3, 2, acc)
+				img.set_pixel(ox + p2.x + 1, p2.y, acc.lightened(0.4))
+			_rect(img, ox + 6, 4, 4, 5, Color("#9fb0c8"))  # the tipped jar
+		"bus":
+			_rect(img, ox, 0, TILE, 3, Color("#f4ecd2"))
+			_rect(img, ox, 3, TILE, 1, Color("#2b5f47"))
+			_rect(img, ox + 2, 5, 12, 5, Color("#9fc0d8"))
+			_rect(img, ox, 12, TILE, 2, acc)
 		"rug":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)
@@ -287,6 +310,31 @@ func _make_character_sheet(a: Dictionary) -> Image:
 		_paint_leafling(img, order, fw, body, hair, acc, eye)
 		_outline(img)
 		return img
+	if p["style"] == "kettle":
+		for i in order.size():
+			var o := i * fw
+			_rect(img, o + 8, 22, 16, 14, body)            # pot
+			_rect(img, o + 10, 19, 12, 4, skin)            # lid
+			_rect(img, o + 14, 16, 4, 3, legs)             # knob
+			_rect(img, o + 24, 24, 5, 3, body)             # spout
+			_rect(img, o + 28, 21, 2, 4, body)
+			_rect(img, o + 4, 23, 4, 8, legs)              # handle
+			_rect(img, o + 10, 33, 12, 2, body.darkened(0.3))  # dent
+			if order[i] != "up":
+				_rect(img, o + 13, 26, 3, 3, acc)          # the one open eye
+				_rect(img, o + 18, 27, 3, 1, eye)          # the closed one
+		_outline(img)
+		return img
+	if p["style"] == "item":
+		for i in order.size():
+			var o := i * fw
+			_rect(img, o + 9, 28, 14, 9, body)             # a postcard on the ground
+			_rect(img, o + 18, 29, 4, 4, acc)              # stamp
+			_rect(img, o + 10, 31, 6, 1, Color("#5a5a5a"))
+			_rect(img, o + 10, 33, 7, 1, Color("#5a5a5a"))
+		_outline(img)
+		return img
+	var human: bool = p["style"] == "human"
 	for i in order.size():
 		var f: String = order[i]
 		var o := i * fw
@@ -295,6 +343,13 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 8, 33, 16, 3, body)
 			_rect(img, o + 9, 28, 14, 2, acc)          # blue sash
 			_rect(img, o + 11, 36, 10, 1, acc)         # echo glow under feet
+		elif human:
+			_rect(img, o + 11, 31, 4, 8, legs)
+			_rect(img, o + 17, 31, 4, 8, legs)
+			_rect(img, o + 8, 20, 16, 12, body)        # shirt or baju
+			_rect(img, o + 8, 29, 16, 2, acc)          # sash or belt
+			_rect(img, o + 6, 21, 2, 8, skin)          # arms
+			_rect(img, o + 24, 21, 2, 8, skin)
 		else:
 			_rect(img, o + 11, 32, 4, 6, legs)
 			_rect(img, o + 17, 32, 4, 6, legs)

@@ -1,6 +1,6 @@
 {
  "status": "WORKING_PROPOSAL",
- "note": "Item registry. kind: key (can't be sold or used up) or consumable (stack cap 99). Effects come with the combat step.",
+ "note": "Item registry. kind: key (can't be sold, stacked or used up) or consumable (stack cap 99). heal_hp / heal_mp are effects; price_dp is the spirit-stall price in Dewdrops. Chapter 1 values from docs/chapter-01/data.",
  "items": {
   "item_railway_token": {
    "name": "Old Railway Token",
@@ -15,8 +15,10 @@
   "item_dewdrop_candy": {
    "name": "Dewdrop Candy",
    "kind": "consumable",
-   "text": "A sweet spirit candy. Restores 20 HP in battle.",
-   "heal_hp": 20
+   "text": "A sweet spirit candy. Restores 10 HP and 4 MP.",
+   "heal_hp": 10,
+   "heal_mp": 4,
+   "price_dp": 1
   },
   "item_gate_key": {
    "name": "Gate Key",
@@ -32,6 +34,38 @@
    "name": "Bobo's Parcel",
    "kind": "key",
    "text": "Slightly nibbled. Missing half a biscuit."
+  },
+  "item_kaya_toast": {
+   "name": "Kaya Toast",
+   "kind": "consumable",
+   "heal_hp": 20,
+   "text": "It fell off a plate. Restores 20 HP."
+  },
+  "item_moonleaf_bun": {
+   "name": "Moonleaf Bun",
+   "kind": "consumable",
+   "heal_hp": 20,
+   "price_dp": 1,
+   "text": "A soft spirit bun. Restores 20 HP."
+  },
+  "item_starfruit_dumpling": {
+   "name": "Starfruit Dumpling",
+   "kind": "consumable",
+   "heal_hp": 35,
+   "price_dp": 2,
+   "text": "Restores 35 HP."
+  },
+  "item_firefly_tea": {
+   "name": "Firefly Tea",
+   "kind": "consumable",
+   "heal_mp": 12,
+   "price_dp": 2,
+   "text": "Glows a little. Restores 12 MP."
+  },
+  "item_postcard": {
+   "name": "Postcard Home",
+   "kind": "key",
+   "text": "A fisherman dropped it on the jetty. It needs posting in Bandar Senja."
   }
  }
 }

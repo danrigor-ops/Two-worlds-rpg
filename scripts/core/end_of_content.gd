@@ -1,6 +1,7 @@
 extends Control
 ## Shown at the end of the built content, so the game never ends on a blank
 ## screen. The save made just before is kept, so Continue resumes in Sungai Melor.
+## A carries straight on into Chapter 1.
 
 
 func _ready() -> void:
@@ -14,8 +15,8 @@ func _ready() -> void:
 		["The Great Escape", 8, Assets.UI_TEXT, 50],
 		["Next: Chapter 1", 8, Color("#9fb0d8"), 80],
 		["The Last Train to Bandar Senja", 8, Assets.UI_TEXT, 92],
-		["Chapter 1 is not built yet. Your game is saved.", 8, Color("#9fb0d8"), 118],
-		["Press A to return to the title", 8, Assets.UI_GOLD, 140],
+		["Your game is saved.", 8, Color("#9fb0d8"), 118],
+		["Press A to begin Chapter 1", 8, Assets.UI_GOLD, 140],
 	]
 	for l: Array in lines:
 		var label := Label.new()
@@ -30,4 +31,4 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if InputManager.just_pressed("confirm", InputManager.Mode.CUTSCENE):
-		get_tree().change_scene_to_file("res://scenes/title.tscn")
+		get_tree().change_scene_to_file("res://scenes/exploration.tscn")

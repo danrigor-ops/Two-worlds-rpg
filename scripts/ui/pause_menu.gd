@@ -135,7 +135,7 @@ static func item_rows() -> Array:
 		rows.append({"text": "* " + defs.get(k, {}).get("name", k), "detail": defs.get(k, {}).get("text", "")})
 	for i: String in GameState.data["inventory"]:
 		var row := {"text": "%s x%d" % [defs.get(i, {}).get("name", i), GameState.item_count(i)], "detail": defs.get(i, {}).get("text", "")}
-		if defs.get(i, {}).has("heal_hp"):
+		if defs.get(i, {}).has("heal_hp") or defs.get(i, {}).has("heal_mp"):
 			row["detail"] += " Press A to use."
 			row["action"] = func() -> String:
 				var why := GameState.use_heal_item(i)

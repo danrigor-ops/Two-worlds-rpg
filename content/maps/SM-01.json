@@ -13,12 +13,14 @@
   "F": "fence",
   "f": "flowers",
   "V": "veil",
-  "S": "sign"
+  "S": "sign",
+  "D": "door",
+  "E": "exit"
  },
  "rows": [
   "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
   "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TT.................=S=................TT",
+  "TT.................=E=................TT",
   "TT.T...............===..T.............TT",
   "TT..............T..===..............T.TT",
   "TT.................===................TT",
@@ -27,11 +29,11 @@
   "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
   "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
   "TT..HHHHH.HHHHH....===....HHHHH.HHHHH.TT",
-  "TT..HHSHH.HHSHH....===....HHSHH.HHSHH.TT",
+  "TT..HHDHH.HHDHH....===....HHSHH.HHSHH.TT",
   "TT.................===................TT",
   "TT......f..........===........f.......TT",
   "TT====================================TT",
-  "TTS==================================STT",
+  "TTS==================================ETT",
   "TT====================================TT",
   "TT.................===................TT",
   "TT.................===................TT",
@@ -57,6 +59,26 @@
    "x": 20,
    "y": 25,
    "facing": "up"
+  },
+  "from_kopitiam": {
+   "x": 6,
+   "y": 12,
+   "facing": "down"
+  },
+  "from_sundry": {
+   "x": 12,
+   "y": 12,
+   "facing": "down"
+  },
+  "from_bus_stop": {
+   "x": 36,
+   "y": 15,
+   "facing": "left"
+  },
+  "from_jetty": {
+   "x": 20,
+   "y": 3,
+   "facing": "down"
   }
  },
  "doors": [
@@ -66,60 +88,82 @@
    "y": 26,
    "to_map": "KA-07",
    "to_spawn": "from_veil"
+  },
+  {
+   "id": "door_kopitiam",
+   "x": 6,
+   "y": 11,
+   "to_map": "SM-03",
+   "to_spawn": "from_square"
+  },
+  {
+   "id": "door_sundry",
+   "x": 12,
+   "y": 11,
+   "to_map": "SM-04",
+   "to_spawn": "from_square",
+   "require": [
+    {
+     "if_flags": [
+      "ch01_kettle_favour_asked"
+     ],
+     "else_scene": "sundry_closed"
+    }
+   ]
+  },
+  {
+   "id": "road_to_bus_stop",
+   "x": 37,
+   "y": 15,
+   "to_map": "SM-05",
+   "to_spawn": "from_village"
+  },
+  {
+   "id": "lane_to_jetty",
+   "x": 20,
+   "y": 2,
+   "to_map": "SM-02",
+   "to_spawn": "from_village"
   }
  ],
- "npcs": [],
+ "npcs": [
+  {
+   "id": "basket_woman",
+   "character": "basket_woman",
+   "x": 24,
+   "y": 15,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_basket_woman"
+    }
+   ]
+  }
+ ],
  "objects": [],
  "overrides": [],
  "triggers": [],
  "signs": [
   {
-   "x": 6,
-   "y": 11,
-   "lines": [
-    "A closed door. (Sungai Melor is explored in Chapter 1.)"
-   ]
-  },
-  {
-   "x": 12,
-   "y": 11,
-   "lines": [
-    "A closed door. (Sungai Melor is explored in Chapter 1.)"
-   ]
-  },
-  {
    "x": 28,
    "y": 11,
    "lines": [
-    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+    "A closed door. Someone inside is listening to the radio."
    ]
   },
   {
    "x": 34,
    "y": 11,
    "lines": [
-    "A closed door. (Sungai Melor is explored in Chapter 1.)"
+    "A closed door. Someone inside is listening to the radio."
    ]
   },
   {
    "x": 2,
    "y": 15,
    "lines": [
-    "The road goes on. (Chapter 1 isn't built yet.)"
-   ]
-  },
-  {
-   "x": 37,
-   "y": 15,
-   "lines": [
-    "The road goes on. (Chapter 1 isn't built yet.)"
-   ]
-  },
-  {
-   "x": 20,
-   "y": 2,
-   "lines": [
-    "The road goes on. (Chapter 1 isn't built yet.)"
+    "West: the forest path. (The Veil gate is quiet now.)"
    ]
   }
  ],
@@ -128,6 +172,15 @@
    "scene": "P07_arrival",
    "if_not_flags": [
     "prologue_completed"
+   ]
+  },
+  {
+   "scene": "C00_morning",
+   "if_flags": [
+    "prologue_completed"
+   ],
+   "if_not_flags": [
+    "ch01_started"
    ]
   }
  ]

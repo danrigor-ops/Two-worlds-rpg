@@ -1,0 +1,121 @@
+{
+ "id": "SM-05",
+ "name": "Village Road Bus Stop",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 20,
+ "legend": {
+  ".": "grass",
+  "T": "tree",
+  "=": "laterite",
+  "E": "exit",
+  "b": "bus",
+  "B": "bus_door"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT...T........................TT",
+  "TT............bbbbbbbbbbbb....TT",
+  "TT............bbbbbbbbbbbb....TT",
+  "TT............bbbBbbbbbbbb....TT",
+  "TT............................TT",
+  "TT============================TT",
+  "TE============================TT",
+  "TT============================TT",
+  "TT............................TT",
+  "TT............................TT",
+  "TT.........................T..TT",
+  "TT.......T....................TT",
+  "TT....................T.......TT",
+  "TT............................TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 10,
+   "facing": "right"
+  },
+  "from_village": {
+   "x": 2,
+   "y": 10,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "road_to_village",
+   "x": 1,
+   "y": 10,
+   "to_map": "SM-01",
+   "to_spawn": "from_bus_stop"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "rambutan_man",
+   "character": "rambutan_man",
+   "x": 20,
+   "y": 9,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_rambutan_man"
+    }
+   ]
+  },
+  {
+   "id": "passenger_a",
+   "character": "passenger_a",
+   "x": 18,
+   "y": 9,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_queue_a"
+    }
+   ]
+  },
+  {
+   "id": "passenger_b",
+   "character": "passenger_b",
+   "x": 22,
+   "y": 9,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_queue_b"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "bus_door",
+   "x": 17,
+   "y": 7,
+   "talk": [
+    {
+     "if_not_flags": [
+      "ch01_kettle_tip_heard"
+     ],
+     "scene": "bus_no_plan"
+    },
+    {
+     "scene": "C03_boarding"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": []
+}

@@ -11,6 +11,11 @@ func _initialize() -> void:
 
 
 func _run() -> void:
-	var suite: RefCounted = load("res://tests/test_suite.gd").new()
+	var script: GDScript = load("res://tests/test_suite.gd")
+	if script == null or not script.can_instantiate():
+		printerr("test_suite.gd failed to load. See the parse errors above.")
+		quit(1)
+		return
+	var suite: RefCounted = script.new()
 	var code: int = await suite.run(self)
 	quit(code)

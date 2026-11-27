@@ -196,28 +196,84 @@ func sell(item_id: String, price_cents: int, n: int = 1) -> bool:
 	return true
 
 
-## Uses a healing item outside battle on the member with the lowest HP share.
-## Returns "" on success, or the reason it couldn't be used.
+## Uses a healing item outside battle. HP items go to the member with the
+## lowest HP share, MP items to the lowest MP share. Returns "" on success, or
+## the reason it couldn't be used.
 func use_heal_item(item_id: String) -> String:
-	var heal := int(item_defs().get(item_id, {}).get("heal_hp", 0))
-	if heal <= 0:
+	var def: Dictionary = item_defs().get(item_id, {})
+	var hp := int(def.get("heal_hp", 0))
+	var mp := int(def.get("heal_mp", 0))
+	if hp <= 0 and mp <= 0:
 		return "That can't be used here."
 	if item_count(item_id) <= 0:
 		return "None left."
+	var key := "hp" if hp > 0 else "mp"
 	var target := ""
 	var best := 2.0
 	for id: String in party():
 		var m: Dictionary = data["members"][id]
-		var share := float(m["hp"]) / float(m["max_hp"])
+		var share := float(m[key]) / float(m["max_" + key])
 		if share < best:
 			best = share
 			target = id
-	if best >= 1.0:
+	if best >= 1.0 and (hp <= 0 or mp <= 0 or _all_full("mp")):
 		return "Everyone is already full of energy."
 	add_item(item_id, -1)
 	var m: Dictionary = data["members"][target]
-	m["hp"] = mini(int(m["max_hp"]), int(m["hp"]) + heal)
+	m["hp"] = mini(int(m["max_hp"]), int(m["hp"]) + hp)
+	m["mp"] = mini(int(m["max_mp"]), int(m["mp"]) + mp)
 	return ""
+
+
+func _all_full(key: String) -> bool:
+	for id: String in party():
+		var m: Dictionary = data["members"][id]
+		if int(m[key]) < int(m["max_" + key]):
+			return false
+	return true
+
+
+## Spirit stalls take Dewdrops.
+func buy_with_dewdrops(item_id: String, price_dp: int, n: int = 1) -> bool:
+	if price_dp * n > int(data["wallet"]["dewdrops"]) or item_count(item_id) + n > 99:
+		return false
+	if not add_item(item_id, n):
+		return false
+	data["wallet"]["dewdrops"] = int(data["wallet"]["dewdrops"]) - price_dp * n
+	return true
+
+
+# --- Levels ------------------------------------------------------------------
+
+const GROWTH_PATH := "res://content/growth.json"
+const MAX_LEVEL := 30
+
+
+## XP needed to reach level L (04 rule): 10 * (L - 1)^2.
+static func xp_for_level(level: int) -> int:
+	return 10 * (level - 1) * (level - 1)
+
+
+## Adds XP and applies any level-ups. Returns one line per level gained.
+func gain_xp(member_id: String, xp: int) -> Array[String]:
+	var m: Dictionary = data["members"][member_id]
+	m["xp"] = int(m["xp"]) + xp
+	return apply_levels(member_id)
+
+
+func apply_levels(member_id: String) -> Array[String]:
+	var lines: Array[String] = []
+	var m: Dictionary = data["members"][member_id]
+	var g: Dictionary = JsonUtil.load_dict(GROWTH_PATH).get("growth", {}).get(member_id, {})
+	var name: String = JsonUtil.load_dict(CHARACTERS_PATH).get("characters", {}).get(member_id, {}).get("name", member_id)
+	while int(m["level"]) < MAX_LEVEL and int(m["xp"]) >= xp_for_level(int(m["level"]) + 1):
+		m["level"] = int(m["level"]) + 1
+		for stat: String in g:
+			m[stat] = int(m[stat]) + int(g[stat])
+		m["hp"] = mini(int(m["max_hp"]), int(m["hp"]) + int(g.get("max_hp", 0)))
+		m["mp"] = mini(int(m["max_mp"]), int(m["mp"]) + int(g.get("max_mp", 0)))
+		lines.append("%s reached level %d!" % [name, int(m["level"])])
+	return lines
 
 
 func add_dewdrops(n: int) -> bool:
@@ -304,6 +360,8 @@ func load_from_dict(incoming: Dictionary) -> Array[String]:
 	if errors.is_empty():
 		_normalize(copy)
 		data = copy
+		for id: String in data["members"]:
+			apply_levels(id)   # older saves stored XP before levels existed
 		party_changed.emit()
 	return errors
 

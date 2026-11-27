@@ -1,0 +1,80 @@
+{
+ "id": "BS-01",
+ "name": "Bandar Senja Station",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "=": "laterite",
+  "H": "shophouse",
+  "T": "tree",
+  "S": "sign"
+ },
+ "rows": [
+  "TTHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTT",
+  "TTHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHSHHHHHHHHHHH======TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TT====================================TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 20,
+   "facing": "up"
+  },
+  "from_bus": {
+   "x": 20,
+   "y": 20,
+   "facing": "up"
+  }
+ },
+ "doors": [],
+ "npcs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "signs": [
+  {
+   "x": 20,
+   "y": 9,
+   "lines": [
+    "Bandar Senja Station.",
+    "(The station is built in the next part of Chapter 1.)"
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C03_arrival",
+   "if_not_flags": [
+    "ch01_arrived_bandar_senja"
+   ]
+  }
+ ]
+}
