@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 14
+const SECTIONS := 16
 
 
 func check(cond: bool, label: String) -> void:
@@ -76,6 +76,12 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 1 part A: Sungai Melor to Bandar Senja")
 	await _test_chapter1_a(gs, im)
+
+	print("Statuses, summons and Guardian Bloom")
+	_test_statuses()
+
+	print("Chapter 1 part B: the Clockkeeper's parcels")
+	await _test_chapter1_b(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -798,13 +804,7 @@ func _run_battle(scene: Node, im: Node, prefer_team: bool) -> Array[String]:
 			break
 		out.assign(battle.battle_log)
 		if battle._menu_open:
-			var pick: Variant = null
-			for it: Dictionary in battle._menu_items:
-				if it["enabled"] and ((prefer_team and str(it["value"]).begins_with("team:")) or it["value"] == "attack"):
-					pick = it["value"]
-					if str(pick).begins_with("team:"):
-						break
-			battle._menu_done.emit(pick if pick != null else "guard")
+			battle._menu_done.emit(_menu_pick(battle, ["team:spirit_cyclone", "attack"] if prefer_team else ["attack"]))
 		await tree.process_frame
 	return out
 
@@ -1083,3 +1083,243 @@ func _test_chapter1_a(gs: Node, im: Node) -> void:
 	scene.free()
 	saves.delete_all()
 	_sections_done += 1
+
+
+## The first enabled menu value from prefs; else the first enabled entry
+## (target menus), else guard.
+func _menu_pick(battle: Battle, prefs: Array) -> Variant:
+	for want: Variant in prefs:
+		for it: Dictionary in battle._menu_items:
+			if it["enabled"] and it["value"] == want:
+				return want
+	if battle._menu_items.any(func(it: Dictionary) -> bool: return it["value"] == "attack"):
+		return "guard"
+	for it: Dictionary in battle._menu_items:
+		if it["enabled"]:
+			return it["value"]
+	return null
+
+
+func _test_statuses() -> void:
+	var a := Combat.make_unit("a", "A", "hero", {"max_hp": 40, "atk": 10, "def": 5, "mag": 5, "res": 5, "spd": 12})
+	var b := Combat.make_unit("b", "B", "enemy", {"max_hp": 40, "atk": 10, "def": 5, "mag": 5, "res": 5, "spd": 10})
+	var c := Combat.make_unit("c", "C", "enemy", {"max_hp": 40, "atk": 10, "def": 5, "mag": 5, "res": 5, "spd": 4})
+	var cb := Combat.new()
+	cb.setup([a], [b, c])
+	check(cb.begin_round() == ["a", "b", "c"], "SPD order")
+	Combat.add_status(a, "slow", 3)
+	check(cb.begin_round() == ["b", "a", "c"], "Slow cuts SPD by 30% (12 -> 8.4)")
+	c["haste"] = true
+	check(cb.begin_round()[0] == "c" and not c["haste"], "Green Light: a hastened ally acts first next round, once")
+	Combat.tick_status(a)
+	check(int(a["status"]["slow"]) == 3, "a status doesn't count down on the turn it lands")
+	Combat.tick_status(a)
+	Combat.tick_status(a)
+	Combat.tick_status(a)
+	check(not Combat.has_status(a, "slow"), "Slow lasts 3 turns")
+	b["immune"] = ["slow"]
+	check(not Combat.add_status(b, "slow", 3) and not Combat.has_status(b, "slow"), "immune enemies ignore Slow")
+	var plain := cb.hit(b, a, "physical", 1.0, "miss")
+	a["hp"] = 40
+	Combat.add_status(a, "shielded", 2)
+	check(plain == 15 and cb.hit(b, a, "physical", 1.0, "miss") == 11, "Shielded takes 30% off (15 -> 10.5, rounded to 11)")
+	a["guarding"] = true
+	check(cb.hit(b, a, "physical", 1.0, "miss") == 5, "Guard and Shielded stack (15 x 0.5 x 0.7 = 5.25 -> 5)")
+	_sections_done += 1
+
+
+func _test_chapter1_b(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_started", "ch01_visibility_learned", "ch01_coin_jar_solved",
+			"ch01_kettle_tip_heard", "ch01_bus_boarded", "ch01_arrived_bandar_senja", "ch01_postcard_found"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	gs.add_key_item("item_postcard")
+	gs.gain_xp("reno", 40)
+	gs.gain_xp("lumi", 40)
+	gs.data["wallet"]["dewdrops"] = 10
+	gs.set_spawn("BS-01", "from_bus")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	check(im.current_mode() == im.Mode.EXPLORE, "no arrival scene again once arrived")
+
+	# Mr Slot takes the postcard (C01-S01).
+	await _talk(scene, Vector2i(24, 12), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_postcard_posted") and not gs.has_key_item("item_postcard") and gs.quest_state("C01-S01") == "rewarded" and int(gs.data["wallet"]["dewdrops"]) == 12, "C01-S01: Mr Slot posts the postcard, 2 Dewdrops")
+
+	# C04: overhear Pak Darus, meet the Clockkeeper.
+	scene.warp("BS-02", "from_forecourt")
+	await _press_for("move_up", 30)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_darus_overheard"), "C04: Pak Darus is overheard")
+	await _talk(scene, Vector2i(20, 2), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.quest_state("C01-003") == "active", "C01-003: the parcels quest begins")
+
+	# C05: the goods shed. Root Grip pulls crates one tile.
+	scene.warp("BS-03", "from_forecourt")
+	await _wait(2)
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(11, 9), "left", im)
+	check(scene.map.movables.has(Vector2i(11, 9)) and _cell_of(scene.leader()) == Vector2i(12, 9), "Root Grip pulls the crate toward Reno, who steps back")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(9, 5), "right", im)
+	check(im.current_mode() == im.Mode.DIALOGUE and scene.map.movables.has(Vector2i(10, 5)), "only Reno can Root Grip")
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(9, 5), "right", im)
+	check(scene.map.movables.has(Vector2i(9, 5)), "the second crate is pulled out of the aisle")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(10, 13)), "up")
+	await _press_for("move_up", 170)
+	check(_cell_of(scene.leader()).y == 3, "PZ-103: the aisle to the parcel shelf is clear")
+	await _tap("confirm")
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_parcel_a") and gs.get_flag("pz103_crates_solved"), "C05: Parcel A found")
+	await _face_and_press(scene, Vector2i(33, 22), "right", im)
+	await _finish_dialogue(im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.movables.has(Vector2i(10, 9)) and scene.map.movables.has(Vector2i(10, 5)), "the reset lever puts the crates back")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(28, 3), "up", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_dead_letter_tag_read") and gs.quest_state("C01-S02") in ["completed", "rewarded"], "C01-S02: Lumi reads the 1951 tag")
+	await _tap("swap")
+	# A Dust Bundle: telegraphs Roll Over, and the first Guardian Bloom test.
+	gs.set_flag("ch01_guardian_bloom_learned")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(21, 16)), "up")
+	await _press_for("move_up", 30)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "attack"])
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(blog.any(func(l: String) -> bool: return l.contains("telegraph Roll Over")), "Dust Bundle telegraphs Roll Over")
+	check(blog.any(func(l: String) -> bool: return l.begins_with("bloom perfect,perfect 15%")), "Guardian Bloom: two cues, 15% heal")
+	check(gs.get_flag("bs03_dust_a_beaten"), "the Dust Bundle is beaten")
+	gs.set_flag("ch01_guardian_bloom_learned", false)
+
+	# C06: Memory Touch on the smudged label, then the right signboard.
+	scene.warp("BS-04", "from_forecourt")
+	await _face_and_press(scene, Vector2i(4, 14), "up", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("ch01_label_read"), "Reno can't read the smudged label")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(4, 14), "up", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_label_read") and gs.has_key_item("item_label_fragments"), "C06: Memory Touch gives the fragments")
+	await _face_and_press(scene, Vector2i(9, 10), "up", im)
+	await _finish_dialogue(im)
+	check(not gs.has_key_item("item_parcel_c"), "PZ-105: the wrong shop just gets a funny line")
+	await _face_and_press(scene, Vector2i(19, 10), "up", im)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_parcel_c") and gs.get_flag("pz105_label_solved"), "C06: Parcel C is at the bicycle repairer's")
+	await _tap("swap")
+
+	# Place: only while Pak Darus looks away.
+	scene.warp("BS-02", "from_forecourt")
+	scene.set_loop_step("pak_darus", 0)
+	await _face_and_press(scene, Vector2i(6, 8), "up", im)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_parcel_a") and not gs.get_flag("ch01_parcel_a_returned"), "Place waits while the stationmaster is looking")
+	scene.set_loop_step("pak_darus", 1)
+	await _face_and_press(scene, Vector2i(6, 8), "up", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_parcel_a_returned") and gs.get_flag("ch01_parcel_r1") and not gs.get_flag("ch01_parcel_r2"), "Parcel A placed: first reaction")
+	scene.set_loop_step("pak_darus", 1)
+	await _face_and_press(scene, Vector2i(6, 8), "up", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_parcel_c_returned") and gs.get_flag("ch01_parcel_r2") and not gs.get_flag("ch01_parcels_returned"), "Parcel C placed: second reaction")
+	_milestone(gs, "two parcels returned")
+
+	# C07: the rail yard, signal levers and the Monarch.
+	scene.warp("BS-05", "from_hall")
+	await _wait(2)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.quest_state("C01-004") == "active", "C01-004 begins in the rail yard")
+	await _face_and_press(scene, Vector2i(10, 13), "up", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("bs05_lever_1") and scene.map.tile_name(Vector2i(10, 12)) == "lever_on", "a lever flips and shows it")
+	await _face_and_press(scene, Vector2i(4, 8), "left", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("pz104_signals_solved"), "PZ-104: a wrong route rolls the handcar back")
+	await _face_and_press(scene, Vector2i(22, 13), "up", im)
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(4, 8), "left", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("pz104_signals_solved") and scene.map.is_walkable(Vector2i(38, 6)), "PZ-104: switched, straight, switched opens the siding")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(38, 8)), "up")
+	await _press_for("move_up", 50)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Paper Moth Monarch fight starts")
+	blog = await _run_battle_with(scene, im, ["team:spirit_cyclone", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon ticket_moth")), "below half HP the Monarch summons a Ticket Moth")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_moth_monarch_defeated") and gs.has_key_item("item_parcel_b") and gs.has_key_item("equip_moth_wing_charm"), "BOSS-101 beaten: Parcel B and the charm")
+	check(gs.get_flag("ch01_guardian_bloom_learned") and gs.quest_state("C01-004") in ["completed", "rewarded"], "Guardian Bloom learned, C01-004 done")
+	check(gs.equip_bonus("lumi").get("spd", 0) == 2, "the Moth-Wing Charm gives Lumi SPD +2")
+
+	# Last parcel, then the tickets.
+	scene.warp("BS-02", "from_yard")
+	scene.set_loop_step("pak_darus", 1)
+	await _face_and_press(scene, Vector2i(6, 8), "up", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_parcels_returned") and gs.quest_state("C01-003") == "rewarded" and gs.item_count("item_moonleaf_bun") == 2, "C01-003 done: all three parcels back, 2 Moonleaf Buns")
+	await _talk(scene, Vector2i(20, 2), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_veil_ticket") and gs.get_flag("ch01_tickets_obtained"), "C08: the Clockkeeper stamps two Veil tickets")
+	_milestone(gs, "tickets")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 1)), "up")
+	await _press_for("move_up", 12)
+	await _wait_transition(im)
+	check(scene.map.id == "BS-06", "Platform 2 opens with the tickets")
+	root.remove_child(scene)
+	scene.free()
+	saves.delete_all()
+	_sections_done += 1
+
+
+func _run_battle_with(scene: Node, im: Node, prefs: Array) -> Array[String]:
+	var out: Array[String] = []
+	var battle: Battle = null
+	for i in 200:
+		for c in scene.get_children():
+			if c is Battle:
+				battle = c
+		if battle:
+			break
+		await tree.process_frame
+	if battle == null:
+		return out
+	var used := {}
+	for i in 4000:
+		if not is_instance_valid(battle) or im.current_mode() != im.Mode.BATTLE:
+			break
+		out.assign(battle.battle_log)
+		if battle._menu_open:
+			# Each team skill in prefs is tried once, then plain attacks.
+			var p: Array = prefs.filter(func(v: String) -> bool: return not used.has(v) or v == "attack")
+			var v: Variant = _menu_pick(battle, p)
+			if str(v).begins_with("team:guardian"):
+				used[v] = true
+			battle._menu_done.emit(v)
+		await tree.process_frame
+	return out

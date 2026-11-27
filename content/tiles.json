@@ -275,6 +275,55 @@
    "color": "#8a6a48",
    "accent": "#6b4a2f",
    "pattern": "planks"
+  },
+  "goods_crate": {
+   "index": 39,
+   "solid": true,
+   "color": "#8a6a48",
+   "accent": "#5a3e2b",
+   "pattern": "box"
+  },
+  "lever": {
+   "index": 40,
+   "solid": true,
+   "color": "#6b6b6b",
+   "accent": "#c94f4f",
+   "pattern": "lever"
+  },
+  "lever_on": {
+   "index": 41,
+   "solid": true,
+   "color": "#6b6b6b",
+   "accent": "#6fbf4a",
+   "pattern": "lever_on"
+  },
+  "rail": {
+   "index": 42,
+   "solid": false,
+   "color": "#8a7a68",
+   "accent": "#4a4a4a",
+   "pattern": "rail"
+  },
+  "signboard": {
+   "index": 43,
+   "solid": true,
+   "color": "#5a3320",
+   "accent": "#e8b84a",
+   "pattern": "sign"
+  },
+  "desk": {
+   "index": 44,
+   "solid": true,
+   "color": "#7a4528",
+   "accent": "#f4ecd2",
+   "pattern": "desk"
+  },
+  "nest": {
+   "index": 45,
+   "solid": true,
+   "color": "#d8d0b8",
+   "accent": "#9a9078",
+   "pattern": "nest"
   }
  }
 }

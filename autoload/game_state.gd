@@ -317,7 +317,24 @@ func conditions_met(def: Dictionary) -> bool:
 	for f: String in def.get("if_not_flags", []):
 		if get_flag(f):
 			return false
+	for k: String in def.get("if_key_items", []):
+		if not has_key_item(k):
+			return false
+	if def.has("if_any_key_items") and not (def["if_any_key_items"] as Array).any(has_key_item):
+		return false
 	return true
+
+
+## Charms are worn by one member (item "equip_to") and add to their stats.
+func equip_bonus(member_id: String) -> Dictionary:
+	var out := {}
+	var defs := item_defs()
+	for k: String in data["key_items"]:
+		var d: Dictionary = defs.get(k, {})
+		if d.get("kind", "") == "charm" and d.get("equip_to", "") == member_id:
+			for stat: String in d.get("bonus", {}):
+				out[stat] = int(out.get(stat, 0)) + int(d["bonus"][stat])
+	return out
 
 
 func quest_state(quest_id: String) -> String:

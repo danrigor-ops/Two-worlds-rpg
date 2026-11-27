@@ -1,0 +1,163 @@
+{
+ "id": "BS-03",
+ "name": "Goods Shed",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 36,
+ "height": 28,
+ "legend": {
+  ".": "floor",
+  "#": "wall",
+  "s": "shelf",
+  "x": "goods_crate",
+  "E": "exit",
+  "l": "lever"
+ },
+ "rows": [
+  "####################################",
+  "#ssssssssssssssssssssssssssssssssss#",
+  "#ssssssssssssssssssssssssssssssssss#",
+  "#........s.s.......................#",
+  "#........s.s.......................#",
+  "#..........s..xxxxx...xxxxx........#",
+  "#........s.s..xxxxx...xxxxx........#",
+  "#........s.s.......................#",
+  "#........s.s.......................#",
+  "#........s....xxxxx...xxxxx........#",
+  "#........s.s..xxxxx...xxxxx........#",
+  "#........s.s.......................#",
+  "#........s.s.......................#",
+  "#..................................#",
+  "#..................................#",
+  "#..................................#",
+  "#..xxxxx..................xxxxx....#",
+  "#..xxxxx....xxxxx.........xxxxx....#",
+  "#...........xxxxx..................#",
+  "#..................................#",
+  "#..................................E",
+  "#..................................#",
+  "#.................................l#",
+  "#..................................#",
+  "#..................................#",
+  "#..................................#",
+  "#..................................#",
+  "####################################"
+ ],
+ "spawns": {
+  "start": {
+   "x": 33,
+   "y": 20,
+   "facing": "left"
+  },
+  "from_forecourt": {
+   "x": 34,
+   "y": 20,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_forecourt",
+   "x": 35,
+   "y": 20,
+   "to_map": "BS-01",
+   "to_spawn": "from_shed"
+  }
+ ],
+ "movables": [
+  {
+   "x": 10,
+   "y": 5,
+   "tile": "goods_crate"
+  },
+  {
+   "x": 10,
+   "y": 9,
+   "tile": "goods_crate"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "dust_a",
+   "character": "dust_bundle",
+   "x": 21,
+   "y": 14,
+   "facing": "left",
+   "hide_if_flag": "bs03_dust_a_beaten",
+   "encounter": {
+    "id": "bs03_dust",
+    "outro_scene": "dust_a_beaten"
+   }
+  },
+  {
+   "id": "dust_b",
+   "character": "dust_bundle",
+   "x": 5,
+   "y": 21,
+   "facing": "right",
+   "hide_if_flag": "bs03_dust_b_beaten",
+   "encounter": {
+    "id": "bs03_dust",
+    "outro_scene": "dust_b_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "parcel_shelf",
+   "x": 10,
+   "y": 2,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_parcel_a_found"
+     ],
+     "scene": "shelf_empty"
+    },
+    {
+     "scene": "C05_parcel_a"
+    }
+   ]
+  },
+  {
+   "id": "dead_letters",
+   "x": 28,
+   "y": 2,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_dead_letter_tag_read"
+     ],
+     "scene": "dead_letter_done"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C05_dead_letter_touch"
+    },
+    {
+     "scene": "C05_dead_letter_look"
+    }
+   ]
+  },
+  {
+   "id": "reset_lever",
+   "x": 34,
+   "y": 22,
+   "talk": [
+    {
+     "scene": "shed_reset"
+    }
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C05_shed",
+   "if_not_flags": [
+    "ch01_shed_entered"
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": []
+}

@@ -66,6 +66,45 @@
    "name": "Postcard Home",
    "kind": "key",
    "text": "A fisherman dropped it on the jetty. It needs posting in Bandar Senja."
+  },
+  "item_parcel_a": {
+   "name": "Parcel A",
+   "kind": "key",
+   "text": "The stationmaster's parcel, from the goods shed."
+  },
+  "item_parcel_b": {
+   "name": "Parcel B",
+   "kind": "key",
+   "text": "The stationmaster's parcel, chewed at one corner by moths."
+  },
+  "item_parcel_c": {
+   "name": "Parcel C",
+   "kind": "key",
+   "text": "The stationmaster's parcel, back from the bicycle shop."
+  },
+  "item_veil_ticket": {
+   "name": "Veil-Stamped Tickets x2",
+   "kind": "key",
+   "text": "Two tickets with a violet tick mark. They keep your destination safe in the Veil."
+  },
+  "item_blank_punched_ticket": {
+   "name": "Blank Punched Ticket",
+   "kind": "key",
+   "text": "A ticket with no destination, just a neat hole."
+  },
+  "item_label_fragments": {
+   "name": "Label Fragments",
+   "kind": "key",
+   "text": "What Lumi saw in the smudged label: something BLUE, a ROUND shape, and the letters '...CLE'."
+  },
+  "equip_moth_wing_charm": {
+   "name": "Moth-Wing Charm",
+   "kind": "charm",
+   "equip_to": "lumi",
+   "bonus": {
+    "spd": 2
+   },
+   "text": "A papery charm. Lumi wears it: SPD +2."
   }
  }
 }

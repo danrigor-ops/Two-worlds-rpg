@@ -151,8 +151,61 @@
     "dewdrops": 2
    },
    "journal": {
-    "active": "A fisherman dropped his postcard on the jetty. Post it in Bandar Senja.",
+    "active": "A fisherman dropped his postcard on the jetty. Post it in Bandar Senja. Maybe the post box knows how.",
     "completed": "Mr Slot took the postcard."
+   }
+  },
+  {
+   "id": "C01-003",
+   "name": "The Stationmaster's Parcels",
+   "start": "locked",
+   "start_flags": [
+    "ch01_parcels_quest_started"
+   ],
+   "complete_flags": [
+    "ch01_parcel_a_returned",
+    "ch01_parcel_b_returned",
+    "ch01_parcel_c_returned"
+   ],
+   "reward": {
+    "items": {
+     "item_moonleaf_bun": 2
+    }
+   },
+   "journal": {
+    "active": "Put Pak Darus's three parcels back on his desk while he isn't looking. A: the goods shed (west). B: the rail yard (through the hall). C: sent to the wrong shop on Shophouse Row (east).",
+    "completed": "All three parcels are back. The Clockkeeper owes us tickets."
+   }
+  },
+  {
+   "id": "C01-004",
+   "name": "The Paper Moth Monarch",
+   "start": "locked",
+   "start_flags": [
+    "ch01_moth_trail_started"
+   ],
+   "complete_flags": [
+    "ch01_moth_monarch_defeated"
+   ],
+   "journal": {
+    "active": "Parcel B is in a moth nest on a rail yard siding. Set the three signal levers to send the handcar there. Lumi's Echo Sight can show the old route.",
+    "completed": "We beat the Paper Moth Monarch and got Parcel B back. We learned Guardian Bloom."
+   }
+  },
+  {
+   "id": "C01-S02",
+   "name": "The Dead-Letter Shelf",
+   "optional": true,
+   "start": "locked",
+   "start_flags": [
+    "ch01_dead_letter_seen"
+   ],
+   "complete_flags": [
+    "ch01_dead_letter_tag_read"
+   ],
+   "journal": {
+    "active": "A 1951 parcel tag on the goods shed's high shelf has the same emblem as Reno's token. Lumi could read it with Memory Touch.",
+    "completed": "Footsteps on a platform, and a woman's voice: \"Mind the gap, little one.\""
    }
   }
  ]

@@ -24,6 +24,7 @@ var on_enter: Array = []      # [{"scene", "if_flags", "if_not_flags"}]
 var objects: Dictionary = {}  # Vector2i -> {"id", "talk": [...]}  (interactable solid tiles)
 var overrides: Array = []     # [{"if_flags", "tile", "cells": [Vector2i]}]
 var triggers: Array = []      # [{"cells": [Vector2i], "scene", "if_flags", "if_not_flags"}]
+var movables: Dictionary = {}  # Vector2i -> tile name (crates Root Grip can pull)
 var _override_tiles: Dictionary = {}  # Vector2i -> tile name currently replaced
 
 
@@ -82,6 +83,8 @@ static func load_map(map_id: String) -> MapData:
 		var tr := t.duplicate()
 		tr["cells"] = _cells(t.get("cells", []))
 		m.triggers.append(tr)
+	for mv: Dictionary in d.get("movables", []):
+		m.movables[Vector2i(int(mv["x"]), int(mv["y"]))] = mv.get("tile", "goods_crate")
 	for sign: Dictionary in d.get("signs", []):
 		m.signs[Vector2i(int(sign["x"]), int(sign["y"]))] = sign.get("lines", [])
 	return m
@@ -113,6 +116,11 @@ func apply_overrides(has_flag: Callable) -> Array[Vector2i]:
 	return changed
 
 
+func move_movable(from: Vector2i, to: Vector2i) -> void:
+	movables[to] = movables[from]
+	movables.erase(from)
+
+
 func is_pit(cell: Vector2i) -> bool:
 	return tile_name(cell) == "pit"
 
@@ -128,6 +136,8 @@ func in_bounds(cell: Vector2i) -> bool:
 func tile_name(cell: Vector2i) -> String:
 	if not in_bounds(cell) or cell.y >= rows.size() or cell.x >= rows[cell.y].length():
 		return ""
+	if movables.has(cell):
+		return movables[cell]
 	if _override_tiles.has(cell):
 		return _override_tiles[cell]
 	return legend.get(rows[cell.y][cell.x], "")
@@ -227,6 +237,9 @@ func validate_self() -> Array[String]:
 	for t: Dictionary in on_enter:
 		if not Dialogue.has_scene(t.get("scene", "")):
 			e.append(p + "on_enter uses missing scene '%s'" % t.get("scene", ""))
+	for cell: Vector2i in movables:
+		if legend.get(rows[cell.y][cell.x], "") == "" or tile_defs().get(legend[rows[cell.y][cell.x]], {}).get("solid", true):
+			e.append(p + "movable at %s must start on walkable ground" % cell)
 	for cell: Vector2i in signs:
 		if tile_name(cell) != "sign":
 			e.append(p + "sign at %s is not on a sign tile" % cell)

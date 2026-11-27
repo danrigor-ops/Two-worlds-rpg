@@ -105,6 +105,12 @@ func _advance() -> void:
 		if step.has("choice"):
 			_show_choice(step["choice"])
 			return
+		if step.has("goto"):
+			# Shared lines: continue with another scene's steps.
+			var more := Dialogue.scene(step["goto"]).duplicate()
+			more.append_array(_queue)
+			_queue = more
+			continue
 		_apply(step)
 	_close()
 
@@ -112,6 +118,8 @@ func _advance() -> void:
 func _apply(step: Dictionary) -> void:
 	if step.has("set_flag"):
 		GameState.set_flag(step["set_flag"])
+	if step.has("toggle_flag"):
+		GameState.set_flag(step["toggle_flag"], not GameState.get_flag(step["toggle_flag"]))
 	if step.has("key_item"):
 		GameState.add_key_item(step["key_item"])
 	if step.has("take_key_item"):

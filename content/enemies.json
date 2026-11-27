@@ -1,6 +1,6 @@
 {
  "status": "WORKING_PROPOSAL",
- "note": "Prologue stats from 04_GAMEPLAY_SYSTEMS.md. Not balanced.",
+ "note": "Prologue and Chapter 1 stats from 04_GAMEPLAY_SYSTEMS.md and docs/chapter-01/data/chapter-01-battles.json. Not balanced. Attack fields: kind, mult, target (one/all), telegraph (lands next turn), applies + turns (status), support haste, guard. Phase fields: above, attacks, summon (one at a time, no XP), enter_text, ensure_mp, teach_flag, hint. end_below ends a story boss at an HP share.",
  "enemies": {
   "leafling": {
    "name": "Leafling",
@@ -96,6 +96,137 @@
      "teach_flag": "spirit_cyclone_learned"
     }
    ]
+  },
+  "ticket_moth": {
+   "name": "Ticket Moth",
+   "character": "ticket_moth",
+   "stats": {
+    "level": 3,
+    "max_hp": 40,
+    "atk": 8,
+    "def": 6,
+    "mag": 10,
+    "res": 8,
+    "spd": 13
+   },
+   "xp": 8,
+   "attacks": [
+    {
+     "name": "Paper Nibble",
+     "kind": "magical",
+     "mult": 1.0
+    }
+   ]
+  },
+  "dust_bundle": {
+   "name": "Dust Bundle",
+   "character": "dust_bundle",
+   "stats": {
+    "level": 3,
+    "max_hp": 56,
+    "atk": 12,
+    "def": 10,
+    "mag": 3,
+    "res": 6,
+    "spd": 5
+   },
+   "xp": 9,
+   "attacks": [
+    {
+     "name": "Roll Over",
+     "kind": "physical",
+     "mult": 1.2,
+     "telegraph": true,
+     "telegraph_text": "The Dust Bundle curls up tight. It's going to roll! (Guard or dodge.)"
+    }
+   ]
+  },
+  "signal_flicker": {
+   "name": "Signal Flicker",
+   "character": "signal_flicker",
+   "stats": {
+    "level": 4,
+    "max_hp": 44,
+    "atk": 6,
+    "def": 7,
+    "mag": 13,
+    "res": 12,
+    "spd": 14
+   },
+   "xp": 11,
+   "attacks": [
+    {
+     "name": "Red Light",
+     "kind": "status",
+     "applies": "slow",
+     "turns": 3
+    },
+    {
+     "name": "Green Light",
+     "support": "haste"
+    }
+   ]
+  },
+  "paper_moth_monarch": {
+   "name": "Paper Moth Monarch",
+   "character": "paper_moth_monarch",
+   "stats": {
+    "level": 4,
+    "max_hp": 200,
+    "atk": 9,
+    "def": 8,
+    "mag": 14,
+    "res": 11,
+    "spd": 12
+   },
+   "xp": 40,
+   "immune": [
+    "slow"
+   ],
+   "attacks": [
+    {
+     "name": "Paper Storm",
+     "kind": "magical",
+     "mult": 0.7,
+     "target": "all"
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.5,
+     "attacks": [
+      {
+       "name": "Paper Storm",
+       "kind": "magical",
+       "mult": 0.7,
+       "target": "all"
+      },
+      {
+       "name": "Nibble",
+       "kind": "magical",
+       "mult": 1.0
+      }
+     ]
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Paper Storm",
+       "kind": "magical",
+       "mult": 0.7,
+       "target": "all"
+      },
+      {
+       "name": "Nibble",
+       "kind": "magical",
+       "mult": 1.0
+      }
+     ],
+     "summon": "ticket_moth",
+     "enter_text": "The Monarch shrieks. Paper flies everywhere: it's calling its moths!"
+    }
+   ]
   }
  },
  "encounters": {
@@ -122,6 +253,40 @@
    "boss": true,
    "win_flags": [
     "thornkeeper_defeated"
+   ]
+  },
+  "bs03_dust": {
+   "enemies": [
+    "dust_bundle"
+   ]
+  },
+  "bs05_moths": {
+   "enemies": [
+    "ticket_moth",
+    "ticket_moth"
+   ]
+  },
+  "bs05_flicker": {
+   "enemies": [
+    "signal_flicker",
+    "ticket_moth"
+   ]
+  },
+  "monarch_boss": {
+   "enemies": [
+    "paper_moth_monarch"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch01_parcel_b_found",
+    "ch01_moth_monarch_defeated",
+    "ch01_guardian_bloom_learned"
+   ],
+   "win_key_items": [
+    "item_parcel_b",
+    "item_blank_punched_ticket",
+    "equip_moth_wing_charm"
    ]
   }
  }

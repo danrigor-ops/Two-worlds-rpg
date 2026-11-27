@@ -1,0 +1,254 @@
+{
+ "id": "BS-05",
+ "name": "Rail Yard",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 44,
+ "height": 32,
+ "legend": {
+  ".": "laterite",
+  "F": "fence",
+  "r": "rail",
+  "E": "exit",
+  "l": "lever",
+  "m": "echo_marker",
+  "k": "crate",
+  "N": "nest"
+ },
+ "rows": [
+  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+  "FF................................FFFNNNFFFF",
+  "FF................................F......FFF",
+  "FF................................F......FFF",
+  "FF................................F......FFF",
+  "FF................................FFFFFFFFFF",
+  "FF........................................FF",
+  "FFrkrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrFF",
+  "FF............................r...........FF",
+  "FF............................r...........FF",
+  "FF............................r...........FF",
+  "FF........l.....l.....l.......r...........FF",
+  "FF............................r...........FF",
+  "FE............................r...........FF",
+  "FF............................r...........FF",
+  "FF....m.......................r...........FF",
+  "FF............................r...........FF",
+  "FF............................r...........FF",
+  "FF............................r...........FF",
+  "FFrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrFF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FF........................................FF",
+  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+  "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_hall": {
+   "x": 2,
+   "y": 14,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_hall",
+   "x": 1,
+   "y": 14,
+   "to_map": "BS-02",
+   "to_spawn": "from_yard"
+  }
+ ],
+ "overrides": [
+  {
+   "if_flags": [
+    "bs05_lever_1"
+   ],
+   "tile": "lever_on",
+   "cells": [
+    [
+     10,
+     12
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "bs05_lever_2"
+   ],
+   "tile": "lever_on",
+   "cells": [
+    [
+     16,
+     12
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "bs05_lever_3"
+   ],
+   "tile": "lever_on",
+   "cells": [
+    [
+     22,
+     12
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "pz104_signals_solved"
+   ],
+   "tile": "rail",
+   "cells": [
+    [
+     37,
+     6
+    ],
+    [
+     38,
+     6
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "pz104_signals_solved"
+   ],
+   "tile": "laterite",
+   "cells": [
+    [
+     3,
+     8
+    ]
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "moths_a",
+   "character": "ticket_moth",
+   "x": 14,
+   "y": 16,
+   "facing": "left",
+   "hide_if_flag": "bs05_moths_beaten",
+   "encounter": {
+    "id": "bs05_moths",
+    "outro_scene": "moths_beaten"
+   }
+  },
+  {
+   "id": "flicker",
+   "character": "signal_flicker",
+   "x": 26,
+   "y": 24,
+   "facing": "left",
+   "hide_if_flag": "bs05_flicker_beaten",
+   "encounter": {
+    "id": "bs05_flicker",
+    "outro_scene": "flicker_beaten"
+   }
+  },
+  {
+   "id": "monarch",
+   "character": "paper_moth_monarch",
+   "x": 38,
+   "y": 4,
+   "facing": "down",
+   "hide_if_flag": "ch01_moth_monarch_defeated",
+   "encounter": {
+    "id": "monarch_boss",
+    "intro_scene": "C07_monarch_intro",
+    "outro_scene": "C07_monarch_outro"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "lever_1",
+   "x": 10,
+   "y": 12,
+   "talk": [
+    {
+     "scene": "lever_1"
+    }
+   ]
+  },
+  {
+   "id": "lever_2",
+   "x": 16,
+   "y": 12,
+   "talk": [
+    {
+     "scene": "lever_2"
+    }
+   ]
+  },
+  {
+   "id": "lever_3",
+   "x": 22,
+   "y": 12,
+   "talk": [
+    {
+     "scene": "lever_3"
+    }
+   ]
+  },
+  {
+   "id": "ghost_marker",
+   "x": 6,
+   "y": 16,
+   "talk": [
+    {
+     "if_leader": "lumi",
+     "scene": "PZ104_echo"
+    },
+    {
+     "scene": "PZ104_marker_reno"
+    }
+   ]
+  },
+  {
+   "id": "handcar",
+   "x": 3,
+   "y": 8,
+   "talk": [
+    {
+     "if_flags": [
+      "bs05_lever_1",
+      "bs05_lever_3"
+     ],
+     "if_not_flags": [
+      "bs05_lever_2"
+     ],
+     "scene": "PZ104_solved"
+    },
+    {
+     "scene": "PZ104_wrong"
+    }
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C07_yard",
+   "if_not_flags": [
+    "ch01_moth_trail_started"
+   ]
+  }
+ ],
+ "signs": [],
+ "triggers": [],
+ "movables": []
+}

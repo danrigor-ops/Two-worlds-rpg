@@ -354,6 +354,213 @@
     "accent": "#c94f4f",
     "legs": "#f4ecd2"
    }
+  },
+  "pak_darus_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c08a5e",
+    "body": "#e8e4d8",
+    "accent": "#2a3a6a",
+    "legs": "#2a3a6a"
+   }
+  },
+  "ticket_clerk_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#1d1a2a",
+    "skin": "#d6a57a",
+    "body": "#9fb0c8",
+    "accent": "#2a3a6a",
+    "legs": "#3a3a3a"
+   }
+  },
+  "repairer_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a3a3a",
+    "skin": "#a8714a",
+    "body": "#5a7a9e",
+    "accent": "#3a3a3a",
+    "legs": "#3a4a5a"
+   }
+  },
+  "clockkeeper_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "clock",
+    "hair": "#5a3320",
+    "skin": "#f4ecd2",
+    "body": "#7a4528",
+    "accent": "#e8b84a",
+    "legs": "#3e2a1c"
+   }
+  },
+  "mr_slot_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "postbox",
+    "hair": "#a02a2a",
+    "skin": "#c94f4f",
+    "body": "#c94f4f",
+    "accent": "#1a1420",
+    "legs": "#7a2020"
+   }
+  },
+  "ticket_moth_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "moth",
+    "hair": "#f4ecd2",
+    "skin": "#d8d0b8",
+    "body": "#5a4a3a",
+    "accent": "#c94f4f",
+    "legs": "#5a4a3a"
+   }
+  },
+  "paper_moth_monarch_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "monarch",
+    "hair": "#f4ecd2",
+    "skin": "#e8b84a",
+    "body": "#4a3a5a",
+    "accent": "#c94f4f",
+    "legs": "#4a3a5a"
+   }
+  },
+  "dust_bundle_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#8a8070",
+    "skin": "#a89a88",
+    "body": "#6b6058",
+    "accent": "#f4ecd2",
+    "legs": "#6b6058"
+   }
+  },
+  "signal_flicker_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#3a3a3a",
+    "skin": "#6fbf4a",
+    "body": "#2b2b2b",
+    "accent": "#e04a3a",
+    "legs": "#4a4a4a"
+   }
   }
  },
  "characters": {
@@ -371,6 +578,15 @@
   "passenger_b": "passenger_b_overworld",
   "fisherman": "fisherman_overworld",
   "old_kettle": "old_kettle_overworld",
-  "postcard_marker": "postcard_marker_overworld"
+  "postcard_marker": "postcard_marker_overworld",
+  "pak_darus": "pak_darus_overworld",
+  "ticket_clerk": "ticket_clerk_overworld",
+  "repairer": "repairer_overworld",
+  "clockkeeper": "clockkeeper_overworld",
+  "mr_slot": "mr_slot_overworld",
+  "ticket_moth": "ticket_moth_overworld",
+  "paper_moth_monarch": "paper_moth_monarch_overworld",
+  "dust_bundle": "dust_bundle_overworld",
+  "signal_flicker": "signal_flicker_overworld"
  }
 }

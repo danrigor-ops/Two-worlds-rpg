@@ -16,6 +16,9 @@ const MULT := {"perfect": 1.5, "good": 1.2, "miss": 1.0}
 const DODGE_MULT := {"perfect": 0.0, "good": 0.5, "miss": 1.0}
 const GUARD_MULT := 0.5
 const GUARD_MP := 2
+## Statuses (04): slow = SPD x0.7, shielded = damage x0.7, fog = Skill sealed.
+const SLOW_MULT := 0.7
+const SHIELD_MULT := 0.7
 
 var units: Array[Dictionary] = []
 var round_number := 0
@@ -51,7 +54,7 @@ static func make_unit(id: String, name: String, side: String, stats: Dictionary)
 		"id": id, "name": name, "side": side,
 		"max_hp": int(stats["max_hp"]), "hp": int(stats.get("hp", stats["max_hp"])),
 		"max_mp": int(stats.get("max_mp", 0)), "mp": int(stats.get("mp", stats.get("max_mp", 0))),
-		"guarding": false, "token": false,
+		"guarding": false, "token": false, "status": {}, "haste": false, "immune": [],
 	}
 	for k in ["atk", "def", "mag", "res", "spd"]:
 		u[k] = int(stats[k])
@@ -93,7 +96,13 @@ func begin_round(first_side := "") -> Array[String]:
 	_queue.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		if first_side != "" and a["side"] != b["side"]:
 			return a["side"] == first_side
-		return a["spd"] > b["spd"] if a["spd"] != b["spd"] else a["id"] < b["id"])
+		if a["haste"] != b["haste"]:
+			return a["haste"]
+		var sa := speed(a)
+		var sb := speed(b)
+		return sa > sb if sa != sb else a["id"] < b["id"])
+	for u in units:
+		u["haste"] = false
 	var ids: Array[String] = []
 	for u in _queue:
 		ids.append(u["id"])
@@ -109,6 +118,35 @@ func next_actor() -> Dictionary:
 			u["guarding"] = false
 			return u
 	return {}
+
+
+static func speed(u: Dictionary) -> float:
+	return float(u["spd"]) * (SLOW_MULT if has_status(u, "slow") else 1.0)
+
+
+static func has_status(u: Dictionary, name: String) -> bool:
+	return int(u["status"].get(name, 0)) > 0
+
+
+## Returns false if the unit is immune.
+static func add_status(u: Dictionary, name: String, turns: int) -> bool:
+	if name in u["immune"]:
+		return false
+	u["status"][name] = maxi(int(u["status"].get(name, 0)), turns)
+	u.get_or_add("fresh", {})[name] = true   # doesn't count down on the turn it lands
+	return true
+
+
+## Called after a unit's own turn: statuses count down.
+static func tick_status(u: Dictionary) -> void:
+	var fresh: Dictionary = u.get("fresh", {})
+	for k: String in u["status"].keys():
+		if fresh.has(k):
+			continue
+		u["status"][k] = int(u["status"][k]) - 1
+		if int(u["status"][k]) <= 0:
+			u["status"].erase(k)
+	fresh.clear()
 
 
 func spend_token(u: Dictionary) -> bool:
@@ -131,6 +169,8 @@ func hit(attacker: Dictionary, target: Dictionary, kind: String, skill_mult: flo
 	var defense: float = DODGE_MULT[dodge]
 	if target["guarding"]:
 		defense *= GUARD_MULT
+	if has_status(target, "shielded"):
+		defense *= SHIELD_MULT
 	var dmg := final_damage(base_damage(kind, attacker, target), skill_mult, MULT[timing], defense)
 	target["hp"] = maxi(0, int(target["hp"]) - dmg)
 	return dmg

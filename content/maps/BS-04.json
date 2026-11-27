@@ -1,0 +1,185 @@
+{
+ "id": "BS-04",
+ "name": "Shophouse Row",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 28,
+ "legend": {
+  "=": "laterite",
+  "H": "shophouse",
+  "T": "tree",
+  "E": "exit",
+  "b": "signboard",
+  "n": "signboard",
+  ".": "grass"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT====HHHHHHH===HHHHHHH===HHHHHHH===HHHHHHH===TT",
+  "TT=======b=========b=========b=========b======TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT==n=========================================TT",
+  "TE============================================TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT............................................TT",
+  "TT............................................TT",
+  "TT............................................TT",
+  "TT............................................TT",
+  "TT............................................TT",
+  "TT............................................TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_forecourt": {
+   "x": 2,
+   "y": 14,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_forecourt",
+   "x": 1,
+   "y": 14,
+   "to_map": "BS-01",
+   "to_spawn": "from_row"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "repairer",
+   "character": "repairer",
+   "x": 22,
+   "y": 11,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_repairer"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "noticeboard",
+   "x": 4,
+   "y": 13,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_label_read"
+     ],
+     "scene": "label_again"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C06_memory_touch"
+    },
+    {
+     "scene": "C06_label_reno"
+    }
+   ]
+  },
+  {
+   "id": "sign_tailor",
+   "x": 9,
+   "y": 9,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_label_read"
+     ],
+     "if_not_flags": [
+      "ch01_parcel_c_found"
+     ],
+     "scene": "pz105_tailor"
+    },
+    {
+     "scene": "sign_tailor"
+    }
+   ]
+  },
+  {
+   "id": "sign_bicycle",
+   "x": 19,
+   "y": 9,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_label_read"
+     ],
+     "if_not_flags": [
+      "ch01_parcel_c_found"
+     ],
+     "scene": "C06_parcel_c"
+    },
+    {
+     "scene": "sign_bicycle"
+    }
+   ]
+  },
+  {
+   "id": "sign_photo",
+   "x": 29,
+   "y": 9,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_label_read"
+     ],
+     "if_not_flags": [
+      "ch01_parcel_c_found"
+     ],
+     "scene": "pz105_photo"
+    },
+    {
+     "scene": "sign_photo"
+    }
+   ]
+  },
+  {
+   "id": "sign_gold",
+   "x": 39,
+   "y": 9,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_label_read"
+     ],
+     "if_not_flags": [
+      "ch01_parcel_c_found"
+     ],
+     "scene": "pz105_gold"
+    },
+    {
+     "scene": "sign_gold"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}

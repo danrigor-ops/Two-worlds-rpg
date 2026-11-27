@@ -10,6 +10,16 @@
     "item_firefly_tea",
     "item_dewdrop_candy"
    ]
+  },
+  "clock_stall": {
+   "name": "The Clockkeeper's Shelf",
+   "currency": "dewdrops",
+   "items": [
+    "item_moonleaf_bun",
+    "item_starfruit_dumpling",
+    "item_firefly_tea",
+    "item_dewdrop_candy"
+   ]
   }
  }
 }

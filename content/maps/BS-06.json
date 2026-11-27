@@ -1,0 +1,73 @@
+{
+ "id": "BS-06",
+ "name": "Platform 2",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 20,
+ "legend": {
+  "t": "tile_floor",
+  "#": "wall",
+  "r": "rail",
+  "D": "door",
+  "S": "sign"
+ },
+ "rows": [
+  "########################################",
+  "#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#",
+  "#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#",
+  "#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#",
+  "#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#",
+  "#rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttStttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttttttttttt#",
+  "########################D###############"
+ ],
+ "spawns": {
+  "start": {
+   "x": 24,
+   "y": 17,
+   "facing": "up"
+  },
+  "from_hall": {
+   "x": 24,
+   "y": 18,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_hall",
+   "x": 24,
+   "y": 19,
+   "to_map": "BS-02",
+   "to_spawn": "from_platform"
+  }
+ ],
+ "signs": [
+  {
+   "x": 20,
+   "y": 8,
+   "lines": [
+    "PLATFORM 2. Evening service.",
+    "(The evening train arrives in the next part of Chapter 1.)"
+   ]
+  }
+ ],
+ "npcs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}

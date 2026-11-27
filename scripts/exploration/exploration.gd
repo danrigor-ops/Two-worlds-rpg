@@ -30,6 +30,7 @@ var _busy := false               # leaping or falling
 var trail := FollowTrail.new()
 var transitioning := false
 var _label_time := 0.0
+var _glows: Array = []   # [{"node": ColorRect, "cell": Vector2i, "obj": Dictionary}]
 
 
 func _ready() -> void:
@@ -143,6 +144,24 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 		var npc := _spawn_member(def.get("member", def.get("character", "")), MapData.cell_to_feet(def["cell"]), def.get("facing", "down"))
 		npcs.append({"node": npc, "def": def})
 
+	for g in _glows:
+		g["node"].queue_free()
+	_glows.clear()
+	for cell: Vector2i in map.objects:
+		if map.objects[cell].has("place_watcher"):
+			var glow := ColorRect.new()
+			glow.color = Color(1.0, 0.95, 0.6, 0.55)
+			glow.size = Vector2(6, 6)
+			glow.position = Vector2(cell * MapData.TILE) + Vector2(5, -2)
+			glow.z_index = 5
+			add_child(glow)
+			_glows.append({"node": glow, "cell": cell, "obj": map.objects[cell]})
+	for npc in npcs:
+		if npc["def"].has("facing_loop"):
+			npc["loop_i"] = 0
+			npc["loop_t"] = 0.0
+			npc["node"].facing = npc["def"]["facing_loop"][0]["facing"]
+			npc["node"]._update_frame()
 	GameState.set_position(map.id, start["cell"], start["facing"])
 	camera.global_position = pos + CAMERA_LIFT
 	camera.reset_smoothing()
@@ -233,6 +252,7 @@ func _physics_process(_delta: float) -> void:
 func _process(delta: float) -> void:
 	if InputManager.current_mode() == InputManager.Mode.EXPLORE:
 		GameState.add_playtime(delta)
+	_update_watchers(delta)
 	if _label_time > 0.0:
 		_label_time -= delta
 		map_label.visible = _label_time > 0.0
@@ -274,11 +294,14 @@ func _interact() -> void:
 			_talk_to(npc)
 			return
 	var cell := MapData.feet_to_cell(probe)
+	if map.movables.has(cell):
+		_root_grip(lead, cell)
+		return
 	if map.signs.has(cell):
 		dialogue.show_lines(map.signs[cell])
 		return
 	if map.objects.has(cell):
-		var scene_id := pick_scene(map.objects[cell].get("talk", []))
+		var scene_id := pick(map.objects[cell].get("talk", []))
 		if scene_id != "":
 			dialogue.play_scene(scene_id)
 		return
@@ -355,9 +378,87 @@ func _talk_to(npc: Dictionary) -> void:
 	if not npc["def"].get("unaware", false):
 		# Humans can't see the spirits, so they don't turn to look.
 		node.face(leader().global_position - node.global_position)
-	var scene_id := pick_scene(npc["def"].get("talk", []))
+	var scene_id := pick(npc["def"].get("talk", []))
 	if scene_id != "":
 		dialogue.play_scene(scene_id)
+
+
+## Like pick_scene, but also knows who is looking: "if_watched" and
+## "if_unwatched" name a human NPC with a facing loop (the Place mechanic).
+func pick(entries: Array) -> String:
+	for t: Dictionary in entries:
+		if t.has("if_watched") and not is_watching(t["if_watched"]):
+			continue
+		if t.has("if_unwatched") and is_watching(t["if_unwatched"]):
+			continue
+		if GameState.conditions_met(t):
+			return t.get("scene", "")
+	return ""
+
+
+func _npc_by_id(id: String) -> Dictionary:
+	for npc in npcs:
+		if npc["def"].get("id", "") == id:
+			return npc
+	return {}
+
+
+## A watcher looks at the drop spot while facing its "watch_facing".
+func is_watching(id: String) -> bool:
+	var npc := _npc_by_id(id)
+	return not npc.is_empty() and npc["node"].facing == npc["def"].get("watch_facing", "down")
+
+
+## Jumps a watcher's facing loop to a step (tests and debug).
+func set_loop_step(id: String, i: int) -> void:
+	var npc := _npc_by_id(id)
+	npc["loop_i"] = i
+	npc["loop_t"] = 0.0
+	npc["node"].facing = npc["def"]["facing_loop"][i]["facing"]
+	npc["node"]._update_frame()
+
+
+## Humans with a simple routine: look at the paperwork, turn to the window...
+## No timer pressure: the player just waits for the right moment.
+func _update_watchers(delta: float) -> void:
+	for npc in npcs:
+		if not npc.has("loop_i"):
+			continue
+		var loop: Array = npc["def"]["facing_loop"]
+		npc["loop_t"] += delta
+		if npc["loop_t"] >= float(loop[npc["loop_i"]].get("time", 3.0)):
+			set_loop_step(npc["def"]["id"], (int(npc["loop_i"]) + 1) % loop.size())
+	for g in _glows:
+		var obj: Dictionary = g["obj"]
+		var holding := GameState.conditions_met({"if_any_key_items": obj.get("place_items", [])})
+		g["node"].visible = holding and not is_watching(obj["place_watcher"])
+
+
+## Root Grip (Reno): pull a crate one tile toward him; he steps back.
+func _root_grip(lead: PartyMember, crate: Vector2i) -> void:
+	if lead.member_id != "reno":
+		dialogue.play_scene("grip_lumi")
+		return
+	var here := MapData.feet_to_cell(lead.global_position)
+	var back := here - (crate - here)
+	if not map.is_walkable(back) or map.is_pit(back) or not map.door_at(back).is_empty() or _npc_at(back):
+		dialogue.play_scene("grip_no_room")
+		return
+	map.move_movable(crate, here)
+	_paint_cell(crate)
+	_paint_cell(here)
+	lead.place_at(MapData.cell_to_feet(back), lead.facing)
+	trail.reset(lead.global_position)
+	var f := follower()
+	if f:
+		f.place_at(lead.global_position, f.facing)
+
+
+func _npc_at(cell: Vector2i) -> bool:
+	for npc in npcs:
+		if MapData.feet_to_cell(npc["node"].global_position) == cell:
+			return true
+	return false
 
 
 ## First entry whose conditions hold.
@@ -383,6 +484,11 @@ func _on_story_event(name: String) -> void:
 			await dialogue.finished
 			await _wait_for_explore()
 			shop.open(parts[1])
+			return
+		"reset_map":
+			await dialogue.finished
+			await _wait_for_explore()
+			travel(map.id, parts[1])
 			return
 		"autosave":
 			await dialogue.finished
@@ -422,7 +528,7 @@ func _wait_for_explore() -> void:
 
 
 func _run_on_enter() -> void:
-	var scene_id := pick_scene(map.on_enter)
+	var scene_id := pick(map.on_enter)
 	if scene_id != "":
 		dialogue.play_scene(scene_id)
 
