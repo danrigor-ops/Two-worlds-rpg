@@ -25,6 +25,8 @@ var objects: Dictionary = {}  # Vector2i -> {"id", "talk": [...]}  (interactable
 var overrides: Array = []     # [{"if_flags", "tile", "cells": [Vector2i]}]
 var triggers: Array = []      # [{"cells": [Vector2i], "scene", "if_flags", "if_not_flags"}]
 var no_autosave := false
+var tint := ""             # a colour over the whole map (night scenes)
+var tint_until_flag := ""  # the tint goes once this flag is set
 var movables: Dictionary = {}  # Vector2i -> tile name (crates Root Grip can pull)
 var _override_tiles: Dictionary = {}  # Vector2i -> tile name currently replaced
 
@@ -54,6 +56,8 @@ static func load_map(map_id: String) -> MapData:
 	m.name = d.get("name", map_id)
 	m.status = d.get("status", "")
 	m.no_autosave = d.get("no_autosave", false)
+	m.tint = d.get("tint", "")
+	m.tint_until_flag = d.get("tint_until_flag", "")
 	m.width = int(d.get("width", 0))
 	m.height = int(d.get("height", 0))
 	m.rows = PackedStringArray(d.get("rows", []))
@@ -104,7 +108,7 @@ static func _cells(list: Array) -> Array[Vector2i]:
 func apply_overrides(has_flag: Callable) -> Array[Vector2i]:
 	var next := {}
 	for ov: Dictionary in overrides:
-		if (ov.get("if_flags", []) as Array).all(has_flag):
+		if (ov.get("if_flags", []) as Array).all(has_flag) and not (ov.get("if_not_flags", []) as Array).any(has_flag):
 			for c: Vector2i in ov["cells"]:
 				next[c] = ov["tile"]
 	var changed: Array[Vector2i] = []

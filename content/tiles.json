@@ -352,6 +352,34 @@
    "color": "#6b4a2f",
    "accent": "#e8b84a",
    "pattern": "box"
+  },
+  "mud": {
+   "index": 50,
+   "solid": false,
+   "color": "#7a5a3a",
+   "accent": "#5a4028",
+   "pattern": "speckle"
+  },
+  "log": {
+   "index": 51,
+   "solid": false,
+   "color": "#8a6a48",
+   "accent": "#5a3e2b",
+   "pattern": "log"
+  },
+  "tide_post": {
+   "index": 52,
+   "solid": true,
+   "color": "#6b4a2f",
+   "accent": "#3e2a1c",
+   "pattern": "post"
+  },
+  "mangrove": {
+   "index": 53,
+   "solid": true,
+   "color": "#2a5a3a",
+   "accent": "#5a3e2b",
+   "pattern": "tree"
   }
  }
 }

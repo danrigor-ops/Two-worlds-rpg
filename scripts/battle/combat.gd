@@ -16,9 +16,11 @@ const MULT := {"perfect": 1.5, "good": 1.2, "miss": 1.0}
 const DODGE_MULT := {"perfect": 0.0, "good": 0.5, "miss": 1.0}
 const GUARD_MULT := 0.5
 const GUARD_MP := 2
-## Statuses (04): slow = SPD x0.7, shielded = damage x0.7, fog = Skill sealed.
+## Statuses (04): slow = SPD x0.7, shielded = damage x0.7, fog = Skill sealed,
+## soaked = DEF x0.7 against physical hits.
 const SLOW_MULT := 0.7
 const SHIELD_MULT := 0.7
+const SOAK_MULT := 0.7   # Soaked (Chapter 2): DEF x0.7
 
 var units: Array[Dictionary] = []
 var round_number := 0
@@ -39,7 +41,8 @@ static func judge(delta_ms: float, scale := 1.0) -> String:
 static func base_damage(kind: String, attacker: Dictionary, defender: Dictionary) -> int:
 	if kind == "magical":
 		return maxi(1, 2 * int(attacker["mag"]) - int(defender["res"]))
-	return maxi(1, 2 * int(attacker["atk"]) - int(defender["def"]))
+	var def := float(defender["def"]) * (SOAK_MULT if defender.has("status") and has_status(defender, "soaked") else 1.0)
+	return maxi(1, 2 * int(attacker["atk"]) - roundi(def))
 
 
 ## One rounding at the end. defense_mult covers guard and dodges.

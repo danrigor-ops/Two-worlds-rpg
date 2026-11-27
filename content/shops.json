@@ -20,6 +20,16 @@
     "item_firefly_tea",
     "item_dewdrop_candy"
    ]
+  },
+  "kampung_air_stall": {
+   "name": "Mak Siput's Stall",
+   "currency": "dewdrops",
+   "items": [
+    "item_river_rice_cake",
+    "item_lotus_tea",
+    "item_moonleaf_bun",
+    "item_dewdrop_candy"
+   ]
   }
  }
 }

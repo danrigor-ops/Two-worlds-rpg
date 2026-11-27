@@ -16,8 +16,8 @@ func _ready() -> void:
 		["The Last Train to Bandar Senja", 8, Assets.UI_TEXT, 50],
 		["Next: Chapter 2", 8, Color("#9fb0d8"), 80],
 		["The river remembers.", 8, Assets.UI_TEXT, 92],
-		["Chapter 2 isn't built yet. Your game is saved.", 8, Color("#9fb0d8"), 118],
-		["Press A to return to the title", 8, Assets.UI_GOLD, 140],
+		["Your game is saved.", 8, Color("#9fb0d8"), 118],
+		["Press A to begin Chapter 2", 8, Assets.UI_GOLD, 140],
 	] if ch1 else [
 		["PROLOGUE COMPLETE", 16, Assets.UI_GOLD, 28],
 		["The Great Escape", 8, Assets.UI_TEXT, 50],
@@ -39,5 +39,4 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if InputManager.just_pressed("confirm", InputManager.Mode.CUTSCENE):
-		var to := "res://scenes/title.tscn" if GameState.get_flag("chapter_01_completed") else "res://scenes/exploration.tscn"
-		get_tree().change_scene_to_file(to)
+		get_tree().change_scene_to_file("res://scenes/exploration.tscn")

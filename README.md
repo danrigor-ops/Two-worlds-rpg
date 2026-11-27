@@ -82,6 +82,15 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
 
 New battle rules: Slow (SPD x0.7), Shielded (damage x0.7), Memory Fog (Skill sealed for a turn), telegraphed attacks (the Dust Bundle announces Roll Over a turn early), and immunities.
 
+**Chapter 2, part A (the river).** Design: `docs/chapter-02/CHAPTER_02_PRODUCTION.md` (a working proposal).
+
+34. From the Chapter 1 screen, press A, then take the new south road out of the station forecourt to **Senja River Landing** (RV-01). It's night and the river is running backwards. Two fishermen are overheard, and the Kingfisher sisters Kilat and Kilau ask you to find the three verses of the Tide Song (C2-01).
+35. Go east into the **Mangrove Walk** (RV-02). Blow the Conductor's Whistle at the first carved post to learn **Tide Call**. Each post switches the tide: low tide shows the mud paths, and high tide floats logs across the deep channel (PZ-201). If the tide rises under you, you're put back on dry land.
+36. On the island, **Pak Lumpur** sings the first verse (C2-02). Watch for a Driftnet Tangle (Snare: Slow) and two Silt Wisps (Mud Splash: Soaked).
+37. East again to **Kampung Air** (RV-03), the spirit-side stilt village. Talk to **Old Pole** as Lumi (press C) to hear the second verse with Memory Touch. Lumi learns **Ripple Echo** (6 MP, hits every enemy). Mak Siput's stall sells River Rice Cakes and Lotus Tea.
+
+New battle rules: Soaked (DEF x0.7 against physical hits, 2 turns) and the first area skill. Part B (the Sunken Jetty, the Barnacle Bell, the Undertow and Nenek Arus) comes next.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -143,4 +152,6 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
    - ✅ Part A: Sungai Melor, Old Kettle, the Coin Jar, the bus (plus level growth, MP items, Dewdrop stalls)
    - ✅ Part B: Bandar Senja, the Clockkeeper's parcels, Paper Moth Monarch, Guardian Bloom
    - ✅ Part C: the Veil train, Gentle Float, the Forgotten Conductor, the Veil Halt
-9. Chapter 2 (the river route)
+9. Chapter 2: Whispers Along the River (design proposal in `docs/chapter-02/`)
+   - ✅ Part A: the river landing, Tide Call and the mangroves, Kampung Air, Soaked, Ripple Echo
+   - Part B: the Sunken Jetty, the Barnacle Bell, the Undertow, Nenek Arus

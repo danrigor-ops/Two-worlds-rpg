@@ -31,6 +31,7 @@ var _busy := false               # leaping or falling
 var trail := FollowTrail.new()
 var transitioning := false
 var _label_time := 0.0
+var _tint: CanvasModulate
 var _glows: Array = []   # [{"node": ColorRect, "cell": Vector2i, "obj": Dictionary}]
 
 
@@ -120,6 +121,7 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	map = MapData.load_map(map_id)
 	map.apply_overrides(GameState.get_flag)
 
+	_apply_tint()
 	tilemap.clear()
 	for y in map.height:
 		for x in map.width:
@@ -173,6 +175,28 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	_label_time = 2.0
 
 
+## The closest walkable cell (feet position) to a cell that just flooded.
+func _nearest_dry(from: Vector2i) -> Vector2:
+	if map.is_walkable(MapData.feet_to_cell(_last_safe)):
+		return _last_safe
+	for r in range(1, 8):
+		for dy in range(-r, r + 1):
+			for dx in range(-r, r + 1):
+				var c := from + Vector2i(dx, dy)
+				if maxi(absi(dx), absi(dy)) == r and map.is_walkable(c) and not _npc_at(c):
+					return MapData.cell_to_feet(c)
+	return _last_safe
+
+
+func _apply_tint() -> void:
+	var on := map.tint != "" and (map.tint_until_flag == "" or not GameState.get_flag(map.tint_until_flag))
+	if on and _tint == null:
+		_tint = CanvasModulate.new()
+		add_child(_tint)
+	if _tint:
+		_tint.color = Color(map.tint) if on else Color.WHITE
+
+
 ## Saved tile if it is still valid, else the named spawn, else "start".
 func _paint_cell(cell: Vector2i) -> void:
 	var idx := Assets.tile_index(map.tile_name(cell))
@@ -188,6 +212,16 @@ func _on_flag_changed(_flag: String, _value: Variant) -> void:
 		return
 	for cell in map.apply_overrides(GameState.get_flag):
 		_paint_cell(cell)
+	_apply_tint()
+	# Tide Call can flood the ground under the party: step back to dry land.
+	var lead := leader()
+	if lead and not map.is_walkable(MapData.feet_to_cell(lead.global_position)):
+		var dry := _nearest_dry(MapData.feet_to_cell(lead.global_position))
+		lead.place_at(dry, lead.facing)
+		_last_safe = dry
+		trail.reset(dry)
+		if follower():
+			follower().place_at(dry, follower().facing)
 	for npc in npcs.duplicate():
 		if npc["def"].has("hide_if_flag") and GameState.get_flag(npc["def"]["hide_if_flag"]):
 			npcs.erase(npc)

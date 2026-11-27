@@ -285,6 +285,44 @@
     "active": "The lantern showed a Veil keyhole on a trunk in the Luggage Van. Something inside is grumpy.",
     "completed": "We calmed the Lost Luggage and found a Brass Lantern Hook."
    }
+  },
+  {
+   "id": "C02-001",
+   "name": "The River Runs Backwards",
+   "start": "locked",
+   "start_flags": [
+    "ch02_started"
+   ],
+   "complete_flags": [
+    "ch02_song_quest_started"
+   ],
+   "reward": {
+    "dewdrops": 2
+   },
+   "journal": {
+    "active": "The river below Bandar Senja is flowing the wrong way.",
+    "completed": "The Kingfisher sisters say Nenek Arus is forgetting the Tide Song."
+   }
+  },
+  {
+   "id": "C02-002",
+   "name": "The Tide Song",
+   "start": "locked",
+   "start_flags": [
+    "ch02_song_quest_started"
+   ],
+   "complete_flags": [
+    "ch02_verse_1",
+    "ch02_verse_2",
+    "ch02_verse_3"
+   ],
+   "reward": {
+    "dewdrops": 3
+   },
+   "journal": {
+    "active": "Find the three verses of the Tide Song. Pak Lumpur in the Mangrove Walk (east of the landing) has the first. Old Pole in Kampung Air has the second. The third is somewhere at the Sunken Jetty.",
+    "completed": "We have all three verses of the Tide Song."
+   }
   }
  ]
 }
