@@ -24,6 +24,7 @@ var on_enter: Array = []      # [{"scene", "if_flags", "if_not_flags"}]
 var objects: Dictionary = {}  # Vector2i -> {"id", "talk": [...]}  (interactable solid tiles)
 var overrides: Array = []     # [{"if_flags", "tile", "cells": [Vector2i]}]
 var triggers: Array = []      # [{"cells": [Vector2i], "scene", "if_flags", "if_not_flags"}]
+var no_autosave := false
 var movables: Dictionary = {}  # Vector2i -> tile name (crates Root Grip can pull)
 var _override_tiles: Dictionary = {}  # Vector2i -> tile name currently replaced
 
@@ -52,6 +53,7 @@ static func load_map(map_id: String) -> MapData:
 	m.id = d.get("id", map_id)
 	m.name = d.get("name", map_id)
 	m.status = d.get("status", "")
+	m.no_autosave = d.get("no_autosave", false)
 	m.width = int(d.get("width", 0))
 	m.height = int(d.get("height", 0))
 	m.rows = PackedStringArray(d.get("rows", []))

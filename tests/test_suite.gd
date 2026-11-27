@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 16
+const SECTIONS := 17
 
 
 func check(cond: bool, label: String) -> void:
@@ -82,6 +82,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 1 part B: the Clockkeeper's parcels")
 	await _test_chapter1_b(gs, im)
+
+	print("Chapter 1 part C: the Veil train and the ending")
+	await _test_chapter1_c(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1107,12 +1110,12 @@ func _test_statuses() -> void:
 	var cb := Combat.new()
 	cb.setup([a], [b, c])
 	check(cb.begin_round() == ["a", "b", "c"], "SPD order")
-	Combat.add_status(a, "slow", 3)
+	Combat.add_status(a, "slow", 3, true)
 	check(cb.begin_round() == ["b", "a", "c"], "Slow cuts SPD by 30% (12 -> 8.4)")
 	c["haste"] = true
 	check(cb.begin_round()[0] == "c" and not c["haste"], "Green Light: a hastened ally acts first next round, once")
 	Combat.tick_status(a)
-	check(int(a["status"]["slow"]) == 3, "a status doesn't count down on the turn it lands")
+	check(int(a["status"]["slow"]) == 3, "a self-applied status doesn't count down on the turn it lands")
 	Combat.tick_status(a)
 	Combat.tick_status(a)
 	Combat.tick_status(a)
@@ -1323,3 +1326,177 @@ func _run_battle_with(scene: Node, im: Node, prefs: Array) -> Array[String]:
 			battle._menu_done.emit(v)
 		await tree.process_frame
 	return out
+
+
+func _test_chapter1_c(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_started", "ch01_arrived_bandar_senja", "ch01_parcels_quest_started",
+			"ch01_parcels_returned", "ch01_moth_monarch_defeated", "ch01_guardian_bloom_learned", "ch01_tickets_obtained", "lantern_obtained"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	for k in ["item_veil_ticket", "item_blank_punched_ticket", "item_lantern", "equip_moth_wing_charm"]:
+		gs.add_key_item(k)
+	gs.gain_xp("reno", 160)
+	gs.gain_xp("lumi", 160)
+	gs.set_spawn("BS-02", "from_platform")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 1)), "up")
+	await _press_for("move_up", 12)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BS-06" and im.current_mode() == im.Mode.DIALOGUE, "C08 plays on Platform 2")
+	await _finish_dialogue(im)
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "VT-01" and gs.get_flag("ch01_veil_train_entered"), "C08: aboard the Veil train")
+	var auto: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(saves.save_dir + "autosave.json"))
+	check(auto["state"]["map_id"] == "BS-06", "autosave before departure, none inside the train")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.quest_state("C01-006") == "active", "C01-006 Tickets, Please begins")
+
+	# VT-01: Memory Moths carry the first slip.
+	await _talk(scene, Vector2i(11, 4), im, 0)
+	check(not gs.get_flag("ch01_passenger_1_restored"), "no slip yet: nothing to give")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(21, 6)), "right")
+	await _press_for("move_right", 30)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:spirit_cyclone", "attack"])
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_slip_chalk"), "the Memory Moths drop the chalk slip")
+	await _talk(scene, Vector2i(11, 4), im, 0)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_passenger_1_restored") and not gs.has_key_item("item_slip_chalk"), "PZ-107: the teacher gets her destination back")
+
+	# VT-02: the dining car.
+	scene.warp("VT-02", "from_third")
+	await _wait(2)
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(28, 6)), "right")
+	await _press_for("move_right", 30)
+	blog = await _run_battle_with(scene, im, ["team:spirit_cyclone", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("dodge")), "the dining car fight ran")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(15, 4), im, 2)
+	check(not gs.get_flag("ch01_passenger_2_restored"), "PZ-107: a wrong slip doesn't fit, no penalty")
+	await _talk(scene, Vector2i(15, 4), im, 1)
+	check(gs.get_flag("ch01_passenger_2_restored"), "PZ-107: the grandmother remembers her grandson")
+
+	# VT-03: the roof, Leaf Leap and Gentle Float.
+	scene.warp("VT-03", "from_dining")
+	await _wait(2)
+	await _finish_dialogue(im)
+	for x in [11, 21]:
+		scene.leader().place_at(MapData.cell_to_feet(Vector2i(x, 5)), "right")
+		await tree.physics_frame
+		await _tap("confirm")
+		await tree.create_timer(0.7).timeout
+	check(_cell_of(scene.leader()) == Vector2i(24, 5), "PZ-106: two Leaf Leaps across the carriage gaps")
+	await _press_for("move_right", 100)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_gentle_float_unlocked"), "Gentle Float unlocked on the roof")
+	await _face_and_press(scene, Vector2i(31, 5), "right", im)
+	check(im.current_mode() == im.Mode.DIALOGUE, "the wide gap is too far for Reno")
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(31, 5), "right", im)
+	await tree.create_timer(0.7).timeout
+	check(_cell_of(scene.leader()) == Vector2i(36, 5) and scene.leader().member_id == "lumi", "PZ-106: Gentle Float crosses four tiles")
+	await _tap("swap")
+	await _talk(scene, Vector2i(42, 4), im)
+	check(gs.has_key_item("item_slip_cloth"), "the cloth slip is on the roof")
+	scene.warp("VT-02", "from_roof")
+	await _talk(scene, Vector2i(23, 7), im, 2)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_passenger_3_restored") and gs.get_flag("ch01_guards_van_unlocked"), "three destinations back: the Guard's Van opens")
+	check(gs.quest_state("C01-006") in ["completed", "rewarded"] and gs.quest_state("C01-007") == "active", "C01-006 done, C01-007 begins")
+
+	# VT-04: the optional lantern keyhole and Lost Luggage.
+	scene.warp("VT-04", "from_roof")
+	await _face_and_press(scene, Vector2i(17, 4), "up", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(scene.npcs.any(func(n: Dictionary) -> bool: return n["def"]["id"] == "lost_luggage"), "PZ-108: the lantern reveals the Lost Luggage")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(19, 7)), "up")
+	await _press_for("move_up", 20)
+	await _finish_dialogue(im)
+	blog = await _run_battle_with(scene, im, ["attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("telegraph Snap Shut")), "Lost Luggage telegraphs Snap Shut")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_lost_luggage_defeated") and gs.equip_bonus("lumi").get("mag", 0) == 3, "C01-S03: Brass Lantern Hook (MAG +3)")
+
+	# VT-05: the Forgotten Conductor.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(37, 6)), "right")
+	await _press_for("move_right", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "VT-05", "into the Guard's Van")
+	auto = JSON.parse_string(FileAccess.get_file_as_string(saves.save_dir + "autosave.json"))
+	check(auto["state"]["map_id"] == "VT-05", "autosave at the Guard's Van door (pre-boss)")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(17, 7)), "right")
+	await _press_for("move_right", 30)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Conductor fight starts")
+	var battle: Battle = null
+	for c in scene.get_children():
+		if c is Battle:
+			battle = c
+	blog = await _run_battle_with(scene, im, ["attack"])
+	check(blog.any(func(l: String) -> bool: return l == "phase 2"), "the Conductor reaches Final Stop")
+	check(blog.any(func(l: String) -> bool: return l.contains("telegraph Final Stop")), "Final Stop is announced a round ahead")
+	check(blog.any(func(l: String) -> bool: return l.contains("status fog")), "Where Are You Going? fogs a hero")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch01_conductor_calmed") and not gs.has_key_item("item_blank_punched_ticket"), "C10: the Conductor is calmed at the story threshold")
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "VT-06", "C11: the Veil Halt")
+	await _finish_dialogue(im)
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(5)
+	check(scene.map.id == "BS-06", "dawn at Platform 2")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	for i in 240:
+		if tree.current_scene != null and tree.current_scene != scene:
+			break
+		await tree.process_frame
+	var need := ["ch01_veil_train_entered", "ch01_gentle_float_unlocked", "ch01_passenger_1_restored", "ch01_passenger_2_restored", "ch01_passenger_3_restored",
+		"ch01_guards_van_unlocked", "ch01_conductor_calmed", "ch01_lumi_origin_glimpsed", "river_route_unlocked", "chapter_01_completed", "chapter_02_unlocked"]
+	check(need.all(gs.get_flag), "every end-of-chapter flag is set")
+	check(gs.has_key_item("item_conductors_whistle"), "the Conductor's Whistle")
+	check(["C01-005", "C01-006", "C01-007", "C01-008"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C01-005 to C01-008 are finished")
+	check(tree.current_scene != null and tree.current_scene.name == "EndOfContent", "the Chapter 1 complete screen shows")
+	gs.new_game()
+	saves.load_slot("auto")
+	check(gs.get_flag("chapter_01_completed") and gs.data["map_id"] == "BS-06", "the chapter ending is autosaved")
+	if is_instance_valid(scene):
+		if scene.is_inside_tree():
+			root.remove_child(scene)
+		scene.free()
+	var end_screen := tree.current_scene
+	if end_screen:
+		root.remove_child(end_screen)
+		end_screen.free()
+	saves.delete_all()
+	_sections_done += 1

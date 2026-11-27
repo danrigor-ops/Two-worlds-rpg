@@ -341,7 +341,7 @@ func _team_support(t: Dictionary) -> void:
 	var pct := float(t.get("heal_pct_miss", 10)) if "miss" in judgements else float(t.get("heal_pct", 15))
 	var parts: PackedStringArray = []
 	for h in combat.side("hero"):
-		Combat.add_status(h, t.get("applies", "shielded"), int(t.get("turns", 2)))
+		Combat.add_status(h, t.get("applies", "shielded"), int(t.get("turns", 2)), true)
 		var healed := combat.heal(h, roundi(h["max_hp"] * pct / 100.0))
 		parts.append("%s +%d HP" % [h["name"], healed])
 	_log("bloom %s %d%%" % [",".join(judgements), int(pct)])
@@ -398,6 +398,8 @@ func _check_phase(u: Dictionary) -> void:
 	if idx <= int(_phase.get(u["id"], 0)):
 		return
 	_phase[u["id"]] = idx
+	u["turn_in_phase"] = 0
+	u.erase("charging")
 	var ph: Dictionary = phases[idx]
 	_log("phase %d" % idx)
 	if ph.has("enter_text"):
@@ -425,7 +427,11 @@ func _enemy_turn(u: Dictionary) -> void:
 		u.erase("charging")
 	else:
 		var attacks := _current_attacks(u)
-		atk = attacks[(combat.round_number - 1 + int(u.get("offset", 0))) % attacks.size()]
+		# Moves cycle in order, starting again whenever a new phase begins,
+		# so a phase's opening move (Final Stop's warning) always comes first.
+		var n := int(u.get("turn_in_phase", 0))
+		u["turn_in_phase"] = n + 1
+		atk = attacks[(n + int(u.get("offset", 0))) % attacks.size()]
 		if atk.get("telegraph", false):
 			# Telegraphed: announced now, lands on its next turn. Guard or dodge it.
 			u["charging"] = atk

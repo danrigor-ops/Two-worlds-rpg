@@ -1,0 +1,126 @@
+{
+ "id": "VT-02",
+ "name": "Veil Train: Dining Car",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 12,
+ "no_autosave": true,
+ "legend": {
+  ".": "floor",
+  "#": "wall",
+  "S": "bus_seat",
+  "D": "door",
+  "c": "counter",
+  "t": "trunk"
+ },
+ "rows": [
+  "########################################",
+  "########################################",
+  "#......................................#",
+  "#.....cc......cc......cc......cc.......#",
+  "#......................................#",
+  "#......................................#",
+  "D......................................D",
+  "#......................................#",
+  "#.....cc......cc......cc......cc.......#",
+  "#......................................#",
+  "########################################",
+  "########################################"
+ ],
+ "spawns": {
+  "start": {
+   "x": 1,
+   "y": 6,
+   "facing": "right"
+  },
+  "from_third": {
+   "x": 1,
+   "y": 6,
+   "facing": "right"
+  },
+  "from_roof": {
+   "x": 38,
+   "y": 6,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_third",
+   "x": 0,
+   "y": 6,
+   "to_map": "VT-01",
+   "to_spawn": "from_dining"
+  },
+  {
+   "id": "to_roof",
+   "x": 39,
+   "y": 6,
+   "to_map": "VT-03",
+   "to_spawn": "from_dining"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "grandmother",
+   "character": "grandmother",
+   "x": 15,
+   "y": 4,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_passenger_2_restored"
+     ],
+     "scene": "grandmother_after"
+    },
+    {
+     "scene": "C09_grandmother"
+    }
+   ]
+  },
+  {
+   "id": "cloth_man",
+   "character": "cloth_man",
+   "x": 23,
+   "y": 7,
+   "facing": "up",
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_passenger_3_restored"
+     ],
+     "scene": "cloth_man_after"
+    },
+    {
+     "scene": "C09_cloth_man"
+    }
+   ]
+  },
+  {
+   "id": "vt02_moth",
+   "character": "memory_moth",
+   "x": 31,
+   "y": 6,
+   "facing": "left",
+   "hide_if_flag": "vt02_moth_beaten",
+   "encounter": {
+    "id": "vt02_moth",
+    "outro_scene": "vt02_moth_beaten"
+   }
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C09_dining",
+   "if_not_flags": [
+    "ch01_dining_seen"
+   ]
+  }
+ ],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "movables": []
+}

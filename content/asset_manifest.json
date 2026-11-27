@@ -561,6 +561,213 @@
     "accent": "#e04a3a",
     "legs": "#4a4a4a"
    }
+  },
+  "teacher_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#d6a57a",
+    "body": "#c9d3f0",
+    "accent": "#5a7a9e",
+    "legs": "#3a4a6a"
+   }
+  },
+  "grandmother_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#d8d4cc",
+    "skin": "#c08a5e",
+    "body": "#8f6bb0",
+    "accent": "#e8b84a",
+    "legs": "#4a3466"
+   }
+  },
+  "cloth_man_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#1d1a2a",
+    "skin": "#a8714a",
+    "body": "#6b8f4a",
+    "accent": "#c94f4f",
+    "legs": "#3a2a1a"
+   }
+  },
+  "porter_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c98d5a",
+    "body": "#3a3a5a",
+    "accent": "#e8b84a",
+    "legs": "#2a2a40"
+   }
+  },
+  "memory_moth_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "moth",
+    "hair": "#c9b8f0",
+    "skin": "#d8d0f8",
+    "body": "#4a3a7a",
+    "accent": "#8af0e0",
+    "legs": "#4a3a7a"
+   }
+  },
+  "fog_porter_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#9a9ab8",
+    "skin": "#b8b8d0",
+    "body": "#6a6a8a",
+    "accent": "#e8b84a",
+    "legs": "#6a6a8a"
+   }
+  },
+  "lost_luggage_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#e8b84a",
+    "skin": "#8a6a48",
+    "body": "#6b4a2f",
+    "accent": "#f4ecd2",
+    "legs": "#6b4a2f"
+   }
+  },
+  "conductor_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "conductor",
+    "hair": "#2a2a40",
+    "skin": "#f2d45c",
+    "body": "#3a3a5a",
+    "accent": "#8a6ad8",
+    "legs": "#2a2a40"
+   }
+  },
+  "slip_marker_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#c9f0e8",
+    "skin": "#c9f0e8",
+    "body": "#c9f0e8",
+    "accent": "#8a6ad8",
+    "legs": "#c9f0e8"
+   }
   }
  },
  "characters": {
@@ -587,6 +794,15 @@
   "ticket_moth": "ticket_moth_overworld",
   "paper_moth_monarch": "paper_moth_monarch_overworld",
   "dust_bundle": "dust_bundle_overworld",
-  "signal_flicker": "signal_flicker_overworld"
+  "signal_flicker": "signal_flicker_overworld",
+  "teacher": "teacher_overworld",
+  "grandmother": "grandmother_overworld",
+  "cloth_man": "cloth_man_overworld",
+  "porter": "porter_overworld",
+  "memory_moth": "memory_moth_overworld",
+  "fog_porter": "fog_porter_overworld",
+  "lost_luggage": "lost_luggage_overworld",
+  "conductor": "conductor_overworld",
+  "slip_marker": "slip_marker_overworld"
  }
 }

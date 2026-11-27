@@ -43,6 +43,11 @@
    "x": 24,
    "y": 18,
    "facing": "up"
+  },
+  "dawn": {
+   "x": 20,
+   "y": 12,
+   "facing": "up"
   }
  },
  "doors": [
@@ -59,8 +64,7 @@
    "x": 20,
    "y": 8,
    "lines": [
-    "PLATFORM 2. Evening service.",
-    "(The evening train arrives in the next part of Chapter 1.)"
+    "PLATFORM 2. Evening service to Tanjung Lampu."
    ]
   }
  ],
@@ -68,6 +72,25 @@
  "objects": [],
  "overrides": [],
  "triggers": [],
- "on_enter": [],
+ "on_enter": [
+  {
+   "scene": "C11_dawn",
+   "if_flags": [
+    "ch01_conductor_calmed"
+   ],
+   "if_not_flags": [
+    "chapter_01_completed"
+   ]
+  },
+  {
+   "scene": "C08_board",
+   "if_flags": [
+    "ch01_tickets_obtained"
+   ],
+   "if_not_flags": [
+    "ch01_veil_train_entered"
+   ]
+  }
+ ],
  "movables": []
 }

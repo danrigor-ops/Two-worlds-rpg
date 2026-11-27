@@ -6,6 +6,7 @@ const FADE_TIME := 0.25
 const INTERACT_REACH := 12.0
 const CAMERA_LIFT := Vector2(0, -12)
 const MAX_LEAP := 2        # Leaf Leap clears up to this many pit tiles
+const MAX_FLOAT := 4       # Gentle Float (Lumi, Chapter 1) crosses wider gaps
 const LEAP_TIME := 0.4
 
 var map: MapData
@@ -139,6 +140,8 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	for def in map.npcs:
 		if def.has("hide_if_flag") and GameState.get_flag(def["hide_if_flag"]):
 			continue
+		if def.has("show_if_flag") and not GameState.get_flag(def["show_if_flag"]):
+			continue
 		if def.has("member") and GameState.has_member(def["member"]):
 			continue
 		var npc := _spawn_member(def.get("member", def.get("character", "")), MapData.cell_to_feet(def["cell"]), def.get("facing", "down"))
@@ -189,6 +192,11 @@ func _on_flag_changed(_flag: String, _value: Variant) -> void:
 		if npc["def"].has("hide_if_flag") and GameState.get_flag(npc["def"]["hide_if_flag"]):
 			npcs.erase(npc)
 			npc["node"].queue_free()
+	for def in map.npcs:
+		# Something revealed mid-scene (the lantern's keyhole) steps out.
+		if def.has("show_if_flag") and GameState.get_flag(def["show_if_flag"]) and not npcs.any(func(n: Dictionary) -> bool: return n["def"] == def) \
+				and not (def.has("hide_if_flag") and GameState.get_flag(def["hide_if_flag"])):
+			npcs.append({"node": _spawn_member(def.get("character", ""), MapData.cell_to_feet(def["cell"]), def.get("facing", "down")), "def": def})
 
 
 func _pick_start(spawn_name: String) -> Dictionary:
@@ -317,15 +325,17 @@ func _try_leap(lead: PartyMember) -> bool:
 	var from := MapData.feet_to_cell(lead.global_position)
 	var c := from + dir
 	var pits := 0
-	while map.is_pit(c) and pits <= MAX_LEAP:
+	while map.is_pit(c) and pits <= MAX_FLOAT:
 		pits += 1
 		c += dir
 	if pits == 0:
 		return false
-	if lead.member_id != "reno":
+	var floating := lead.member_id == "lumi" and GameState.get_flag("ch01_gentle_float_unlocked")
+	var reach := MAX_FLOAT if floating else MAX_LEAP
+	if lead.member_id == "lumi" and not floating:
 		dialogue.play_scene("leap_lumi")
-	elif pits > MAX_LEAP or not map.is_walkable(c) or map.is_pit(c):
-		dialogue.play_scene("leap_too_far")
+	elif pits > reach or not map.is_walkable(c) or map.is_pit(c):
+		dialogue.play_scene("float_too_far" if floating else "leap_too_far")
 	else:
 		_leap(lead, MapData.cell_to_feet(c))
 	return true
@@ -478,7 +488,18 @@ func _on_story_event(name: String) -> void:
 		"travel":
 			await dialogue.finished
 			await _wait_for_explore()
+			if parts.size() > 3 and parts[3] == "save_first":
+				Saves.autosave()
 			travel(parts[1], parts[2])
+			return
+		"chapter_end":
+			await dialogue.finished
+			await _wait_for_explore()
+			Saves.autosave()
+			var t := create_tween()
+			t.tween_property(fade, "modulate:a", 1.0, 0.6)
+			await t.finished
+			get_tree().change_scene_to_file.call_deferred("res://scenes/end_of_content.tscn")
 			return
 		"shop":
 			await dialogue.finished
@@ -620,7 +641,9 @@ func travel(map_id: String, spawn: String, notes: Array = []) -> void:
 	InputManager.pop_mode(InputManager.Mode.TRANSITION)
 	transitioning = false
 	# Safe moment to autosave: the transition is over and nothing is mid-change.
-	Saves.autosave()
+	# Inside the Veil train there's no saving between scenes (Chapter 1 rule).
+	if not map.no_autosave:
+		Saves.autosave()
 	if not notes.is_empty():
 		dialogue.show_lines(notes)
 	_run_on_enter()

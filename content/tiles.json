@@ -324,6 +324,34 @@
    "color": "#d8d0b8",
    "accent": "#9a9078",
    "pattern": "nest"
+  },
+  "roof": {
+   "index": 46,
+   "solid": false,
+   "color": "#4a4466",
+   "accent": "#3a3456",
+   "pattern": "planks"
+  },
+  "veil_sky": {
+   "index": 47,
+   "solid": true,
+   "color": "#2a2050",
+   "accent": "#8a6ad8",
+   "pattern": "speckle"
+  },
+  "halt": {
+   "index": 48,
+   "solid": false,
+   "color": "#5a5476",
+   "accent": "#8a84a6",
+   "pattern": "checker"
+  },
+  "trunk": {
+   "index": 49,
+   "solid": true,
+   "color": "#6b4a2f",
+   "accent": "#e8b84a",
+   "pattern": "box"
   }
  }
 }

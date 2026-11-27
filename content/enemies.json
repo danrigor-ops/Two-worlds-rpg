@@ -227,6 +227,165 @@
      "enter_text": "The Monarch shrieks. Paper flies everywhere: it's calling its moths!"
     }
    ]
+  },
+  "memory_moth": {
+   "name": "Memory Moth",
+   "character": "memory_moth",
+   "stats": {
+    "level": 5,
+    "max_hp": 50,
+    "atk": 7,
+    "def": 8,
+    "mag": 15,
+    "res": 13,
+    "spd": 15
+   },
+   "xp": 14,
+   "attacks": [
+    {
+     "name": "Forget-Me Dust",
+     "kind": "magical",
+     "mult": 0.6,
+     "applies": "fog",
+     "turns": 1
+    }
+   ]
+  },
+  "fog_porter": {
+   "name": "Fog Porter",
+   "character": "fog_porter",
+   "stats": {
+    "level": 5,
+    "max_hp": 72,
+    "atk": 15,
+    "def": 12,
+    "mag": 6,
+    "res": 9,
+    "spd": 8
+   },
+   "xp": 16,
+   "attacks": [
+    {
+     "name": "Heavy Trunk",
+     "kind": "physical",
+     "mult": 1.3
+    }
+   ]
+  },
+  "lost_luggage": {
+   "name": "Lost Luggage",
+   "character": "lost_luggage",
+   "stats": {
+    "level": 6,
+    "max_hp": 90,
+    "atk": 14,
+    "def": 16,
+    "mag": 4,
+    "res": 8,
+    "spd": 4
+   },
+   "xp": 30,
+   "attacks": [
+    {
+     "name": "Snap Shut",
+     "kind": "physical",
+     "mult": 1.4,
+     "telegraph": true,
+     "telegraph_text": "The trunk's lid creaks open wide... (Guard or dodge!)"
+    }
+   ]
+  },
+  "forgotten_conductor": {
+   "name": "The Forgotten Conductor",
+   "character": "conductor",
+   "stats": {
+    "level": 6,
+    "max_hp": 420,
+    "atk": 17,
+    "def": 14,
+    "mag": 19,
+    "res": 16,
+    "spd": 11
+   },
+   "xp": 80,
+   "immune": [
+    "slow",
+    "fog"
+   ],
+   "end_below": 0.15,
+   "attacks": [
+    {
+     "name": "Ticket Punch",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Ticket Punch",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Where Are You Going?",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Ticket Punch",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Where Are You Going?",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      },
+      {
+       "name": "Last Call",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      }
+     ],
+     "enter_text": "The carriage plunges into a tunnel. Everything goes dark!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Final Stop",
+       "kind": "magical",
+       "mult": 1.6,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "Conductor: Next stop... nowhere. (Final Stop lands next turn. Guard!)"
+      },
+      {
+       "name": "Ticket Punch",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Last Call",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      }
+     ],
+     "enter_text": "Conductor: Final stop. Everyone off. Everyone... nowhere."
+    }
+   ]
   }
  },
  "encounters": {
@@ -287,6 +446,51 @@
     "item_parcel_b",
     "item_blank_punched_ticket",
     "equip_moth_wing_charm"
+   ]
+  },
+  "vt01_moths": {
+   "enemies": [
+    "memory_moth",
+    "memory_moth"
+   ],
+   "win_key_items": [
+    "item_slip_chalk"
+   ]
+  },
+  "vt02_moth": {
+   "enemies": [
+    "memory_moth",
+    "fog_porter"
+   ],
+   "win_key_items": [
+    "item_slip_laugh"
+   ]
+  },
+  "vt04_porter": {
+   "enemies": [
+    "fog_porter"
+   ]
+  },
+  "lost_luggage": {
+   "enemies": [
+    "lost_luggage"
+   ],
+   "can_escape": false,
+   "win_flags": [
+    "ch01_lost_luggage_defeated"
+   ],
+   "win_key_items": [
+    "equip_brass_lantern_hook"
+   ]
+  },
+  "conductor_boss": {
+   "enemies": [
+    "forgotten_conductor"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch01_conductor_calmed"
    ]
   }
  }

@@ -1,0 +1,101 @@
+{
+ "id": "VT-01",
+ "name": "Veil Train: Third-Class Carriage",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 12,
+ "no_autosave": true,
+ "legend": {
+  ".": "floor",
+  "#": "wall",
+  "S": "bus_seat",
+  "D": "door",
+  "c": "counter",
+  "t": "trunk"
+ },
+ "rows": [
+  "########################################",
+  "########################################",
+  "#......................................#",
+  "#..S...S...S...S...S...S...S...S...S...#",
+  "#......................................#",
+  "#......................................#",
+  "#......................................D",
+  "#......................................#",
+  "#..S...S...S...S...S...S...S...S...S...#",
+  "#......................................#",
+  "########################################",
+  "########################################"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 6,
+   "facing": "right"
+  },
+  "from_platform": {
+   "x": 2,
+   "y": 6,
+   "facing": "right"
+  },
+  "from_dining": {
+   "x": 38,
+   "y": 6,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_dining",
+   "x": 39,
+   "y": 6,
+   "to_map": "VT-02",
+   "to_spawn": "from_third"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "teacher",
+   "character": "teacher",
+   "x": 11,
+   "y": 4,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_passenger_1_restored"
+     ],
+     "scene": "teacher_after"
+    },
+    {
+     "scene": "C09_teacher"
+    }
+   ]
+  },
+  {
+   "id": "vt01_moths",
+   "character": "memory_moth",
+   "x": 24,
+   "y": 6,
+   "facing": "left",
+   "hide_if_flag": "vt01_moths_beaten",
+   "encounter": {
+    "id": "vt01_moths",
+    "outro_scene": "vt01_moths_beaten"
+   }
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C09_carriage",
+   "if_not_flags": [
+    "ch01_carriage_seen"
+   ]
+  }
+ ],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "movables": []
+}

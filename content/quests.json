@@ -207,6 +207,84 @@
     "active": "A 1951 parcel tag on the goods shed's high shelf has the same emblem as Reno's token. Lumi could read it with Memory Touch.",
     "completed": "Footsteps on a platform, and a woman's voice: \"Mind the gap, little one.\""
    }
+  },
+  {
+   "id": "C01-005",
+   "name": "The Last Train",
+   "start": "locked",
+   "start_flags": [
+    "ch01_tickets_obtained"
+   ],
+   "complete_flags": [
+    "ch01_veil_train_entered"
+   ],
+   "journal": {
+    "active": "Board the evening train at Platform 2 (north door of the Station Hall).",
+    "completed": "We boarded. Then the fog came."
+   }
+  },
+  {
+   "id": "C01-006",
+   "name": "Tickets, Please",
+   "start": "locked",
+   "start_flags": [
+    "ch01_veil_train_entered"
+   ],
+   "complete_flags": [
+    "ch01_passenger_1_restored",
+    "ch01_passenger_2_restored",
+    "ch01_passenger_3_restored"
+   ],
+   "journal": {
+    "active": "The passengers have lost where they were going. Memory Moths carry glowing slips. Get them back and give each slip to the passenger it belongs to.",
+    "completed": "Three passengers remember where they're going. The Guard's Van is open."
+   }
+  },
+  {
+   "id": "C01-007",
+   "name": "The Forgotten Conductor",
+   "start": "locked",
+   "start_flags": [
+    "ch01_guards_van_unlocked"
+   ],
+   "complete_flags": [
+    "ch01_conductor_calmed"
+   ],
+   "journal": {
+    "active": "Someone in the Guard's Van is collecting everyone's destinations. Our stamped tickets should keep ours safe.",
+    "completed": "The Conductor remembered he used to carry people home."
+   }
+  },
+  {
+   "id": "C01-008",
+   "name": "The Veil Halt",
+   "start": "locked",
+   "start_flags": [
+    "ch01_conductor_calmed"
+   ],
+   "complete_flags": [
+    "chapter_01_completed"
+   ],
+   "journal": {
+    "active": "The train has stopped at a ghost platform.",
+    "completed": "The river route is open. The rails forget; the river remembers."
+   }
+  },
+  {
+   "id": "C01-S03",
+   "name": "Unclaimed Luggage",
+   "optional": true,
+   "start": "locked",
+   "start_flags": [
+    "pz108_lantern_keyhole_found"
+   ],
+   "complete_flags": [
+    "ch01_lost_luggage_defeated"
+   ],
+   "journal": {
+    "active": "The lantern showed a Veil keyhole on a trunk in the Luggage Van. Something inside is grumpy.",
+    "completed": "We calmed the Lost Luggage and found a Brass Lantern Hook."
+   }
   }
  ]
 }
