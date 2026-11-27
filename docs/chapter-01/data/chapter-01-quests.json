@@ -1,0 +1,184 @@
+{
+  "quests": [
+    {
+      "id": "C01-001",
+      "name": "Human Money",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "prologue_completed",
+      "completeFlag": "ch01_bus_fare_earned",
+      "reward": {
+        "humanCents": 50
+      }
+    },
+    {
+      "id": "C01-002",
+      "name": "The Bus to Bandar Senja",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_bus_fare_earned",
+      "completeFlag": "ch01_arrived_bandar_senja",
+      "reward": {
+        "autosave": true,
+        "costHumanCents": 30
+      }
+    },
+    {
+      "id": "C01-003",
+      "name": "The Stationmaster's Parcels",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_arrived_bandar_senja",
+      "completeFlags": [
+        "ch01_parcel_a_found",
+        "ch01_parcel_b_found",
+        "ch01_parcel_c_found",
+        "ch01_parcels_returned"
+      ],
+      "reward": {
+        "items": {
+          "item_evening_ticket": 2,
+          "item_kaya_toast": 2
+        },
+        "setFlags": [
+          "ch01_tickets_obtained"
+        ]
+      }
+    },
+    {
+      "id": "C01-004",
+      "name": "The Paper Moth Monarch",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_parcels_quest_started",
+      "completeFlag": "ch01_moth_monarch_defeated",
+      "reward": {
+        "items": {
+          "item_parcel_b": 1,
+          "item_blank_punched_ticket": 1,
+          "equip_moth_wing_charm": 1
+        },
+        "skills": [
+          "skill_guardian_bloom"
+        ]
+      }
+    },
+    {
+      "id": "C01-005",
+      "name": "The Last Train",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_tickets_obtained",
+      "completeFlag": "ch01_veil_train_entered",
+      "reward": {
+        "autosave": true
+      }
+    },
+    {
+      "id": "C01-006",
+      "name": "Tickets, Please",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_veil_train_entered",
+      "completeFlags": [
+        "ch01_passenger_1_restored",
+        "ch01_passenger_2_restored",
+        "ch01_passenger_3_restored"
+      ],
+      "reward": {
+        "setFlags": [
+          "ch01_guards_van_unlocked"
+        ]
+      }
+    },
+    {
+      "id": "C01-007",
+      "name": "The Forgotten Conductor",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_guards_van_unlocked",
+      "completeFlag": "ch01_conductor_calmed",
+      "reward": {
+        "items": {
+          "item_conductors_whistle": 1
+        },
+        "xp": 80
+      }
+    },
+    {
+      "id": "C01-008",
+      "name": "The Veil Halt",
+      "status": "WORKING_PROPOSAL",
+      "optional": false,
+      "prerequisiteFlag": "ch01_conductor_calmed",
+      "completeFlags": [
+        "ch01_lumi_origin_glimpsed",
+        "river_route_unlocked",
+        "chapter_01_completed"
+      ],
+      "reward": {
+        "setFlags": [
+          "chapter_02_unlocked"
+        ],
+        "autosave": true
+      }
+    },
+    {
+      "id": "C01-S01",
+      "name": "A Postcard Home",
+      "status": "WORKING_PROPOSAL",
+      "optional": true,
+      "prerequisiteFlag": "ch01_started",
+      "completeFlag": "ch01_postcard_posted",
+      "reward": {
+        "items": {
+          "item_banana_fritter": 2
+        },
+        "humanCents": 20
+      }
+    },
+    {
+      "id": "C01-S02",
+      "name": "The Dead-Letter Shelf",
+      "status": "WORKING_PROPOSAL",
+      "optional": true,
+      "prerequisiteFlag": "ch01_arrived_bandar_senja",
+      "completeFlag": "ch01_dead_letter_tag_read",
+      "reward": {
+        "memoryAlbum": [
+          "album_railway_badge"
+        ]
+      }
+    },
+    {
+      "id": "C01-S03",
+      "name": "Unclaimed Luggage",
+      "status": "WORKING_PROPOSAL",
+      "optional": true,
+      "prerequisiteFlag": "ch01_veil_train_entered",
+      "completeFlag": "ch01_lost_luggage_defeated",
+      "reward": {
+        "items": {
+          "equip_brass_lantern_hook": 1
+        }
+      }
+    },
+    {
+      "id": "C01-S04",
+      "name": "Two Extra Passengers",
+      "status": "WORKING_PROPOSAL",
+      "optional": true,
+      "prerequisiteFlag": "ch01_veil_train_entered",
+      "completeFlags": [
+        "ch01_extra_passenger_1_restored",
+        "ch01_extra_passenger_2_restored"
+      ],
+      "reward": {
+        "items": {
+          "item_herbal_tea": 2
+        }
+      }
+    }
+  ],
+  "note": "Chapter 1 proposal data, NEEDS_APPROVAL. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+}

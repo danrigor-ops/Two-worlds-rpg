@@ -1,0 +1,377 @@
+{
+  "formula": "04_GAMEPLAY_SYSTEMS prototype formulas, deterministic, no variance",
+  "enemies": [
+    {
+      "id": "EN-101",
+      "name": "Ticket Moth",
+      "level": 3,
+      "stats": {
+        "hp": 40,
+        "atk": 8,
+        "def": 6,
+        "mag": 10,
+        "res": 8,
+        "spd": 13
+      },
+      "xp": 8,
+      "maps": [
+        "BS-05"
+      ],
+      "moves": [
+        {
+          "id": "move_paper_nibble",
+          "name": "Paper Nibble",
+          "kind": "magical",
+          "multiplier": 1.0,
+          "target": "single",
+          "defense": "dodge"
+        }
+      ],
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "EN-102",
+      "name": "Dust Bundle",
+      "level": 3,
+      "stats": {
+        "hp": 56,
+        "atk": 12,
+        "def": 10,
+        "mag": 3,
+        "res": 6,
+        "spd": 5
+      },
+      "xp": 9,
+      "maps": [
+        "BS-03"
+      ],
+      "moves": [
+        {
+          "id": "move_roll_over",
+          "name": "Roll Over",
+          "kind": "physical",
+          "multiplier": 1.2,
+          "target": "single",
+          "telegraphTurns": 1,
+          "defense": "guard_or_dodge"
+        }
+      ],
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "EN-103",
+      "name": "Signal Flicker",
+      "level": 4,
+      "stats": {
+        "hp": 44,
+        "atk": 6,
+        "def": 7,
+        "mag": 13,
+        "res": 12,
+        "spd": 14
+      },
+      "xp": 11,
+      "maps": [
+        "BS-05"
+      ],
+      "moves": [
+        {
+          "id": "move_red_light",
+          "name": "Red Light",
+          "kind": "status",
+          "multiplier": 0,
+          "target": "single",
+          "applies": "slow"
+        },
+        {
+          "id": "move_green_light",
+          "name": "Green Light",
+          "kind": "support",
+          "multiplier": 0,
+          "target": "ally",
+          "effect": "act_first_next_round"
+        }
+      ],
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "EN-104",
+      "name": "Fog Porter",
+      "level": 5,
+      "stats": {
+        "hp": 72,
+        "atk": 15,
+        "def": 12,
+        "mag": 6,
+        "res": 9,
+        "spd": 8
+      },
+      "xp": 16,
+      "maps": [
+        "VT-01",
+        "VT-04"
+      ],
+      "moves": [
+        {
+          "id": "move_heavy_trunk",
+          "name": "Heavy Trunk",
+          "kind": "physical",
+          "multiplier": 1.3,
+          "target": "single",
+          "defense": "dodge"
+        }
+      ],
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "EN-105",
+      "name": "Memory Moth",
+      "level": 5,
+      "stats": {
+        "hp": 50,
+        "atk": 7,
+        "def": 8,
+        "mag": 15,
+        "res": 13,
+        "spd": 15
+      },
+      "xp": 14,
+      "maps": [
+        "VT-01",
+        "VT-02",
+        "VT-03"
+      ],
+      "moves": [
+        {
+          "id": "move_forget_me_dust",
+          "name": "Forget-Me Dust",
+          "kind": "magical",
+          "multiplier": 0.6,
+          "target": "single",
+          "applies": "memory_fog"
+        }
+      ],
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "EN-106",
+      "name": "Lost Luggage",
+      "level": 6,
+      "stats": {
+        "hp": 90,
+        "atk": 14,
+        "def": 16,
+        "mag": 4,
+        "res": 8,
+        "spd": 4
+      },
+      "xp": 30,
+      "maps": [
+        "VT-04"
+      ],
+      "moves": [
+        {
+          "id": "move_snap_shut",
+          "name": "Snap Shut",
+          "kind": "physical",
+          "multiplier": 1.4,
+          "target": "single",
+          "telegraphTurns": 1,
+          "defense": "guard_or_dodge"
+        }
+      ],
+      "status": "WORKING_PROPOSAL",
+      "optional": true,
+      "canEscape": false,
+      "guaranteedDrops": [
+        "equip_brass_lantern_hook"
+      ]
+    }
+  ],
+  "bosses": [
+    {
+      "id": "BOSS-101",
+      "name": "Paper Moth Monarch",
+      "level": 4,
+      "stats": {
+        "hp": 200,
+        "atk": 9,
+        "def": 8,
+        "mag": 14,
+        "res": 11,
+        "spd": 12
+      },
+      "xp": 40,
+      "maps": [
+        "BS-05"
+      ],
+      "moves": [
+        {
+          "id": "move_paper_storm",
+          "name": "Paper Storm",
+          "kind": "magical",
+          "multiplier": 0.7,
+          "target": "all",
+          "defense": "dodge"
+        },
+        {
+          "id": "move_paper_nibble",
+          "name": "Nibble",
+          "kind": "magical",
+          "multiplier": 1.0,
+          "target": "single",
+          "defense": "dodge"
+        }
+      ],
+      "status": "WORKING_PROPOSAL",
+      "phases": [
+        {
+          "hpAbovePercent": 50,
+          "moves": [
+            "move_paper_storm",
+            "move_paper_nibble"
+          ]
+        },
+        {
+          "hpAtOrBelowPercent": 50,
+          "summon": {
+            "enemyId": "EN-101",
+            "maxActive": 1,
+            "xp": 0
+          }
+        }
+      ],
+      "immune": [
+        "slow"
+      ],
+      "canEscape": false,
+      "fixedRewards": {
+        "items": [
+          "item_parcel_b",
+          "item_blank_punched_ticket",
+          "equip_moth_wing_charm"
+        ],
+        "skills": [
+          "skill_guardian_bloom"
+        ]
+      },
+      "defeatReturnsToSnapshot": true
+    },
+    {
+      "id": "BOSS-102",
+      "name": "The Forgotten Conductor",
+      "level": 6,
+      "stats": {
+        "hp": 420,
+        "atk": 17,
+        "def": 14,
+        "mag": 19,
+        "res": 16,
+        "spd": 11
+      },
+      "xp": 80,
+      "maps": [
+        "VT-05"
+      ],
+      "moves": [
+        {
+          "id": "move_ticket_punch",
+          "name": "Ticket Punch",
+          "kind": "physical",
+          "multiplier": 1.2,
+          "target": "single",
+          "defense": "dodge"
+        },
+        {
+          "id": "move_where_are_you_going",
+          "name": "Where Are You Going?",
+          "kind": "status",
+          "multiplier": 0,
+          "target": "single",
+          "applies": "memory_fog",
+          "telegraphTurns": 0
+        },
+        {
+          "id": "move_last_call",
+          "name": "Last Call",
+          "kind": "magical",
+          "multiplier": 0.8,
+          "target": "all"
+        },
+        {
+          "id": "move_final_stop",
+          "name": "Final Stop",
+          "kind": "magical",
+          "multiplier": 1.6,
+          "target": "all",
+          "telegraphTurns": 1,
+          "defense": "guard"
+        }
+      ],
+      "status": "WORKING_PROPOSAL",
+      "phases": [
+        {
+          "name": "Tickets, Please",
+          "hpAbovePercent": 60,
+          "moves": [
+            "move_ticket_punch",
+            "move_where_are_you_going"
+          ]
+        },
+        {
+          "name": "Tunnel",
+          "hpAtOrBelowPercent": 60,
+          "moves": [
+            "move_ticket_punch",
+            "move_where_are_you_going",
+            "move_last_call"
+          ],
+          "special": "one dark round: unguardable, extended dodge window"
+        },
+        {
+          "name": "Final Stop",
+          "hpAtOrBelowPercent": 30,
+          "moves": [
+            "move_ticket_punch",
+            "move_last_call",
+            "move_final_stop"
+          ]
+        }
+      ],
+      "storyEndAtOrBelowPercent": 15,
+      "nonLethal": true,
+      "immune": [
+        "slow",
+        "memory_fog"
+      ],
+      "canEscape": false,
+      "fixedRewards": {
+        "items": [
+          "item_conductors_whistle"
+        ]
+      },
+      "defeatReturnsToSnapshot": true
+    }
+  ],
+  "dualTechs": [
+    {
+      "id": "skill_guardian_bloom",
+      "name": "Guardian Bloom",
+      "participants": [
+        "reno",
+        "lumi"
+      ],
+      "mpEach": 5,
+      "actionTokens": 2,
+      "timingCues": 2,
+      "effect": {
+        "applies": "shielded",
+        "durationTurns": 2,
+        "healPercentMaxHp": 15,
+        "healPercentOnMiss": 10
+      },
+      "status": "WORKING_PROPOSAL"
+    }
+  ],
+  "note": "Chapter 1 proposal data, NEEDS_APPROVAL. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+}

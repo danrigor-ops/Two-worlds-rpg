@@ -1,0 +1,198 @@
+{
+  "currency": "humanCents",
+  "items": [
+    {
+      "id": "item_kaya_toast",
+      "name": "Kaya Toast",
+      "type": "consumable",
+      "effect": {
+        "healHp": 20
+      },
+      "priceHumanCents": 15,
+      "sellable": true,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_banana_fritter",
+      "name": "Banana Fritter",
+      "type": "consumable",
+      "effect": {
+        "healHp": 15
+      },
+      "priceHumanCents": 10,
+      "sellable": true,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_herbal_tea",
+      "name": "Herbal Tea",
+      "type": "consumable",
+      "effect": {
+        "restoreMp": 12
+      },
+      "priceHumanCents": 30,
+      "sellable": true,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_curry_puff",
+      "name": "Curry Puff",
+      "type": "consumable",
+      "effect": {
+        "healHp": 30
+      },
+      "priceHumanCents": 20,
+      "sellable": true,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_evening_ticket",
+      "name": "Evening Train Ticket",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_parcel_a",
+      "name": "Stationmaster's Parcel A",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_parcel_b",
+      "name": "Stationmaster's Parcel B",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_parcel_c",
+      "name": "Stationmaster's Parcel C",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_postcard",
+      "name": "Postcard Home",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_blank_punched_ticket",
+      "name": "Blank Punched Ticket",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_conductors_whistle",
+      "name": "Conductor's Whistle",
+      "type": "key",
+      "effect": {},
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "equip_moth_wing_charm",
+      "name": "Moth-Wing Charm",
+      "type": "charm",
+      "effect": {
+        "spd": 2
+      },
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "equip_brass_lantern_hook",
+      "name": "Brass Lantern Hook",
+      "type": "tool",
+      "effect": {
+        "mag": 3
+      },
+      "priceHumanCents": null,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    }
+  ],
+  "shops": [
+    {
+      "map": "SM-03",
+      "stock": [
+        "item_kaya_toast",
+        "item_banana_fritter",
+        "item_herbal_tea"
+      ]
+    },
+    {
+      "map": "BS-02",
+      "stock": [
+        "item_kaya_toast",
+        "item_banana_fritter",
+        "item_herbal_tea",
+        "item_curry_puff"
+      ]
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "PZ-101",
+      "map": "SM-04",
+      "mandatory": true,
+      "solvedFlag": "pz101_coin_jar_solved"
+    },
+    {
+      "id": "PZ-103",
+      "map": "BS-03",
+      "mandatory": true,
+      "solvedFlag": "pz103_crates_solved"
+    },
+    {
+      "id": "PZ-104",
+      "map": "BS-05",
+      "mandatory": true,
+      "solvedFlag": "pz104_signals_solved"
+    },
+    {
+      "id": "PZ-105",
+      "map": "BS-04",
+      "mandatory": true,
+      "solvedFlag": "pz105_label_solved"
+    },
+    {
+      "id": "PZ-106",
+      "map": "VT-03",
+      "mandatory": true,
+      "solvedFlag": "pz106_roof_crossed"
+    },
+    {
+      "id": "PZ-107",
+      "map": "VT-02",
+      "mandatory": true,
+      "solvedFlag": "pz107_destinations_matched"
+    },
+    {
+      "id": "PZ-108",
+      "map": "VT-04",
+      "mandatory": false,
+      "solvedFlag": "pz108_lantern_keyhole_found"
+    }
+  ],
+  "note": "Chapter 1 proposal data, NEEDS_APPROVAL. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+}
