@@ -380,6 +380,41 @@
    "color": "#2a5a3a",
    "accent": "#5a3e2b",
    "pattern": "tree"
+  },
+  "crate_float": {
+   "index": 54,
+   "solid": false,
+   "color": "#8a6a48",
+   "accent": "#5a3e2b",
+   "pattern": "float_crate"
+  },
+  "pillar": {
+   "index": 55,
+   "solid": true,
+   "color": "#6b4a2f",
+   "accent": "#3e2a1c",
+   "pattern": "pillar"
+  },
+  "bell_floor": {
+   "index": 56,
+   "solid": false,
+   "color": "#5a7a7a",
+   "accent": "#3f5a5a",
+   "pattern": "planks"
+  },
+  "riverbed": {
+   "index": 57,
+   "solid": false,
+   "color": "#3a5a6a",
+   "accent": "#5a8a9a",
+   "pattern": "speckle"
+  },
+  "deep": {
+   "index": 58,
+   "solid": true,
+   "color": "#1f3f6a",
+   "accent": "#4f7fae",
+   "pattern": "water"
   }
  }
 }

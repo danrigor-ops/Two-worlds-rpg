@@ -1,0 +1,79 @@
+{
+ "id": "RV-06",
+ "name": "Nenek Arus's Pool",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 24,
+ "legend": {
+  "M": "mangrove",
+  ".": "grass",
+  "W": "water",
+  "f": "flowers"
+ },
+ "rows": [
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM..f.....WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW.....f..MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM........WWWWWWWWWWWW........MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM........................f...MM",
+  "MM...f........................MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MM............................MM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
+ ],
+ "spawns": {
+  "start": {
+   "x": 16,
+   "y": 16,
+   "facing": "up"
+  },
+  "arrive": {
+   "x": 16,
+   "y": 16,
+   "facing": "up"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "nenek_arus",
+   "character": "nenek_arus",
+   "x": 16,
+   "y": 12,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "C2_08_nenek_arus"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C2_08_nenek_arus",
+   "if_not_flags": [
+    "ch02_name_cut_learned"
+   ]
+  }
+ ],
+ "movables": []
+}

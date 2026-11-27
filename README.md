@@ -89,7 +89,25 @@ New battle rules: Slow (SPD x0.7), Shielded (damage x0.7), Memory Fog (Skill sea
 36. On the island, **Pak Lumpur** sings the first verse (C2-02). Watch for a Driftnet Tangle (Snare: Slow) and two Silt Wisps (Mud Splash: Soaked).
 37. East again to **Kampung Air** (RV-03), the spirit-side stilt village. Talk to **Old Pole** as Lumi (press C) to hear the second verse with Memory Touch. Lumi learns **Ripple Echo** (6 MP, hits every enemy). Mak Siput's stall sells River Rice Cakes and Lotus Tea.
 
-New battle rules: Soaked (DEF x0.7 against physical hits, 2 turns) and the first area skill. Part B (the Sunken Jetty, the Barnacle Bell, the Undertow and Nenek Arus) comes next.
+New battle rules: Soaked (DEF x0.7 against physical hits, 2 turns) and the first area skill.
+
+**Chapter 2, part B (the jetty and the crossing).**
+
+38. From Kampung Air's east end, cross to **the Sunken Jetty** (RV-04). The boardwalk is broken, and at low tide the far deck is out of reach (PZ-202). At low tide, Root Grip two crates out of the mud into the gap. Then blow the whistle at the marker: at high tide the crates float and the deck is level. The rope by the entrance resets the crates.
+39. In the flooded bell house, fight the **Barnacle Bell** (BOSS-201):
+    - **Clang** hits both heroes.
+    - **Toll** is announced a round ahead.
+    - Below half HP it calls Rust Crabs.
+    - Winning gives the third verse and the Soggy Bell Clapper (Reno DEF +3). A skiff by the back wall takes you back to Kampung Air.
+40. Back at the landing, talk to the Kingfishers. Lumi sings the **Tide Song** while Reno blows the whistle on the beat (PZ-203), and the **Veil boat** rises at the end of the pier. The game autosaves before you board.
+41. **The Undertow** (BOSS-202) waits at the Drowned Crossing:
+    - Phase 1 uses Slow and Soaked.
+    - Phase 2 adds Flotsam Storm.
+    - Phase 3 brings Whirlpool, announced a round ahead.
+    - At 15% HP the story takes over.
+42. **Nenek Arus** reveals that part of her name was cut from the Book of Names. The trail leads to Bandar Kencana. Then morning on the river and the **Chapter 2 complete** screen.
+
+Optional, **Things the River Kept** (C02-S01): overhear the fisherman at the landing. Then find the toy boat (Mangrove Walk), the bicycle bell (Kampung Air) and the wedding ring (jetty mud). Slip each one into his tackle box while he's looking at the water.
 
 ### Saving
 
@@ -154,4 +172,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
    - ✅ Part C: the Veil train, Gentle Float, the Forgotten Conductor, the Veil Halt
 9. Chapter 2: Whispers Along the River (design proposal in `docs/chapter-02/`)
    - ✅ Part A: the river landing, Tide Call and the mangroves, Kampung Air, Soaked, Ripple Echo
-   - Part B: the Sunken Jetty, the Barnacle Bell, the Undertow, Nenek Arus
+   - ✅ Part B: the Sunken Jetty, the Barnacle Bell, the Tide Song, the Undertow, Nenek Arus, Things the River Kept
+10. Chapter 3: The Town That Forgot Its Name (no design doc yet)

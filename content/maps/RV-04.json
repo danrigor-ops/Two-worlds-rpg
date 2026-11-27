@@ -1,0 +1,862 @@
+{
+ "id": "RV-04",
+ "name": "The Sunken Jetty",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 44,
+ "height": 28,
+ "legend": {
+  "W": "water",
+  "M": "mangrove",
+  "j": "jetty",
+  "m": "mud",
+  "p": "pillar",
+  "w": "wall",
+  "b": "bell_floor",
+  "E": "exit",
+  "P": "tide_post",
+  "r": "fence"
+ },
+ "rows": [
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMwwwwwwwwwwwwM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMwbbbbbbbbbbwM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMwbbbbbbbbbbwM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMwbbbbbbbbbbwM",
+  "MMMrMPMMMMMMMMMMMMMMMMMMMMMMMMMwbbbbbbbbbbwM",
+  "EjjjjjjjjjjjjjjjjjjjmmpjjjjjjjjbbbbbbbbbbbwW",
+  "WjjjjjjjjjjjjjjjjjjjmmpjjjjjjjjbbbbbbbbbbbwW",
+  "WWWWWWWWWmmmmmmmmmmmmmpppppppppwbbbbbbbbbbwW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWwbbbbbbbbbbwW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWwbbbbbbbbbbwW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWwbbbbbbbbbbwW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWwwwwwEwwwwwwW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWmmmmmmmmmmmmmWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
+ ],
+ "spawns": {
+  "start": {
+   "x": 1,
+   "y": 7,
+   "facing": "right"
+  },
+  "from_village": {
+   "x": 1,
+   "y": 8,
+   "facing": "right"
+  },
+  "bell_house": {
+   "x": 33,
+   "y": 8,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_village",
+   "x": 0,
+   "y": 7,
+   "to_map": "RV-03",
+   "to_spawn": "from_jetty"
+  },
+  {
+   "id": "skiff",
+   "x": 36,
+   "y": 13,
+   "to_map": "RV-03",
+   "to_spawn": "from_jetty"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "crab",
+   "character": "rust_crab",
+   "x": 12,
+   "y": 16,
+   "facing": "up",
+   "hide_if_flag": "rv04_crab_beaten",
+   "encounter": {
+    "id": "rv04_crab",
+    "outro_scene": "rv04_crab_beaten"
+   }
+  },
+  {
+   "id": "deck",
+   "character": "driftnet_tangle",
+   "x": 27,
+   "y": 7,
+   "facing": "left",
+   "hide_if_flag": "rv04_deck_beaten",
+   "encounter": {
+    "id": "rv04_deck",
+    "outro_scene": "rv04_deck_beaten"
+   }
+  },
+  {
+   "id": "barnacle_bell",
+   "character": "barnacle_bell",
+   "x": 38,
+   "y": 7,
+   "facing": "left",
+   "hide_if_flag": "ch02_bell_quieted",
+   "encounter": {
+    "id": "bell_boss",
+    "intro_scene": "C2_04_bell_intro",
+    "outro_scene": "C2_04_bell_outro"
+   }
+  },
+  {
+   "id": "lost_ring",
+   "character": "lost_thing",
+   "x": 10,
+   "y": 19,
+   "facing": "down",
+   "hide_if_flag": "ch02_ring_found",
+   "talk": [
+    {
+     "scene": "find_ring"
+    }
+   ],
+   "show_if_flag": "ch02_lost_things_heard"
+  }
+ ],
+ "objects": [
+  {
+   "id": "marker",
+   "x": 5,
+   "y": 6,
+   "talk": [
+    {
+     "scene": "rv04_tide_toggle"
+    }
+   ]
+  },
+  {
+   "id": "reset_rope",
+   "x": 3,
+   "y": 6,
+   "talk": [
+    {
+     "scene": "rv04_reset"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "rv04_tide_high"
+   ],
+   "tile": "water",
+   "cells": [
+    [
+     20,
+     7
+    ],
+    [
+     21,
+     7
+    ],
+    [
+     20,
+     8
+    ],
+    [
+     21,
+     8
+    ],
+    [
+     9,
+     9
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     11,
+     9
+    ],
+    [
+     12,
+     9
+    ],
+    [
+     13,
+     9
+    ],
+    [
+     14,
+     9
+    ],
+    [
+     15,
+     9
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     17,
+     9
+    ],
+    [
+     18,
+     9
+    ],
+    [
+     19,
+     9
+    ],
+    [
+     20,
+     9
+    ],
+    [
+     21,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     10
+    ],
+    [
+     11,
+     10
+    ],
+    [
+     12,
+     10
+    ],
+    [
+     13,
+     10
+    ],
+    [
+     14,
+     10
+    ],
+    [
+     15,
+     10
+    ],
+    [
+     16,
+     10
+    ],
+    [
+     17,
+     10
+    ],
+    [
+     18,
+     10
+    ],
+    [
+     19,
+     10
+    ],
+    [
+     20,
+     10
+    ],
+    [
+     21,
+     10
+    ],
+    [
+     9,
+     11
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     11
+    ],
+    [
+     12,
+     11
+    ],
+    [
+     13,
+     11
+    ],
+    [
+     14,
+     11
+    ],
+    [
+     15,
+     11
+    ],
+    [
+     16,
+     11
+    ],
+    [
+     17,
+     11
+    ],
+    [
+     18,
+     11
+    ],
+    [
+     19,
+     11
+    ],
+    [
+     20,
+     11
+    ],
+    [
+     21,
+     11
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     12
+    ],
+    [
+     13,
+     12
+    ],
+    [
+     14,
+     12
+    ],
+    [
+     15,
+     12
+    ],
+    [
+     16,
+     12
+    ],
+    [
+     17,
+     12
+    ],
+    [
+     18,
+     12
+    ],
+    [
+     19,
+     12
+    ],
+    [
+     20,
+     12
+    ],
+    [
+     21,
+     12
+    ],
+    [
+     9,
+     13
+    ],
+    [
+     10,
+     13
+    ],
+    [
+     11,
+     13
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     13
+    ],
+    [
+     14,
+     13
+    ],
+    [
+     15,
+     13
+    ],
+    [
+     16,
+     13
+    ],
+    [
+     17,
+     13
+    ],
+    [
+     18,
+     13
+    ],
+    [
+     19,
+     13
+    ],
+    [
+     20,
+     13
+    ],
+    [
+     21,
+     13
+    ],
+    [
+     9,
+     14
+    ],
+    [
+     10,
+     14
+    ],
+    [
+     11,
+     14
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     14
+    ],
+    [
+     15,
+     14
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     17,
+     14
+    ],
+    [
+     18,
+     14
+    ],
+    [
+     19,
+     14
+    ],
+    [
+     20,
+     14
+    ],
+    [
+     21,
+     14
+    ],
+    [
+     9,
+     15
+    ],
+    [
+     10,
+     15
+    ],
+    [
+     11,
+     15
+    ],
+    [
+     12,
+     15
+    ],
+    [
+     13,
+     15
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     15
+    ],
+    [
+     16,
+     15
+    ],
+    [
+     17,
+     15
+    ],
+    [
+     18,
+     15
+    ],
+    [
+     19,
+     15
+    ],
+    [
+     20,
+     15
+    ],
+    [
+     21,
+     15
+    ],
+    [
+     9,
+     16
+    ],
+    [
+     10,
+     16
+    ],
+    [
+     11,
+     16
+    ],
+    [
+     12,
+     16
+    ],
+    [
+     13,
+     16
+    ],
+    [
+     14,
+     16
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     16
+    ],
+    [
+     17,
+     16
+    ],
+    [
+     18,
+     16
+    ],
+    [
+     19,
+     16
+    ],
+    [
+     20,
+     16
+    ],
+    [
+     21,
+     16
+    ],
+    [
+     9,
+     17
+    ],
+    [
+     10,
+     17
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     12,
+     17
+    ],
+    [
+     13,
+     17
+    ],
+    [
+     14,
+     17
+    ],
+    [
+     15,
+     17
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     17
+    ],
+    [
+     18,
+     17
+    ],
+    [
+     19,
+     17
+    ],
+    [
+     20,
+     17
+    ],
+    [
+     21,
+     17
+    ],
+    [
+     9,
+     18
+    ],
+    [
+     10,
+     18
+    ],
+    [
+     11,
+     18
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     13,
+     18
+    ],
+    [
+     14,
+     18
+    ],
+    [
+     15,
+     18
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     18
+    ],
+    [
+     19,
+     18
+    ],
+    [
+     20,
+     18
+    ],
+    [
+     21,
+     18
+    ],
+    [
+     9,
+     19
+    ],
+    [
+     10,
+     19
+    ],
+    [
+     11,
+     19
+    ],
+    [
+     12,
+     19
+    ],
+    [
+     13,
+     19
+    ],
+    [
+     14,
+     19
+    ],
+    [
+     15,
+     19
+    ],
+    [
+     16,
+     19
+    ],
+    [
+     17,
+     19
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     19
+    ],
+    [
+     20,
+     19
+    ],
+    [
+     21,
+     19
+    ],
+    [
+     9,
+     20
+    ],
+    [
+     10,
+     20
+    ],
+    [
+     11,
+     20
+    ],
+    [
+     12,
+     20
+    ],
+    [
+     13,
+     20
+    ],
+    [
+     14,
+     20
+    ],
+    [
+     15,
+     20
+    ],
+    [
+     16,
+     20
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     18,
+     20
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     20
+    ],
+    [
+     21,
+     20
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "rv04_tide_high"
+   ],
+   "tile": "jetty",
+   "cells": [
+    [
+     22,
+     7
+    ],
+    [
+     22,
+     8
+    ]
+   ]
+  }
+ ],
+ "triggers": [
+  {
+   "cells": [
+    [
+     31,
+     7
+    ],
+    [
+     31,
+     8
+    ]
+   ],
+   "scene": "pz202_crossed",
+   "if_not_flags": [
+    "pz202_jetty_crossed"
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C2_04_jetty",
+   "if_not_flags": [
+    "ch02_jetty_seen"
+   ]
+  }
+ ],
+ "movables": [
+  {
+   "x": 20,
+   "y": 13,
+   "tile": "goods_crate"
+  },
+  {
+   "x": 21,
+   "y": 15,
+   "tile": "goods_crate"
+  }
+ ]
+}

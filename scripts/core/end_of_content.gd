@@ -11,7 +11,15 @@ func _ready() -> void:
 	bg.size = Vector2(240, 160)
 	add_child(bg)
 	var ch1: bool = GameState.get_flag("chapter_01_completed")
+	var ch2: bool = GameState.get_flag("chapter_02_completed")
 	var lines := [
+		["CHAPTER 2 COMPLETE", 16, Assets.UI_GOLD, 28],
+		["Whispers Along the River", 8, Assets.UI_TEXT, 50],
+		["Next: Chapter 3", 8, Color("#9fb0d8"), 80],
+		["The Town That Forgot Its Name", 8, Assets.UI_TEXT, 92],
+		["Chapter 3 isn't built yet. Saved.", 8, Color("#9fb0d8"), 118],
+		["Press A to return to the title", 8, Assets.UI_GOLD, 140],
+	] if ch2 else [
 		["CHAPTER 1 COMPLETE", 16, Assets.UI_GOLD, 28],
 		["The Last Train to Bandar Senja", 8, Assets.UI_TEXT, 50],
 		["Next: Chapter 2", 8, Color("#9fb0d8"), 80],
@@ -39,4 +47,5 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if InputManager.just_pressed("confirm", InputManager.Mode.CUTSCENE):
-		get_tree().change_scene_to_file("res://scenes/exploration.tscn")
+		var to := "res://scenes/title.tscn" if GameState.get_flag("chapter_02_completed") else "res://scenes/exploration.tscn"
+		get_tree().change_scene_to_file(to)

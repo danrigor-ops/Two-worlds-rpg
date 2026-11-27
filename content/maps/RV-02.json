@@ -128,6 +128,20 @@
     "id": "rv02_wisps",
     "outro_scene": "rv02_wisps_beaten"
    }
+  },
+  {
+   "id": "lost_boat",
+   "character": "lost_thing",
+   "x": 4,
+   "y": 20,
+   "facing": "down",
+   "hide_if_flag": "ch02_boat_found",
+   "talk": [
+    {
+     "scene": "find_toy_boat"
+    }
+   ],
+   "show_if_flag": "ch02_lost_things_heard"
   }
  ],
  "objects": [

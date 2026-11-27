@@ -14,7 +14,8 @@
   "j": "jetty",
   "H": "house",
   "E": "exit",
-  "S": "sign"
+  "S": "sign",
+  "b": "goods_crate"
  },
  "rows": [
   "TTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTT",
@@ -38,9 +39,9 @@
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWbjjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
-  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
-  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWjWWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
@@ -63,6 +64,16 @@
    "x": 37,
    "y": 12,
    "facing": "left"
+  },
+  "morning": {
+   "x": 22,
+   "y": 13,
+   "facing": "down"
+  },
+  "from_boat": {
+   "x": 20,
+   "y": 22,
+   "facing": "up"
   }
  },
  "doors": [
@@ -87,11 +98,22 @@
    "character": "fisherman",
    "x": 19,
    "y": 21,
-   "facing": "down",
+   "facing": "left",
    "unaware": true,
    "talk": [
     {
      "scene": "human_rv_fisherman"
+    }
+   ],
+   "watch_facing": "left",
+   "facing_loop": [
+    {
+     "facing": "left",
+     "time": 2.5
+    },
+    {
+     "facing": "down",
+     "time": 3.0
     }
    ]
   },
@@ -117,6 +139,15 @@
    "show_if_flag": "ch02_started",
    "talk": [
     {
+     "if_flags": [
+      "ch02_verse_3"
+     ],
+     "if_not_flags": [
+      "ch02_boat_called"
+     ],
+     "scene": "C2_05_tide_song"
+    },
+    {
      "scene": "kingfishers_hint"
     }
    ]
@@ -130,12 +161,79 @@
    "show_if_flag": "ch02_started",
    "talk": [
     {
+     "if_flags": [
+      "ch02_verse_3"
+     ],
+     "if_not_flags": [
+      "ch02_boat_called"
+     ],
+     "scene": "C2_05_tide_song"
+    },
+    {
      "scene": "kingfishers_hint"
+    }
+   ]
+  },
+  {
+   "id": "veil_boat",
+   "character": "veil_boat",
+   "x": 20,
+   "y": 23,
+   "facing": "up",
+   "show_if_flag": "ch02_boat_called",
+   "hide_if_flag": "ch02_undertow_calmed",
+   "talk": [
+    {
+     "scene": "board_veil_boat"
     }
    ]
   }
  ],
- "objects": [],
+ "objects": [
+  {
+   "id": "tackle_box",
+   "x": 18,
+   "y": 21,
+   "place_watcher": "fisherman",
+   "place_items": [
+    "item_lost_toy_boat",
+    "item_lost_bell",
+    "item_lost_ring"
+   ],
+   "talk": [
+    {
+     "if_any_key_items": [
+      "item_lost_toy_boat",
+      "item_lost_bell",
+      "item_lost_ring"
+     ],
+     "if_watched": "fisherman",
+     "scene": "place_wait"
+    },
+    {
+     "if_key_items": [
+      "item_lost_toy_boat"
+     ],
+     "scene": "place_toy_boat"
+    },
+    {
+     "if_key_items": [
+      "item_lost_bell"
+     ],
+     "scene": "place_bell"
+    },
+    {
+     "if_key_items": [
+      "item_lost_ring"
+     ],
+     "scene": "place_ring"
+    },
+    {
+     "scene": "tackle_box_idle"
+    }
+   ]
+  }
+ ],
  "signs": [
   {
    "x": 24,
@@ -153,6 +251,15 @@
    "scene": "C2_01_arrive",
    "if_not_flags": [
     "ch02_started"
+   ]
+  },
+  {
+   "scene": "C2_09_morning",
+   "if_flags": [
+    "ch02_name_cut_learned"
+   ],
+   "if_not_flags": [
+    "chapter_02_completed"
    ]
   }
  ],

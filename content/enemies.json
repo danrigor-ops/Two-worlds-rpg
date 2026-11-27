@@ -432,6 +432,198 @@
      "turns": 2
     }
    ]
+  },
+  "rust_crab": {
+   "name": "Rust Crab",
+   "character": "rust_crab",
+   "stats": {
+    "level": 7,
+    "max_hp": 96,
+    "atk": 18,
+    "def": 18,
+    "mag": 4,
+    "res": 8,
+    "spd": 6
+   },
+   "xp": 22,
+   "attacks": [
+    {
+     "name": "Pinch",
+     "kind": "physical",
+     "mult": 1.3,
+     "telegraph": true,
+     "telegraph_text": "The Rust Crab raises one huge claw. (Pinch lands next turn. Guard!)"
+    }
+   ]
+  },
+  "barnacle_bell": {
+   "name": "Barnacle Bell",
+   "character": "barnacle_bell",
+   "stats": {
+    "level": 7,
+    "max_hp": 320,
+    "atk": 15,
+    "def": 16,
+    "mag": 18,
+    "res": 12,
+    "spd": 8
+   },
+   "xp": 60,
+   "immune": [
+    "slow"
+   ],
+   "attacks": [
+    {
+     "name": "Clang",
+     "kind": "magical",
+     "mult": 0.8,
+     "target": "all"
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.5,
+     "attacks": [
+      {
+       "name": "Clang",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Toll",
+       "kind": "magical",
+       "mult": 1.5,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Barnacle Bell swings back, further and further... (Toll lands next turn. Guard!)"
+      }
+     ]
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Clang",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Toll",
+       "kind": "magical",
+       "mult": 1.5,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Barnacle Bell swings back, further and further... (Toll lands next turn. Guard!)"
+      }
+     ],
+     "summon": "rust_crab",
+     "enter_text": "Barnacle Bell: CLANG! CLANG! Don't make it quiet! (A Rust Crab scuttles out of the bell.)"
+    }
+   ]
+  },
+  "undertow": {
+   "name": "The Undertow",
+   "character": "undertow",
+   "stats": {
+    "level": 8,
+    "max_hp": 520,
+    "atk": 19,
+    "def": 15,
+    "mag": 21,
+    "res": 17,
+    "spd": 10
+   },
+   "xp": 100,
+   "immune": [
+    "slow",
+    "soaked"
+   ],
+   "end_below": 0.15,
+   "attacks": [
+    {
+     "name": "Grasping Net",
+     "kind": "physical",
+     "mult": 1.1,
+     "applies": "slow",
+     "turns": 2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Grasping Net",
+       "kind": "physical",
+       "mult": 1.1,
+       "applies": "slow",
+       "turns": 2
+      },
+      {
+       "name": "Pull Under",
+       "kind": "magical",
+       "mult": 1.0,
+       "applies": "soaked",
+       "turns": 2
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Grasping Net",
+       "kind": "physical",
+       "mult": 1.1,
+       "applies": "slow",
+       "turns": 2
+      },
+      {
+       "name": "Pull Under",
+       "kind": "magical",
+       "mult": 1.0,
+       "applies": "soaked",
+       "turns": 2
+      },
+      {
+       "name": "Flotsam Storm",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      }
+     ],
+     "enter_text": "Undertow: Hoard. HOARD. Sandals, nets, letters, all of it, mine!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Whirlpool",
+       "kind": "magical",
+       "mult": 1.7,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Undertow starts to spin. Everything is being pulled in! (Whirlpool lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Flotsam Storm",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Pull Under",
+       "kind": "magical",
+       "mult": 1.0,
+       "applies": "soaked",
+       "turns": 2
+      }
+     ],
+     "enter_text": "Undertow: Nothing floats away. Not ever. Not you either."
+    }
+   ]
   }
  },
  "encounters": {
@@ -548,6 +740,37 @@
    "enemies": [
     "silt_wisp",
     "silt_wisp"
+   ]
+  },
+  "rv04_crab": {
+   "enemies": [
+    "rust_crab"
+   ]
+  },
+  "rv04_deck": {
+   "enemies": [
+    "driftnet_tangle",
+    "silt_wisp"
+   ]
+  },
+  "bell_boss": {
+   "enemies": [
+    "barnacle_bell"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch02_bell_quieted"
+   ]
+  },
+  "undertow_boss": {
+   "enemies": [
+    "undertow"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch02_undertow_beaten"
    ]
   }
  }

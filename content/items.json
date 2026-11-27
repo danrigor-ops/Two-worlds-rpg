@@ -158,6 +158,40 @@
    "name": "Tide Song, Verse 2",
    "kind": "key",
    "text": "From Old Pole: \"Many voices, one river.\""
+  },
+  "item_tide_verse_3": {
+   "name": "Tide Song, Verse 3",
+   "kind": "key",
+   "text": "From the Barnacle Bell: \"Every tide comes back.\""
+  },
+  "item_tide_pearl": {
+   "name": "Tide Pearl",
+   "kind": "key",
+   "text": "Nenek Arus's pearl. Hold it to your ear and it hums the Tide Song."
+  },
+  "equip_bell_clapper": {
+   "name": "Soggy Bell Clapper",
+   "kind": "charm",
+   "equip_to": "reno",
+   "bonus": {
+    "def": 3
+   },
+   "text": "Heavy and damp. Reno wears it: DEF +3."
+  },
+  "item_lost_toy_boat": {
+   "name": "Toy Boat",
+   "kind": "key",
+   "text": "A little wooden boat with a paper sail. The river kept it."
+  },
+  "item_lost_bell": {
+   "name": "Bicycle Bell",
+   "kind": "key",
+   "text": "Rusty, but it still rings. The river kept it."
+  },
+  "item_lost_ring": {
+   "name": "Wedding Ring",
+   "kind": "key",
+   "text": "Thin and gold, found in the jetty mud. The river kept it."
   }
  }
 }

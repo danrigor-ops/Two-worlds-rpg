@@ -1,0 +1,82 @@
+{
+ "id": "RV-05",
+ "name": "The Drowned Crossing",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 36,
+ "height": 24,
+ "no_autosave": true,
+ "tint": "#9fc8e0",
+ "legend": {
+  "D": "deep",
+  "~": "veil_sky",
+  ".": "riverbed",
+  "j": "jetty"
+ },
+ "rows": [
+  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "DDDD~~~~~~~~~~~~~~~~~~~~~~~~~~~~DDDD",
+  "DDDD~~~~~~~~~~~~~~~~~~~~~~~~~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~...............jj...~~~~DDDD",
+  "DDDD~~~~..jj................~~~~DDDD",
+  "DDDD~~~~..jj................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~................jj..~~~~DDDD",
+  "DDDD~~~~................jj..~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~....................~~~~DDDD",
+  "DDDD~~~~~~~~~~~~....~~~~~~~~~~~~DDDD",
+  "DDDD~~~~~~~~~~~~....~~~~~~~~~~~~DDDD",
+  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+ ],
+ "spawns": {
+  "start": {
+   "x": 18,
+   "y": 20,
+   "facing": "up"
+  },
+  "arrive": {
+   "x": 18,
+   "y": 20,
+   "facing": "up"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "undertow",
+   "character": "undertow",
+   "x": 18,
+   "y": 9,
+   "facing": "down",
+   "hide_if_flag": "ch02_undertow_calmed",
+   "encounter": {
+    "id": "undertow_boss",
+    "intro_scene": "C2_06_undertow_intro",
+    "outro_scene": "C2_07_calmed"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C2_06_crossing",
+   "if_not_flags": [
+    "ch02_crossing_seen"
+   ]
+  }
+ ],
+ "movables": []
+}
