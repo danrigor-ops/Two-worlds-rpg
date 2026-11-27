@@ -1,0 +1,73 @@
+{
+ "id": "VT-06",
+ "name": "The Veil Halt",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 36,
+ "height": 24,
+ "legend": {
+  "~": "veil_sky",
+  "h": "halt",
+  "r": "rail"
+ },
+ "rows": [
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr~~",
+  "~~rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr~~",
+  "~~rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhh~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "spawns": {
+  "start": {
+   "x": 10,
+   "y": 11,
+   "facing": "up"
+  }
+ },
+ "npcs": [
+  {
+   "id": "conductor_halt",
+   "character": "conductor",
+   "x": 16,
+   "y": 10,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "conductor_halt"
+    }
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C11_veil_halt",
+   "if_not_flags": [
+    "ch01_lumi_origin_glimpsed"
+   ]
+  }
+ ],
+ "doors": [],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "movables": []
+}

@@ -1,0 +1,122 @@
+{
+ "id": "VT-03",
+ "name": "Veil Train: Carriage Roof",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 12,
+ "no_autosave": true,
+ "legend": {
+  "~": "veil_sky",
+  "o": "roof",
+  "p": "pit",
+  "D": "door"
+ },
+ "rows": [
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~oooooooooooppooooooooppooooooooppppooooooooooo~",
+  "~oooooooooooppooooooooppooooooooppppooooooooooo~",
+  "DoooooooooooppooooooooppooooooooppppoooooooooooD",
+  "~oooooooooooppooooooooppooooooooppppooooooooooo~",
+  "~oooooooooooppooooooooppooooooooppppooooooooooo~",
+  "~oooooooooooppooooooooppooooooooppppooooooooooo~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+  "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 5,
+   "facing": "right"
+  },
+  "from_dining": {
+   "x": 1,
+   "y": 5,
+   "facing": "right"
+  },
+  "from_luggage": {
+   "x": 46,
+   "y": 5,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_dining",
+   "x": 0,
+   "y": 5,
+   "to_map": "VT-02",
+   "to_spawn": "from_roof"
+  },
+  {
+   "id": "to_luggage",
+   "x": 47,
+   "y": 5,
+   "to_map": "VT-04",
+   "to_spawn": "from_roof"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "slip_cloth",
+   "character": "slip_marker",
+   "x": 42,
+   "y": 4,
+   "facing": "down",
+   "hide_if_flag": "ch01_slip_cloth_found",
+   "talk": [
+    {
+     "scene": "slip_cloth_pickup"
+    }
+   ]
+  }
+ ],
+ "triggers": [
+  {
+   "cells": [
+    [
+     30,
+     3
+    ],
+    [
+     30,
+     4
+    ],
+    [
+     30,
+     5
+    ],
+    [
+     30,
+     6
+    ],
+    [
+     30,
+     7
+    ],
+    [
+     30,
+     8
+    ]
+   ],
+   "scene": "C09_float_unlock",
+   "if_not_flags": [
+    "ch01_gentle_float_unlocked"
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C09_roof",
+   "if_not_flags": [
+    "ch01_roof_seen"
+   ]
+  }
+ ],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "movables": []
+}

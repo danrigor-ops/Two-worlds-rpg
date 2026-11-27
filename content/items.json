@@ -105,6 +105,35 @@
     "spd": 2
    },
    "text": "A papery charm. Lumi wears it: SPD +2."
+  },
+  "item_slip_chalk": {
+   "name": "Glowing Slip (chalk)",
+   "kind": "key",
+   "text": "A faint slip of light. It smells of chalk dust."
+  },
+  "item_slip_laugh": {
+   "name": "Glowing Slip (laughter)",
+   "kind": "key",
+   "text": "A faint slip of light. It hums with a baby's laugh."
+  },
+  "item_slip_cloth": {
+   "name": "Glowing Slip (cloth)",
+   "kind": "key",
+   "text": "A faint slip of light. It feels like soft new cloth."
+  },
+  "item_conductors_whistle": {
+   "name": "Conductor's Whistle",
+   "kind": "key",
+   "text": "A brass whistle from the Veil Halt. The river might answer it."
+  },
+  "equip_brass_lantern_hook": {
+   "name": "Brass Lantern Hook",
+   "kind": "charm",
+   "equip_to": "lumi",
+   "bonus": {
+    "mag": 3
+   },
+   "text": "A hook for the lantern. Lumi carries it: MAG +3."
   }
  }
 }

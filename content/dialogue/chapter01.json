@@ -61,6 +61,26 @@
   "monarch": {
    "name": "Paper Moth Monarch",
    "character": "paper_moth_monarch"
+  },
+  "conductor": {
+   "name": "The Conductor",
+   "character": "conductor"
+  },
+  "teacher": {
+   "name": "Schoolteacher",
+   "character": "teacher"
+  },
+  "grandmother": {
+   "name": "Grandmother",
+   "character": "grandmother"
+  },
+  "cloth_man": {
+   "name": "Man with a parcel of cloth",
+   "character": "cloth_man"
+  },
+  "luggage": {
+   "name": "Lost Luggage",
+   "character": "lost_luggage"
   }
  },
  "scenes": {
@@ -1523,6 +1543,811 @@
    {
     "speaker": "narrator",
     "text": "New team skill: Guardian Bloom! Reno and Lumi use both turns and 5 MP each to shield each other (damage x0.7 for 2 turns) and heal 15% of their HP. Find it under Bloom in battle."
+   }
+  ],
+  "C08_board": [
+   {
+    "speaker": "narrator",
+    "text": "Platform 2 at dusk. The evening train pulls in, hissing steam."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi. Lumi. It's real."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You're crying."
+   },
+   {
+    "speaker": "reno",
+    "text": "It's steam. In my eyes."
+   },
+   {
+    "speaker": "narrator",
+    "text": "They slip aboard behind a porter. A fog rolls across the platform."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The lamps turn from yellow to blue-violet, and the station clock runs backwards for one tick."
+   },
+   {
+    "set_flag": "ch01_veil_train_entered"
+   },
+   {
+    "event": "travel:VT-01:start:save_first"
+   }
+  ],
+  "C09_carriage": [
+   {
+    "set_flag": "ch01_carriage_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Passengers sit staring forward. Each holds a ticket with a neat hole where the destination should be."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pale moths drift between the seats, carrying faint glowing slips."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno. We're inside the Veil. The whole train is."
+   },
+   {
+    "speaker": "reno",
+    "text": "Is that bad?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Hold on to your ticket."
+   }
+  ],
+  "passengers_check": [
+   {
+    "speaker": "narrator",
+    "text": "Far down the train, a whistle blows. A door clanks open somewhere past the luggage van.",
+    "if_flags": [
+     "ch01_passenger_1_restored",
+     "ch01_passenger_2_restored",
+     "ch01_passenger_3_restored"
+    ],
+    "if_not_flags": [
+     "ch01_guards_van_unlocked"
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "The Guard's Van. Whoever is taking the destinations is in there.",
+    "if_flags": [
+     "ch01_passenger_1_restored",
+     "ch01_passenger_2_restored",
+     "ch01_passenger_3_restored"
+    ],
+    "if_not_flags": [
+     "ch01_guards_van_unlocked"
+    ]
+   },
+   {
+    "set_flag": "ch01_guards_van_unlocked",
+    "if_flags": [
+     "ch01_passenger_1_restored",
+     "ch01_passenger_2_restored",
+     "ch01_passenger_3_restored"
+    ],
+    "if_not_flags": [
+     "ch01_guards_van_unlocked"
+    ]
+   }
+  ],
+  "C09_teacher": [
+   {
+    "speaker": "teacher",
+    "text": "Are you... a dream? I'm going... I was going... somewhere with a blackboard?"
+   },
+   {
+    "speaker": "reno",
+    "text": "She can see us!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Only a little. Like when you're half asleep."
+   },
+   {
+    "speaker": "lumi",
+    "text": "They haven't lost their luggage. They've lost where they were going."
+   },
+   {
+    "speaker": "reno",
+    "text": "That's so much worse!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A box of new chalk sits on her lap. Which slip do you offer?"
+   },
+   {
+    "choice": [
+     {
+      "text": "The slip that smells of chalk",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "take_key_item": "item_slip_chalk",
+        "if_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "speaker": "narrator",
+        "text": "The slip melts into her ticket. A destination appears where the hole was.",
+        "if_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "speaker": "teacher",
+        "text": "Kampung Seri Pagi. My first school. Forty children and one blackboard. I'm going to be late!",
+        "if_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "speaker": "reno",
+        "text": "Good luck, teacher!",
+        "if_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "set_flag": "ch01_passenger_1_restored",
+        "if_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "goto": "passengers_check"
+       }
+      ]
+     },
+     {
+      "text": "The slip with a baby's laugh",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_laugh"
+        ]
+       }
+      ]
+     },
+     {
+      "text": "The slip like soft cloth",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_cloth"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "teacher_after": [
+   {
+    "speaker": "teacher",
+    "text": "(half asleep) Forty children... I'll learn every name."
+   }
+  ],
+  "C09_grandmother": [
+   {
+    "speaker": "grandmother",
+    "text": "Such polite little dreams. I'm knitting for someone, but I can't think who..."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A pair of tiny yellow booties hangs off her needles. Which slip do you offer?"
+   },
+   {
+    "choice": [
+     {
+      "text": "The slip that smells of chalk",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_chalk"
+        ]
+       }
+      ]
+     },
+     {
+      "text": "The slip with a baby's laugh",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "take_key_item": "item_slip_laugh",
+        "if_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "speaker": "narrator",
+        "text": "The slip settles on the booties. She smiles all the way up to her eyes.",
+        "if_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "speaker": "grandmother",
+        "text": "My grandson! He was born on Tuesday. I'm going to meet him.",
+        "if_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "He's going to love the booties.",
+        "if_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "set_flag": "ch01_passenger_2_restored",
+        "if_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "goto": "passengers_check"
+       }
+      ]
+     },
+     {
+      "text": "The slip like soft cloth",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_cloth"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "grandmother_after": [
+   {
+    "speaker": "grandmother",
+    "text": "(half asleep) Tuesday. Born on a Tuesday..."
+   }
+  ],
+  "C09_cloth_man": [
+   {
+    "speaker": "cloth_man",
+    "text": "Blue for the shirt, or was it... I had a reason to carry all this. Didn't I?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "He hugs a parcel of folded batik. Which slip do you offer?"
+   },
+   {
+    "choice": [
+     {
+      "text": "The slip that smells of chalk",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_chalk_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_chalk"
+        ]
+       }
+      ]
+     },
+     {
+      "text": "The slip with a baby's laugh",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_laugh_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "No... that one doesn't fit. It flutters back to us.",
+        "if_key_items": [
+         "item_slip_laugh"
+        ]
+       }
+      ]
+     },
+     {
+      "text": "The slip like soft cloth",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We don't have that one yet.",
+        "if_not_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "take_key_item": "item_slip_cloth",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "narrator",
+        "text": "The slip slides into the folds of the cloth.",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "cloth_man",
+        "text": "The tailor on Jalan Pasar! My daughter's wedding shirt. Of course.",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "reno",
+        "text": "A wedding! Will there be cake?",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "speaker": "lumi",
+        "text": "Reno.",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "set_flag": "ch01_passenger_3_restored",
+        "if_flags": [
+         "ch01_slip_cloth_found"
+        ]
+       },
+       {
+        "goto": "passengers_check"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "cloth_man_after": [
+   {
+    "speaker": "cloth_man",
+    "text": "(half asleep) Wedding shirt. Blue. Mustn't crease it."
+   }
+  ],
+  "vt01_moths_beaten": [
+   {
+    "set_flag": "vt01_moths_beaten"
+   },
+   {
+    "set_flag": "ch01_slip_chalk_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Memory Moths dissolve into light. One glowing slip is left. It smells of chalk dust."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got a Glowing Slip (chalk)."
+   }
+  ],
+  "C09_dining": [
+   {
+    "set_flag": "ch01_dining_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The dining car. Tea cups rattle. Nobody drinks."
+   },
+   {
+    "speaker": "lumi",
+    "text": "More passengers. Look at what they're holding. It might tell us which slip is whose."
+   }
+  ],
+  "vt02_moth_beaten": [
+   {
+    "set_flag": "vt02_moth_beaten"
+   },
+   {
+    "set_flag": "ch01_slip_laugh_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A glowing slip drifts down. It hums with a baby's laugh."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got a Glowing Slip (laughter)."
+   }
+  ],
+  "C09_roof": [
+   {
+    "set_flag": "ch01_roof_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The roof of the train. The Veil sky streams past, violet and full of stars."
+   },
+   {
+    "speaker": "reno",
+    "text": "There's a slip up here! Past the gaps between the carriages."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Hint: face a gap as Reno and press A to Leaf Leap. A miss just puts you back where you were."
+   }
+  ],
+  "C09_float_unlock": [
+   {
+    "set_flag": "ch01_gentle_float_unlocked"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The last gap is far too wide to jump."
+   },
+   {
+    "speaker": "lumi",
+    "text": "I think I can float across."
+   },
+   {
+    "speaker": "reno",
+    "text": "And me?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Hold my scarf."
+   },
+   {
+    "speaker": "reno",
+    "text": "This is the best day of my life."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We're on the roof of a ghost train."
+   },
+   {
+    "speaker": "reno",
+    "text": "Best. Day."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi learned Gentle Float! Swap to Lumi with C, face a wide gap and press A. Reno holds on."
+   }
+  ],
+  "float_too_far": [
+   {
+    "speaker": "lumi",
+    "text": "Even floating, that's too far."
+   }
+  ],
+  "slip_cloth_pickup": [
+   {
+    "set_flag": "ch01_slip_cloth_found"
+   },
+   {
+    "key_item": "item_slip_cloth"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A glowing slip, caught on a roof vent. It feels like soft new cloth."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got a Glowing Slip (cloth)."
+   }
+  ],
+  "guards_van_locked": [
+   {
+    "speaker": "narrator",
+    "text": "A heavy door marked GUARD. It won't budge."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Not yet. The passengers need their destinations back first."
+   }
+  ],
+  "vt04_porter_beaten": [
+   {
+    "set_flag": "vt04_porter_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Even the luggage handlers are made of fog in here."
+   }
+  ],
+  "trunk_plain": [
+   {
+    "speaker": "narrator",
+    "text": "An old steamer trunk with a brass lock."
+   }
+  ],
+  "PZ108_keyhole": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi holds up the lantern from Kampung Akar. In its light, a second keyhole glows on the trunk, violet and very much not brass."
+   },
+   {
+    "set_flag": "pz108_lantern_keyhole_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The trunk shudders, hops off the pile... and lands right beside you, lid snapping."
+   },
+   {
+    "speaker": "reno",
+    "text": "The luggage is ALIVE."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Lost luggage. Nobody claimed it, so it got grumpy."
+   }
+  ],
+  "trunk_open": [
+   {
+    "speaker": "narrator",
+    "text": "The trunk's Veil keyhole has faded."
+   }
+  ],
+  "lost_luggage_intro": [
+   {
+    "speaker": "luggage",
+    "text": "SNAP. SNAP SNAP."
+   }
+  ],
+  "lost_luggage_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Lost Luggage settles down with a contented creak. Something brass rolls out of it."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Brass Lantern Hook. (Lumi carries it: MAG +3.)"
+   }
+  ],
+  "C10_conductor": [
+   {
+    "speaker": "narrator",
+    "text": "A tall, thin figure in a faded uniform, with a lantern for a face. His cap badge has been rubbed blank."
+   },
+   {
+    "speaker": "narrator",
+    "text": "He reaches for their tickets, and recoils from the Clockkeeper's violet stamp."
+   },
+   {
+    "speaker": "conductor",
+    "text": "Stamped. Stamped tickets. Then I cannot take your where. Tickets, please. Where are you going?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Bandar... no, wait, we're already... somewhere fun!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Don't tell him!"
+   },
+   {
+    "speaker": "conductor",
+    "text": "Everyone is going somewhere. I am going nowhere. I had a name once. It was on a list. Now there is no list."
+   },
+   {
+    "speaker": "conductor",
+    "text": "So I keep everyone's where... so I am not alone with my nowhere."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Someone took your name?"
+   },
+   {
+    "speaker": "conductor",
+    "text": "Tickets. Please."
+   }
+  ],
+  "C10_ticket": [
+   {
+    "speaker": "narrator",
+    "text": "The Conductor sways. Lumi steps forward with the blank punched ticket from the moth nest."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Memory Touch. The ticket remembers one thing that is still his: a small platform at dawn, and a man in a uniform waving passengers off."
+   },
+   {
+    "take_key_item": "item_blank_punched_ticket"
+   },
+   {
+    "speaker": "conductor",
+    "text": "...I used to carry them home."
+   },
+   {
+    "speaker": "reno",
+    "text": "You still can! You just took a wrong turn. I do that constantly."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The train slows. Outside, a platform appears under a violet sky."
+   },
+   {
+    "event": "travel:VT-06:start"
+   }
+  ],
+  "C11_veil_halt": [
+   {
+    "speaker": "narrator",
+    "text": "The Veil Halt. The Conductor opens his lantern, and hundreds of small lights drift back into the carriages."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The passengers sleep, smiling."
+   },
+   {
+    "speaker": "narrator",
+    "text": "One light doesn't go to any passenger. It drifts to Lumi. A lullaby, the one from Reno's dream, and a voice: \"Remember the way home.\""
+   },
+   {
+    "speaker": "lumi",
+    "text": "That one's mine."
+   },
+   {
+    "speaker": "reno",
+    "text": "You lost a memory too?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "I don't think I lost it. I think I never had it. There's nothing before... before I woke up in Kampung Akar."
+   },
+   {
+    "speaker": "conductor",
+    "text": "(reading an old ledger) Your name is here, little echo. But nothing is written before it. As if you began in the middle of a sentence."
+   },
+   {
+    "set_flag": "ch01_lumi_origin_glimpsed"
+   },
+   {
+    "speaker": "reno",
+    "text": "Then you get to write the rest. That's the fun part."
+   },
+   {
+    "speaker": "lumi",
+    "text": "...That's annoyingly wise."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Conductor gives Reno his whistle and points down the platform, to steps that lead into mist and the sound of water."
+   },
+   {
+    "key_item": "item_conductors_whistle"
+   },
+   {
+    "set_flag": "river_route_unlocked"
+   },
+   {
+    "speaker": "conductor",
+    "text": "The rails forget. The river remembers. If someone is taking names, the river spirits will know who."
+   },
+   {
+    "speaker": "conductor",
+    "text": "I will keep this halt until mine is written again."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Conductor's Whistle. (Key item)"
+   },
+   {
+    "event": "travel:BS-06:dawn"
+   }
+  ],
+  "conductor_halt": [
+   {
+    "speaker": "conductor",
+    "text": "The river remembers. Go well, little travellers."
+   }
+  ],
+  "C11_dawn": [
+   {
+    "speaker": "narrator",
+    "text": "Dawn at Platform 2. The train is an ordinary train again. Passengers wake up yawning."
+   },
+   {
+    "speaker": "teacher",
+    "text": "(to the woman beside her) I had the strangest dream. Two children on the roof of the train."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pak Darus checks his watch."
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "(to himself) Late again. But everyone's here. Strange."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Above the platform, the Clockkeeper ticks once, pleased."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi, can we ride another one?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Can we have breakfast first?"
+   },
+   {
+    "speaker": "reno",
+    "text": "...After breakfast."
+   },
+   {
+    "set_flag": "chapter_01_completed"
+   },
+   {
+    "set_flag": "chapter_02_unlocked"
+   },
+   {
+    "event": "chapter_end"
    }
   ]
  }

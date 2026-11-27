@@ -129,11 +129,14 @@ static func has_status(u: Dictionary, name: String) -> bool:
 
 
 ## Returns false if the unit is immune.
-static func add_status(u: Dictionary, name: String, turns: int) -> bool:
+## self_applied: put on during the unit's own turn (Guardian Bloom), so the
+## countdown at the end of that same turn skips it.
+static func add_status(u: Dictionary, name: String, turns: int, self_applied := false) -> bool:
 	if name in u["immune"]:
 		return false
 	u["status"][name] = maxi(int(u["status"].get(name, 0)), turns)
-	u.get_or_add("fresh", {})[name] = true   # doesn't count down on the turn it lands
+	if self_applied:
+		u.get_or_add("fresh", {})[name] = true
 	return true
 
 

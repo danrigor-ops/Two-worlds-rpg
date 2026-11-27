@@ -366,7 +366,7 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 10, 33, 7, 1, Color("#5a5a5a"))
 		_outline(img)
 		return img
-	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox"]:
+	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox", "conductor"]:
 		_paint_spirit(img, order, fw, p["style"], hair, skin, body, acc, legs, eye)
 		_outline(img)
 		return img
@@ -467,6 +467,16 @@ static func _paint_spirit(img: Image, order: Array, fw: int, style: String, hair
 				_rect(img, o + 16, 17, 7, 2, eye)
 				_rect(img, o + 14, 30, 4, 8, legs)                          # bracket
 				_rect(img, o + 15, 7, 2, 2, acc)
+			"conductor":
+				_rect(img, o + 10, 14, 12, 22, body)                        # long coat
+				_rect(img, o + 11, 36, 4, 3, legs)
+				_rect(img, o + 17, 36, 4, 3, legs)
+				_rect(img, o + 7, 16, 3, 14, body)                          # thin arms
+				_rect(img, o + 22, 16, 3, 14, body)
+				_rect(img, o + 11, 2, 10, 11, skin.darkened(0.4))           # lantern face
+				_rect(img, o + 13, 4, 6, 7, skin)
+				_rect(img, o + 9, 0, 14, 3, hair)                           # cap, badge rubbed blank
+				_rect(img, o + 14, 0, 4, 2, acc.darkened(0.5))
 			"postbox":
 				_rect(img, o + 9, 10, 14, 28, body)
 				_rect(img, o + 8, 7, 16, 5, hair)                           # cap

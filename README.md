@@ -67,6 +67,19 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
 26. **Rail Yard** (east door of the hall, PZ-104): set the three signal levers (Lumi's Echo Sight on the old marker shows the route) and shove the handcar to open the moth siding. Then fight the **Paper Moth Monarch** (BOSS-101). Below half HP it calls Ticket Moths, and you pick your target.
 27. The win gives Parcel B, the Moth-Wing Charm (Lumi SPD +2) and the team skill **Guardian Bloom**. Return the last parcel, and the Clockkeeper stamps your Veil tickets. Platform 2 opens; the train itself is part C.
 
+**Chapter 1, part C (the Veil train).**
+
+28. Board at Platform 2 (C08). The game autosaves on the platform. Inside the Veil train there's no autosave until the Guard's Van door.
+29. Passengers have lost their destinations, and they can dimly see you. Beat the Memory Moths for glowing slips, then offer each slip to the passenger it fits (PZ-107). The chalk slip goes to the teacher, the baby's laugh to the grandmother, and the soft cloth to the man with the batik. A wrong slip just floats back.
+30. **Roof** (PZ-106): Leaf Leap two gaps as Reno. Lumi then learns **Gentle Float** and can cross the 4-tile gap, with Reno holding her scarf. Missing a jump puts you back on the last safe tile.
+31. Optional (PZ-108, C01-S03): in the Luggage Van, the lantern reveals a Veil keyhole. Beat the Lost Luggage for the Brass Lantern Hook (Lumi MAG +3).
+32. **The Forgotten Conductor** (BOSS-102):
+    - **Phase 1:** Ticket Punch, plus Where Are You Going?, which fogs a hero's skills.
+    - **Phase 2:** the tunnel, which adds Last Call.
+    - **Phase 3:** Final Stop, announced a full round ahead, so guard.
+    - At 15% HP the fight ends in the story scene. You don't need to land a final blow.
+33. **The Veil Halt** (C11), then dawn at Platform 2 and the **Chapter 1 complete** screen.
+
 New battle rules: Slow (SPD x0.7), Shielded (damage x0.7), Memory Fog (Skill sealed for a turn), telegraphed attacks (the Dust Bundle announces Roll Over a turn early), and immunities.
 
 ### Saving
@@ -129,4 +142,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 8. Chapter 1: The Last Train to Bandar Senja (design approved in `docs/chapter-01/`)
    - ✅ Part A: Sungai Melor, Old Kettle, the Coin Jar, the bus (plus level growth, MP items, Dewdrop stalls)
    - ✅ Part B: Bandar Senja, the Clockkeeper's parcels, Paper Moth Monarch, Guardian Bloom
-   - Part C: the Veil train, the Forgotten Conductor, the Veil Halt
+   - ✅ Part C: the Veil train, Gentle Float, the Forgotten Conductor, the Veil Halt
+9. Chapter 2 (the river route)

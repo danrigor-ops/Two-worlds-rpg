@@ -1,0 +1,124 @@
+{
+ "id": "VT-04",
+ "name": "Veil Train: Luggage Van",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 12,
+ "no_autosave": true,
+ "legend": {
+  ".": "floor",
+  "#": "wall",
+  "S": "bus_seat",
+  "D": "door",
+  "c": "counter",
+  "t": "trunk"
+ },
+ "rows": [
+  "########################################",
+  "########################################",
+  "#......................................#",
+  "#....tt..........t..t.............t....#",
+  "#......................................#",
+  "#......................................#",
+  "D......................................D",
+  "#......................................#",
+  "#...........tt..............tt.........#",
+  "#......................................#",
+  "########################################",
+  "########################################"
+ ],
+ "spawns": {
+  "start": {
+   "x": 1,
+   "y": 6,
+   "facing": "right"
+  },
+  "from_roof": {
+   "x": 1,
+   "y": 6,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_roof",
+   "x": 0,
+   "y": 6,
+   "to_map": "VT-03",
+   "to_spawn": "from_luggage"
+  },
+  {
+   "id": "to_guards_van",
+   "x": 39,
+   "y": 6,
+   "to_map": "VT-05",
+   "to_spawn": "from_luggage",
+   "one_way": true,
+   "require": [
+    {
+     "if_flags": [
+      "ch01_guards_van_unlocked"
+     ],
+     "else_scene": "guards_van_locked"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "vt04_porter",
+   "character": "fog_porter",
+   "x": 25,
+   "y": 6,
+   "facing": "left",
+   "hide_if_flag": "vt04_porter_beaten",
+   "encounter": {
+    "id": "vt04_porter",
+    "outro_scene": "vt04_porter_beaten"
+   }
+  },
+  {
+   "id": "lost_luggage",
+   "character": "lost_luggage",
+   "x": 19,
+   "y": 5,
+   "facing": "down",
+   "hide_if_flag": "ch01_lost_luggage_defeated",
+   "encounter": {
+    "id": "lost_luggage",
+    "intro_scene": "lost_luggage_intro",
+    "outro_scene": "lost_luggage_outro"
+   },
+   "show_if_flag": "pz108_lantern_keyhole_found"
+  }
+ ],
+ "objects": [
+  {
+   "id": "keyhole_trunk",
+   "x": 17,
+   "y": 3,
+   "talk": [
+    {
+     "if_flags": [
+      "pz108_lantern_keyhole_found"
+     ],
+     "scene": "trunk_open"
+    },
+    {
+     "if_key_items": [
+      "item_lantern"
+     ],
+     "scene": "PZ108_keyhole"
+    },
+    {
+     "scene": "trunk_plain"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}

@@ -1,0 +1,65 @@
+{
+ "id": "VT-05",
+ "name": "Veil Train: Guard's Van",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 14,
+ "legend": {
+  ".": "floor",
+  "#": "wall",
+  "S": "bus_seat",
+  "D": "door",
+  "c": "counter",
+  "t": "trunk"
+ },
+ "rows": [
+  "##############################",
+  "##############################",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "#............................#",
+  "##############################",
+  "##############################"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 7,
+   "facing": "right"
+  },
+  "from_luggage": {
+   "x": 2,
+   "y": 7,
+   "facing": "right"
+  }
+ },
+ "npcs": [
+  {
+   "id": "conductor",
+   "character": "conductor",
+   "x": 20,
+   "y": 7,
+   "facing": "left",
+   "hide_if_flag": "ch01_conductor_calmed",
+   "encounter": {
+    "id": "conductor_boss",
+    "intro_scene": "C10_conductor",
+    "outro_scene": "C10_ticket"
+   }
+  }
+ ],
+ "doors": [],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}
