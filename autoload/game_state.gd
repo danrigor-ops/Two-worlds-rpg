@@ -131,6 +131,13 @@ func add_key_item(item_id: String) -> bool:
 	return true
 
 
+func remove_key_item(item_id: String) -> bool:
+	if item_id not in data["key_items"]:
+		return false
+	data["key_items"].erase(item_id)
+	return true
+
+
 func has_key_item(item_id: String) -> bool:
 	return item_id in data["key_items"]
 

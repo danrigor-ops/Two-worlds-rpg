@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 7
+const SECTIONS := 9
 
 
 func check(cond: bool, label: String) -> void:
@@ -51,6 +51,12 @@ func run(t: SceneTree) -> int:
 
 	print("Exploration integration")
 	await _test_exploration(gs, im)
+
+	print("Combat rules")
+	_test_combat()
+
+	print("Leafling tutorial battle")
+	await _test_leafling(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -350,6 +356,155 @@ func _test_exploration(gs: Node, im: Node) -> void:
 	check(MapData.feet_to_cell(scene.leader().global_position) == Vector2i(10, 13), "arrived on the from_square spawn")
 	check(scene.members.size() == 2, "the party survives the transition")
 	check(im.current_mode() == im.Mode.EXPLORE, "P00 doesn't replay when coming home")
+	root.remove_child(scene)
+	scene.free()
+	_sections_done += 1
+
+
+func _test_combat() -> void:
+	check(Combat.judge(0) == "perfect" and Combat.judge(80) == "perfect" and Combat.judge(-80) == "perfect", "within 80 ms is Perfect")
+	check(Combat.judge(81) == "good" and Combat.judge(-180) == "good", "81 to 180 ms is Good")
+	check(Combat.judge(181) == "miss", "past 180 ms is a miss")
+	check(Combat.judge(150, 2.0) == "perfect", "the accessibility setting widens the windows")
+	var reno := Combat.make_unit("reno", "Reno", "hero", {"max_hp": 42, "max_mp": 14, "atk": 14, "def": 9, "mag": 6, "res": 8, "spd": 12})
+	var lumi := Combat.make_unit("lumi", "Lumi", "hero", {"max_hp": 32, "max_mp": 24, "atk": 7, "def": 7, "mag": 16, "res": 12, "spd": 10})
+	var leaf := Combat.make_unit("leafling_0", "Leafling", "enemy", {"max_hp": 48, "atk": 9, "def": 8, "mag": 4, "res": 7, "spd": 6})
+	check(Combat.base_damage("physical", reno, leaf) == 20, "physical base is 2*ATK-DEF (20)")
+	check(Combat.base_damage("magical", lumi, leaf) == 25, "magical base is 2*MAG-RES (25)")
+	check(Combat.base_damage("physical", leaf, Combat.make_unit("x", "x", "hero", {"max_hp": 1, "atk": 0, "def": 99, "mag": 0, "res": 0, "spd": 0})) == 1, "base damage is at least 1")
+	check(Combat.final_damage(20, 1.0, 1.5, 1.0) == 30, "Perfect is 1.5x")
+	check(Combat.final_damage(20, 1.0, 1.2, 1.0) == 24, "Good is 1.2x")
+	check(Combat.final_damage(25, 1.4, 1.5, 1.0) == 53, "multipliers stack, then round once (52.5 -> 53)")
+	check(Combat.final_damage(1, 1.0, 1.0, 0.5) == 1, "a landed hit does at least 1")
+	check(Combat.final_damage(20, 1.0, 1.0, 0.0) == 0, "a perfect dodge does nothing")
+
+	var c := Combat.new()
+	var a := Combat.make_unit("a", "A", "hero", {"max_hp": 10, "atk": 1, "def": 1, "mag": 1, "res": 1, "spd": 10})
+	var b := Combat.make_unit("b", "B", "hero", {"max_hp": 10, "atk": 1, "def": 1, "mag": 1, "res": 1, "spd": 10})
+	c.setup([b, a, reno], [leaf])
+	check(c.begin_round() == ["reno", "a", "b", "leafling_0"], "order is by SPD, ties by id")
+	check(c.begin_round("enemy")[0] == "leafling_0", "an enemy-first round puts enemies first")
+	c.begin_round()
+	var first := c.next_actor()
+	check(c.spend_token(first) and not c.spend_token(first), "one action token per round")
+	c.guard(reno)
+	check(reno["guarding"] and reno["mp"] == 14, "guard sets the stance (MP is capped at max)")
+	reno["mp"] = 5
+	c.guard(reno)
+	check(reno["mp"] == 7, "guard gives 2 MP")
+	var before: int = reno["hp"]
+	var dmg := c.hit(leaf, reno, "physical", 1.0, "miss")
+	check(dmg == 5 and reno["hp"] == before - 5, "guard halves damage (9 -> 4.5 -> 5)")
+	check(not c.spend_mp(reno, 99) and reno["mp"] == 7, "can't spend more MP than you have")
+	c.begin_round()
+	while true:
+		var u := c.next_actor()
+		if u.is_empty() or u["id"] == "reno":
+			break
+	check(not reno["guarding"], "guard ends when that hero's next turn starts")
+	leaf["hp"] = 0
+	check(c.outcome() == "win", "no enemies left is a win")
+	_sections_done += 1
+
+
+func _wait_menu(battle: Node) -> void:
+	for i in 300:
+		if not is_instance_valid(battle) or battle._menu_open:
+			return
+		await tree.process_frame
+
+
+func _test_leafling(gs: Node, im: Node) -> void:
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["p00_seen", "lumi_joined", "elder_warning_heard"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(2)
+
+	# The glade door is closed until Bobo's errand has started.
+	scene.warp("KA-01", "from_glade")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(19, 27)), "down")
+	await _press_for("move_down", 20)
+	check(scene.map.id == "KA-01" and im.current_mode() == im.Mode.DIALOGUE, "the glade is closed before Bobo's errand")
+	await _finish_dialogue(im)
+	check(scene.map.is_walkable(MapData.feet_to_cell(scene.leader().global_position)), "Reno is stepped back off the exit")
+	gs.set_flag("bobo_parcel_quest_started")
+	await _wait(3)
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(19, 27)), "down")
+	await _press_for("move_down", 20)
+	await _wait_transition(im)
+	check(scene.map.id == "KA-06", "then it leads to the Training Glade")
+
+	# Walk into the Leafling.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 12)), "down")
+	await _press_for("move_down", 24)
+	check(im.current_mode() == im.Mode.DIALOGUE, "touching the Leafling starts scene P04")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "then the battle starts")
+	var battle: Battle = null
+	for c in scene.get_children():
+		if c is Battle:
+			battle = c
+	check(battle != null and battle.snapshot.get("flags", {}).has("bobo_parcel_quest_started"), "a snapshot is saved before the fight")
+	await _wait_menu(battle)
+	check(battle.battle_log.size() == 1 and "dodge:perfect 0" in battle.battle_log[0], "the Leafling opens with Seed Toss, dodged perfectly")
+	check(not battle._menu_items.any(func(i: Dictionary) -> bool: return i["value"] == "run"), "you can't run from the tutorial")
+	await _tap("confirm")   # Reno: Attack
+	await _wait_menu(battle)
+	check("reno -> leafling_0 perfect 30" in battle.battle_log, "Reno's Perfect attack does 30 (20 x 1.5)")
+	await _tap("move_down")
+	await _tap("confirm")   # Lumi: Skill
+	await _wait_menu(battle)
+	await _tap("confirm")   # Echo Spark
+	for i in 300:
+		if im.current_mode() != im.Mode.BATTLE:
+			break
+		await tree.process_frame
+	check(gs.get_flag("leafling_tutorial_complete"), "winning sets leafling_tutorial_complete")
+	check(gs.has_key_item("item_bobo_parcel"), "the parcel is recovered")
+	check(gs.data["members"]["reno"]["xp"] == 5 and gs.data["members"]["lumi"]["mp"] == 24, "XP is gained and MP refills after the battle")
+	check(im.current_mode() == im.Mode.DIALOGUE, "the after-battle scene plays")
+	await _finish_dialogue(im)
+	check(scene.npcs.is_empty(), "the Leafling is gone")
+	scene.warp("KA-01", "from_glade")
+	scene.warp("KA-06", "from_square")
+	check(scene.npcs.is_empty(), "and stays gone after leaving and coming back")
+
+	# Return the parcel.
+	scene.warp("KA-04", "from_square")
+	await _talk(scene, Vector2i(8, 9), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.quest_state("PRO-002") == "rewarded" and gs.has_key_item("item_lantern"), "Bobo trades the lantern for the parcel")
+	check(not gs.has_key_item("item_bobo_parcel"), "the parcel is handed over")
+
+	# A lost battle restores the snapshot taken at its start.
+	var b2 := Battle.new()
+	b2.auto_judge = "miss"
+	b2.speed = 20.0
+	scene.add_child(b2)
+	b2.start("leafling_tutorial")
+	await _wait(2)
+	gs.add_item("item_dewdrop_candy", -2)
+	await b2._lose()
+	check(gs.item_count("item_dewdrop_candy") == 2, "losing restores the state from before the battle")
+	# One input per cue: a second press on the same cue is ignored.
+	var results: Array[String] = []
+	b2._cue_done.connect(func(r: String) -> void: results.append(r))
+	b2._cue_active = true
+	b2._cue_time_us = Time.get_ticks_usec() - 50000
+	b2._resolve_cue(Time.get_ticks_usec())
+	b2._resolve_cue(Time.get_ticks_usec())
+	check(results.size() == 1 and results[0] == "perfect", "one input per cue (a press 50 ms late is Perfect)")
+	b2._end("escape")
+	await _wait(2)
 	root.remove_child(scene)
 	scene.free()
 	_sections_done += 1

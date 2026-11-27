@@ -5,7 +5,7 @@ extends RefCounted
 ## Step types:
 ##   {"speaker": "reno", "text": "..."}            a line
 ##   {"choice": [{"text": "...", "then": [steps]}]} up to three flavour choices
-##   {"set_flag": "x"} {"key_item": "id"} {"join": "lumi"}
+##   {"set_flag": "x"} {"key_item": "id"} {"take_key_item": "id"} {"join": "lumi"}
 ##   {"item": "id", "count": n} {"quest": "PRO-002", "state": "active"}
 ## Any step can carry "if_flags" / "if_not_flags" to only run sometimes.
 
@@ -66,8 +66,8 @@ static func _validate_steps(id: String, steps: Array, e: Array[String]) -> void:
 				e.append("scene %s: a choice needs 1 to 3 options" % id)
 			for o: Dictionary in opts:
 				_validate_steps(id, o.get("then", []), e)
-		elif step.has("key_item") or step.has("item"):
-			var item: String = step.get("key_item", step.get("item", ""))
+		elif step.has("key_item") or step.has("item") or step.has("take_key_item"):
+			var item: String = step.get("key_item", step.get("item", step.get("take_key_item", "")))
 			if not JsonUtil.load_dict("res://content/items.json").get("items", {}).has(item):
 				e.append("scene %s: unknown item '%s'" % [id, item])
 		elif not (step.has("set_flag") or step.has("join") or step.has("quest")):

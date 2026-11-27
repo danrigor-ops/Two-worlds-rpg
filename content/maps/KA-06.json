@@ -1,0 +1,83 @@
+{
+ "id": "KA-06",
+ "name": "Training Glade",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 36,
+ "height": 28,
+ "legend": {
+  ".": "grass",
+  "=": "path",
+  "f": "flowers",
+  "T": "tree",
+  "E": "exit",
+  "~": "water"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTT",
+  "TT................=...............TT",
+  "TT................=...............TT",
+  "TT..~~~~~.........=.......T.......TT",
+  "TT..~~~~~....f....=...............TT",
+  "TT..~~~~~.........=....f....T.....TT",
+  "TT..~~~~~.........=...............TT",
+  "TT........f.......=...............TT",
+  "TT................=...............TT",
+  "TT..........T===========T.........TT",
+  "TT..........=============.........TT",
+  "TT....T.....=============.........TT",
+  "TT..........=============.....T...TT",
+  "TT..........=============.........TT",
+  "TT..........=============.........TT",
+  "TT..........=============.........TT",
+  "TT..T.......=============....f....TT",
+  "TT..........T===========T.........TT",
+  "TT................................TT",
+  "TT.......T.................~~~~~..TT",
+  "TT...............f.........~~~~~..TT",
+  "TT.....f...................~~~~~..TT",
+  "TT.............T...........~~~~~..TT",
+  "TT...................T............TT",
+  "TT................................TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 18,
+   "y": 3,
+   "facing": "down"
+  },
+  "from_square": {
+   "x": 18,
+   "y": 2,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "exit_to_square",
+   "x": 18,
+   "y": 1,
+   "to_map": "KA-01",
+   "to_spawn": "from_glade"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "leafling_parcel",
+   "character": "leafling",
+   "x": 18,
+   "y": 14,
+   "facing": "down",
+   "hide_if_flag": "leafling_tutorial_complete",
+   "encounter": {
+    "id": "leafling_tutorial",
+    "intro_scene": "P04_leafling",
+    "outro_scene": "P04_after"
+   }
+  }
+ ],
+ "signs": [],
+ "on_enter": []
+}

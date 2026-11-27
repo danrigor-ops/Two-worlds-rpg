@@ -17,6 +17,10 @@ var map_label: Label
 var members := {}           # member id -> PartyMember (in the party)
 var npcs: Array[Dictionary] = []   # {"node": PartyMember, "def": Dictionary}
 var _notices: Array[String] = []
+var _encounter_running := false
+## Test hooks passed to battles.
+var battle_auto_judge := ""
+var battle_speed := 1.0
 var trail := FollowTrail.new()
 var transitioning := false
 var _label_time := 0.0
@@ -169,9 +173,16 @@ func _physics_process(_delta: float) -> void:
 
 	var cell := MapData.feet_to_cell(lead.global_position)
 	GameState.set_position(map.id, cell, lead.facing)
+	if InputManager.current_mode() != InputManager.Mode.EXPLORE:
+		return
 	var door := map.door_at(cell)
 	if not door.is_empty():
-		_use_door(door)
+		_try_door(door, cell)
+		return
+	for npc in npcs:
+		if npc["def"].has("encounter") and npc["node"].global_position.distance_to(lead.global_position) < 14.0:
+			start_encounter(npc)
+			return
 
 
 func _process(delta: float) -> void:
@@ -219,6 +230,9 @@ func _interact() -> void:
 
 
 func _talk_to(npc: Dictionary) -> void:
+	if npc["def"].has("encounter"):
+		start_encounter(npc)
+		return
 	var node: PartyMember = npc["node"]
 	node.face(leader().global_position - node.global_position)
 	var scene_id := pick_scene(npc["def"].get("talk", []))
@@ -250,6 +264,53 @@ func _on_party_changed() -> void:
 			members[node.member_id] = node
 			var path: Array[Vector2] = [node.global_position, leader().global_position]
 			trail.reset_path(path)
+
+
+## Visible encounter: intro scene, battle, then outro scene on a win.
+func start_encounter(npc: Dictionary) -> void:
+	if _encounter_running:
+		return
+	_encounter_running = true
+	var enc: Dictionary = npc["def"]["encounter"]
+	if enc.has("intro_scene"):
+		dialogue.play_scene(enc["intro_scene"])
+		await dialogue.finished
+	var battle := Battle.new()
+	battle.auto_judge = battle_auto_judge
+	battle.speed = battle_speed
+	add_child(battle)
+	battle.start(enc["id"])
+	var result: String = await battle.ended
+	if result == "win":
+		npcs.erase(npc)
+		npc["node"].queue_free()
+		if enc.has("outro_scene"):
+			dialogue.play_scene(enc["outro_scene"])
+			await dialogue.finished
+	else:
+		# Ran away: step back so the encounter doesn't start again at once.
+		var lead := leader()
+		var away: Vector2 = (lead.global_position - npc["node"].global_position).normalized()
+		lead.walk(away * 24.0 * 60.0, 1.0)
+		trail.reset(lead.global_position)
+	_encounter_running = false
+
+
+## Doors can require story flags; if one is missing, its scene explains why
+## and the leader steps back off the door.
+func _try_door(door: Dictionary, cell: Vector2i) -> void:
+	for r: Dictionary in door["require"]:
+		if not GameState.conditions_met(r):
+			var lead := leader()
+			var back := cell - Vector2i(lead.facing_vector())
+			lead.place_at(MapData.cell_to_feet(back), lead.facing)
+			trail.reset(lead.global_position)
+			var f := follower()
+			if f:
+				f.place_at(lead.global_position, f.facing)
+			dialogue.play_scene(r["else_scene"])
+			return
+	_use_door(door)
 
 
 func _use_door(door: Dictionary) -> void:

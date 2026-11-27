@@ -36,8 +36,13 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
 5. Take the north path to Elder's Hollow (KA-05) for Nenek Rimba's warning (P02).
 6. Take the east path to Root Market (KA-04). Bobo (P03) starts the parcel errand.
 7. Press Esc to open the Journal, Items and Party menu.
+8. Take the south path to the Training Glade (KA-06). It opens once you've heard Nenek and spoken to Bobo.
+9. Walk into the Leafling for the tutorial battle (P04). Press A as the ring closes: on your attacks for a stronger hit, and on the Leafling's Seed Toss to dodge.
+10. Bring the parcel back to Bobo for the lantern and two Dewdrop Candies.
 
-The Training Glade to the south arrives with the combat step, so Bobo's parcel can't be returned yet.
+### Battle basics
+
+Each round, everyone acts once, fastest first. Commands are Attack, Skill (costs MP), Guard (halves damage until your next turn and gives 2 MP) and Item. Timed presses within 80 ms of the cue are Perfect (1.5x), within 180 ms Good (1.2x). Dodging an enemy cue Perfectly avoids the hit; Good halves it. Losing restarts the battle from just before it began. HP and MP refill after each prologue battle.
 
 ## Run the tests
 
@@ -62,6 +67,7 @@ The first command only needs running once after cloning. The tests check every m
 | Exploration | `scripts/exploration/` | Movement with collision, camera clamped to the map, Lumi following safe prior positions, swapping, doors with fades. |
 | Dialogue | `content/dialogue/*.json`, `scripts/ui/dialogue_box.gd` | Scenes as lists of steps: lines with name and portrait, up to three choices, and story steps (flags, items, party joins). NPCs pick a scene by story flags. |
 | Quests | `content/quests.json`, `autoload/quests.gd` | Quests move locked → active → completed → rewarded when story flags change. Each reward is granted once. |
+| Combat | `scripts/battle/combat.gd`, `scripts/battle/battle.gd`, `content/enemies.json`, `content/skills.json` | Rules (turn order, tokens, damage, timing windows) kept separate from the battle screen so they can be tested. |
 | Menu | `scripts/ui/pause_menu.gd` | Journal, Items (money shown as 1963 dollars and cents) and Party tabs. |
 
 Content files are marked `PLACEHOLDER` or `WORKING_PROPOSAL`, following the handover's status rules.
@@ -78,7 +84,7 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 1. ✅ Foundation: screen, input, game state, asset manifest, boot and title
 2. ✅ Exploration (first pass): Root Square and Reno's Home, follow, swap, doors
 3. ✅ Dialogue and quests: P00 to P03, journal, items and party menu
-4. Combat and the Leafling tutorial
+4. ✅ Combat and the Leafling tutorial
 5. Field abilities and Whispering Roots puzzles
 6. Inventory and saving
 7. The rest of the prologue
