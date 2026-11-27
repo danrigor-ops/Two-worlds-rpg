@@ -135,7 +135,8 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 	var start := _pick_start(spawn_name)
 	var pos := MapData.cell_to_feet(start["cell"])
 	for id: String in GameState.party():
-		members[id] = _spawn_member(id, pos, start["facing"])
+		if GameState.walks(id):
+			members[id] = _spawn_member(id, pos, start["facing"])
 	trail.reset(pos)
 	_last_safe = pos
 
@@ -593,7 +594,11 @@ func _run_on_enter() -> void:
 func _on_party_changed() -> void:
 	for npc in npcs.duplicate():
 		var node: PartyMember = npc["node"]
-		if GameState.has_member(node.member_id) and not members.has(node.member_id):
+		if GameState.has_member(node.member_id) and not GameState.walks(node.member_id):
+			# Companions travel along without walking the map.
+			npcs.erase(npc)
+			node.queue_free()
+		elif GameState.has_member(node.member_id) and not members.has(node.member_id):
 			npcs.erase(npc)
 			members[node.member_id] = node
 			var path: Array[Vector2] = [node.global_position, leader().global_position]

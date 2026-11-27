@@ -27,6 +27,23 @@
    "target": "all",
    "requires_flag": "ch02_ripple_learned",
    "text": "Lumi hums and the echo ripples out. Hits every enemy."
+  },
+  "spark_coil": {
+   "name": "Spark Coil",
+   "user": "elias",
+   "mp": 4,
+   "kind": "magical",
+   "mult": 1.4,
+   "text": "A coil of crackling static."
+  },
+  "static_burst": {
+   "name": "Static Burst",
+   "user": "elias",
+   "mp": 7,
+   "kind": "magical",
+   "mult": 0.8,
+   "target": "all",
+   "text": "A burst of radio noise. Hits every enemy."
   }
  },
  "team": {

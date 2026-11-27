@@ -30,6 +30,16 @@
     "item_moonleaf_bun",
     "item_dewdrop_candy"
    ]
+  },
+  "kertas_stall": {
+   "name": "Mak Kertas's Stall",
+   "currency": "dewdrops",
+   "items": [
+    "item_coconut_jelly",
+    "item_chrysanthemum_tea",
+    "item_river_rice_cake",
+    "item_lotus_tea"
+   ]
   }
  }
 }

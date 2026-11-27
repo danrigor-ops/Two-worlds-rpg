@@ -109,6 +109,20 @@ New battle rules: Soaked (DEF x0.7 against physical hits, 2 turns) and the first
 
 Optional, **Things the River Kept** (C02-S01): overhear the fisherman at the landing. Then find the toy boat (Mangrove Walk), the bicycle bell (Kampung Air) and the wedding ring (jetty mud). Slip each one into his tackle box while he's looking at the water.
 
+**Chapter 3: The Town That Forgot Its Name.** Design: `docs/chapter-03/CHAPTER_03_PRODUCTION.md`.
+
+43. From the Chapter 2 screen, press A. At the landing, ride the **paper barge** from the end of the pier to **Bandar Kencana** (BK-01). The townsfolk can't remember the town's name.
+44. In **Kedai Radio**, a voice in an old radio needs a valve. The spare is in the photo studio's desk. Fit it, and **Elias** joins: the first companion, with Spark Coil and Static Burst.
+45. **Photographs** (PZ-301): with Lumi leading, Memory Touch each faded photo and pick the right caption. The town remembers, and a crack opens at the west end of the wharf.
+46. **Kencana-in-the-Veil** (BK-04): read each radio mast's plaque and let Elias Tune the right band (PZ-302). KEN, CA, NA.
+47. **The Blank Clerk** (BOSS-301) in the Hall of Records:
+    - Stamp and Redline in phase 1.
+    - Erase and Ink Blots from 60%.
+    - Redact, announced a round ahead, from 30%.
+48. The name comes back, and the Clerk's ledger points to **Bukit Getah Estate**.
+
+Party rules from Chapter 3: up to three heroes fight; anyone else waits in reserve and still earns XP. Companions join at the party's level and travel along without walking the map.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -173,4 +187,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 9. Chapter 2: Whispers Along the River (design proposal in `docs/chapter-02/`)
    - ✅ Part A: the river landing, Tide Call and the mangroves, Kampung Air, Soaked, Ripple Echo
    - ✅ Part B: the Sunken Jetty, the Barnacle Bell, the Tide Song, the Undertow, Nenek Arus, Things the River Kept
-10. Chapter 3: The Town That Forgot Its Name (no design doc yet)
+10. ✅ Chapter 3: The Town That Forgot Its Name (Elias joins, three-hero battles)
+11. Chapters 4 to 10 and the epilogue

@@ -1,0 +1,236 @@
+{
+ "id": "BK-04",
+ "name": "Kencana-in-the-Veil",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "V": "veil_sky",
+  "h": "halt",
+  "H": "shophouse",
+  "E": "exit",
+  "M": "mast"
+ },
+ "rows": [
+  "VVVVVVVVVVVVVVVVVVVVEVVVVVVVVVVVVVVVVVVV",
+  "VhhhhhhhhhhhhhHHHHHHhHHHHHhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhHHHHHHhHHHHHhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhHHHHHHhHHHHHhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhMhhhhhhhhhhhhhhhhhhhhhhMhhhhhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "EhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhHHHHHHHHHhhhhhhhhhhhhhhHHHHHHHHHhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhMhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhV",
+  "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_crack": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_hall": {
+   "x": 20,
+   "y": 4,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_wharf",
+   "x": 0,
+   "y": 14,
+   "to_map": "BK-01",
+   "to_spawn": "from_veil"
+  },
+  {
+   "id": "to_hall",
+   "x": 20,
+   "y": 0,
+   "to_map": "BK-05",
+   "to_spawn": "from_town",
+   "require": [
+    {
+     "if_flags": [
+      "ch03_masts_done"
+     ],
+     "else_scene": "bk04_hall_locked"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "mak_kertas",
+   "character": "mak_kertas",
+   "x": 16,
+   "y": 14,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "kertas_stall"
+    }
+   ]
+  },
+  {
+   "id": "nameless_a",
+   "character": "nameless_spirit",
+   "x": 24,
+   "y": 13,
+   "facing": "left",
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_name_restored"
+     ],
+     "scene": "nameless_after"
+    },
+    {
+     "scene": "nameless_a"
+    }
+   ]
+  },
+  {
+   "id": "nameless_b",
+   "character": "nameless_spirit",
+   "x": 14,
+   "y": 24,
+   "facing": "up",
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_name_restored"
+     ],
+     "scene": "nameless_after"
+    },
+    {
+     "scene": "nameless_b"
+    }
+   ]
+  },
+  {
+   "id": "blots",
+   "character": "ink_blot",
+   "x": 10,
+   "y": 14,
+   "facing": "right",
+   "hide_if_flag": "bk04_blots_beaten",
+   "encounter": {
+    "id": "bk04_blots",
+    "outro_scene": "bk04_blots_beaten"
+   }
+  },
+  {
+   "id": "beetle",
+   "character": "typeset_beetle",
+   "x": 31,
+   "y": 14,
+   "facing": "left",
+   "hide_if_flag": "bk04_beetle_beaten",
+   "encounter": {
+    "id": "bk04_beetle",
+    "outro_scene": "bk04_beetle_beaten"
+   }
+  },
+  {
+   "id": "mixed",
+   "character": "typeset_beetle",
+   "x": 24,
+   "y": 5,
+   "facing": "down",
+   "hide_if_flag": "bk04_mixed_beaten",
+   "encounter": {
+    "id": "bk04_mixed",
+    "outro_scene": "bk04_mixed_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "mast_1",
+   "x": 8,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_mast_1"
+     ],
+     "scene": "mast_done"
+    },
+    {
+     "scene": "mast_1"
+    }
+   ]
+  },
+  {
+   "id": "mast_2",
+   "x": 31,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_mast_2"
+     ],
+     "scene": "mast_done"
+    },
+    {
+     "scene": "mast_2"
+    }
+   ]
+  },
+  {
+   "id": "mast_3",
+   "x": 20,
+   "y": 25,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_mast_3"
+     ],
+     "scene": "mast_done"
+    },
+    {
+     "scene": "mast_3"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C3_04_veil",
+   "if_not_flags": [
+    "ch03_veil_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#c8b8f0"
+}

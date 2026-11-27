@@ -1,0 +1,215 @@
+{
+ "id": "BK-01",
+ "name": "Kencana Wharf",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "T": "tree",
+  "H": "shophouse",
+  "=": "laterite",
+  "j": "jetty",
+  "W": "water",
+  "D": "door",
+  "E": "exit",
+  "S": "signboard"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHT",
+  "THHHHHHHHHDHHHHHHHHHHHHHHHHHDHHHHHHHHHHT",
+  "T===================S==================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "E======================================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "T======================================T",
+  "TjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjT",
+  "TWWWWWWWWWWWWWWWWWWjjjWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWjjjWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWjjjWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWjjjWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWT",
+  "TWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 24,
+   "facing": "up"
+  },
+  "from_barge": {
+   "x": 20,
+   "y": 24,
+   "facing": "up"
+  },
+  "from_radio": {
+   "x": 10,
+   "y": 9,
+   "facing": "down"
+  },
+  "from_studio": {
+   "x": 28,
+   "y": 9,
+   "facing": "down"
+  },
+  "from_veil": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_radio",
+   "x": 10,
+   "y": 8,
+   "to_map": "BK-02",
+   "to_spawn": "from_wharf"
+  },
+  {
+   "id": "to_studio",
+   "x": 28,
+   "y": 8,
+   "to_map": "BK-03",
+   "to_spawn": "from_wharf"
+  },
+  {
+   "id": "to_veil",
+   "x": 0,
+   "y": 14,
+   "to_map": "BK-04",
+   "to_spawn": "from_crack",
+   "require": [
+    {
+     "if_flags": [
+      "ch03_photos_restored"
+     ],
+     "else_scene": "bk01_no_crack"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "printer",
+   "character": "printer",
+   "x": 14,
+   "y": 12,
+   "facing": "right",
+   "unaware": true,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_name_restored"
+     ],
+     "scene": "human_printer_after"
+    },
+    {
+     "scene": "human_printer"
+    }
+   ]
+  },
+  {
+   "id": "trader",
+   "character": "trader",
+   "x": 15,
+   "y": 12,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_name_restored"
+     ],
+     "scene": "human_trader_after"
+    },
+    {
+     "scene": "human_trader"
+    }
+   ]
+  },
+  {
+   "id": "barge_back",
+   "character": "paper_barge",
+   "x": 21,
+   "y": 25,
+   "facing": "up",
+   "talk": [
+    {
+     "scene": "bk01_barge_home"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "town_sign",
+   "x": 20,
+   "y": 9,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_name_restored"
+     ],
+     "scene": "sign_restored"
+    },
+    {
+     "scene": "sign_blank"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch03_photos_restored"
+   ],
+   "tile": "veil",
+   "cells": [
+    [
+     0,
+     13
+    ],
+    [
+     0,
+     15
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C3_01_wharf",
+   "if_not_flags": [
+    "ch03_wharf_seen"
+   ]
+  },
+  {
+   "scene": "C3_07_name_back",
+   "if_flags": [
+    "ch03_clerk_defeated"
+   ],
+   "if_not_flags": [
+    "chapter_03_completed"
+   ]
+  }
+ ],
+ "movables": []
+}

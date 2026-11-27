@@ -41,7 +41,7 @@
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWbjjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
-  "TTWWWWWWWWWWWWWWWWWWjWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWjjWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
   "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
@@ -72,6 +72,11 @@
   },
   "from_boat": {
    "x": 20,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_kencana": {
+   "x": 21,
    "y": 22,
    "facing": "up"
   }
@@ -185,6 +190,19 @@
    "talk": [
     {
      "scene": "board_veil_boat"
+    }
+   ]
+  },
+  {
+   "id": "paper_barge",
+   "character": "paper_barge",
+   "x": 21,
+   "y": 23,
+   "facing": "up",
+   "show_if_flag": "chapter_03_unlocked",
+   "talk": [
+    {
+     "scene": "C3_00_barge"
     }
    ]
   }

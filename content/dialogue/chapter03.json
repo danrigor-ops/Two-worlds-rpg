@@ -1,0 +1,932 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 3 from docs/chapter-03/CHAPTER_03_PRODUCTION.md. Human lines are overheard; humans can't see or hear the spirits.",
+ "speakers": {
+  "elias": {
+   "name": "Elias",
+   "character": "elias"
+  },
+  "printer": {
+   "name": "Printer",
+   "character": "printer"
+  },
+  "trader": {
+   "name": "Paper trader",
+   "character": "trader"
+  },
+  "repairman": {
+   "name": "Radio repairman",
+   "character": "repairman"
+  },
+  "photographer": {
+   "name": "Photographer",
+   "character": "photographer"
+  },
+  "nameless_spirit": {
+   "name": "Nameless spirit",
+   "character": "nameless_spirit"
+  },
+  "mak_kertas": {
+   "name": "Mak Kertas",
+   "character": "mak_kertas"
+  },
+  "blank_clerk": {
+   "name": "The Blank Clerk",
+   "character": "blank_clerk"
+  }
+ },
+ "scenes": {
+  "C3_00_barge": [
+   {
+    "speaker": "narrator",
+    "text": "A flat barge stacked with paper bales is pushing off from the pier. It's bound downriver, for Bandar Kencana."
+   },
+   {
+    "choice": [
+     {
+      "text": "Hop on the paper bales",
+      "then": [
+       {
+        "set_flag": "ch03_started"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The duo ride on top of the paper all morning. Reno counts herons. Lumi counts Reno's herons and corrects him."
+       },
+       {
+        "event": "travel:BK-01:from_barge"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We can catch it tomorrow. It goes every morning."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "bk01_barge_home": [
+   {
+    "speaker": "narrator",
+    "text": "The paper barge goes back upriver to Senja River Landing."
+   },
+   {
+    "choice": [
+     {
+      "text": "Ride it back",
+      "then": [
+       {
+        "event": "travel:RV-01:from_kencana"
+       }
+      ]
+     },
+     {
+      "text": "Stay",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C3_01_wharf": [
+   {
+    "set_flag": "ch03_wharf_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Bandar Kencana: printing shops, paper merchants and the smell of fresh ink."
+   },
+   {
+    "speaker": "printer",
+    "text": "(to the trader) Proofs for the... for the Bandar... what's this town called again?"
+   },
+   {
+    "speaker": "trader",
+    "text": "Ha! Long week. It's Bandar... um."
+   },
+   {
+    "speaker": "printer",
+    "text": "Bandar Um. Lovely place."
+   },
+   {
+    "speaker": "reno",
+    "text": "They forgot the name of their own town?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno. Smell that. It's the same ink as Nenek Arus's pool."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Somewhere along the shophouses, a radio crackles. \"...anybody... valve... ANYBODY...\""
+   },
+   {
+    "speaker": "reno",
+    "text": "That radio's talking to us!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: find out what's crackling in the radio shop."
+   }
+  ],
+  "human_printer": [
+   {
+    "speaker": "printer",
+    "text": "(muttering over a proof sheet) The masthead's blank. I set those letters myself. Bandar... Ken... no."
+   }
+  ],
+  "human_trader": [
+   {
+    "speaker": "trader",
+    "text": "(to nobody) Thirty years selling paper in... this town. It's on the tip of my tongue."
+   }
+  ],
+  "human_printer_after": [
+   {
+    "speaker": "printer",
+    "text": "(laughing) BANDAR KENCANA. Bold type. Front page. I'm never forgetting it again."
+   }
+  ],
+  "human_trader_after": [
+   {
+    "speaker": "trader",
+    "text": "Bandar Kencana! Thirty years. Ha! Thirty-one, actually."
+   }
+  ],
+  "sign_blank": [
+   {
+    "speaker": "narrator",
+    "text": "The wharf sign reads: BANDAR ______. The paint isn't faded. The letters are just... gone."
+   }
+  ],
+  "sign_restored": [
+   {
+    "speaker": "narrator",
+    "text": "The wharf sign reads: BANDAR KENCANA. The letters look a little smug about it."
+   }
+  ],
+  "bk01_no_crack": [
+   {
+    "speaker": "lumi",
+    "text": "The air at the end of the wharf feels thin. Like a page about to tear. Not yet, though."
+   }
+  ],
+  "human_repairman": [
+   {
+    "speaker": "repairman",
+    "text": "(to his soldering iron) That old set on the top shelf talks to itself. Valves are finished. I keep meaning to throw it out."
+   }
+  ],
+  "C3_02_radio": [
+   {
+    "speaker": "narrator",
+    "text": "A big old valve radio on the top shelf. The dial glows faintly."
+   },
+   {
+    "speaker": "elias",
+    "text": "(through the speaker) ...oh! Oh, somebody can HEAR me! Spirits! Hello!"
+   },
+   {
+    "speaker": "reno",
+    "text": "Hello radio!"
+   },
+   {
+    "speaker": "elias",
+    "text": "I'm not the radio. I'm IN the radio. Elias. My valve cracked and I can't get out. I've been stuck on the shipping forecast for a month."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Where can we find a valve?"
+   },
+   {
+    "speaker": "elias",
+    "text": "The photo studio across the wharf keeps spares for their flash units. Bottom drawer of the big desk. Please hurry. It's very windy in Dogger."
+   },
+   {
+    "set_flag": "ch03_valve_needed"
+   }
+  ],
+  "find_valve": [
+   {
+    "speaker": "narrator",
+    "text": "The bottom drawer of the photographer's desk: flash bulbs, film... and a spare glass valve."
+   },
+   {
+    "key_item": "item_glass_valve"
+   },
+   {
+    "set_flag": "ch03_valve_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Glass Valve. (Key item)"
+   }
+  ],
+  "drawer_idle": [
+   {
+    "speaker": "narrator",
+    "text": "Drawers full of film and flash bulbs."
+   }
+  ],
+  "C3_02_elias": [
+   {
+    "speaker": "narrator",
+    "text": "Reno climbs the shelf and swaps the cracked valve for the new one. The radio hums, warms, glows..."
+   },
+   {
+    "take_key_item": "item_glass_valve"
+   },
+   {
+    "speaker": "narrator",
+    "text": "...and a lanky spirit with an aerial for a cowlick pops out of the speaker grille."
+   },
+   {
+    "speaker": "elias",
+    "text": "FREE! Thank you! Elias, Wayfarer, radio spirit, at your service. Mind the cord."
+   },
+   {
+    "speaker": "reno",
+    "text": "Reno! That's Lumi! We're looking for whoever's stealing names!"
+   },
+   {
+    "speaker": "elias",
+    "text": "Stealing... that's why I can't remember this town's name. Nobody can. I tried every station."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Can you help us?"
+   },
+   {
+    "speaker": "elias",
+    "text": "I can tune things. Radios, masts, old broadcasts. If this town ever said its name out loud, the air still remembers it."
+   },
+   {
+    "join": "elias"
+   },
+   {
+    "set_flag": "ch03_elias_joined"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Elias joined the party! He rides in Reno's satchel. In battle: Spark Coil and Static Burst. In the field: Tune, at radio masts."
+   },
+   {
+    "speaker": "elias",
+    "text": "Start with the photo studio. Photographs remember things people forget."
+   }
+  ],
+  "radio_empty": [
+   {
+    "speaker": "narrator",
+    "text": "The old radio plays a quiet song now. The shipping forecast is over."
+   }
+  ],
+  "human_photographer": [
+   {
+    "speaker": "photographer",
+    "text": "(dusting frames) Thirty years of photographs of this town and every caption's gone blank. My handwriting, gone."
+   }
+  ],
+  "human_photographer_after": [
+   {
+    "speaker": "photographer",
+    "text": "(writing captions, humming) Bandar Kencana, 1938. Bandar Kencana, 1946. Bandar Kencana, Bandar Kencana..."
+   }
+  ],
+  "photo_later": [
+   {
+    "speaker": "narrator",
+    "text": "Three faded photographs with blank captions."
+   }
+  ],
+  "photo_look": [
+   {
+    "speaker": "narrator",
+    "text": "A faded photograph with a blank caption."
+   },
+   {
+    "speaker": "elias",
+    "text": "Lumi's Memory Touch could tell us what it was."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C, then look again.)"
+   }
+  ],
+  "photo_done": [
+   {
+    "speaker": "narrator",
+    "text": "The caption is written in again, in neat handwriting."
+   }
+  ],
+  "photo_1_touch": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the photograph. Firecrackers, red paper, a crowd on the wharf, and a banner going up over the street."
+   },
+   {
+    "choice": [
+     {
+      "text": "Wharf, New Year, 1938",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes \"Wharf, New Year, 1938\" on the caption. It stays."
+       },
+       {
+        "set_flag": "ch03_photo_1"
+       },
+       {
+        "goto": "photos_check"
+       }
+      ]
+     },
+     {
+      "text": "Rubber auction, 1951",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     },
+     {
+      "text": "Flood, 1926",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "photo_2_touch": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the photograph. Rain hammering the street, sandbags, the printer's apprentices carrying paper up to the first floor."
+   },
+   {
+    "choice": [
+     {
+      "text": "Wedding at the jetty, 1955",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     },
+     {
+      "text": "The big flood, 1926",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes \"The big flood, 1926\" on the caption. It stays."
+       },
+       {
+        "set_flag": "ch03_photo_2"
+       },
+       {
+        "goto": "photos_check"
+       }
+      ]
+     },
+     {
+      "text": "Market day, 1960",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "photo_3_touch": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the photograph. A brand-new printing press being winched off a barge, everybody cheering, a dog barking."
+   },
+   {
+    "choice": [
+     {
+      "text": "Fire drill, 1949",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     },
+     {
+      "text": "The school band, 1957",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes it, and the words slide off the paper."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Not that one."
+       }
+      ]
+     },
+     {
+      "text": "The new press arrives, 1946",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Lumi writes \"The new press arrives, 1946\" on the caption. It stays."
+       },
+       {
+        "set_flag": "ch03_photo_3"
+       },
+       {
+        "goto": "photos_check"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "photos_check": [
+   {
+    "speaker": "photographer",
+    "text": "(suddenly) Kencana. Bandar Kencana! How did I forget?",
+    "if_flags": [
+     "ch03_photo_1",
+     "ch03_photo_2",
+     "ch03_photo_3"
+    ]
+   },
+   {
+    "set_flag": "ch03_photos_restored",
+    "if_flags": [
+     "ch03_photo_1",
+     "ch03_photo_2",
+     "ch03_photo_3"
+    ]
+   },
+   {
+    "speaker": "elias",
+    "text": "It's coming back for the humans. But the spirit side is still blank. Feel that? Something tore at the west end of the wharf.",
+    "if_flags": [
+     "ch03_photo_1",
+     "ch03_photo_2",
+     "ch03_photo_3"
+    ]
+   }
+  ],
+  "C3_04_veil": [
+   {
+    "set_flag": "ch03_veil_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Kencana-in-the-Veil: the town's spirit twin, violet and quiet. Spirits wander the street looking at their own hands."
+   },
+   {
+    "speaker": "nameless_spirit",
+    "text": "Excuse me. Do you know who I am? I'm the one who... sells the... the paper things?"
+   },
+   {
+    "speaker": "elias",
+    "text": "Three radio masts. If the town ever broadcast its name, I can tune it back in."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: read each mast's plaque, and let Elias Tune the right frequency."
+   }
+  ],
+  "nameless_a": [
+   {
+    "speaker": "nameless_spirit",
+    "text": "I had a name. It was short. Or long. It had a nice sound."
+   }
+  ],
+  "nameless_b": [
+   {
+    "speaker": "nameless_spirit",
+    "text": "The Hall of Records is shut. Something in there keeps saying \"tidy, tidy\"."
+   }
+  ],
+  "nameless_after": [
+   {
+    "speaker": "nameless_spirit",
+    "text": "Kertas-Kecil! That's me! Of the Kencana Paper Kin! Thank you!"
+   }
+  ],
+  "kertas_stall": [
+   {
+    "speaker": "mak_kertas",
+    "text": "I remember my stall even if I can't remember my street. Buy something, dear."
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse",
+      "then": [
+       {
+        "event": "shop:kertas_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "mast_1": [
+   {
+    "speaker": "narrator",
+    "text": "Plaque: \"Wharf Station. First broadcast at dawn, when the tide was lowest.\""
+   },
+   {
+    "speaker": "elias",
+    "text": "Which band should I tune?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Low band, 0.6",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Elias tunes the mast. Static, a whistle... then a voice, decades old:"
+       },
+       {
+        "speaker": "narrator",
+        "text": "...good morning from the wharf at Bandar KEN...!"
+       },
+       {
+        "set_flag": "ch03_mast_1"
+       },
+       {
+        "speaker": "elias",
+        "text": "\"KEN\"! That's part of it!"
+       },
+       {
+        "goto": "masts_check"
+       }
+      ]
+     },
+     {
+      "text": "Middle band, 1.0",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     },
+     {
+      "text": "High band, 1.4",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "mast_2": [
+   {
+    "speaker": "narrator",
+    "text": "Plaque: \"Market Station. Our signal is neither high nor low, like a fair price.\""
+   },
+   {
+    "speaker": "elias",
+    "text": "Which band should I tune?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Low band, 0.6",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     },
+     {
+      "text": "Middle band, 1.0",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Elias tunes the mast. Static, a whistle... then a voice, decades old:"
+       },
+       {
+        "speaker": "narrator",
+        "text": "...prices today in the market of Bandar Ken-CA...!"
+       },
+       {
+        "set_flag": "ch03_mast_2"
+       },
+       {
+        "speaker": "elias",
+        "text": "\"CA\"! That's part of it!"
+       },
+       {
+        "goto": "masts_check"
+       }
+      ]
+     },
+     {
+      "text": "High band, 1.4",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "mast_3": [
+   {
+    "speaker": "narrator",
+    "text": "Plaque: \"Hill Station. Highest mast in town. Our voice carries furthest.\""
+   },
+   {
+    "speaker": "elias",
+    "text": "Which band should I tune?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Low band, 0.6",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     },
+     {
+      "text": "Middle band, 1.0",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Just static, and somebody's cooking programme."
+       },
+       {
+        "speaker": "elias",
+        "text": "Wrong band. Let's read the plaque again."
+       }
+      ]
+     },
+     {
+      "text": "High band, 1.4",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Elias tunes the mast. Static, a whistle... then a voice, decades old:"
+       },
+       {
+        "speaker": "narrator",
+        "text": "...and goodnight from Bandar Kenca-NA...!"
+       },
+       {
+        "set_flag": "ch03_mast_3"
+       },
+       {
+        "speaker": "elias",
+        "text": "\"NA\"! That's part of it!"
+       },
+       {
+        "goto": "masts_check"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "mast_done": [
+   {
+    "speaker": "narrator",
+    "text": "The mast hums quietly, still holding its old broadcast."
+   }
+  ],
+  "masts_check": [
+   {
+    "speaker": "reno",
+    "text": "KEN, CA, NA! Kencana! Bandar Kencana!",
+    "if_flags": [
+     "ch03_mast_1",
+     "ch03_mast_2",
+     "ch03_mast_3"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Far up the street, the doors of the Hall of Records swing open.",
+    "if_flags": [
+     "ch03_mast_1",
+     "ch03_mast_2",
+     "ch03_mast_3"
+    ]
+   },
+   {
+    "set_flag": "ch03_masts_done",
+    "if_flags": [
+     "ch03_mast_1",
+     "ch03_mast_2",
+     "ch03_mast_3"
+    ]
+   }
+  ],
+  "bk04_hall_locked": [
+   {
+    "speaker": "narrator",
+    "text": "The Hall of Records is shut tight. Inside, a dry voice says \"tidy... tidy...\""
+   },
+   {
+    "speaker": "elias",
+    "text": "We need the name first. The masts."
+   }
+  ],
+  "bk04_blots_beaten": [
+   {
+    "set_flag": "bk04_blots_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Ugh. My hands are all inky."
+   }
+  ],
+  "bk04_beetle_beaten": [
+   {
+    "set_flag": "bk04_beetle_beaten"
+   },
+   {
+    "speaker": "elias",
+    "text": "A typeset beetle. Somebody's been printing nothing at all."
+   }
+  ],
+  "bk04_mixed_beaten": [
+   {
+    "set_flag": "bk04_mixed_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "They're guarding the masts. Somebody didn't want the name back."
+   }
+  ],
+  "C3_06_clerk_intro": [
+   {
+    "speaker": "narrator",
+    "text": "In the Hall of Records, a tall spirit made of white paper and black ink is wiping a ledger clean, page after page."
+   },
+   {
+    "speaker": "blank_clerk",
+    "text": "Visitors. Untidy. Names are untidy. They smudge. They tear. They hurt when they're lost."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Who told you to do this?"
+   },
+   {
+    "speaker": "blank_clerk",
+    "text": "Someone with ink on their fingers. Someone who was very, very sad. Blank is tidy. Blank is SAFE."
+   },
+   {
+    "speaker": "reno",
+    "text": "Blank is boring!"
+   }
+  ],
+  "C3_06_clerk_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Blank Clerk crumples like a dropped page. Its ink runs out of it and soaks into the floorboards."
+   },
+   {
+    "speaker": "blank_clerk",
+    "text": "...it was so quiet. Nobody could lose anything..."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The ledger falls open. Every page blank, except the stamp inside the cover: a rubber leaf."
+   },
+   {
+    "key_item": "item_clerks_ledger"
+   },
+   {
+    "speaker": "elias",
+    "text": "\"Bukit Getah Estate.\" That's a rubber estate, up the hill road."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Clerk's Ledger and the Crystal Earpiece (Elias: RES +3, SPD +2)."
+   },
+   {
+    "set_flag": "bukit_getah_route_unlocked"
+   },
+   {
+    "event": "travel:BK-01:from_veil"
+   }
+  ],
+  "C3_07_name_back": [
+   {
+    "speaker": "narrator",
+    "text": "Back at the wharf, the letters climb back onto every sign: BANDAR KENCANA."
+   },
+   {
+    "speaker": "printer",
+    "text": "(laughing at himself) Bandar Kencana! Bandar Um. Oh dear."
+   },
+   {
+    "speaker": "trader",
+    "text": "Bandar Um! I'm telling everyone!"
+   },
+   {
+    "set_flag": "ch03_name_restored"
+   },
+   {
+    "speaker": "elias",
+    "text": "The name's back. For the humans and the spirits."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Whoever did this sent the Clerk from a rubber estate."
+   },
+   {
+    "speaker": "reno",
+    "text": "Rubber trees! Do they have trains?"
+   },
+   {
+    "speaker": "elias",
+    "text": "They have a lorry. I know the radio in its cab. Lovely voice. Terrible taste in music."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Elias... are you coming with us?"
+   },
+   {
+    "speaker": "elias",
+    "text": "Somebody has to tune things for you. Besides, my shelf was getting dusty."
+   },
+   {
+    "set_flag": "chapter_03_completed"
+   },
+   {
+    "set_flag": "chapter_04_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}
