@@ -153,3 +153,46 @@ func outcome() -> String:
 	if side("hero").is_empty():
 		return "lose"
 	return ""
+
+
+## A team skill can be used only if every user is alive, still has their
+## action token this round, and has the MP.
+func can_team(user_ids: Array, mp_each: int) -> bool:
+	for id: String in user_ids:
+		var u := unit(id)
+		if u.is_empty() or u["hp"] <= 0 or not u["token"] or u["mp"] < mp_each:
+			return false
+	return true
+
+
+## Pays for a team skill once: every user's token and MP.
+func pay_team(user_ids: Array, mp_each: int) -> bool:
+	if not can_team(user_ids, mp_each):
+		return false
+	for id: String in user_ids:
+		var u := unit(id)
+		u["token"] = false
+		u["mp"] -= mp_each
+	return true
+
+
+## Team damage: each user's base (physical for the first, magical for the
+## rest) added together, times the skill multiplier, times the average of the
+## cue multipliers. Misses weaken it, but it always lands. One rounding.
+static func team_damage(users: Array, target: Dictionary, mult: float, judgements: Array) -> int:
+	var base := 0
+	for i in users.size():
+		base += base_damage("physical" if i == 0 else "magical", users[i], target)
+	var timing := 0.0
+	for j: String in judgements:
+		timing += MULT[j]
+	timing /= maxf(1.0, judgements.size())
+	var defense := GUARD_MULT if target["guarding"] else 1.0
+	return final_damage(base, mult, timing, defense)
+
+
+func team_hit(user_ids: Array, target: Dictionary, mult: float, judgements: Array) -> int:
+	var users: Array = user_ids.map(unit)
+	var dmg := team_damage(users, target, mult, judgements)
+	target["hp"] = maxi(0, int(target["hp"]) - dmg)
+	return dmg

@@ -9,8 +9,7 @@
   ".": "dark_grass",
   "=": "path",
   "E": "exit",
-  "G": "gate",
-  "s": "sign"
+  "G": "gate"
  },
  "rows": [
   "##############################",
@@ -26,7 +25,7 @@
   "##.............=............##",
   "##.............=............##",
   "##.............=............##",
-  "##............s.............##",
+  "##..........................##",
   "##.........=========........##",
   "##.........=========........##",
   "##.........=========........##",
@@ -48,6 +47,11 @@
    "x": 15,
    "y": 2,
    "facing": "down"
+  },
+  "from_veil": {
+   "x": 15,
+   "y": 19,
+   "facing": "up"
   }
  },
  "doors": [
@@ -57,21 +61,128 @@
    "y": 1,
    "to_map": "KA-08",
    "to_spawn": "from_gate"
+  },
+  {
+   "id": "gate_to_sungai_melor",
+   "x": 15,
+   "y": 21,
+   "to_map": "SM-01",
+   "to_spawn": "from_veil"
   }
  ],
- "npcs": [],
- "objects": [],
- "overrides": [],
- "triggers": [],
- "signs": [
+ "npcs": [
   {
-   "x": 14,
-   "y": 13,
-   "lines": [
-    "The Forbidden Gate.",
-    "(The Thornkeeper arrives in the final build step.)"
+   "id": "thornkeeper",
+   "character": "thornkeeper",
+   "x": 15,
+   "y": 17,
+   "facing": "up",
+   "hide_if_flag": "thornkeeper_defeated",
+   "encounter": {
+    "id": "thornkeeper_boss",
+    "intro_scene": "P06_thornkeeper",
+    "outro_scene": "P06_after"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "forbidden_gate",
+   "x": 15,
+   "y": 20,
+   "talk": [
+    {
+     "if_flags": [
+      "forbidden_gate_open"
+     ],
+     "scene": "pz5_open"
+    },
+    {
+     "if_flags": [
+      "gate_key_collected",
+      "thornkeeper_defeated"
+     ],
+     "scene": "PZ5_open_gate"
+    },
+    {
+     "if_flags": [
+      "thornkeeper_defeated"
+     ],
+     "scene": "pz5_need_key"
+    },
+    {
+     "scene": "pz5_sealed"
+    }
    ]
   }
  ],
+ "overrides": [
+  {
+   "if_flags": [
+    "forbidden_gate_open"
+   ],
+   "tile": "veil",
+   "cells": [
+    [
+     13,
+     20
+    ],
+    [
+     14,
+     20
+    ],
+    [
+     16,
+     20
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     13,
+     21
+    ],
+    [
+     14,
+     21
+    ],
+    [
+     16,
+     21
+    ],
+    [
+     17,
+     21
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "forbidden_gate_open"
+   ],
+   "tile": "exit",
+   "cells": [
+    [
+     15,
+     21
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "forbidden_gate_open"
+   ],
+   "tile": "path",
+   "cells": [
+    [
+     15,
+     20
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "signs": [],
  "on_enter": []
 }

@@ -23,6 +23,10 @@
   },
   "voice": {
    "name": "???"
+  },
+  "thornkeeper": {
+   "name": "Thornkeeper",
+   "character": "thornkeeper"
   }
  },
  "scenes": {
@@ -566,6 +570,141 @@
    {
     "speaker": "narrator",
     "text": "The root bridge holds firm."
+   }
+  ],
+  "P06_thornkeeper": [
+   {
+    "speaker": "thornkeeper",
+    "text": "NO CROSSING."
+   },
+   {
+    "speaker": "reno",
+    "text": "We only want to see a train!"
+   },
+   {
+    "speaker": "thornkeeper",
+    "text": "NO CROSSING."
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's repeating an old instruction."
+   },
+   {
+    "speaker": "reno",
+    "text": "Can we give it a new one?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Not while it's trying to squash us."
+   },
+   {
+    "speaker": "reno",
+    "text": "So... first we don't get squashed?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "An excellent beginning."
+   }
+  ],
+  "P06_after": [
+   {
+    "speaker": "thornkeeper",
+    "text": "THE PROMISE... HAS NOT ENDED."
+   },
+   {
+    "speaker": "lumi",
+    "text": "What promise?"
+   },
+   {
+    "speaker": "thornkeeper",
+    "text": "REMEMBER... THE NAMES."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Thornkeeper sinks back into the roots."
+   }
+  ],
+  "pz5_sealed": [
+   {
+    "speaker": "narrator",
+    "text": "A great gate of woven roots. Something guards it."
+   }
+  ],
+  "pz5_need_key": [
+   {
+    "speaker": "narrator",
+    "text": "The gate has an old keyhole."
+   },
+   {
+    "speaker": "lumi",
+    "text": "The key must be somewhere in the Whispering Roots."
+   }
+  ],
+  "PZ5_open_gate": [
+   {
+    "speaker": "narrator",
+    "text": "Reno turns the Gate Key. The roots unwind, and the air beyond shimmers like a curtain."
+   },
+   {
+    "set_flag": "forbidden_gate_open"
+   },
+   {
+    "speaker": "reno",
+    "text": "A real crossing!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "A short, careful crossing."
+   }
+  ],
+  "pz5_open": [
+   {
+    "speaker": "narrator",
+    "text": "The open gate shimmers. The human world is on the other side."
+   }
+  ],
+  "P07_arrival": [
+   {
+    "speaker": "narrator",
+    "text": "Morning. A warm riverside village. A bicycle rattles past."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi! Look! A metal buffalo!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "That's a bicycle."
+   },
+   {
+    "speaker": "reno",
+    "text": "Does it bite?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Only if you ride it into a wall."
+   },
+   {
+    "speaker": "reno",
+    "text": "...Humans are incredible."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A bus roars by in a cloud of dust."
+   },
+   {
+    "speaker": "reno",
+    "text": "WHAT WAS THAT?!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "I suspect our short visit is about to become much longer."
+   },
+   {
+    "set_flag": "prologue_completed"
+   },
+   {
+    "event": "prologue_end"
    }
   ]
  }

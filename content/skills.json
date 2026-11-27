@@ -1,8 +1,36 @@
 {
-  "status": "WORKING_PROPOSAL",
-  "note": "Prototype costs and multipliers. One cue per skill.",
-  "skills": {
-    "leaf_slap": {"name": "Leaf Slap", "user": "reno", "mp": 3, "kind": "physical", "mult": 1.3, "text": "A springy slap with a big leaf."},
-    "echo_spark": {"name": "Echo Spark", "user": "lumi", "mp": 4, "kind": "magical", "mult": 1.4, "text": "A spark of remembered light."}
+ "status": "WORKING_PROPOSAL",
+ "note": "Prototype costs and multipliers. One cue per skill.",
+ "skills": {
+  "leaf_slap": {
+   "name": "Leaf Slap",
+   "user": "reno",
+   "mp": 3,
+   "kind": "physical",
+   "mult": 1.3,
+   "text": "A springy slap with a big leaf."
+  },
+  "echo_spark": {
+   "name": "Echo Spark",
+   "user": "lumi",
+   "mp": 4,
+   "kind": "magical",
+   "mult": 1.4,
+   "text": "A spark of remembered light."
   }
+ },
+ "team": {
+  "spirit_cyclone": {
+   "name": "Spirit Cyclone",
+   "users": [
+    "reno",
+    "lumi"
+   ],
+   "mp_each": 4,
+   "cues": 3,
+   "mult": 1.5,
+   "text": "Reno spins, Lumi's echoes follow. Uses both heroes' turns. Three timed presses; misses weaken it but it always lands.",
+   "requires_flag": "spirit_cyclone_learned"
+  }
+ }
 }

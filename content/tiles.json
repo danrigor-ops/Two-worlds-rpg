@@ -191,6 +191,34 @@
    "color": "#3a2a4a",
    "accent": "#e8b84a",
    "pattern": "gate"
+  },
+  "laterite": {
+   "index": 27,
+   "solid": false,
+   "color": "#b8643c",
+   "accent": "#9c5232",
+   "pattern": "speckle"
+  },
+  "shophouse": {
+   "index": 28,
+   "solid": true,
+   "color": "#e0b48a",
+   "accent": "#c0563a",
+   "pattern": "shophouse"
+  },
+  "veil": {
+   "index": 29,
+   "solid": false,
+   "color": "#4a3a7a",
+   "accent": "#8fe3d0",
+   "pattern": "exit"
+  },
+  "fence": {
+   "index": 30,
+   "solid": true,
+   "color": "#5d9e4b",
+   "accent": "#f4ecd2",
+   "pattern": "fence"
   }
  }
 }

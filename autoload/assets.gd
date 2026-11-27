@@ -234,6 +234,16 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			for x in [1, 6, 11]:
 				_rect(img, ox + x, 0, 3, TILE, Color("#6b4a8f"))
 			_rect(img, ox, 7, TILE, 2, acc)
+		"shophouse":
+			_rect(img, ox, 0, TILE, 4, acc)
+			_rect(img, ox, 4, TILE, 1, acc.darkened(0.3))
+			_rect(img, ox + 3, 7, 4, 5, Color("#5a7a9e"))
+			_rect(img, ox + 9, 7, 4, 5, Color("#5a7a9e"))
+		"fence":
+			_rect(img, ox, 0, TILE, TILE, Color("#5d9e4b"))
+			for x in [1, 6, 11]:
+				_rect(img, ox + x, 3, 3, 12, acc)
+			_rect(img, ox, 6, TILE, 2, acc.darkened(0.15))
 		"rug":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)
@@ -255,6 +265,24 @@ func _make_character_sheet(a: Dictionary) -> Image:
 	var lumi: bool = p["style"] == "lumi"
 	var eye := Color("#1a1420")
 	var img := Image.create(fw * order.size(), fh, false, Image.FORMAT_RGBA8)
+	if p["style"] == "thornkeeper":
+		for i in order.size():
+			var o := i * fw
+			_rect(img, o + 5, 10, 22, 28, body)
+			_rect(img, o + 7, 6, 18, 6, hair)
+			for tx: int in [4, 9, 15, 21, 26]:
+				_rect(img, o + tx, 3 + (tx % 3), 2, 5, skin)   # thorns
+			_rect(img, o + 3, 18, 3, 12, skin)
+			_rect(img, o + 26, 18, 3, 12, skin)
+			if order[i] != "up":
+				var ex := 10 if order[i] != "right" else 14
+				_rect(img, o + ex, 15, 3, 3, acc)
+				if order[i] == "down":
+					_rect(img, o + 19, 15, 3, 3, acc)
+			_rect(img, o + 7, 36, 6, 2, legs)
+			_rect(img, o + 19, 36, 6, 2, legs)
+		_outline(img)
+		return img
 	if p["style"] == "leafling":
 		_paint_leafling(img, order, fw, body, hair, acc, eye)
 		_outline(img)

@@ -124,6 +124,29 @@
     "accent": "#c49d62",
     "legs": "#4b8a3d"
    }
+  },
+  "thornkeeper_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "thornkeeper",
+    "hair": "#24182f",
+    "skin": "#6b4a8f",
+    "body": "#3a2a4a",
+    "accent": "#e8b84a",
+    "legs": "#24182f"
+   }
   }
  },
  "characters": {
@@ -131,6 +154,7 @@
   "lumi": "lumi_overworld",
   "nenek": "nenek_overworld",
   "bobo": "bobo_overworld",
-  "leafling": "leafling_overworld"
+  "leafling": "leafling_overworld",
+  "thornkeeper": "thornkeeper_overworld"
  }
 }

@@ -40,6 +40,8 @@ var _cue_active := false
 var _cue_time_us := 0
 var _cue_result := ""
 var _hints_shown := {}
+var _team: Dictionary = {}
+var _phase := {}   # enemy uid -> phase index
 
 signal _menu_done(value: Variant)
 signal _cue_done(result: String)
@@ -51,7 +53,9 @@ func start(id: String) -> void:
 	_enemy_defs = data.get("enemies", {})
 	encounter = data.get("encounters", {}).get(id, {})
 	encounter_id = id
-	_skills = JsonUtil.load_dict(SKILLS_PATH).get("skills", {})
+	var sk := JsonUtil.load_dict(SKILLS_PATH)
+	_skills = sk.get("skills", {})
+	_team = sk.get("team", {})
 	snapshot = GameState.to_dict()
 	layer = 30
 	InputManager.push_mode(InputManager.Mode.BATTLE)
@@ -171,12 +175,15 @@ func _run() -> void:
 			else:
 				await _enemy_turn(u)
 			_refresh_status()
+			for e in combat.side("enemy"):
+				await _check_phase(e)
 			var result := combat.outcome()
 			if result == "win":
 				await _win()
 				return
 			if result == "lose":
 				await _lose()
+				_phase.clear()
 				_setup_combat()
 				await _say("Try again!")
 				break
@@ -191,9 +198,18 @@ func _hero_turn(u: Dictionary) -> bool:
 			{"text": "Guard", "enabled": true, "value": "guard"},
 			{"text": "Item", "enabled": true, "value": "item"},
 		]
+		for tid: String in _team:
+			var t: Dictionary = _team[tid]
+			if t.has("requires_flag") and not GameState.get_flag(t["requires_flag"]):
+				continue
+			if u["id"] in t["users"] and t["users"].all(func(id: String) -> bool: return not combat.unit(id).is_empty()):
+				items.insert(2, {"text": "Team", "enabled": combat.can_team(t["users"], int(t["mp_each"])), "value": "team:" + tid})
 		if encounter.get("can_escape", true):
 			items.append({"text": "Run", "enabled": true, "value": "run"})
 		var cmd: Variant = await _choose("%s's turn" % u["name"], items, false)
+		if str(cmd).begins_with("team:"):
+			await _team_attack(_team[str(cmd).trim_prefix("team:")])
+			return false
 		match cmd:
 			"attack":
 				await _attack(u, "physical", 1.0, "%s attacks!" % u["name"])
@@ -250,28 +266,93 @@ func _attack(u: Dictionary, kind: String, mult: float, text: String) -> void:
 	var judgement: String = await _cue(_sprites[target["id"]].position + Vector2(0, -18), u["id"], target["id"])
 	var dmg := combat.hit(u, target, kind, mult, judgement)
 	_log("%s -> %s %s %d" % [u["id"], target["id"], judgement, dmg])
-	await _say("%s %d damage!" % [_judgement_text(judgement), dmg])
+	await _say("%s %d damage!%s" % [_judgement_text(judgement), dmg, " (It's guarding.)" if target["guarding"] else ""])
 	if target["hp"] <= 0:
 		_sprites[target["id"]].modulate.a = 0.25
 
 
+func _team_attack(t: Dictionary) -> void:
+	var users: Array = t["users"]
+	combat.pay_team(users, int(t["mp_each"]))
+	var target: Dictionary = combat.side("enemy")[0]
+	var judgements: Array[String] = []
+	for i in int(t["cues"]):
+		_msg.text = "%s! (%d/%d)" % [t["name"], i + 1, int(t["cues"])]
+		judgements.append(await _cue(_sprites[target["id"]].position + Vector2(0, -18), users[i % users.size()], target["id"]))
+	var dmg := combat.team_hit(users, target, float(t["mult"]), judgements)
+	_log("team %s %s %d" % [",".join(users), ",".join(judgements), dmg])
+	await _say("%s! %d damage!" % [t["name"], dmg])
+	if target["hp"] <= 0:
+		_sprites[target["id"]].modulate.a = 0.25
+
+
+## Bosses change attacks as their HP drops (phases in enemies.json).
+func _current_attacks(u: Dictionary) -> Array:
+	var def: Dictionary = _enemy_defs[u["def_id"]]
+	if not def.has("phases"):
+		return def["attacks"]
+	var share := float(u["hp"]) / float(u["max_hp"])
+	var phases: Array = def["phases"]
+	var idx := phases.size() - 1
+	for i in phases.size():
+		if share > float(phases[i]["above"]):
+			idx = i
+			break
+	return phases[idx]["attacks"]
+
+
+func _check_phase(u: Dictionary) -> void:
+	var def: Dictionary = _enemy_defs.get(u.get("def_id", ""), {})
+	if not def.has("phases") or u["hp"] <= 0:
+		return
+	var share := float(u["hp"]) / float(u["max_hp"])
+	var phases: Array = def["phases"]
+	var idx := phases.size() - 1
+	for i in phases.size():
+		if share > float(phases[i]["above"]):
+			idx = i
+			break
+	if idx <= int(_phase.get(u["id"], 0)):
+		return
+	_phase[u["id"]] = idx
+	var ph: Dictionary = phases[idx]
+	_log("phase %d" % idx)
+	if ph.has("enter_text"):
+		await _say(ph["enter_text"])
+	if ph.has("teach_flag"):
+		GameState.set_flag(ph["teach_flag"])
+	if ph.has("ensure_mp"):
+		# The first team skill must be possible: top both heroes up to its cost.
+		for h in combat.side("hero"):
+			h["mp"] = maxi(int(h["mp"]), int(ph["ensure_mp"]))
+		_refresh_status()
+	if ph.get("hint", "") == "cyclone":
+		_hint.text = "Choose Team: Spirit Cyclone uses both heroes' turns. Press A on all three rings!"
+
+
 func _enemy_turn(u: Dictionary) -> void:
 	combat.spend_token(u)
-	var def: Dictionary = _enemy_defs[u["def_id"]]
-	var atk: Dictionary = def["attacks"][(combat.round_number - 1) % def["attacks"].size()]
+	var attacks := _current_attacks(u)
+	var atk: Dictionary = attacks[(combat.round_number - 1) % attacks.size()]
+	if atk.get("guard", false):
+		combat.guard(u)
+		_log("%s guard" % u["id"])
+		await _say("%s uses %s! It braces itself." % [u["name"], atk["name"]])
+		return
 	var heroes := combat.side("hero")
-	var target: Dictionary = heroes[(combat.round_number - 1) % heroes.size()]
-	_msg.text = "%s uses %s on %s!" % [u["name"], atk["name"], target["name"]]
+	var targets: Array = heroes if atk.get("target", "one") == "all" else [heroes[(combat.round_number - 1) % heroes.size()]]
+	var aim: Dictionary = targets[0]
+	_msg.text = "%s uses %s%s!" % [u["name"], atk["name"], "" if targets.size() > 1 else " on " + aim["name"]]
 	_tutorial_hint("cue_dodge")
-	var judgement: String = await _cue(_sprites[target["id"]].position + Vector2(0, -18), u["id"], target["id"])
-	var dmg := combat.hit(u, target, atk["kind"], float(atk["mult"]), "miss", judgement)
-	_log("%s -> %s dodge:%s %d" % [u["id"], target["id"], judgement, dmg])
-	if dmg == 0:
-		await _say("%s dodged it completely!" % target["name"])
-	else:
-		await _say("%s%s takes %d damage." % ["Half dodged! " if judgement == "good" else "", target["name"], dmg])
-	if target["hp"] <= 0:
-		_sprites[target["id"]].modulate.a = 0.35
+	var judgement: String = await _cue(_sprites[aim["id"]].position + Vector2(0, -18), u["id"], aim["id"])
+	var parts: PackedStringArray = []
+	for target: Dictionary in targets:
+		var dmg := combat.hit(u, target, atk["kind"], float(atk["mult"]), "miss", judgement)
+		_log("%s -> %s dodge:%s %d" % [u["id"], target["id"], judgement, dmg])
+		parts.append("%s dodged" % target["name"] if dmg == 0 else "%s takes %d" % [target["name"], dmg])
+		if target["hp"] <= 0:
+			_sprites[target["id"]].modulate.a = 0.35
+	await _say(("Half dodged! " if judgement == "good" else "") + ", ".join(parts) + ".")
 
 
 func _lowest_hp_hero() -> Dictionary:
@@ -360,7 +441,7 @@ func _choose(title: String, items: Array, can_back: bool) -> Variant:
 	if _menu_index >= items.size():
 		_menu_index = 0
 	_msg.text = title
-	_menu_panel.size.y = 6 + 9 * items.size()
+	_menu_panel.size.y = 6 + 10 * items.size()
 	_menu_panel.position.y = 156 - _menu_panel.size.y
 	_menu_open = true
 	_menu_back_allowed = can_back

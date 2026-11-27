@@ -70,5 +70,5 @@ static func _validate_steps(id: String, steps: Array, e: Array[String]) -> void:
 			var item: String = step.get("key_item", step.get("item", step.get("take_key_item", "")))
 			if not JsonUtil.load_dict("res://content/items.json").get("items", {}).has(item):
 				e.append("scene %s: unknown item '%s'" % [id, item])
-		elif not (step.has("set_flag") or step.has("join") or step.has("quest")):
+		elif not (step.has("set_flag") or step.has("join") or step.has("quest") or step.has("event")):
 			e.append("scene %s: step has no known type: %s" % [id, str(step)])

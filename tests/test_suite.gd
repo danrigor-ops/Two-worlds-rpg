@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 11
+const SECTIONS := 13
 
 
 func check(cond: bool, label: String) -> void:
@@ -67,6 +67,12 @@ func run(t: SceneTree) -> int:
 
 	print("Inventory and saving")
 	await _test_saves(gs, im)
+
+	print("Team skill rules")
+	_test_team_rules()
+
+	print("Full prologue run (regression)")
+	await _test_full_prologue(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -731,5 +737,204 @@ func _test_saves(gs: Node, im: Node) -> void:
 	await _tap("cancel")
 	root.remove_child(scene)
 	scene.free()
+	saves.delete_all()
+	_sections_done += 1
+
+
+
+func _test_team_rules() -> void:
+	var c := Combat.new()
+	var reno := Combat.make_unit("reno", "Reno", "hero", {"max_hp": 42, "max_mp": 14, "atk": 14, "def": 9, "mag": 6, "res": 8, "spd": 12})
+	var lumi := Combat.make_unit("lumi", "Lumi", "hero", {"max_hp": 32, "max_mp": 24, "atk": 7, "def": 7, "mag": 16, "res": 12, "spd": 10})
+	var boss := Combat.make_unit("thornkeeper_0", "Thornkeeper", "enemy", {"max_hp": 180, "atk": 11, "def": 9, "mag": 8, "res": 10, "spd": 5})
+	c.setup([reno, lumi], [boss])
+	c.begin_round()
+	check(c.can_team(["reno", "lumi"], 4), "Spirit Cyclone is available with both tokens and 4 MP each")
+	lumi["mp"] = 3
+	check(not c.can_team(["reno", "lumi"], 4), "not without enough MP")
+	lumi["mp"] = 24
+	c.spend_token(lumi)
+	check(not c.can_team(["reno", "lumi"], 4), "not once a partner has acted")
+	c.begin_round()
+	check(c.pay_team(["reno", "lumi"], 4) and reno["mp"] == 10 and lumi["mp"] == 20, "it costs 4 MP from each, once")
+	check(not reno["token"] and not lumi["token"], "and uses both heroes' turns")
+	check(not c.pay_team(["reno", "lumi"], 4), "it can't be paid twice in a round")
+	# (19 physical + 22 magical) x 1.5 skill x timing average.
+	check(Combat.team_damage([reno, lumi], boss, 1.5, ["perfect", "perfect", "perfect"]) == 92, "three Perfects: 41 x 1.5 x 1.5 = 92")
+	check(Combat.team_damage([reno, lumi], boss, 1.5, ["miss", "miss", "miss"]) == 62, "three misses still land: 41 x 1.5 = 62")
+	check(Combat.team_damage([reno, lumi], boss, 1.5, ["perfect", "good", "miss"]) == 76, "mixed timing scales between (x1.233 = 76)")
+	reno["hp"] = 0
+	check(not c.can_team(["reno", "lumi"], 4), "not if a partner is down")
+	_sections_done += 1
+
+
+func _milestone(gs: Node, label: String) -> void:
+	# Save and resume must give the same quest state at every milestone.
+	var saves: Node = root.get_node("Saves")
+	var before: Dictionary = gs.data["quests"].duplicate()
+	saves.save("2")
+	gs.new_game()
+	saves.load_slot("2")
+	check(gs.data["quests"] == before, "save and resume keep quests at: " + label)
+
+
+func _run_battle(scene: Node, im: Node, prefer_team: bool) -> Array[String]:
+	var out: Array[String] = []
+	var battle: Battle = null
+	for i in 200:
+		for c in scene.get_children():
+			if c is Battle:
+				battle = c
+		if battle:
+			break
+		await tree.process_frame
+	if battle == null:
+		return out
+	for i in 3000:
+		if not is_instance_valid(battle) or im.current_mode() != im.Mode.BATTLE:
+			break
+		out.assign(battle.battle_log)
+		if battle._menu_open:
+			var pick: Variant = null
+			for it: Dictionary in battle._menu_items:
+				if it["enabled"] and ((prefer_team and str(it["value"]).begins_with("team:")) or it["value"] == "attack"):
+					pick = it["value"]
+					if str(pick).begins_with("team:"):
+						break
+			battle._menu_done.emit(pick if pick != null else "guard")
+		await tree.process_frame
+	return out
+
+
+func _test_full_prologue(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(2)
+	await _finish_dialogue(im)
+	check(gs.get_flag("reno_token_obtained"), "P00: token")
+	scene.warp("KA-01", "from_home")
+	var lumi_cell: Vector2i = scene.npcs[0]["def"]["cell"]
+	scene.leader().place_at(MapData.cell_to_feet(lumi_cell + Vector2i(1, 0)), "left")
+	await tree.physics_frame
+	await _tap("confirm")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("lumi_joined"), "P01: Lumi joins")
+	_milestone(gs, "Lumi joined")
+	scene.warp("KA-05", "from_square")
+	await _talk(scene, Vector2i(12, 8), im)
+	check(gs.get_flag("elder_warning_heard"), "P02: Nenek's warning")
+	scene.warp("KA-04", "from_square")
+	await _talk(scene, Vector2i(8, 9), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	_milestone(gs, "Bobo's errand")
+	scene.warp("KA-06", "from_square")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 12)), "down")
+	await _press_for("move_down", 24)
+	await _finish_dialogue(im)
+	await _run_battle(scene, im, false)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("leafling_tutorial_complete"), "P04: Leafling beaten")
+	scene.warp("KA-04", "from_square")
+	await _talk(scene, Vector2i(8, 9), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("lantern_obtained"), "P03: lantern")
+	_milestone(gs, "lantern")
+	scene.warp("KA-08", "from_glade")
+	await _wait(2)
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(23, 18), "left", im)
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(30, 25), "right", im)
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("gate_key_collected") and gs.get_flag("root_bridge_restored"), "P05: key and bridge")
+	check(gs.quest_state("PRO-004") == "active", "the Thornkeeper quest begins")
+	_milestone(gs, "bridge restored")
+
+	# P06: the gate is sealed until the Thornkeeper is beaten.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 32)), "down")
+	await _press_for("move_down", 30)
+	await _wait_transition(im)
+	check(scene.map.id == "KA-07", "the bridge leads to the Forbidden Gate")
+	await _face_and_press(scene, Vector2i(15, 15), "down", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("thornkeeper_defeated"), "")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 15)), "down")
+	await _press_for("move_down", 24)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "walking up to the Thornkeeper starts the boss fight")
+	var blog: Array[String] = await _run_battle(scene, im, true)
+	check(blog.any(func(l: String) -> bool: return l.begins_with("phase 2")), "the boss reached its last phase")
+	check(blog.any(func(l: String) -> bool: return l.begins_with("team reno,lumi")), "Spirit Cyclone was used")
+	var first_team := blog.find(blog.filter(func(l: String) -> bool: return l.begins_with("team"))[0]) if blog.any(func(l: String) -> bool: return l.begins_with("team")) else -1
+	check(first_team > blog.find("phase 2"), "Spirit Cyclone is only learned in the last phase")
+	check(blog.any(func(l: String) -> bool: return l == "thornkeeper_0 guard"), "the Thornkeeper guards in its first phase")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("thornkeeper_defeated") and gs.quest_state("PRO-004") == "rewarded", "P06: Thornkeeper beaten, PRO-004 rewarded")
+	check(gs.has_key_item("item_guardian_seed") and int(gs.data["wallet"]["dewdrops"]) == 8, "Guardian Seed and 3 Dewdrops (5 + 3)")
+	check(scene.npcs.is_empty(), "the Thornkeeper is gone")
+	_milestone(gs, "Thornkeeper beaten")
+
+	# PZ-005: open the gate and cross.
+	await _face_and_press(scene, Vector2i(15, 19), "down", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("forbidden_gate_open") and gs.quest_state("PRO-005") == "active", "PZ-005: the gate opens")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 19)), "down")
+	await _press_for("move_down", 30)
+	await _wait_transition(im)
+	check(scene.map.id == "SM-01", "through the gate to Sungai Melor")
+	check(im.current_mode() == im.Mode.DIALOGUE, "P07 plays on arrival")
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	for i in 240:
+		if tree.current_scene != null and tree.current_scene != scene:
+			break
+		await tree.process_frame
+	check(gs.get_flag("prologue_completed") and gs.get_flag("chapter_01_unlocked"), "prologue complete and Chapter 1 unlocked")
+	check(gs.quest_state("PRO-005") == "rewarded", "every prologue quest is finished")
+	check(tree.current_scene != null and tree.current_scene.name == "EndOfContent", "the end-of-content screen shows (not a blank screen)")
+	check(saves.has_save("auto"), "the game autosaved at the end")
+	gs.new_game()
+	saves.load_slot("auto")
+	check(gs.get_flag("prologue_completed") and gs.data["map_id"] == "SM-01", "Continue resumes in Sungai Melor after the prologue")
+	var flags_in_order := ["reno_token_obtained", "lumi_joined", "elder_warning_heard", "bobo_parcel_quest_started", "leafling_tutorial_complete",
+		"bobo_parcel_returned", "lantern_obtained", "gate_key_collected", "echo_path_revealed", "root_bridge_restored",
+		"thornkeeper_defeated", "forbidden_gate_open", "prologue_completed", "chapter_01_unlocked"]
+	check(flags_in_order.all(gs.get_flag), "all 14 required prologue flags are set")
+	if is_instance_valid(scene):
+		if scene.is_inside_tree():
+			root.remove_child(scene)
+		scene.free()
+	var end_screen := tree.current_scene
+	if end_screen:
+		root.remove_child(end_screen)
+		end_screen.free()
 	saves.delete_all()
 	_sections_done += 1

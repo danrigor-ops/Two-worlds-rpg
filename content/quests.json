@@ -52,7 +52,8 @@
     "root_bridge_restored"
    ],
    "journal": {
-    "active": "Find the gate key and a way across the Whispering Roots."
+    "active": "Find the gate key and a way across the Whispering Roots.",
+    "completed": "We found the gate key and rebuilt the root bridge."
    }
   },
   {
@@ -72,7 +73,8 @@
     "dewdrops": 3
    },
    "journal": {
-    "active": "Something guards the Forbidden Gate."
+    "active": "Something guards the Forbidden Gate.",
+    "completed": "The Thornkeeper let us pass. It said the promise hasn't ended."
    }
   },
   {
@@ -91,7 +93,8 @@
     ]
    },
    "journal": {
-    "active": "Go through the gate."
+    "active": "Open the Forbidden Gate and cross into the human world.",
+    "completed": "We made it to Sungai Melor!"
    }
   }
  ]
