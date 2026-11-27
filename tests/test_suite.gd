@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 20
+const SECTIONS := 21
 
 
 func check(cond: bool, label: String) -> void:
@@ -94,6 +94,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 3: The Town That Forgot Its Name")
 	await _test_chapter3(gs, im)
+
+	print("Chapter 4: The Rubber Grove at Midnight")
+	await _test_chapter4(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -249,6 +252,20 @@ func _finish_dialogue(im: Node, choice := 0) -> void:
 		if box.choice_panel.visible:
 			for k in choice:
 				await _tap("move_down")
+		await _tap("confirm")
+
+
+## Like _finish_dialogue, but each choice box takes the next answer in the list.
+func _finish_dialogue_choices(im: Node, choices: Array) -> void:
+	var n := 0
+	for i in 120:
+		if im.current_mode() != im.Mode.DIALOGUE:
+			return
+		var box: DialogueBox = tree.current_scene.dialogue
+		if box.choice_panel.visible:
+			for k in int(choices[mini(n, choices.size() - 1)]):
+				await _tap("move_down")
+			n += 1
 		await _tap("confirm")
 
 
@@ -1945,4 +1962,123 @@ func _test_chapter3(gs: Node, im: Node) -> void:
 		root.remove_child(end_screen)
 		end_screen.free()
 	saves.delete_all()
+	_sections_done += 1
+
+
+## A new game set up at the end of the given chapter, with Elias, at the given XP.
+func _chapter_start(gs: Node, flags: Array, xp: int, map_id: String, spawn: String) -> Node:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_guardian_bloom_learned", "ch01_gentle_float_unlocked", "ch02_ripple_learned"] + flags:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	gs.gain_xp("reno", xp)
+	gs.gain_xp("lumi", xp)
+	if "ch03_elias_joined" in flags:
+		gs.add_member("elias")
+	gs.set_spawn(map_id, spawn)
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	return scene
+
+
+## After a chapter_end event: wait for the end screen, check it, and clean up.
+func _chapter_end_screen(scene: Node, label: String) -> void:
+	for i in 240:
+		if tree.current_scene != null and tree.current_scene != scene:
+			break
+		await tree.process_frame
+	check(tree.current_scene != null and tree.current_scene.name == "EndOfContent", "the %s complete screen shows" % label)
+	if is_instance_valid(scene):
+		if scene.is_inside_tree():
+			root.remove_child(scene)
+		scene.free()
+	var end_screen := tree.current_scene
+	if end_screen:
+		root.remove_child(end_screen)
+		end_screen.free()
+	root.get_node("Saves").delete_all()
+
+
+func _test_chapter4(gs: Node, im: Node) -> void:
+	var a := Combat.make_unit("p", "P", "hero", {"max_hp": 200, "atk": 5, "def": 5, "mag": 5, "res": 5, "spd": 5})
+	check(Combat.poison_damage(a) == 12, "Poison: 6% of max HP")
+
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "chapter_04_unlocked", "ch03_elias_joined", "ch03_name_restored", "ch03_wharf_seen"], 900, "BK-01", "from_estate")
+	await _face_and_press(scene, Vector2i(29, 16), "right", im)
+	await _finish_dialogue(im)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "GT-01" and gs.get_flag("ch04_started"), "C4-00: the lorry up to Bukit Getah")
+	await _finish_dialogue(im)
+	check(scene._tint != null and scene._tint.color != Color.WHITE, "the estate is dark")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(20, 2)), "up")
+	await _press_for("move_up", 40)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "GT-02", "into the rubber grove")
+	await _finish_dialogue(im)
+	check(not scene.map.is_walkable(Vector2i(12, 8)), "a frightened tree blocks the lane")
+	await _face_and_press(scene, Vector2i(11, 8), "right", im)
+	await _finish_dialogue(im, 1)
+	check(not gs.get_flag("ch04_tree_1"), "PZ-401: the wrong words make the tree shiver harder")
+	await _face_and_press(scene, Vector2i(11, 8), "right", im)
+	await _finish_dialogue(im, 0)
+	check(gs.get_flag("ch04_whisper_learned") and gs.get_flag("ch04_tree_1") and scene.map.is_walkable(Vector2i(12, 8)), "PZ-401: Forest Whisper calms the first tree")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(23, 20), "right", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("ch04_tree_2"), "Lumi can't Forest Whisper")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(23, 20), "right", im)
+	await _finish_dialogue(im, 1)
+	await _face_and_press(scene, Vector2i(35, 12), "right", im)
+	await _finish_dialogue(im, 2)
+	check(gs.get_flag("pz401_grove_calm") and gs.quest_state("C04-001") in ["completed", "rewarded"], "PZ-401: the grove is calm")
+
+	# A battle with Poison and Root Uppercut.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 25)), "up")
+	await _press_for("move_up", 40)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["skill", "root_uppercut", "attack"])
+	check(blog.size() > 2, "the Grove Shades fight ran")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("gt02_shades_beaten"), "the Grove Shades scatter")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(45, 15)), "right")
+	await _press_for("move_right", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "GT-03", "the smokehouse clearing")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(15, 6), im, 1)
+	check(not gs.get_flag("ch04_titis_calmed"), "PZ-402: a harsh answer makes Titis hide again")
+	await _tap("confirm")
+	await _finish_dialogue_choices(im, [0, 1, 0])
+	check(gs.get_flag("ch04_titis_calmed"), "PZ-402: three gentle answers calm Titis")
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 9)), "down")
+	await _press_for("move_down", 30)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Fear-Shadow fight starts")
+	blog = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon grove_shade")), "the Fear-Shadow splits into Grove Shades")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch04_shadow_beaten") and gs.equip_bonus("lumi").get("mag", 0) == 3, "BOSS-401 beaten: the Sap-Drop Charm")
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "GT-01" and scene._tint.color == Color.WHITE, "C4-06: dawn on the estate")
+	await _finish_dialogue(im)
+	check(["seribu_bunga_route_unlocked", "chapter_04_completed", "chapter_05_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C04-001", "C04-002", "C04-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C04-001 to C04-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 4")
 	_sections_done += 1

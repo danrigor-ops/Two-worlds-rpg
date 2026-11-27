@@ -226,6 +226,15 @@
     "spd": 2
    },
    "text": "Picks up stations nobody else can hear. Elias wears it: RES +3, SPD +2."
+  },
+  "equip_sap_drop_charm": {
+   "name": "Sap-Drop Charm",
+   "kind": "charm",
+   "equip_to": "lumi",
+   "bonus": {
+    "mag": 3
+   },
+   "text": "A bead of morning sap, hardened clear. Lumi wears it: MAG +3."
   }
  }
 }

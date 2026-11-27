@@ -1,0 +1,229 @@
+{
+ "id": "GT-02",
+ "name": "The Rubber Grove",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 30,
+ "legend": {
+  "R": "rubber_tree",
+  ".": "grass",
+  "X": "shadow_tree",
+  "E": "exit"
+ },
+ "rows": [
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R..R...R....R..R...R....R..R...R....R..R...R...R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........X...........R...........R..........R",
+  "R..R...R....R..R...R....R..R...R....R..R...R...R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........X..........R",
+  "R...........R...........R...........R..........R",
+  "R..R...R....R..R...R....R..R...R....R..R...R...R",
+  "E...........R...........R...........R..........E",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R..R...R....R..R...R....R..R...R....R..R...R...R",
+  "R...........R...........X...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R..R...R....R..R...R....R..R...R....R..R...R...R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "R...........R...........R...........R..........R",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 15,
+   "facing": "right"
+  },
+  "from_road": {
+   "x": 1,
+   "y": 15,
+   "facing": "right"
+  },
+  "from_clearing": {
+   "x": 46,
+   "y": 15,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_road",
+   "x": 0,
+   "y": 15,
+   "to_map": "GT-01",
+   "to_spawn": "from_grove"
+  },
+  {
+   "id": "to_clearing",
+   "x": 47,
+   "y": 15,
+   "to_map": "GT-03",
+   "to_spawn": "from_grove"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "lurker",
+   "character": "latex_lurker",
+   "x": 6,
+   "y": 9,
+   "facing": "right",
+   "hide_if_flag": "gt02_lurker_beaten",
+   "encounter": {
+    "id": "gt02_lurker",
+    "outro_scene": "gt02_lurker_beaten"
+   }
+  },
+  {
+   "id": "shades",
+   "character": "grove_shade",
+   "x": 18,
+   "y": 22,
+   "facing": "left",
+   "hide_if_flag": "gt02_shades_beaten",
+   "encounter": {
+    "id": "gt02_shades",
+    "outro_scene": "gt02_shades_beaten"
+   }
+  },
+  {
+   "id": "mixed",
+   "character": "latex_lurker",
+   "x": 30,
+   "y": 7,
+   "facing": "down",
+   "hide_if_flag": "gt02_mixed_beaten",
+   "encounter": {
+    "id": "gt02_mixed",
+    "outro_scene": "gt02_mixed_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "shadow_1",
+   "x": 12,
+   "y": 8,
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_tree_1"
+     ],
+     "scene": "tree_calm"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "whisper_1"
+    },
+    {
+     "scene": "tree_look"
+    }
+   ]
+  },
+  {
+   "id": "shadow_2",
+   "x": 24,
+   "y": 20,
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_tree_2"
+     ],
+     "scene": "tree_calm"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "whisper_2"
+    },
+    {
+     "scene": "tree_look"
+    }
+   ]
+  },
+  {
+   "id": "shadow_3",
+   "x": 36,
+   "y": 12,
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_tree_3"
+     ],
+     "scene": "tree_calm"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "whisper_3"
+    },
+    {
+     "scene": "tree_look"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch04_tree_1"
+   ],
+   "tile": "grass",
+   "cells": [
+    [
+     12,
+     8
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch04_tree_2"
+   ],
+   "tile": "grass",
+   "cells": [
+    [
+     24,
+     20
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch04_tree_3"
+   ],
+   "tile": "grass",
+   "cells": [
+    [
+     36,
+     12
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C4_02_grove",
+   "if_not_flags": [
+    "ch04_grove_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#6870a8",
+ "tint_until_flag": "ch04_shadow_beaten"
+}

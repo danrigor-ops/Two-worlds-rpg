@@ -1,0 +1,110 @@
+{
+ "id": "GT-03",
+ "name": "Smokehouse Clearing",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 20,
+ "legend": {
+  "R": "rubber_tree",
+  ".": "grass",
+  "H": "house",
+  "E": "exit"
+ },
+ "rows": [
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "R............................R",
+  "R..........HHHHHHHH..........R",
+  "R..........HHHHHHHH..........R",
+  "R...R......HHHHHHHH..........R",
+  "R........................R...R",
+  "R............................R",
+  "R............................R",
+  "R............................R",
+  "R.......R....................R",
+  "E....................R.......R",
+  "R............................R",
+  "R............................R",
+  "R............................R",
+  "R............................R",
+  "R....R..................R....R",
+  "R............................R",
+  "R............................R",
+  "R............................R",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 10,
+   "facing": "right"
+  },
+  "from_grove": {
+   "x": 1,
+   "y": 10,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_grove",
+   "x": 0,
+   "y": 10,
+   "to_map": "GT-02",
+   "to_spawn": "from_clearing"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "titis",
+   "character": "titis",
+   "x": 15,
+   "y": 6,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_shadow_beaten"
+     ],
+     "scene": "titis_after"
+    },
+    {
+     "if_flags": [
+      "ch04_titis_calmed"
+     ],
+     "scene": "titis_waiting"
+    },
+    {
+     "scene": "C4_04_mediation"
+    }
+   ]
+  },
+  {
+   "id": "fear_shadow",
+   "character": "fear_shadow",
+   "x": 15,
+   "y": 12,
+   "facing": "up",
+   "show_if_flag": "ch04_titis_calmed",
+   "hide_if_flag": "ch04_shadow_beaten",
+   "encounter": {
+    "id": "fear_boss",
+    "intro_scene": "C4_05_shadow_intro",
+    "outro_scene": "C4_05_shadow_outro"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C4_03_clearing",
+   "if_not_flags": [
+    "ch04_clearing_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#a898d8"
+}

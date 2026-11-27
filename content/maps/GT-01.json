@@ -1,0 +1,158 @@
+{
+ "id": "GT-01",
+ "name": "Bukit Getah Estate Road",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "R": "rubber_tree",
+  ".": "grass",
+  "=": "estate_path",
+  "H": "house",
+  "S": "sign",
+  "E": "exit"
+ },
+ "rows": [
+  "RRRRRRRRRRRRRRRRRRR=E=RRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRR===RRRRRRRRRRRRRRRRRR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR..HHHHHHH........===......HHHHHHHH..RR",
+  "RR..HHHHHHH........===......HHHHHHHH..RR",
+  "RR..HHHHHHH........===......HHHHHHHH..RR",
+  "RR..HHHHHHH........===......HHHHHHHH..RR",
+  "RR..HHHHHHH........===......HHHHHHHH..RR",
+  "RR..HHHHHHH........===................RR",
+  "RR.................===................RR",
+  "RR.................===S...............RR",
+  "RR.R..R..R..R..R...===..R..R..R..R..R.RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR.R..R..R..R..R...===..R..R..R..R..R.RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR.R..R..R..R..R...===..R..R..R..R..R.RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR====================================RR",
+  "RR====================================RR",
+  "RR====================================RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RR.................===................RR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR",
+  "RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 25,
+   "facing": "up"
+  },
+  "from_lorry": {
+   "x": 20,
+   "y": 25,
+   "facing": "up"
+  },
+  "from_grove": {
+   "x": 20,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_grove",
+   "x": 20,
+   "y": 0,
+   "to_map": "GT-02",
+   "to_spawn": "from_road"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "tapper",
+   "character": "tapper",
+   "x": 17,
+   "y": 18,
+   "facing": "right",
+   "unaware": true,
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_shadow_beaten"
+     ],
+     "scene": "human_tapper_after"
+    },
+    {
+     "scene": "human_tapper"
+    }
+   ]
+  },
+  {
+   "id": "tapper_b",
+   "character": "tapper_b",
+   "x": 23,
+   "y": 18,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "if_flags": [
+      "ch04_shadow_beaten"
+     ],
+     "scene": "human_tapper_b_after"
+    },
+    {
+     "scene": "human_tapper_b"
+    }
+   ]
+  },
+  {
+   "id": "lorry_back",
+   "character": "lorry",
+   "x": 22,
+   "y": 26,
+   "facing": "up",
+   "talk": [
+    {
+     "scene": "gt01_lorry_back"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [
+  {
+   "x": 22,
+   "y": 11,
+   "lines": [
+    "BUKIT GETAH ESTATE. Tapping lanes north.",
+    "Lanterns to be returned to the smokehouse."
+   ]
+  }
+ ],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C4_01_estate",
+   "if_not_flags": [
+    "ch04_estate_seen"
+   ]
+  },
+  {
+   "scene": "C4_06_dawn",
+   "if_flags": [
+    "ch04_shadow_beaten"
+   ],
+   "if_not_flags": [
+    "chapter_04_completed"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#7880b8",
+ "tint_until_flag": "ch04_shadow_beaten"
+}

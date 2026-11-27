@@ -183,6 +183,12 @@ func _run() -> void:
 					return
 			else:
 				await _enemy_turn(u)
+			if u["hp"] > 0 and Combat.has_status(u, "poison"):
+				# Poison (Chapter 4): 6% of max HP after each of the unit's own actions.
+				var pdmg := Combat.poison_damage(u)
+				u["hp"] = maxi(0, int(u["hp"]) - pdmg)
+				_log("%s poison %d" % [u["id"], pdmg])
+				await _say("%s takes %d poison damage." % [u["name"], pdmg])
 			Combat.tick_status(u)
 			_refresh_status()
 			for e in combat.side("enemy"):
@@ -497,6 +503,7 @@ func _enemy_turn(u: Dictionary) -> void:
 
 
 const STATUS_TEXT := {
+	"poison": "is poisoned!",
 	"slow": "is slowed!",
 	"fog": "forgets their skills for a turn!",
 	"shielded": "is shielded!",
@@ -692,7 +699,7 @@ func _refresh_status() -> void:
 static func _tags(u: Dictionary) -> String:
 	var t := " [G]" if u["guarding"] else ""
 	for k: String in u["status"]:
-		t += " [%s]" % {"slow": "Slow", "shielded": "Shield", "fog": "Fog", "soaked": "Soak"}.get(k, k)
+		t += " [%s]" % {"slow": "Slow", "shielded": "Shield", "fog": "Fog", "soaked": "Soak", "poison": "Psn"}.get(k, k)
 	return t
 
 

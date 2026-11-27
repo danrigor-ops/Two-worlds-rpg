@@ -443,6 +443,59 @@
     "active": "Something in the Hall of Records keeps the town's page blank.",
     "completed": "The Blank Clerk is gone, and the name is back."
    }
+  },
+  {
+   "id": "C04-001",
+   "name": "Lanterns Going Out",
+   "start": "locked",
+   "start_flags": [
+    "ch04_started"
+   ],
+   "complete_flags": [
+    "pz401_grove_calm"
+   ],
+   "reward": {
+    "dewdrops": 4
+   },
+   "journal": {
+    "active": "Bukit Getah's grove is full of frightened trees blocking the lanes. Reno can Forest Whisper to them (Reno leads).",
+    "completed": "The grove trees calmed down. Something small is hiding by the smokehouse."
+   }
+  },
+  {
+   "id": "C04-002",
+   "name": "Something Small and Scared",
+   "start": "locked",
+   "start_flags": [
+    "pz401_grove_calm"
+   ],
+   "complete_flags": [
+    "ch04_titis_calmed"
+   ],
+   "reward": {
+    "items": {
+     "item_coconut_jelly": 2
+    }
+   },
+   "journal": {
+    "active": "The grove's guardian is hiding in the smokehouse clearing. Talk to her gently.",
+    "completed": "Titis trusts us. Her fear came loose as a shadow."
+   }
+  },
+  {
+   "id": "C04-003",
+   "name": "The Fear-Shadow",
+   "start": "locked",
+   "start_flags": [
+    "ch04_titis_calmed"
+   ],
+   "complete_flags": [
+    "ch04_shadow_beaten"
+   ],
+   "journal": {
+    "active": "Titis's fear has a shape of its own now. Face it.",
+    "completed": "The Fear-Shadow is gone. The grove is quiet."
+   }
   }
  ]
 }

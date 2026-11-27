@@ -71,6 +71,11 @@
    "x": 1,
    "y": 14,
    "facing": "right"
+  },
+  "from_estate": {
+   "x": 29,
+   "y": 16,
+   "facing": "left"
   }
  },
  "doors": [
@@ -152,6 +157,19 @@
    "talk": [
     {
      "scene": "bk01_barge_home"
+    }
+   ]
+  },
+  {
+   "id": "lorry",
+   "character": "lorry",
+   "x": 30,
+   "y": 16,
+   "facing": "left",
+   "show_if_flag": "chapter_04_unlocked",
+   "talk": [
+    {
+     "scene": "C4_00_lorry"
     }
    ]
   }
