@@ -1,0 +1,8 @@
+{
+  "status": "WORKING_PROPOSAL",
+  "note": "Prototype stats from 04_GAMEPLAY_SYSTEMS.md. Not balanced.",
+  "characters": {
+    "reno": {"name": "Reno", "stats": {"level": 1, "max_hp": 42, "max_mp": 14, "atk": 14, "def": 9, "mag": 6, "res": 8, "spd": 12}},
+    "lumi": {"name": "Lumi", "stats": {"level": 1, "max_hp": 32, "max_mp": 24, "atk": 7, "def": 7, "mag": 16, "res": 12, "spd": 10}}
+  }
+}
