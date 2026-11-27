@@ -1,0 +1,96 @@
+{
+ "id": "BK-02",
+ "name": "Kedai Radio",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 20,
+ "height": 15,
+ "legend": {
+  "w": "wall",
+  "f": "tile_floor",
+  "s": "shelf",
+  "c": "counter",
+  "D": "door"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwww",
+  "wssssssssssssssssssw",
+  "wssssssssssssssssssw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffccccccffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wwwwwwwwwwDwwwwwwwww"
+ ],
+ "spawns": {
+  "start": {
+   "x": 10,
+   "y": 12,
+   "facing": "up"
+  },
+  "from_wharf": {
+   "x": 10,
+   "y": 13,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 10,
+   "y": 14,
+   "to_map": "BK-01",
+   "to_spawn": "from_radio"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "repairman",
+   "character": "repairman",
+   "x": 5,
+   "y": 5,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_repairman"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "old_radio",
+   "x": 12,
+   "y": 2,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_elias_joined"
+     ],
+     "scene": "radio_empty"
+    },
+    {
+     "if_key_items": [
+      "item_glass_valve"
+     ],
+     "scene": "C3_02_elias"
+    },
+    {
+     "scene": "C3_02_radio"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}

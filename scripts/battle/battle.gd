@@ -11,6 +11,7 @@ const ENEMIES_PATH := "res://content/enemies.json"
 const SKILLS_PATH := "res://content/skills.json"
 const CUE_LEAD_MS := 650.0
 const HERO_POS := {"reno": Vector2(64, 62), "lumi": Vector2(44, 88)}
+const HERO_SLOTS := [Vector2(66, 58), Vector2(46, 80), Vector2(26, 102)]   # three active heroes
 const ENEMY_POS := [Vector2(176, 74), Vector2(196, 50), Vector2(196, 96)]
 
 var combat := Combat.new()
@@ -99,7 +100,8 @@ func _build_ui() -> void:
 	var bottom := _panel(Vector2(4, 108), Vector2(232, 48))
 	add_child(bottom)
 	_status = Label.new()
-	_status.position = Vector2(4, 2)
+	_status.position = Vector2(4, 1)
+	_status.add_theme_constant_override("line_spacing", -3)
 	bottom.add_child(_status)
 	_menu_panel = _panel(Vector2(140, 108), Vector2(96, 48))
 	add_child(_menu_panel)
@@ -123,13 +125,15 @@ func _setup_combat() -> void:
 	_sprites.clear()
 	var heroes: Array = []
 	var names: Dictionary = JsonUtil.load_dict(GameState.CHARACTERS_PATH).get("characters", {})
-	for id: String in GameState.party():
+	var active := GameState.active_party()
+	for id: String in active:
 		var stats: Dictionary = GameState.data["members"][id].duplicate()
 		var bonus := GameState.equip_bonus(id)
 		for k: String in bonus:
 			stats[k] = int(stats[k]) + int(bonus[k])
 		heroes.append(Combat.make_unit(id, names.get(id, {}).get("name", id), "hero", stats))
-		_add_sprite(id, id, HERO_POS.get(id, Vector2(54, 75)), "right")
+		var pos: Vector2 = HERO_POS.get(id, Vector2(54, 75)) if active.size() <= 2 else HERO_SLOTS[active.find(id)]
+		_add_sprite(id, id, pos, "right")
 	var enemies: Array = []
 	var list: Array = encounter.get("enemies", [])
 	for i in list.size():
@@ -672,11 +676,16 @@ func _tutorial_hint(key: String) -> void:
 
 func _refresh_status() -> void:
 	var lines: PackedStringArray = []
-	for h in combat.side("hero", false):
+	var heroes := combat.side("hero", false)
+	for h in heroes:
 		lines.append("%s%s  HP %d/%d  MP %d/%d" % [h["name"], _tags(h), h["hp"], h["max_hp"], h["mp"], h["max_mp"]])
 	var foes := combat.side("enemy", false).filter(func(e: Dictionary) -> bool: return e["hp"] > 0 or not e.has("summoner"))
-	for e: Dictionary in foes.slice(0, 2):
-		lines.append("%s%s  HP %d/%d" % [e["name"], _tags(e), e["hp"], e["max_hp"]])
+	if heroes.size() >= 3:
+		# Three heroes: the foes share one line.
+		lines.append("  ".join(foes.slice(0, 2).map(func(e: Dictionary) -> String: return "%s%s %d" % [e["name"], _tags(e), e["hp"]])))
+	else:
+		for e: Dictionary in foes.slice(0, 2):
+			lines.append("%s%s  HP %d/%d" % [e["name"], _tags(e), e["hp"], e["max_hp"]])
 	_status.text = "\n".join(lines)
 
 

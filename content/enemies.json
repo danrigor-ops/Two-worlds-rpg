@@ -624,6 +624,144 @@
      "enter_text": "Undertow: Nothing floats away. Not ever. Not you either."
     }
    ]
+  },
+  "ink_blot": {
+   "name": "Ink Blot",
+   "character": "ink_blot",
+   "stats": {
+    "level": 8,
+    "max_hp": 90,
+    "atk": 10,
+    "def": 10,
+    "mag": 22,
+    "res": 16,
+    "spd": 14
+   },
+   "xp": 26,
+   "attacks": [
+    {
+     "name": "Smudge",
+     "kind": "magical",
+     "mult": 1.0,
+     "applies": "fog",
+     "turns": 1
+    }
+   ]
+  },
+  "typeset_beetle": {
+   "name": "Typeset Beetle",
+   "character": "typeset_beetle",
+   "stats": {
+    "level": 9,
+    "max_hp": 120,
+    "atk": 24,
+    "def": 22,
+    "mag": 6,
+    "res": 10,
+    "spd": 8
+   },
+   "xp": 30,
+   "attacks": [
+    {
+     "name": "Press",
+     "kind": "physical",
+     "mult": 1.4,
+     "telegraph": true,
+     "telegraph_text": "The Typeset Beetle locks its letters into place. (Press lands next turn. Guard!)"
+    }
+   ]
+  },
+  "blank_clerk": {
+   "name": "The Blank Clerk",
+   "character": "blank_clerk",
+   "stats": {
+    "level": 10,
+    "max_hp": 720,
+    "atk": 22,
+    "def": 18,
+    "mag": 26,
+    "res": 20,
+    "spd": 12
+   },
+   "xp": 140,
+   "immune": [
+    "slow",
+    "fog"
+   ],
+   "attacks": [
+    {
+     "name": "Stamp",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Stamp",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Redline",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Stamp",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Erase",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      },
+      {
+       "name": "Redline",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ],
+     "summon": "ink_blot",
+     "enter_text": "Blank Clerk: Untidy. Untidy! Fetch the blotters!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Redact",
+       "kind": "magical",
+       "mult": 1.8,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Blank Clerk uncaps an enormous pen. (Redact lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Stamp",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Redline",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ],
+     "enter_text": "Blank Clerk: Everything will be blank, and everything will be SAFE."
+    }
+   ]
   }
  },
  "encounters": {
@@ -771,6 +909,36 @@
    "boss": true,
    "win_flags": [
     "ch02_undertow_beaten"
+   ]
+  },
+  "bk04_blots": {
+   "enemies": [
+    "ink_blot",
+    "ink_blot"
+   ]
+  },
+  "bk04_beetle": {
+   "enemies": [
+    "typeset_beetle"
+   ]
+  },
+  "bk04_mixed": {
+   "enemies": [
+    "typeset_beetle",
+    "ink_blot"
+   ]
+  },
+  "clerk_boss": {
+   "enemies": [
+    "blank_clerk"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch03_clerk_defeated"
+   ],
+   "win_key_items": [
+    "equip_crystal_earpiece"
    ]
   }
  }

@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 19
+const SECTIONS := 20
 
 
 func check(cond: bool, label: String) -> void:
@@ -91,6 +91,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 2 part B: the Sunken Jetty, the Undertow and Nenek Arus")
 	await _test_chapter2_b(gs, im)
+
+	print("Chapter 3: The Town That Forgot Its Name")
+	await _test_chapter3(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1783,6 +1786,156 @@ func _test_chapter2_b(gs: Node, im: Node) -> void:
 	gs.new_game()
 	saves.load_slot("auto")
 	check(gs.get_flag("chapter_02_completed") and gs.data["map_id"] == "RV-01", "the chapter ending is autosaved")
+	if is_instance_valid(scene):
+		if scene.is_inside_tree():
+			root.remove_child(scene)
+		scene.free()
+	var end_screen := tree.current_scene
+	if end_screen:
+		root.remove_child(end_screen)
+		end_screen.free()
+	saves.delete_all()
+	_sections_done += 1
+
+
+func _test_chapter3(gs: Node, im: Node) -> void:
+	# Party rules: three fight, new members join at the party's level, old saves gain new companions.
+	gs.new_game()
+	gs.add_member("lumi")
+	gs.gain_xp("reno", 500)
+	gs.gain_xp("lumi", 300)
+	check(gs.add_member("elias") and int(gs.data["members"]["elias"]["xp"]) == 400 and int(gs.data["members"]["elias"]["level"]) == 7, "Elias joins at the party's average XP (level 7)")
+	check(gs.active_party() == ["reno", "lumi", "elias"] and not gs.walks("elias") and gs.walks("lumi"), "three active heroes; companions don't walk the map")
+	gs.move_to_front("elias")
+	check(gs.party()[0] == "elias", "a member can be moved to the front")
+	var old: Dictionary = gs.to_dict()
+	old["members"].erase("elias")
+	old["party"] = ["reno", "lumi"]
+	check(gs.load_from_dict(old).is_empty() and gs.data["members"].has("elias"), "older saves gain the new companions' stats")
+
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_guardian_bloom_learned", "ch01_gentle_float_unlocked",
+			"chapter_01_completed", "chapter_02_unlocked", "ch02_started", "ch02_undertow_calmed", "ch02_ripple_learned", "chapter_02_completed", "chapter_03_unlocked"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	gs.gain_xp("reno", 640)
+	gs.gain_xp("lumi", 640)
+	gs.set_spawn("RV-01", "from_kencana")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+
+	# C3-00: the paper barge.
+	await _face_and_press(scene, Vector2i(21, 22), "down", im)
+	await _finish_dialogue(im)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BK-01" and gs.get_flag("ch03_started"), "C3-00: the paper barge to Bandar Kencana")
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch03_wharf_seen") and gs.quest_state("C03-001") == "active", "C3-01: a town forgetting its name")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(2, 14)), "left")
+	await _press_for("move_left", 30)
+	await _wait(2)
+	check(scene.map.id == "BK-01" and im.current_mode() == im.Mode.DIALOGUE, "the Veil crack isn't open yet")
+	await _finish_dialogue(im)
+
+	# C3-02: Elias in the radio.
+	scene.warp("BK-02", "from_wharf")
+	await _wait(3)
+	await _talk(scene, Vector2i(12, 2), im)
+	check(gs.get_flag("ch03_valve_needed") and not gs.has_member("elias"), "a voice in the radio needs a valve")
+	scene.warp("BK-03", "from_wharf")
+	await _wait(3)
+	await _talk(scene, Vector2i(16, 3), im)
+	check(gs.has_key_item("item_glass_valve"), "the spare valve in the photographer's desk")
+	scene.warp("BK-02", "from_wharf")
+	await _wait(3)
+	await _talk(scene, Vector2i(12, 2), im)
+	check(gs.has_member("elias") and gs.get_flag("ch03_elias_joined") and not gs.has_key_item("item_glass_valve"), "C3-02: Elias joins")
+	check(not scene.members.has("elias"), "Elias rides along without walking the map")
+
+	# PZ-301: the photographs.
+	scene.warp("BK-03", "from_wharf")
+	await _wait(3)
+	await _talk(scene, Vector2i(4, 1), im)
+	check(not gs.get_flag("ch03_photo_1"), "Reno can't read the photographs")
+	await _tap("swap")
+	await _talk(scene, Vector2i(4, 1), im, 1)
+	check(not gs.get_flag("ch03_photo_1"), "PZ-301: a wrong caption slides off")
+	await _talk(scene, Vector2i(4, 1), im, 0)
+	await _talk(scene, Vector2i(8, 1), im, 1)
+	await _talk(scene, Vector2i(12, 1), im, 2)
+	check(gs.get_flag("ch03_photos_restored") and gs.quest_state("C03-002") in ["completed", "rewarded"], "PZ-301: three captions restore the human town's memory")
+	await _tap("swap")
+
+	# BK-04 and PZ-302.
+	scene.warp("BK-01", "from_veil")
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(2, 14)), "left")
+	await _press_for("move_left", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BK-04", "through the crack into Kencana-in-the-Veil")
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(20, 2)), "up")
+	await _press_for("move_up", 30)
+	await _wait(2)
+	check(scene.map.id == "BK-04", "the Hall of Records is shut until the name is found")
+	await _finish_dialogue(im)
+	# Mast 1 from above, mast 2 from above, mast 3 from below.
+	await _face_and_press(scene, Vector2i(8, 5), "down", im)
+	await _finish_dialogue(im, 2)
+	check(not gs.get_flag("ch03_mast_1"), "PZ-302: the wrong band is static")
+	await _face_and_press(scene, Vector2i(8, 5), "down", im)
+	await _finish_dialogue(im, 0)
+	await _face_and_press(scene, Vector2i(31, 5), "down", im)
+	await _finish_dialogue(im, 1)
+	await _talk(scene, Vector2i(20, 25), im, 2)
+	check(gs.get_flag("ch03_masts_done"), "PZ-302: KEN, CA, NA")
+
+	# A three-hero battle with Static Burst.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 8)), "up")
+	await _press_for("move_up", 30)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["skill", "static_burst", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("elias") and l.ends_with("(all)")), "Elias fights: Static Burst hits every enemy")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("bk04_mixed_beaten") and int(gs.data["members"]["elias"]["xp"]) > 0, "the mast guards are beaten; Elias earns XP too")
+
+	# BOSS-301.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(20, 2)), "up")
+	await _press_for("move_up", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BK-05", "into the Hall of Records")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(12, 8)), "up")
+	await _press_for("move_up", 40)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Blank Clerk fight starts")
+	blog = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon ink_blot")), "the Clerk calls Ink Blots")
+	check(blog.any(func(l: String) -> bool: return l.contains("telegraph Redact")), "Redact is announced a round ahead")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch03_clerk_defeated") and gs.has_key_item("item_clerks_ledger") and gs.equip_bonus("elias").get("res", 0) == 3, "BOSS-301: the ledger and the Crystal Earpiece")
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "BK-01", "C3-07 back at the wharf")
+	await _finish_dialogue(im)
+	for i in 240:
+		if tree.current_scene != null and tree.current_scene != scene:
+			break
+		await tree.process_frame
+	check(["ch03_name_restored", "bukit_getah_route_unlocked", "chapter_03_completed", "chapter_04_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C03-001", "C03-002", "C03-003", "C03-004"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C03-001 to C03-004 are finished")
+	check(tree.current_scene != null and tree.current_scene.name == "EndOfContent", "the Chapter 3 complete screen shows")
 	if is_instance_valid(scene):
 		if scene.is_inside_tree():
 			root.remove_child(scene)

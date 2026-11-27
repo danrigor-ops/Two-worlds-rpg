@@ -192,6 +192,40 @@
    "name": "Wedding Ring",
    "kind": "key",
    "text": "Thin and gold, found in the jetty mud. The river kept it."
+  },
+  "item_coconut_jelly": {
+   "name": "Coconut Jelly",
+   "kind": "consumable",
+   "heal_hp": 70,
+   "price_dp": 5,
+   "text": "Cool and wobbly. Restores 70 HP."
+  },
+  "item_chrysanthemum_tea": {
+   "name": "Chrysanthemum Tea",
+   "kind": "consumable",
+   "heal_mp": 25,
+   "price_dp": 5,
+   "text": "Pale gold and calming. Restores 25 MP."
+  },
+  "item_glass_valve": {
+   "name": "Glass Valve",
+   "kind": "key",
+   "text": "A spare radio valve from the photo studio's drawer."
+  },
+  "item_clerks_ledger": {
+   "name": "The Clerk's Ledger",
+   "kind": "key",
+   "text": "Every page blank, except the stamp: a rubber leaf. Bukit Getah Estate."
+  },
+  "equip_crystal_earpiece": {
+   "name": "Crystal Earpiece",
+   "kind": "charm",
+   "equip_to": "elias",
+   "bonus": {
+    "res": 3,
+    "spd": 2
+   },
+   "text": "Picks up stations nobody else can hear. Elias wears it: RES +3, SPD +2."
   }
  }
 }

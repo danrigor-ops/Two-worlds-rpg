@@ -6,6 +6,7 @@ signal flag_changed(flag: String, value: Variant)
 signal party_changed
 signal leader_changed(member_id: String)
 
+const ACTIVE_SIZE := 3
 const SCHEMA_VERSION := 1
 const CHARACTERS_PATH := "res://content/characters.json"
 const QUESTS_PATH := "res://content/quests.json"
@@ -83,6 +84,26 @@ func leader() -> String:
 	return data["leader"]
 
 
+## The first three in party order fight; the rest wait in reserve (and still earn XP).
+func active_party() -> Array:
+	return data["party"].slice(0, ACTIVE_SIZE)
+
+
+## Only Reno and Lumi walk the map; companions travel along (characters.json "walks").
+func walks(id: String) -> bool:
+	return bool(JsonUtil.load_dict(CHARACTERS_PATH).get("characters", {}).get(id, {}).get("walks", false))
+
+
+## Moves a member to the front of the party order (into the active three).
+func move_to_front(id: String) -> bool:
+	if not has_member(id):
+		return false
+	data["party"].erase(id)
+	data["party"].push_front(id)
+	party_changed.emit()
+	return true
+
+
 func has_member(id: String) -> bool:
 	return id in data["party"]
 
@@ -92,6 +113,17 @@ func add_member(id: String) -> bool:
 	if has_member(id) or not data["members"].has(id):
 		return false
 	data["party"].append(id)
+	# A new companion joins at the party's level (the average XP of the others).
+	var total := 0
+	for other: String in data["party"]:
+		if other != id:
+			total += int(data["members"][other]["xp"])
+	var m: Dictionary = data["members"][id]
+	if data["party"].size() > 1:
+		m["xp"] = maxi(int(m["xp"]), total / (data["party"].size() - 1))
+		apply_levels(id)
+		m["hp"] = m["max_hp"]
+		m["mp"] = m["max_mp"]
 	party_changed.emit()
 	return true
 
@@ -385,6 +417,12 @@ func load_from_dict(incoming: Dictionary) -> Array[String]:
 
 ## Upgrades older save versions. Version 1 is the first, so nothing to do yet.
 func migrate(d: Dictionary) -> Dictionary:
+	# Companions added in later chapters: older saves get their starting stats.
+	if d.get("members") is Dictionary:
+		var fresh: Dictionary = default_state()["members"]
+		for id: String in fresh:
+			if not d["members"].has(id):
+				d["members"][id] = fresh[id]
 	return d
 
 

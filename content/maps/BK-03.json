@@ -1,0 +1,178 @@
+{
+ "id": "BK-03",
+ "name": "Photo Studio",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 20,
+ "height": 15,
+ "legend": {
+  "w": "wall",
+  "f": "floor",
+  "d": "desk",
+  "r": "rug",
+  "p": "photo",
+  "D": "door"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwww",
+  "wwwwpwwwpwwwpwwwwwww",
+  "wffffffffffffffffffw",
+  "wffffffffffffffdddfw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wfrrrrrffffffffffffw",
+  "wfrrrrrffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wffffffffffffffffffw",
+  "wwwwwwwwwwDwwwwwwwww"
+ ],
+ "spawns": {
+  "start": {
+   "x": 10,
+   "y": 12,
+   "facing": "up"
+  },
+  "from_wharf": {
+   "x": 10,
+   "y": 13,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 10,
+   "y": 14,
+   "to_map": "BK-01",
+   "to_spawn": "from_studio"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "photographer",
+   "character": "photographer",
+   "x": 14,
+   "y": 8,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_photos_restored"
+     ],
+     "scene": "human_photographer_after"
+    },
+    {
+     "scene": "human_photographer"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "drawer",
+   "x": 16,
+   "y": 3,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_valve_needed"
+     ],
+     "if_not_flags": [
+      "ch03_valve_found"
+     ],
+     "scene": "find_valve"
+    },
+    {
+     "scene": "drawer_idle"
+    }
+   ]
+  },
+  {
+   "id": "photo_1",
+   "x": 4,
+   "y": 1,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_photo_1"
+     ],
+     "scene": "photo_done"
+    },
+    {
+     "if_not_flags": [
+      "ch03_elias_joined"
+     ],
+     "scene": "photo_later"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "photo_1_touch"
+    },
+    {
+     "scene": "photo_look"
+    }
+   ]
+  },
+  {
+   "id": "photo_2",
+   "x": 8,
+   "y": 1,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_photo_2"
+     ],
+     "scene": "photo_done"
+    },
+    {
+     "if_not_flags": [
+      "ch03_elias_joined"
+     ],
+     "scene": "photo_later"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "photo_2_touch"
+    },
+    {
+     "scene": "photo_look"
+    }
+   ]
+  },
+  {
+   "id": "photo_3",
+   "x": 12,
+   "y": 1,
+   "talk": [
+    {
+     "if_flags": [
+      "ch03_photo_3"
+     ],
+     "scene": "photo_done"
+    },
+    {
+     "if_not_flags": [
+      "ch03_elias_joined"
+     ],
+     "scene": "photo_later"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "photo_3_touch"
+    },
+    {
+     "scene": "photo_look"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": []
+}

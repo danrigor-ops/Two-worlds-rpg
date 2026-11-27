@@ -1,0 +1,76 @@
+{
+ "id": "BK-05",
+ "name": "Hall of Records",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 24,
+ "height": 18,
+ "legend": {
+  "w": "wall",
+  "f": "tile_floor",
+  "s": "shelf",
+  "D": "door"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwwwwwww",
+  "wffffffffffffffffffffffw",
+  "wfsssssffffffffffsssssfw",
+  "wfsssssffffffffffsssssfw",
+  "wffffffffffffffffffffffw",
+  "wffffffffffffffffffffffw",
+  "wffffffffffffffffffffffw",
+  "wffffffffffffffffffffffw",
+  "wffffffffffffffffffffffw",
+  "wfsssffffffffffffffsssfw",
+  "wfsssffffffffffffffsssfw",
+  "wfsssffffffffffffffsssfw",
+  "wfsssffffffffffffffsssfw",
+  "wfsssffffffffffffffsssfw",
+  "wfsssffffffffffffffsssfw",
+  "wffffffffffffffffffffffw",
+  "wffffffffffffffffffffffw",
+  "wwwwwwwwwwwwDwwwwwwwwwww"
+ ],
+ "spawns": {
+  "start": {
+   "x": 12,
+   "y": 15,
+   "facing": "up"
+  },
+  "from_town": {
+   "x": 12,
+   "y": 16,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 12,
+   "y": 17,
+   "to_map": "BK-04",
+   "to_spawn": "from_hall"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "clerk",
+   "character": "blank_clerk",
+   "x": 12,
+   "y": 5,
+   "facing": "down",
+   "hide_if_flag": "ch03_clerk_defeated",
+   "encounter": {
+    "id": "clerk_boss",
+    "intro_scene": "C3_06_clerk_intro",
+    "outro_scene": "C3_06_clerk_outro"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "movables": [],
+ "tint": "#d8c8f0"
+}

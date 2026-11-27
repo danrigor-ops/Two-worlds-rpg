@@ -415,6 +415,20 @@
    "color": "#1f3f6a",
    "accent": "#4f7fae",
    "pattern": "water"
+  },
+  "mast": {
+   "index": 59,
+   "solid": true,
+   "color": "#8a8a9a",
+   "accent": "#e8b84a",
+   "pattern": "post"
+  },
+  "photo": {
+   "index": 60,
+   "solid": true,
+   "color": "#5a3e2b",
+   "accent": "#d8d0b8",
+   "pattern": "sign"
   }
  }
 }

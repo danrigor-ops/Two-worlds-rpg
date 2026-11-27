@@ -19,6 +19,15 @@
    "mag": 2,
    "res": 1,
    "spd": 1
+  },
+  "elias": {
+   "max_hp": 5,
+   "max_mp": 3,
+   "atk": 1,
+   "def": 1,
+   "mag": 2,
+   "res": 2,
+   "spd": 1
   }
  }
 }

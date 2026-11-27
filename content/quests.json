@@ -372,6 +372,77 @@
     "active": "The river has been keeping lost things. Find a toy boat (Mangrove Walk), a bicycle bell (Kampung Air) and a wedding ring (Sunken Jetty), and put them in the fisherman's tackle box at the landing while he isn't looking.",
     "completed": "Three lost things went home."
    }
+  },
+  {
+   "id": "C03-001",
+   "name": "A Town Without a Name",
+   "start": "locked",
+   "start_flags": [
+    "ch03_started"
+   ],
+   "complete_flags": [
+    "ch03_elias_joined"
+   ],
+   "reward": {
+    "dewdrops": 3
+   },
+   "journal": {
+    "active": "Bandar Kencana is forgetting its own name. Something is crackling in the radio shop (north side of the wharf).",
+    "completed": "Elias, a spirit who lives in radios, joined us."
+   }
+  },
+  {
+   "id": "C03-002",
+   "name": "Pictures of a Name",
+   "start": "locked",
+   "start_flags": [
+    "ch03_elias_joined"
+   ],
+   "complete_flags": [
+    "ch03_photos_restored"
+   ],
+   "reward": {
+    "items": {
+     "item_coconut_jelly": 2
+    }
+   },
+   "journal": {
+    "active": "The photo studio has three old photographs with blank captions. Lumi's Memory Touch can show what they were.",
+    "completed": "The town remembers its photographs. A crack into the Veil opened at the west end of the wharf."
+   }
+  },
+  {
+   "id": "C03-003",
+   "name": "Voices in the Static",
+   "start": "locked",
+   "start_flags": [
+    "ch03_photos_restored"
+   ],
+   "complete_flags": [
+    "ch03_masts_done"
+   ],
+   "reward": {
+    "dewdrops": 4
+   },
+   "journal": {
+    "active": "Three radio masts in Kencana-in-the-Veil. Read each plaque, and Elias can tune in an old broadcast.",
+    "completed": "KEN, CA, NA. The Hall of Records is open."
+   }
+  },
+  {
+   "id": "C03-004",
+   "name": "The Blank Clerk",
+   "start": "locked",
+   "start_flags": [
+    "ch03_masts_done"
+   ],
+   "complete_flags": [
+    "ch03_clerk_defeated"
+   ],
+   "journal": {
+    "active": "Something in the Hall of Records keeps the town's page blank.",
+    "completed": "The Blank Clerk is gone, and the name is back."
+   }
   }
  ]
 }
