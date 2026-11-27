@@ -20,6 +20,9 @@
   },
   "narrator": {
    "name": ""
+  },
+  "voice": {
+   "name": "???"
   }
  },
  "scenes": {
@@ -358,6 +361,211 @@
    {
     "speaker": "narrator",
     "text": "Got Bobo's Parcel. (Key item)"
+   }
+  ],
+  "roots_too_dark": [
+   {
+    "speaker": "lumi",
+    "text": "It's pitch dark down there. We need a lantern first. Bobo has one. (placeholder)"
+   }
+  ],
+  "pz1_hint": [
+   {
+    "speaker": "narrator",
+    "text": "Gaps in the roots, marked with old gold paint."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno, you could Leaf Leap these. Face a gap and press A. (placeholder)"
+   },
+   {
+    "set_flag": "pz1_hint_seen"
+   }
+  ],
+  "leap_lumi": [
+   {
+    "speaker": "lumi",
+    "text": "I can float a little, but not that far. Reno could leap it. (Press C to swap.)"
+   }
+  ],
+  "leap_too_far": [
+   {
+    "speaker": "reno",
+    "text": "Even I can't leap that far."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Finally, some wisdom."
+   }
+  ],
+  "fall": [
+   {
+    "speaker": "narrator",
+    "text": "Down into the roots... and back up again."
+   },
+   {
+    "speaker": "reno",
+    "text": "I meant to do that.",
+    "if_leader": "reno"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Let's not do that again.",
+    "if_leader": "lumi"
+   }
+  ],
+  "pz2_hint": [
+   {
+    "speaker": "narrator",
+    "text": "A stone humming with a faint blue light."
+   },
+   {
+    "speaker": "reno",
+    "text": "It's humming. Lumi might understand it. (Lead with Lumi: press C.)"
+   }
+  ],
+  "PZ2_echo_sight": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi listens to the stone. Its echo shows a path across the water."
+   },
+   {
+    "set_flag": "echo_path_revealed"
+   },
+   {
+    "speaker": "voice",
+    "text": "Remember the way home."
+   },
+   {
+    "speaker": "lumi",
+    "text": "...Reno?"
+   },
+   {
+    "speaker": "reno",
+    "text": "What?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Did you hear that?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Hear what?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Nothing. Perhaps it was the wind."
+   }
+  ],
+  "pz2_done": [
+   {
+    "speaker": "narrator",
+    "text": "The stepping stones still glow faintly."
+   }
+  ],
+  "pz3_hint": [
+   {
+    "speaker": "narrator",
+    "text": "A mossy stone. Just moss... for now. (placeholder)"
+   }
+  ],
+  "PZ3_gate_key": [
+   {
+    "speaker": "narrator",
+    "text": "The echo trail ends here. Something glints under the moss."
+   },
+   {
+    "key_item": "item_gate_key"
+   },
+   {
+    "set_flag": "gate_key_collected"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Gate Key!"
+   }
+  ],
+  "pz3_done": [
+   {
+    "speaker": "narrator",
+    "text": "Just moss now."
+   }
+  ],
+  "P05_bridge": [
+   {
+    "speaker": "narrator",
+    "text": "A broken bridge. The chasm is far too wide."
+   },
+   {
+    "speaker": "reno",
+    "text": "We could jump!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's far too wide."
+   },
+   {
+    "speaker": "reno",
+    "text": "We could jump really hard."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Or we could think."
+   },
+   {
+    "set_flag": "p05_bridge_seen"
+   }
+  ],
+  "pz4_hint": [
+   {
+    "speaker": "reno",
+    "text": "Roots everywhere, but where should they go?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Let me look first. (Lead with Lumi and check the post.)"
+   }
+  ],
+  "PZ4_bridge_echo": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi traces the bridge's echo. A faint outline of the old bridge hangs over the chasm."
+   },
+   {
+    "set_flag": "bridge_echo_traced"
+   },
+   {
+    "speaker": "lumi",
+    "text": "There! That's where it was. Reno, grab the roots and pull! (Swap to Reno.)"
+   }
+  ],
+  "pz4_lumi_wait": [
+   {
+    "speaker": "lumi",
+    "text": "I can see it. Now Reno needs to pull the roots along the echo."
+   }
+  ],
+  "PZ4_root_grip": [
+   {
+    "speaker": "reno",
+    "text": "Root Grip!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno pulls. The roots stretch along the echo and weave into a bridge."
+   },
+   {
+    "set_flag": "root_bridge_restored"
+   },
+   {
+    "speaker": "reno",
+    "text": "A great, short, careful bridge!"
+   }
+  ],
+  "pz4_done": [
+   {
+    "speaker": "narrator",
+    "text": "The root bridge holds firm."
    }
   ]
  }

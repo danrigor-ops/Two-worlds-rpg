@@ -203,6 +203,37 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			_rect(img, ox + 2, 2, 12, 12, acc)
 			_rect(img, ox + 3, 3, 10, 10, base)
 			_rect(img, ox + 3, 7, 10, 1, acc)
+		"roots":
+			for y in [2, 7, 12]:
+				_rect(img, ox + (y % 3), y, 13, 2, acc)
+			_rect(img, ox + 5, 0, 2, TILE, acc)
+			_rect(img, ox + 11, 4, 2, 9, base.lightened(0.15))
+		"pit":
+			_rect(img, ox, 0, TILE, 1, acc)
+			_rect(img, ox, 15, TILE, 1, acc)
+			for x in [2, 7, 12]:
+				img.set_pixel(ox + x, 7, Color("#2c2140"))
+		"stone":
+			_rect(img, ox + 2, 3, 12, 10, acc)
+			_rect(img, ox + 3, 4, 10, 8, acc.darkened(0.2))
+		"bridge":
+			for y in [1, 5, 9, 13]:
+				_rect(img, ox + 1, y, 14, 3, acc)
+			_rect(img, ox, 0, 1, TILE, acc.darkened(0.3))
+			_rect(img, ox + 15, 0, 1, TILE, acc.darkened(0.3))
+		"marker":
+			_rect(img, ox + 3, 2, 10, 13, Color("#4a4a5e"))
+			_rect(img, ox + 4, 3, 8, 11, Color("#5e5e74"))
+			_rect(img, ox + 6, 5, 4, 6, acc)
+		"post":
+			_rect(img, ox + 5, 0, 6, 16, acc)
+			_rect(img, ox + 4, 2, 8, 2, acc.darkened(0.3))
+			_rect(img, ox + 4, 10, 8, 2, acc.darkened(0.3))
+		"gate":
+			_rect(img, ox, 0, TILE, TILE, base)
+			for x in [1, 6, 11]:
+				_rect(img, ox + x, 0, 3, TILE, Color("#6b4a8f"))
+			_rect(img, ox, 7, TILE, 2, acc)
 		"rug":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)

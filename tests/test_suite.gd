@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 9
+const SECTIONS := 10
 
 
 func check(cond: bool, label: String) -> void:
@@ -57,6 +57,9 @@ func run(t: SceneTree) -> int:
 
 	print("Leafling tutorial battle")
 	await _test_leafling(gs, im)
+
+	print("Whispering Roots puzzles")
+	await _test_roots(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -336,7 +339,7 @@ func _test_exploration(gs: Node, im: Node) -> void:
 	# Pause menu owns input.
 	await _tap("menu")
 	check(im.current_mode() == im.Mode.MENU, "menu opens")
-	check(PauseMenu.journal_rows().size() == 2, "journal lists the two started quests")
+	check(PauseMenu.journal_rows().size() == 3, "journal lists the three started quests")
 	await _tap("swap")
 	check(gs.leader() == "reno", "swap does nothing while the menu is open")
 	await _tap("cancel")
@@ -505,6 +508,137 @@ func _test_leafling(gs: Node, im: Node) -> void:
 	check(results.size() == 1 and results[0] == "perfect", "one input per cue (a press 50 ms late is Perfect)")
 	b2._end("escape")
 	await _wait(2)
+	root.remove_child(scene)
+	scene.free()
+	_sections_done += 1
+
+
+
+func _cell_of(n: Node2D) -> Vector2i:
+	return MapData.feet_to_cell(n.global_position)
+
+
+func _wait_explore(im: Node) -> void:
+	for i in 120:
+		if im.current_mode() == im.Mode.EXPLORE:
+			return
+		await tree.process_frame
+
+
+func _face_and_press(scene: Node, cell: Vector2i, facing: String, im: Node) -> void:
+	scene.leader().place_at(MapData.cell_to_feet(cell), facing)
+	await tree.physics_frame
+	await _tap("confirm")
+
+
+func _test_roots(gs: Node, im: Node) -> void:
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["p00_seen", "lumi_joined", "elder_warning_heard", "bobo_parcel_quest_started", "leafling_tutorial_complete", "bobo_parcel_returned"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	gs.set_spawn("KA-06", "from_roots")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("lantern_obtained") and gs.quest_state("PRO-003") == "active", "the lantern opens the Whispering Roots quest")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 25)), "down")
+	await _press_for("move_down", 20)
+	await _wait_transition(im)
+	check(scene.map.id == "KA-08", "the glade's south exit leads into the Whispering Roots")
+	await _finish_dialogue(im)
+
+	# PZ-001: Leaf Leap over three gaps.
+	var map: MapData = scene.map
+	await _face_and_press(scene, Vector2i(24, 9), "down", im)
+	await _finish_dialogue(im)   # first-time hint trigger may have played
+	await _face_and_press(scene, Vector2i(24, 9), "down", im)
+	await _wait_explore(im)
+	check(_cell_of(scene.leader()) == Vector2i(24, 11), "Reno leaps the first gap (now at %s)" % _cell_of(scene.leader()))
+	await _face_and_press(scene, Vector2i(24, 12), "down", im)
+	await _wait_explore(im)
+	await _face_and_press(scene, Vector2i(24, 15), "down", im)
+	await _wait_explore(im)
+	check(_cell_of(scene.leader()) == Vector2i(24, 17), "and the next two")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(24, 14), "up", im)
+	check(im.current_mode() == im.Mode.DIALOGUE and _cell_of(scene.leader()) == Vector2i(24, 14), "Lumi can't leap; she says Reno can")
+	await _finish_dialogue(im)
+	await _tap("swap")
+
+	# Falling into a gap puts you back on safe ground.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(22, 15)), "down")
+	await _press_for("move_down", 3)
+	await _press_for("move_up", 20)
+	await _wait(3)
+	await _press_for("move_up", 20)
+	await _wait(30)
+	check(im.current_mode() == im.Mode.DIALOGUE, "walking into a gap is a fall")
+	await _finish_dialogue(im)
+	var after := _cell_of(scene.leader())
+	check(map.is_walkable(after) and not map.is_pit(after), "after a fall Reno is on safe ground (%s)" % after)
+
+	# PZ-002 / PZ-003: Echo Sight and the gate key.
+	check(not map.is_walkable(Vector2i(24, 20)), "the stepping stones are hidden at first")
+	await _face_and_press(scene, Vector2i(23, 18), "left", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("echo_path_revealed"), "Reno can't read the echo marker")
+	await _face_and_press(scene, Vector2i(26, 24), "right", im)
+	await _finish_dialogue(im)
+	check(not gs.has_key_item("item_gate_key"), "the key isn't found before the echo is revealed")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(23, 18), "left", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("echo_path_revealed"), "Lumi's Echo Sight reveals the path")
+	check("???: Remember the way home." in scene.dialogue.history, "the voice speaks (P05)")
+	check(map.is_walkable(Vector2i(24, 20)) and scene.tilemap.get_cell_atlas_coords(Vector2i(24, 20)).x == scene.get_node("/root/Assets").tile_index("stone"), "the stones appear and can be walked on")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 18)), "down")
+	await _press_for("move_down", 80)
+	check(_cell_of(scene.leader()).y >= 23, "you can cross the pond on the stones")
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(30, 25), "right", im)
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_gate_key") and gs.get_flag("gate_key_collected"), "the gate key is found at the mossy marker")
+	await _face_and_press(scene, Vector2i(30, 25), "right", im)
+	await _finish_dialogue(im)
+	check(gs.data["key_items"].count("item_gate_key") == 1, "and only once")
+
+	# PZ-004: Root Bridge needs Lumi's echo, then Reno's grip.
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 26)), "down")
+	await _press_for("move_down", 12)
+	await _finish_dialogue(im)
+	check(gs.get_flag("p05_bridge_seen"), "the broken-bridge scene played")
+	await _tap("swap")
+	check(gs.leader() == "reno", "Reno leads")
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("root_bridge_restored"), "Reno can't rebuild the bridge without the echo")
+	await _face_and_press(scene, Vector2i(24, 27), "down", im)
+	await _finish_dialogue(im)
+	check(_cell_of(scene.leader()).y == 27, "the chasm is too wide to leap")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(22, 27), "left", im)
+	await _finish_dialogue(im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("root_bridge_restored") and map.is_walkable(Vector2i(24, 29)), "Echo Sight then Root Grip restores the bridge")
+	check(gs.quest_state("PRO-003") in ["completed", "rewarded"], "PRO-003 is complete")
+
+	# Puzzles stay solved after leaving, and after a save round trip.
+	scene.warp("KA-06", "from_roots")
+	scene.warp("KA-08", "from_glade")
+	check(scene.map.is_walkable(Vector2i(24, 20)) and scene.map.is_walkable(Vector2i(24, 29)), "stones and bridge are still there after re-entering")
+	var snap: Variant = JSON.parse_string(JSON.stringify(gs.to_dict()))
+	gs.new_game()
+	gs.load_from_dict(snap)
+	scene.warp("KA-08", "from_glade")
+	check(scene.map.is_walkable(Vector2i(24, 29)) and gs.has_key_item("item_gate_key"), "and after loading a save")
 	root.remove_child(scene)
 	scene.free()
 	_sections_done += 1

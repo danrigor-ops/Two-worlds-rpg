@@ -45,7 +45,7 @@
    "name": "Whispering Roots",
    "start": "locked",
    "start_flags": [
-    "thornkeeper_route_open"
+    "lantern_obtained"
    ],
    "complete_flags": [
     "gate_key_collected",
