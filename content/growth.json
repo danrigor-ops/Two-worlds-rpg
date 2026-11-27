@@ -1,0 +1,24 @@
+{
+ "status": "CONFIRMED_USER",
+ "note": "Chapter 1 section 7.2: flat gains per level. XP to reach level L is 10*(L-1)^2.",
+ "growth": {
+  "reno": {
+   "max_hp": 6,
+   "max_mp": 2,
+   "atk": 2,
+   "def": 1,
+   "mag": 1,
+   "res": 1,
+   "spd": 1
+  },
+  "lumi": {
+   "max_hp": 4,
+   "max_mp": 3,
+   "atk": 1,
+   "def": 1,
+   "mag": 2,
+   "res": 1,
+   "spd": 1
+  }
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "SM-04",
+ "name": "Sundry Shop",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 16,
+ "height": 12,
+ "legend": {
+  "t": "tile_floor",
+  "#": "wall",
+  "s": "shelf",
+  "c": "counter",
+  "C": "coins",
+  "D": "door"
+ },
+ "rows": [
+  "################",
+  "################",
+  "#tsssssssssssst#",
+  "#tttttttttttttt#",
+  "#tttttttttttttt#",
+  "#tccccctttttttt#",
+  "#tttttttttttttt#",
+  "#ttttttttCttttt#",
+  "#tttttttttttttt#",
+  "#tttttttttttttt#",
+  "#tttttttttttttt#",
+  "########D#######"
+ ],
+ "spawns": {
+  "start": {
+   "x": 8,
+   "y": 9,
+   "facing": "up"
+  },
+  "from_square": {
+   "x": 8,
+   "y": 10,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "door_out",
+   "x": 8,
+   "y": 11,
+   "to_map": "SM-01",
+   "to_spawn": "from_sundry"
+  }
+ ],
+ "npcs": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [],
+ "objects": [
+  {
+   "id": "coin_jar",
+   "x": 9,
+   "y": 7,
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_coin_jar_solved"
+     ],
+     "scene": "coins_done"
+    },
+    {
+     "scene": "C02_coin_jar_start"
+    }
+   ]
+  }
+ ]
+}

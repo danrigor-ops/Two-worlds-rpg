@@ -1,0 +1,575 @@
+{
+ "status": "CONFIRMED_USER",
+ "note": "Chapter 1 part A (C00 to C03) from docs/chapter-01/CHAPTER_01_PRODUCTION.md section 5. Human lines are overheard; humans can't see or hear the spirits.",
+ "speakers": {
+  "old_kettle": {
+   "name": "Old Kettle",
+   "character": "old_kettle"
+  },
+  "kopitiam_owner": {
+   "name": "Kopitiam owner",
+   "character": "kopitiam_owner"
+  },
+  "regular": {
+   "name": "A regular",
+   "character": "passenger_a"
+  },
+  "encik_lim": {
+   "name": "Encik Lim",
+   "character": "encik_lim"
+  },
+  "basket_woman": {
+   "name": "Woman with a basket",
+   "character": "basket_woman"
+  },
+  "rambutan_man": {
+   "name": "Man with rambutans",
+   "character": "rambutan_man"
+  },
+  "passenger_a": {
+   "name": "Passenger",
+   "character": "passenger_a"
+  },
+  "passenger_b": {
+   "name": "Passenger",
+   "character": "passenger_b"
+  },
+  "fisherman": {
+   "name": "Fisherman",
+   "character": "fisherman"
+  }
+ },
+ "scenes": {
+  "C00_morning": [
+   {
+    "set_flag": "ch01_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The bus is long gone. A woman with a basket walks straight at Reno."
+   },
+   {
+    "speaker": "reno",
+    "text": "Excuse me! Good morning! Hello!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno leaps aside. She walks on without a glance."
+   },
+   {
+    "speaker": "reno",
+    "text": "Rude."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno. She didn't see you."
+   },
+   {
+    "speaker": "reno",
+    "text": "I'm very visible. I'm wearing a red scarf."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A man cycles past and rings his bell at nothing in particular. Reno waves both arms. Nothing."
+   },
+   {
+    "speaker": "lumi",
+    "text": "They can't see us. Or hear us."
+   },
+   {
+    "speaker": "reno",
+    "text": "...So I could make the funniest face in the world and nobody would know?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "That's your first thought?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "We need to get to Bandar Senja. Someone in this village must know the way. Maybe a spirit."
+   }
+  ],
+  "human_basket_woman": [
+   {
+    "speaker": "basket_woman",
+    "text": "(to herself) Fish, kangkung, and... what else? Garlic. It's always the garlic."
+   },
+   {
+    "if_not_flags": [
+     "ch01_visibility_learned"
+    ],
+    "speaker": "reno",
+    "text": "Hello? HELLO? ...Nothing."
+   },
+   {
+    "if_flags": [
+     "ch01_visibility_learned"
+    ],
+    "speaker": "lumi",
+    "text": "She can't hear you, Reno. Stop waving."
+   }
+  ],
+  "C01_overheard": [
+   {
+    "set_flag": "ch01_kopitiam_overheard"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Two voices drift over from the counter."
+   },
+   {
+    "speaker": "kopitiam_owner",
+    "text": "(to a regular) The evening train from Bandar Senja always runs late."
+   },
+   {
+    "speaker": "kopitiam_owner",
+    "text": "My cousin says people fall asleep on it and wake up not knowing where they are."
+   },
+   {
+    "speaker": "regular",
+    "text": "Your cousin says a lot of things."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Did you hear that, Reno?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Bandar Senja has a train! I knew it!"
+   }
+  ],
+  "human_kopitiam_owner": [
+   {
+    "speaker": "kopitiam_owner",
+    "text": "(to herself) Who keeps moving my kettle? Every morning it's facing the door."
+   }
+  ],
+  "human_regular": [
+   {
+    "speaker": "regular",
+    "text": "(to his newspaper) Bus to Bandar Senja at nine. If it isn't late. It's always late."
+   }
+  ],
+  "C01_old_kettle": [
+   {
+    "speaker": "narrator",
+    "text": "A battered tin kettle on the back shelf opens one eye."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "Forest kids, eh? Don't bother waving. They can't see you. They never could."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You're a spirit too."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "I'm a kettle with opinions. Thirty years on this shelf. I know every bus, every customer and every rumour in Sungai Melor."
+   },
+   {
+    "set_flag": "ch01_visibility_learned"
+   },
+   {
+    "speaker": "reno",
+    "text": "We need to get to Bandar Senja. For a train."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "The bus will take you, if you can get on it. But first, do me a favour."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "Something knocked Encik Lim's change jar over last night. A cold wind, out of nowhere. That's been happening a lot lately."
+   },
+   {
+    "speaker": "lumi",
+    "text": "A cold wind?"
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "Veil wind. Sort his coins before he opens up, and I'll tell you the trick for the bus."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "His sundry shop is next door. The back window doesn't latch."
+   },
+   {
+    "set_flag": "ch01_kettle_favour_asked"
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "Oh, and I keep a little shelf for spirit folk. Dewdrops only. Come back any time."
+   }
+  ],
+  "kettle_waiting": [
+   {
+    "speaker": "old_kettle",
+    "text": "Coins first, forest kids. Encik Lim's shop is next door."
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse the shelf",
+      "then": [
+       {
+        "event": "shop:kettle_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": [
+       {
+        "speaker": "old_kettle",
+        "text": "Suit yourselves."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "kettle_stall": [
+   {
+    "speaker": "old_kettle",
+    "text": "Need anything for the road?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse the shelf",
+      "then": [
+       {
+        "event": "shop:kettle_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": [
+       {
+        "speaker": "old_kettle",
+        "text": "Suit yourselves."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "sundry_closed": [
+   {
+    "speaker": "narrator",
+    "text": "The sundry shop is shut. A card in the window says TUTUP."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Closed. Let's not go poking around in there for no reason."
+   }
+  ],
+  "C02_coin_jar_start": [
+   {
+    "speaker": "narrator",
+    "text": "Coins are spilled all over the floor of the closed shop: ones, fives, tens, twenties and a single fifty."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Old Kettle said piles of fifty cents."
+   },
+   {
+    "speaker": "reno",
+    "text": "How many is fifty?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's written on them."
+   },
+   {
+    "speaker": "reno",
+    "text": "This one says ten. So five of these makes... a lot!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It makes fifty, Reno."
+   },
+   {
+    "event": "coin_jar"
+   }
+  ],
+  "C02_coin_jar_solved": [
+   {
+    "set_flag": "pz101_coin_jar_solved"
+   },
+   {
+    "set_flag": "ch01_coin_jar_solved"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Four neat stacks of fifty cents. A key rattles in the front door."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Encik Lim opens up and stops dead."
+   },
+   {
+    "speaker": "encik_lim",
+    "text": "(to himself) Sorted? All of it? ...I must have done it in my sleep."
+   },
+   {
+    "speaker": "reno",
+    "text": "You're welcome!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "He can't hear you."
+   },
+   {
+    "speaker": "reno",
+    "text": "I'm saying it for me."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Let's tell Old Kettle."
+   }
+  ],
+  "coins_done": [
+   {
+    "speaker": "narrator",
+    "text": "The coins sit in four neat stacks. Encik Lim keeps counting them, just to be sure."
+   }
+  ],
+  "C02_kettle_reward": [
+   {
+    "speaker": "old_kettle",
+    "text": "Sorted, all of it! Lim's been staring at those stacks for ten minutes. Here, for your trouble."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Old Kettle tips a few Dewdrops and two slices of kaya toast off the shelf. \"They fell off a plate.\""
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "Now, the bus trick. Wait for someone with a big load. The door stays open longest for people carrying baskets."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "And ride up top, on the luggage rack. Nobody sits there."
+   },
+   {
+    "set_flag": "ch01_kettle_tip_heard"
+   },
+   {
+    "speaker": "reno",
+    "text": "The luggage rack! Like real travellers!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Real travellers sit in seats, Reno."
+   },
+   {
+    "speaker": "old_kettle",
+    "text": "The stop is east of the village, down the main road. Good luck, forest kids."
+   }
+  ],
+  "bus_no_plan": [
+   {
+    "speaker": "narrator",
+    "text": "The bus door wheezes open for a passenger, then snaps shut."
+   },
+   {
+    "speaker": "lumi",
+    "text": "It closes too fast. Old Kettle said he knows every bus. Let's ask him first."
+   }
+  ],
+  "human_rambutan_man": [
+   {
+    "speaker": "rambutan_man",
+    "text": "(to himself) Two baskets of rambutans for my sister in Bandar Senja. The driver always grumbles, but he waits."
+   }
+  ],
+  "human_queue_a": [
+   {
+    "speaker": "passenger_a",
+    "text": "(to the woman behind him) Just a small bag today. In and out, quick as anything."
+   }
+  ],
+  "human_queue_b": [
+   {
+    "speaker": "passenger_b",
+    "text": "(to the man in front) Is it nine already? This bus has never once been on time."
+   }
+  ],
+  "C03_boarding": [
+   {
+    "speaker": "narrator",
+    "text": "The bus doors wheeze open. The queue shuffles forward. Who do you follow on?"
+   },
+   {
+    "choice": [
+     {
+      "text": "The man with a small bag",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "You slip in behind the man with the small bag. The door snaps shut right behind them, in front of your noses."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Too quick. Old Kettle said someone with a big load keeps the door open longest."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The driver opens the door again for the next in the queue. There's still time."
+       }
+      ]
+     },
+     {
+      "text": "The man with two big baskets",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "He heaves two huge baskets of rambutans up the step. The driver sighs and waits, and waits."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Now!"
+       },
+       {
+        "speaker": "narrator",
+        "text": "Reno Leaf Leaps over the baskets and onto the luggage rack. Lumi floats up after him."
+       },
+       {
+        "set_flag": "pz102_bus_boarded"
+       },
+       {
+        "set_flag": "ch01_bus_boarded"
+       },
+       {
+        "event": "travel:TR-01:start"
+       }
+      ]
+     },
+     {
+      "text": "The woman with a parasol",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "You slip in behind the woman with the parasol. The door snaps shut right behind them, in front of your noses."
+       },
+       {
+        "speaker": "lumi",
+        "text": "Too quick. Old Kettle said someone with a big load keeps the door open longest."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The driver opens the door again for the next in the queue. There's still time."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C03_bus_ride": [
+   {
+    "speaker": "narrator",
+    "text": "The bus rattles along the river road."
+   },
+   {
+    "speaker": "reno",
+    "text": "(on the luggage rack, nose against the window) It's even better than I imagined."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You're lying on a sack of onions."
+   },
+   {
+    "speaker": "reno",
+    "text": "Even better."
+   },
+   {
+    "speaker": "passenger_a",
+    "text": "My brother at the station says three parcels have gone missing this week."
+   },
+   {
+    "speaker": "passenger_b",
+    "text": "Missing? From the station?"
+   },
+   {
+    "speaker": "passenger_a",
+    "text": "And the goods shed is full of moths."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Far away, a train whistle sounds. Not one passenger looks up."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Did you hear that?"
+   },
+   {
+    "speaker": "reno",
+    "text": "The bus going brrrrrm? Yes! It's the best sound in the world!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "...Never mind."
+   },
+   {
+    "event": "travel:BS-01:from_bus"
+   }
+  ],
+  "C03_arrival": [
+   {
+    "speaker": "narrator",
+    "text": "Bandar Senja. The bus coughs to a stop in front of a real railway station."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi. LUMI. Look at the clock tower!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Missing parcels, moths, a train that makes people forget... I don't like this, Reno."
+   },
+   {
+    "speaker": "reno",
+    "text": "I like it a lot!"
+   },
+   {
+    "set_flag": "ch01_arrived_bandar_senja"
+   },
+   {
+    "event": "autosave"
+   }
+  ],
+  "human_fisherman": [
+   {
+    "speaker": "fisherman",
+    "text": "(to himself) Where did my postcard go? My sister in Bandar Senja will think I forgot her again."
+   }
+  ],
+  "C01_S01_postcard": [
+   {
+    "speaker": "narrator",
+    "text": "A postcard lies face down on the jetty planks, already stamped."
+   },
+   {
+    "key_item": "item_postcard"
+   },
+   {
+    "set_flag": "ch01_postcard_found"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's the fisherman's. It's addressed to Bandar Senja."
+   },
+   {
+    "speaker": "reno",
+    "text": "We're going there! We can post it for him."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Postcard Home. (Key item)"
+   }
+  ]
+ }
+}

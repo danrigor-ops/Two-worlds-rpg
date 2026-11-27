@@ -1,0 +1,15 @@
+{
+ "status": "CONFIRMED_USER",
+ "note": "Spirit stalls priced in Dewdrops (Chapter 1, section 8). Prices are provisional.",
+ "shops": {
+  "kettle_stall": {
+   "name": "Old Kettle's Shelf",
+   "currency": "dewdrops",
+   "items": [
+    "item_moonleaf_bun",
+    "item_firefly_tea",
+    "item_dewdrop_candy"
+   ]
+  }
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "SM-03",
+ "name": "Kopitiam",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 20,
+ "height": 15,
+ "legend": {
+  "t": "tile_floor",
+  "#": "wall",
+  "s": "shelf",
+  "K": "shelf",
+  "c": "counter",
+  "D": "door"
+ },
+ "rows": [
+  "####################",
+  "####################",
+  "#tsssssssKsssssssst#",
+  "#tttttttttttttttttt#",
+  "#tccccccctttttttttt#",
+  "#tttttttttttttttttt#",
+  "#tttttttttttttttttt#",
+  "#tttttttttttttttttt#",
+  "#tttcctttcctttccttt#",
+  "#tttttttttttttttttt#",
+  "#tttttttttttttttttt#",
+  "#tttccttttttttccttt#",
+  "#tttttttttttttttttt#",
+  "#tttttttttttttttttt#",
+  "##########D#########"
+ ],
+ "spawns": {
+  "start": {
+   "x": 10,
+   "y": 12,
+   "facing": "up"
+  },
+  "from_square": {
+   "x": 10,
+   "y": 13,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "door_out",
+   "x": 10,
+   "y": 14,
+   "to_map": "SM-01",
+   "to_spawn": "from_kopitiam"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "kopitiam_owner",
+   "character": "kopitiam_owner",
+   "x": 5,
+   "y": 3,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_kopitiam_owner"
+    }
+   ]
+  },
+  {
+   "id": "regular",
+   "character": "passenger_a",
+   "x": 10,
+   "y": 9,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_regular"
+    }
+   ]
+  },
+  {
+   "id": "old_kettle",
+   "character": "old_kettle",
+   "x": 9,
+   "y": 3,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_kettle_tip_heard"
+     ],
+     "scene": "kettle_stall"
+    },
+    {
+     "if_flags": [
+      "ch01_coin_jar_solved"
+     ],
+     "scene": "C02_kettle_reward"
+    },
+    {
+     "if_flags": [
+      "ch01_kettle_favour_asked"
+     ],
+     "scene": "kettle_waiting"
+    },
+    {
+     "scene": "C01_old_kettle"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [
+  {
+   "cells": [
+    [
+     9,
+     11
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     11
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     11,
+     12
+    ]
+   ],
+   "scene": "C01_overheard",
+   "if_not_flags": [
+    "ch01_kopitiam_overheard"
+   ]
+  }
+ ],
+ "on_enter": []
+}

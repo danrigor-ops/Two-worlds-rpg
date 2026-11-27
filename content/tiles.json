@@ -219,6 +219,62 @@
    "color": "#5d9e4b",
    "accent": "#f4ecd2",
    "pattern": "fence"
+  },
+  "tile_floor": {
+   "index": 31,
+   "solid": false,
+   "color": "#c8c0a8",
+   "accent": "#a8a088",
+   "pattern": "checker"
+  },
+  "counter": {
+   "index": 32,
+   "solid": true,
+   "color": "#7a4528",
+   "accent": "#d9b77e",
+   "pattern": "planks"
+  },
+  "shelf": {
+   "index": 33,
+   "solid": true,
+   "color": "#5a3320",
+   "accent": "#e0b48a",
+   "pattern": "shelf"
+  },
+  "coins": {
+   "index": 34,
+   "solid": true,
+   "color": "#c8c0a8",
+   "accent": "#e8b84a",
+   "pattern": "coins"
+  },
+  "bus": {
+   "index": 35,
+   "solid": true,
+   "color": "#3f8f6b",
+   "accent": "#f4ecd2",
+   "pattern": "bus"
+  },
+  "bus_door": {
+   "index": 36,
+   "solid": true,
+   "color": "#3f8f6b",
+   "accent": "#2b2420",
+   "pattern": "door"
+  },
+  "bus_seat": {
+   "index": 37,
+   "solid": true,
+   "color": "#7a4528",
+   "accent": "#c94f4f",
+   "pattern": "bed"
+  },
+  "jetty": {
+   "index": 38,
+   "solid": false,
+   "color": "#8a6a48",
+   "accent": "#6b4a2f",
+   "pattern": "planks"
   }
  }
 }

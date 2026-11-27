@@ -236,7 +236,7 @@ func _hero_turn(u: Dictionary) -> bool:
 				var defs := GameState.item_defs()
 				var opts := []
 				for iid: String in GameState.data["inventory"]:
-					if defs.get(iid, {}).has("heal_hp"):
+					if defs.get(iid, {}).has("heal_hp") or defs.get(iid, {}).has("heal_mp"):
 						opts.append({"text": "%s x%d" % [defs[iid]["name"], GameState.item_count(iid)], "enabled": true, "value": iid})
 				if opts.is_empty():
 					await _say("No items to use.")
@@ -244,12 +244,21 @@ func _hero_turn(u: Dictionary) -> bool:
 				var iid: Variant = await _choose("Item", opts, true)
 				if iid == null:
 					continue
-				var target := _lowest_hp_hero()
+				var hp := int(defs[iid].get("heal_hp", 0))
+				var mp := int(defs[iid].get("heal_mp", 0))
+				var target := _lowest_hp_hero() if hp > 0 else _lowest_mp_hero()
 				if not GameState.add_item(iid, -1):
 					continue
 				combat.spend_token(u)
-				var healed := combat.heal(target, int(defs[iid]["heal_hp"]))
-				await _say("%s recovers %d HP!" % [target["name"], healed])
+				var healed := combat.heal(target, hp)
+				var before: int = target["mp"]
+				target["mp"] = mini(target["max_mp"], before + mp)
+				var parts: Array[String] = []
+				if hp > 0:
+					parts.append("%d HP" % healed)
+				if mp > 0:
+					parts.append("%d MP" % (target["mp"] - before))
+				await _say("%s recovers %s!" % [target["name"], " and ".join(parts)])
 				return false
 			"run":
 				combat.spend_token(u)
@@ -363,17 +372,28 @@ func _lowest_hp_hero() -> Dictionary:
 	return best
 
 
+func _lowest_mp_hero() -> Dictionary:
+	var best: Dictionary = {}
+	for h in combat.side("hero"):
+		if best.is_empty() or float(h["mp"]) / max(1, h["max_mp"]) < float(best["mp"]) / max(1, best["max_mp"]):
+			best = h
+	return best
+
+
 func _win() -> void:
 	var xp := 0
 	for e in combat.side("enemy", false):
 		xp += int(_enemy_defs[e["def_id"]].get("xp", 0))
 	await _say("Victory! Gained %d XP." % xp, true)
+	var ups: Array[String] = []
 	for id: String in GameState.party():
 		var m: Dictionary = GameState.data["members"][id]
-		m["xp"] = int(m["xp"]) + xp
+		ups.append_array(GameState.gain_xp(id, xp))
 		# Prologue rule (working proposal): HP and MP refill after each battle.
 		m["hp"] = m["max_hp"]
 		m["mp"] = m["max_mp"]
+	for line in ups:
+		await _say(line, true)
 	for k: String in encounter.get("win_key_items", []):
 		GameState.add_key_item(k)
 	for f: String in encounter.get("win_flags", []):

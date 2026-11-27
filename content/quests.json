@@ -1,6 +1,6 @@
 {
  "status": "WORKING_PROPOSAL",
- "note": "Lifecycle: locked -> active -> completed -> rewarded. 'start_flags' activate a locked quest, 'complete_flags' complete it, and the reward is granted once (tracked in rewards_claimed).",
+ "note": "Lifecycle: locked -> active -> completed -> rewarded. 'start_flags' activate a locked quest, 'complete_flags' complete it, and the reward is granted once (tracked in rewards_claimed). Chapter 1 quests follow docs/chapter-01/data/chapter-01-quests.json.",
  "quests": [
   {
    "id": "PRO-001",
@@ -95,6 +95,64 @@
    "journal": {
     "active": "Open the Forbidden Gate and cross into the human world.",
     "completed": "We made it to Sungai Melor!"
+   }
+  },
+  {
+   "id": "C01-001",
+   "name": "Unseen",
+   "start": "locked",
+   "start_flags": [
+    "prologue_completed"
+   ],
+   "complete_flags": [
+    "ch01_visibility_learned",
+    "ch01_coin_jar_solved",
+    "ch01_kettle_tip_heard"
+   ],
+   "reward": {
+    "dewdrops": 3,
+    "items": {
+     "item_kaya_toast": 2
+    }
+   },
+   "journal": {
+    "active": "Humans can't see us! Find out how to get to Bandar Senja. Old Kettle in the kopitiam knows things.",
+    "completed": "We sorted Encik Lim's coins. Old Kettle told us the bus trick."
+   }
+  },
+  {
+   "id": "C01-002",
+   "name": "The Bus to Bandar Senja",
+   "start": "locked",
+   "start_flags": [
+    "ch01_kettle_tip_heard"
+   ],
+   "complete_flags": [
+    "ch01_bus_boarded",
+    "ch01_arrived_bandar_senja"
+   ],
+   "journal": {
+    "active": "Board the bus at the village road stop. Follow someone with a big load.",
+    "completed": "We rode the bus to Bandar Senja, on the luggage rack."
+   }
+  },
+  {
+   "id": "C01-S01",
+   "name": "A Postcard Home",
+   "optional": true,
+   "start": "locked",
+   "start_flags": [
+    "ch01_postcard_found"
+   ],
+   "complete_flags": [
+    "ch01_postcard_posted"
+   ],
+   "reward": {
+    "dewdrops": 2
+   },
+   "journal": {
+    "active": "A fisherman dropped his postcard on the jetty. Post it in Bandar Senja.",
+    "completed": "Mr Slot took the postcard."
    }
   }
  ]

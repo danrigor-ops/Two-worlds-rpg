@@ -1,0 +1,104 @@
+{
+ "id": "SM-02",
+ "name": "Jetty and Market Lane",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 32,
+ "legend": {
+  ".": "grass",
+  "T": "tree",
+  "~": "water",
+  "j": "jetty",
+  "=": "laterite",
+  "E": "exit",
+  "k": "stall"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjjjjjjjjjjj~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjjjjjjjjjjj~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjj~~~~~~~~~~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjj~~~~~~~~~~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjj~~~~~~~~~~~~~~~~~~~~TT",
+  "TT~~~~~~~~~~~~~~~~~~~~jjjj~~~~~~~~~~~~~~~~~~~~TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TT....kkkkk...kkkkk....==.....kkkkk...kkkkk...TT",
+  "TT....kkkkk...kkkkk....==.....kkkkk...kkkkk...TT",
+  "TT....kkkkk...kkkkk....==.....kkkkk...kkkkk...TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TT============================================TT",
+  "TT============================================TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TT................T....==.....................TT",
+  "TT..T..................==.....................TT",
+  "TT.....................==...............T.....TT",
+  "TT..........T..........==.....................TT",
+  "TT.....................==........T............TT",
+  "TT.....................==.....................TT",
+  "TT.....................==.....................TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 24,
+   "y": 28,
+   "facing": "up"
+  },
+  "from_village": {
+   "x": 24,
+   "y": 29,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "lane_to_village",
+   "x": 24,
+   "y": 30,
+   "to_map": "SM-01",
+   "to_spawn": "from_jetty"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "fisherman",
+   "character": "fisherman",
+   "x": 30,
+   "y": 5,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_fisherman"
+    }
+   ]
+  },
+  {
+   "id": "postcard",
+   "character": "postcard_marker",
+   "x": 27,
+   "y": 5,
+   "hide_if_flag": "ch01_postcard_found",
+   "pickup": true,
+   "talk": [
+    {
+     "scene": "C01_S01_postcard"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": []
+}
