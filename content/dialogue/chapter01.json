@@ -37,6 +37,30 @@
   "fisherman": {
    "name": "Fisherman",
    "character": "fisherman"
+  },
+  "clockkeeper": {
+   "name": "The Clockkeeper",
+   "character": "clockkeeper"
+  },
+  "pak_darus": {
+   "name": "Pak Darus",
+   "character": "pak_darus"
+  },
+  "ticket_clerk": {
+   "name": "Ticket clerk",
+   "character": "ticket_clerk"
+  },
+  "repairer": {
+   "name": "Bicycle repairer",
+   "character": "repairer"
+  },
+  "mr_slot": {
+   "name": "Mr Slot",
+   "character": "mr_slot"
+  },
+  "monarch": {
+   "name": "Paper Moth Monarch",
+   "character": "paper_moth_monarch"
   }
  },
  "scenes": {
@@ -569,6 +593,936 @@
    {
     "speaker": "narrator",
     "text": "Got the Postcard Home. (Key item)"
+   }
+  ],
+  "mr_slot": [
+   {
+    "speaker": "mr_slot",
+    "text": "Letters, postcards, small parcels. In my mouth, out to the world. That's the job."
+   },
+   {
+    "speaker": "reno",
+    "text": "You're a post box!"
+   },
+   {
+    "speaker": "mr_slot",
+    "text": "I'm THE post box. Mr Slot. Forty years on this corner and never lost a letter."
+   }
+  ],
+  "mr_slot_postcard": [
+   {
+    "speaker": "lumi",
+    "text": "Mr Slot, could you take this? A fisherman in Sungai Melor dropped it."
+   },
+   {
+    "speaker": "mr_slot",
+    "text": "A postcard home! My favourite kind. In it goes."
+   },
+   {
+    "take_key_item": "item_postcard"
+   },
+   {
+    "set_flag": "ch01_postcard_posted"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The postcard drops into the slot with a happy little clunk."
+   },
+   {
+    "speaker": "mr_slot",
+    "text": "His sister will have it by Thursday. Here, a little something for honest couriers."
+   }
+  ],
+  "mr_slot_after": [
+   {
+    "speaker": "mr_slot",
+    "text": "Thursday, I said. I'm never late. Unlike some trains I could mention."
+   }
+  ],
+  "C04_overheard": [
+   {
+    "set_flag": "ch01_darus_overheard"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A tired voice rises over the clatter of the hall."
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "(to the ticket clerk) Three parcels gone. One somewhere in the goods shed, one in the yard, and one sent to the wrong shop with a label nobody can read."
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "If they're not on my desk by tonight, head office will have my cap."
+   },
+   {
+    "speaker": "ticket_clerk",
+    "text": "Maybe the moths ate them, Pak."
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "Don't joke. Not about the moths."
+   }
+  ],
+  "human_pak_darus": [
+   {
+    "speaker": "pak_darus",
+    "text": "(to his paperwork) Parcel A, parcel B, parcel C. Gone, gone and gone. Wonderful."
+   }
+  ],
+  "human_ticket_clerk": [
+   {
+    "speaker": "ticket_clerk",
+    "text": "(to herself) Evening train delayed again. I'll just write \"late\" on the board and save the chalk."
+   }
+  ],
+  "C04_clockkeeper": [
+   {
+    "speaker": "narrator",
+    "text": "A ticking voice comes from the big station clock above the ticket window."
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Tick. You two. Yes, you. The ones he can't see."
+   },
+   {
+    "speaker": "reno",
+    "text": "The clock is talking!"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "The clock has been talking since 1931. Nobody listens. Tick. You want the evening train?"
+   },
+   {
+    "speaker": "reno",
+    "text": "More than anything!"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Then you need one of my tickets. Stamped for the Veil. The evening train hasn't been running straight for weeks."
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Board it without a stamp, and you may not get off where you meant to."
+   },
+   {
+    "speaker": "lumi",
+    "text": "And what do you want in return?"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Pak Darus is a good man. He winds me every Monday. Find his parcels and put them on his desk. Quietly."
+   },
+   {
+    "speaker": "reno",
+    "text": "Secret parcel heroes! Deal!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "We once lost a bridge."
+   },
+   {
+    "speaker": "reno",
+    "text": "And then we found it!"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Wait until he looks away before you put anything down. Humans notice a parcel appearing under their nose."
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "The goods shed is west of the forecourt. Shophouse Row is east. The yard is through that door. Tick."
+   },
+   {
+    "set_flag": "ch01_parcels_quest_started"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "And I keep a shelf of travel snacks. Dewdrops, if you have them."
+   }
+  ],
+  "clock_waiting": [
+   {
+    "speaker": "clockkeeper",
+    "text": "Three parcels. Desk. Quietly. Tick."
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse the shelf",
+      "then": [
+       {
+        "event": "shop:clock_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": [
+       {
+        "speaker": "clockkeeper",
+        "text": "Tick."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "clock_stall": [
+   {
+    "speaker": "clockkeeper",
+    "text": "Snacks for the journey? Tick."
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse the shelf",
+      "then": [
+       {
+        "event": "shop:clock_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": [
+       {
+        "speaker": "clockkeeper",
+        "text": "Tick."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C08_tickets": [
+   {
+    "speaker": "clockkeeper",
+    "text": "All three, back on his desk. He's been smiling at them for an hour. Tick."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Clockkeeper's hands spin. Two tickets drop from his case, each stamped with a violet tick mark."
+   },
+   {
+    "key_item": "item_veil_ticket"
+   },
+   {
+    "set_flag": "ch01_tickets_obtained"
+   },
+   {
+    "speaker": "clockkeeper",
+    "text": "Carriage three. Keep these on you. And if the train runs late, don't blame me. That one always does."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi. We have TICKETS."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Platform 2 is through the north door. The evening train comes at dusk."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Veil-Stamped Tickets. (Key item)"
+   }
+  ],
+  "yard_not_yet": [
+   {
+    "speaker": "lumi",
+    "text": "The rail yard's through there. Let's find out what's going on in this station first."
+   }
+  ],
+  "platform_not_yet": [
+   {
+    "speaker": "lumi",
+    "text": "Platform 2. We can't board without the Clockkeeper's tickets."
+   }
+  ],
+  "desk_idle": [
+   {
+    "speaker": "narrator",
+    "text": "The stationmaster's desk. Forms, stamps, a cold cup of coffee and a lot of empty space where three parcels should be."
+   }
+  ],
+  "place_wait": [
+   {
+    "speaker": "lumi",
+    "text": "Wait until he looks away."
+   }
+  ],
+  "parcel_reaction": [
+   {
+    "speaker": "pak_darus",
+    "text": "Ticket clerk! Did you... never mind. Never mind.",
+    "if_flags": [
+     "ch01_parcel_r2"
+    ],
+    "if_not_flags": [
+     "ch01_parcel_r3"
+    ]
+   },
+   {
+    "set_flag": "ch01_parcels_returned",
+    "if_flags": [
+     "ch01_parcel_r2"
+    ],
+    "if_not_flags": [
+     "ch01_parcel_r3"
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "That's all three! Let's tell the Clockkeeper.",
+    "if_flags": [
+     "ch01_parcel_r2"
+    ],
+    "if_not_flags": [
+     "ch01_parcel_r3"
+    ]
+   },
+   {
+    "set_flag": "ch01_parcel_r3",
+    "if_flags": [
+     "ch01_parcel_r2"
+    ]
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "I'm not going to question it.",
+    "if_flags": [
+     "ch01_parcel_r1"
+    ],
+    "if_not_flags": [
+     "ch01_parcel_r2"
+    ]
+   },
+   {
+    "set_flag": "ch01_parcel_r2",
+    "if_flags": [
+     "ch01_parcel_r1"
+    ]
+   },
+   {
+    "speaker": "pak_darus",
+    "text": "...Was that there a minute ago?",
+    "if_not_flags": [
+     "ch01_parcel_r1"
+    ]
+   },
+   {
+    "set_flag": "ch01_parcel_r1"
+   }
+  ],
+  "place_parcel_a": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's turned away: Reno slides the parcel onto the desk."
+   },
+   {
+    "take_key_item": "item_parcel_a"
+   },
+   {
+    "set_flag": "ch01_parcel_a_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pak Darus turns back around and freezes."
+   },
+   {
+    "goto": "parcel_reaction"
+   }
+  ],
+  "place_parcel_b": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's turned away: Reno slides the parcel onto the desk."
+   },
+   {
+    "take_key_item": "item_parcel_b"
+   },
+   {
+    "set_flag": "ch01_parcel_b_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pak Darus turns back around and freezes."
+   },
+   {
+    "goto": "parcel_reaction"
+   }
+  ],
+  "place_parcel_c": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's turned away: Reno slides the parcel onto the desk."
+   },
+   {
+    "take_key_item": "item_parcel_c"
+   },
+   {
+    "set_flag": "ch01_parcel_c_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pak Darus turns back around and freezes."
+   },
+   {
+    "goto": "parcel_reaction"
+   }
+  ],
+  "C05_shed": [
+   {
+    "set_flag": "ch01_shed_entered"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Crates everywhere. Something dusty rolls between the aisles."
+   },
+   {
+    "speaker": "lumi",
+    "text": "There's a parcel on the top shelf at the back. But the aisle is blocked."
+   },
+   {
+    "speaker": "reno",
+    "text": "Root Grip! I'll just pull every crate at once."
+   },
+   {
+    "speaker": "lumi",
+    "text": "One crate at a time. And not onto my foot."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Hint: face a crate as Reno and press A to pull it one tile toward you. The lever by the door puts every crate back."
+   }
+  ],
+  "grip_lumi": [
+   {
+    "speaker": "lumi",
+    "text": "Root Grip is Reno's trick. I'd only scratch the paint."
+   }
+  ],
+  "grip_no_room": [
+   {
+    "speaker": "reno",
+    "text": "Nnngh! There's no room behind me to pull it."
+   }
+  ],
+  "shed_reset": [
+   {
+    "speaker": "narrator",
+    "text": "A big lever marked RESET. Pull it?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Pull it",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Clank! Something in the roof whirs, and every crate slides back to where it started."
+       },
+       {
+        "event": "reset_map:start"
+       }
+      ]
+     },
+     {
+      "text": "Leave it",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C05_parcel_a": [
+   {
+    "speaker": "narrator",
+    "text": "Behind the crates, on the back shelf: a parcel with the station's stamp."
+   },
+   {
+    "key_item": "item_parcel_a"
+   },
+   {
+    "set_flag": "ch01_parcel_a_found"
+   },
+   {
+    "set_flag": "pz103_crates_solved"
+   },
+   {
+    "speaker": "reno",
+    "text": "Parcel A! One down!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Now it goes on Pak Darus's desk. While he isn't looking."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Parcel A. (Key item)"
+   }
+  ],
+  "shelf_empty": [
+   {
+    "speaker": "narrator",
+    "text": "The back shelf. Just dust now."
+   }
+  ],
+  "C05_dead_letter_look": [
+   {
+    "set_flag": "ch01_dead_letter_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A high shelf marked DEAD LETTERS. One parcel tag says 1951. Its emblem looks just like Reno's railway token."
+   },
+   {
+    "speaker": "reno",
+    "text": "That's my token's picture!"
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi, could you do your touchy thing on it?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C, then look again.)"
+   }
+  ],
+  "C05_dead_letter_touch": [
+   {
+    "set_flag": "ch01_dead_letter_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi rests her fingers on the 1951 tag. The shed goes quiet."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Footsteps on a platform. A woman's voice: \"Mind the gap, little one.\""
+   },
+   {
+    "set_flag": "ch01_dead_letter_tag_read"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno goes quiet, for once."
+   },
+   {
+    "speaker": "reno",
+    "text": "That's my token's picture."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Someone in 1951 had the same one."
+   },
+   {
+    "speaker": "reno",
+    "text": "...Maybe it's a very popular token."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi does not answer."
+   }
+  ],
+  "dead_letter_done": [
+   {
+    "speaker": "narrator",
+    "text": "The 1951 tag. Lumi doesn't want to touch it again just yet."
+   }
+  ],
+  "dust_a_beaten": [
+   {
+    "set_flag": "bs03_dust_a_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "It just... unrolled. Into dust."
+   }
+  ],
+  "dust_b_beaten": [
+   {
+    "set_flag": "bs03_dust_b_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Veil creatures, in a human goods shed. The Veil is thin here."
+   }
+  ],
+  "C06_label_reno": [
+   {
+    "speaker": "narrator",
+    "text": "A delivery note is pinned to the noticeboard: PARCEL C. The address is a smudge."
+   },
+   {
+    "speaker": "reno",
+    "text": "It says... blob. Blob street, number blob."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Let me try. Things remember where they were meant to go."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C, then look again.)"
+   }
+  ],
+  "C06_memory_touch": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the smudged label. Memory Touch!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Something BLUE. A ROUND shape on a signboard. The letters ...CLE."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Things remember where they were meant to go."
+   },
+   {
+    "speaker": "reno",
+    "text": "Does my satchel remember where my lunch went?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Your satchel remembers you ate it."
+   },
+   {
+    "key_item": "item_label_fragments"
+   },
+   {
+    "set_flag": "ch01_label_read"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Blue, round, ...CLE. Let's check the shop signs along the row."
+   }
+  ],
+  "label_again": [
+   {
+    "speaker": "narrator",
+    "text": "The smudged note. Lumi's fragments: something BLUE, a ROUND shape, and ...CLE."
+   }
+  ],
+  "sign_tailor": [
+   {
+    "speaker": "narrator",
+    "text": "A red signboard with a pair of scissors: TAILOR."
+   }
+  ],
+  "sign_bicycle": [
+   {
+    "speaker": "narrator",
+    "text": "A blue signboard with a big wheel: BICYCLE REPAIR."
+   }
+  ],
+  "sign_photo": [
+   {
+    "speaker": "narrator",
+    "text": "A green signboard with a camera: PHOTO STUDIO."
+   }
+  ],
+  "sign_gold": [
+   {
+    "speaker": "narrator",
+    "text": "A gold signboard with a ring: GOLDSMITH."
+   }
+  ],
+  "pz105_tailor": [
+   {
+    "speaker": "narrator",
+    "text": "A red signboard with a pair of scissors: TAILOR."
+   },
+   {
+    "speaker": "reno",
+    "text": "Scissors are round-ish. When they're open. Sort of."
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's red, Reno. And there's no ...CLE."
+   }
+  ],
+  "pz105_photo": [
+   {
+    "speaker": "narrator",
+    "text": "A green signboard with a camera: PHOTO STUDIO."
+   },
+   {
+    "speaker": "reno",
+    "text": "The camera has a round bit!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Green, though. And no ...CLE."
+   }
+  ],
+  "pz105_gold": [
+   {
+    "speaker": "narrator",
+    "text": "A gold signboard with a ring: GOLDSMITH."
+   },
+   {
+    "speaker": "reno",
+    "text": "A ring is round! And shiny!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Shiny isn't blue. Keep looking."
+   }
+  ],
+  "C06_parcel_c": [
+   {
+    "speaker": "narrator",
+    "text": "A blue signboard with a big wheel: BICYCLE REPAIR. Blue, round, biCYCLE."
+   },
+   {
+    "speaker": "lumi",
+    "text": "This is it."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Inside, among inner tubes and spanners, sits a parcel with the station's stamp."
+   },
+   {
+    "key_item": "item_parcel_c"
+   },
+   {
+    "set_flag": "ch01_parcel_c_found"
+   },
+   {
+    "set_flag": "pz105_label_solved"
+   },
+   {
+    "take_key_item": "item_label_fragments"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno pokes a bicycle wheel on the way out. It spins."
+   },
+   {
+    "speaker": "repairer",
+    "text": "(to himself, looking up) Wind's strange today."
+   },
+   {
+    "speaker": "reno",
+    "text": "Is that one tame?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's a bicycle. And he can't hear you ask."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Parcel C. (Key item)"
+   }
+  ],
+  "human_repairer": [
+   {
+    "speaker": "repairer",
+    "text": "(to himself) Who sends a parcel to a bicycle shop? I don't even sign for parcels."
+   }
+  ],
+  "C07_yard": [
+   {
+    "set_flag": "ch01_moth_trail_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Ticket Moths flutter over the rails, carrying scraps of paper toward a fenced siding in the north-east."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Look. They're all flying to that siding. And there's something wrapped up in there."
+   },
+   {
+    "speaker": "reno",
+    "text": "A parcel! Parcel B!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "The siding gate is shut. That handcar could knock it open, if the signals sent it the right way."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Hint: the three levers switch the points. Lumi's Echo Sight can show the old marker's memory."
+   }
+  ],
+  "lever_1": [
+   {
+    "toggle_flag": "bs05_lever_1"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 1 is now SWITCHED.",
+    "if_flags": [
+     "bs05_lever_1"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 1 is now STRAIGHT.",
+    "if_not_flags": [
+     "bs05_lever_1"
+    ]
+   }
+  ],
+  "lever_2": [
+   {
+    "toggle_flag": "bs05_lever_2"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 2 is now SWITCHED.",
+    "if_flags": [
+     "bs05_lever_2"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 2 is now STRAIGHT.",
+    "if_not_flags": [
+     "bs05_lever_2"
+    ]
+   }
+  ],
+  "lever_3": [
+   {
+    "toggle_flag": "bs05_lever_3"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 3 is now SWITCHED.",
+    "if_flags": [
+     "bs05_lever_3"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Clunk. Signal lever 3 is now STRAIGHT.",
+    "if_not_flags": [
+     "bs05_lever_3"
+    ]
+   }
+  ],
+  "PZ104_marker_reno": [
+   {
+    "speaker": "narrator",
+    "text": "An old stone marker by the rails, worn smooth."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi, you see echoes. Want to look?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C, then look again.)"
+   }
+  ],
+  "PZ104_echo": [
+   {
+    "speaker": "narrator",
+    "text": "Echo Sight! A ghostly handcar glides past, the last one that ever made it to the siding."
+   },
+   {
+    "speaker": "narrator",
+    "text": "At lever 1 it turns. At lever 2 it goes straight on. At lever 3 it turns."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Switched, straight, switched."
+   }
+  ],
+  "PZ104_wrong": [
+   {
+    "speaker": "narrator",
+    "text": "Reno gives the handcar a shove. It rattles off down the rails..."
+   },
+   {
+    "speaker": "narrator",
+    "text": "...and rolls back a minute later, the wrong way round."
+   },
+   {
+    "speaker": "lumi",
+    "text": "The points sent it somewhere else. Let's check the levers."
+   }
+  ],
+  "PZ104_solved": [
+   {
+    "speaker": "narrator",
+    "text": "Reno gives the handcar a shove. It rattles off, clatters through all three points and slams into the siding gate."
+   },
+   {
+    "set_flag": "pz104_signals_solved"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The gate bursts open. Paper scraps snow down over the yard."
+   },
+   {
+    "speaker": "reno",
+    "text": "Bullseye!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Now there's only the nest. And whatever made it."
+   }
+  ],
+  "moths_beaten": [
+   {
+    "set_flag": "bs05_moths_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "They were carrying bits of tickets!"
+   }
+  ],
+  "flicker_beaten": [
+   {
+    "set_flag": "bs05_flicker_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "A signal lamp that came alive. The Veil really is thin here."
+   }
+  ],
+  "C07_monarch_intro": [
+   {
+    "speaker": "narrator",
+    "text": "The nest heaves. A huge moth unfolds, its wings made of chewed tickets."
+   },
+   {
+    "speaker": "monarch",
+    "text": "Mine. All the little papers that say where... mine."
+   },
+   {
+    "speaker": "reno",
+    "text": "It's eating tickets! That's the worst crime I can think of!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Why would a moth want destinations?"
+   }
+  ],
+  "C07_monarch_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Monarch crumples into a heap of paper. Inside the nest: Parcel B, and a punched ticket with no destination printed on it. Just a neat hole."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Someone is collecting where people are going."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then they'd better not touch our tickets."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Parcel B, the Blank Punched Ticket and the Moth-Wing Charm. (Lumi wears the charm: SPD +2.)"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New team skill: Guardian Bloom! Reno and Lumi use both turns and 5 MP each to shield each other (damage x0.7 for 2 turns) and heal 15% of their HP. Find it under Bloom in battle."
    }
   ]
  }

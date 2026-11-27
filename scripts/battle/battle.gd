@@ -124,7 +124,11 @@ func _setup_combat() -> void:
 	var heroes: Array = []
 	var names: Dictionary = JsonUtil.load_dict(GameState.CHARACTERS_PATH).get("characters", {})
 	for id: String in GameState.party():
-		heroes.append(Combat.make_unit(id, names.get(id, {}).get("name", id), "hero", GameState.data["members"][id]))
+		var stats: Dictionary = GameState.data["members"][id].duplicate()
+		var bonus := GameState.equip_bonus(id)
+		for k: String in bonus:
+			stats[k] = int(stats[k]) + int(bonus[k])
+		heroes.append(Combat.make_unit(id, names.get(id, {}).get("name", id), "hero", stats))
 		_add_sprite(id, id, HERO_POS.get(id, Vector2(54, 75)), "right")
 	var enemies: Array = []
 	var list: Array = encounter.get("enemies", [])
@@ -133,6 +137,7 @@ func _setup_combat() -> void:
 		var uid := "%s_%d" % [list[i], i]
 		var u := Combat.make_unit(uid, def["name"], "enemy", def["stats"])
 		u["def_id"] = list[i]
+		u["immune"] = def.get("immune", [])
 		enemies.append(u)
 		_add_sprite(uid, def.get("character", list[i]), ENEMY_POS[i % ENEMY_POS.size()], "left")
 	combat.setup(heroes, enemies)
@@ -174,10 +179,18 @@ func _run() -> void:
 					return
 			else:
 				await _enemy_turn(u)
+			Combat.tick_status(u)
 			_refresh_status()
 			for e in combat.side("enemy"):
 				await _check_phase(e)
+			for e in combat.side("enemy"):
+				if e.has("summoner") and combat.unit(e["summoner"])["hp"] <= 0:
+					e["hp"] = 0
+					_sprites[e["id"]].modulate.a = 0.0
+					await _say("The %s flutters away." % e["name"])
 			var result := combat.outcome()
+			if _story_end_reached():
+				result = "win"
 			if result == "win":
 				await _win()
 				return
@@ -192,9 +205,12 @@ func _run() -> void:
 func _hero_turn(u: Dictionary) -> bool:
 	while true:
 		_tutorial_hint(u["id"] + "_turn")
+		var fogged := Combat.has_status(u, "fog")
+		if fogged:
+			_hint.text = "Memory Fog: %s can't remember any skills this turn." % u["name"]
 		var items := [
 			{"text": "Attack", "enabled": true, "value": "attack"},
-			{"text": "Skill", "enabled": true, "value": "skill"},
+			{"text": "Skill", "enabled": not fogged, "value": "skill"},
 			{"text": "Guard", "enabled": true, "value": "guard"},
 			{"text": "Item", "enabled": true, "value": "item"},
 		]
@@ -203,12 +219,17 @@ func _hero_turn(u: Dictionary) -> bool:
 			if t.has("requires_flag") and not GameState.get_flag(t["requires_flag"]):
 				continue
 			if u["id"] in t["users"] and t["users"].all(func(id: String) -> bool: return not combat.unit(id).is_empty()):
-				items.insert(2, {"text": "Team", "enabled": combat.can_team(t["users"], int(t["mp_each"])), "value": "team:" + tid})
+				var team_ok: bool = combat.can_team(t["users"], int(t["mp_each"])) and not (t["users"] as Array).any(func(id: String) -> bool: return Combat.has_status(combat.unit(id), "fog"))
+				items.insert(2, {"text": t.get("short", "Team"), "enabled": team_ok, "value": "team:" + tid})
 		if encounter.get("can_escape", true):
 			items.append({"text": "Run", "enabled": true, "value": "run"})
 		var cmd: Variant = await _choose("%s's turn" % u["name"], items, false)
 		if str(cmd).begins_with("team:"):
-			await _team_attack(_team[str(cmd).trim_prefix("team:")])
+			var tdef: Dictionary = _team[str(cmd).trim_prefix("team:")]
+			if tdef.get("kind", "") == "support":
+				await _team_support(tdef)
+			else:
+				await _team_attack(tdef)
 			return false
 		match cmd:
 			"attack":
@@ -267,9 +288,21 @@ func _hero_turn(u: Dictionary) -> bool:
 	return false
 
 
+## With more than one enemy standing, the player picks who to hit.
+func _pick_target() -> Dictionary:
+	var foes := combat.side("enemy")
+	if foes.size() == 1:
+		return foes[0]
+	var opts := []
+	for e in foes:
+		opts.append({"text": "%s %d/%d" % [e["name"], e["hp"], e["max_hp"]], "enabled": true, "value": e["id"]})
+	var id: Variant = await _choose("Target", opts, false)
+	return combat.unit(str(id))
+
+
 func _attack(u: Dictionary, kind: String, mult: float, text: String) -> void:
+	var target: Dictionary = await _pick_target()
 	combat.spend_token(u)
-	var target: Dictionary = combat.side("enemy")[0]
 	_msg.text = text
 	_tutorial_hint("cue_attack")
 	var judgement: String = await _cue(_sprites[target["id"]].position + Vector2(0, -18), u["id"], target["id"])
@@ -282,8 +315,8 @@ func _attack(u: Dictionary, kind: String, mult: float, text: String) -> void:
 
 func _team_attack(t: Dictionary) -> void:
 	var users: Array = t["users"]
+	var target: Dictionary = await _pick_target()
 	combat.pay_team(users, int(t["mp_each"]))
-	var target: Dictionary = combat.side("enemy")[0]
 	var judgements: Array[String] = []
 	for i in int(t["cues"]):
 		_msg.text = "%s! (%d/%d)" % [t["name"], i + 1, int(t["cues"])]
@@ -293,6 +326,35 @@ func _team_attack(t: Dictionary) -> void:
 	await _say("%s! %d damage!" % [t["name"], dmg])
 	if target["hp"] <= 0:
 		_sprites[target["id"]].modulate.a = 0.25
+
+
+## Guardian Bloom: both heroes' turns, two cues. Shielded always applies;
+## the heal is 15% of each hero's max HP, or 10% if a cue was missed.
+func _team_support(t: Dictionary) -> void:
+	var users: Array = t["users"]
+	combat.pay_team(users, int(t["mp_each"]))
+	var judgements: Array[String] = []
+	for i in int(t["cues"]):
+		_msg.text = "%s! (%d/%d)" % [t["name"], i + 1, int(t["cues"])]
+		var who: String = users[i % users.size()]
+		judgements.append(await _cue(_sprites[who].position + Vector2(0, -18), who, who))
+	var pct := float(t.get("heal_pct_miss", 10)) if "miss" in judgements else float(t.get("heal_pct", 15))
+	var parts: PackedStringArray = []
+	for h in combat.side("hero"):
+		Combat.add_status(h, t.get("applies", "shielded"), int(t.get("turns", 2)))
+		var healed := combat.heal(h, roundi(h["max_hp"] * pct / 100.0))
+		parts.append("%s +%d HP" % [h["name"], healed])
+	_log("bloom %s %d%%" % [",".join(judgements), int(pct)])
+	await _say("%s! Shielded. %s" % [t["name"], ", ".join(parts)])
+
+
+## Story bosses end at a threshold instead of being knocked out.
+func _story_end_reached() -> bool:
+	for e in combat.side("enemy"):
+		var def: Dictionary = _enemy_defs.get(e.get("def_id", ""), {})
+		if def.has("end_below") and float(e["hp"]) / e["max_hp"] <= float(def["end_below"]):
+			return true
+	return false
 
 
 ## Bosses change attacks as their HP drops (phases in enemies.json).
@@ -308,6 +370,18 @@ func _current_attacks(u: Dictionary) -> Array:
 			idx = i
 			break
 	return phases[idx]["attacks"]
+
+
+func _current_phase(u: Dictionary) -> Dictionary:
+	var def: Dictionary = _enemy_defs[u["def_id"]]
+	if not def.has("phases"):
+		return {}
+	var share := float(u["hp"]) / float(u["max_hp"])
+	var phases: Array = def["phases"]
+	for i in phases.size():
+		if share > float(phases[i]["above"]):
+			return phases[i]
+	return phases[phases.size() - 1]
 
 
 func _check_phase(u: Dictionary) -> void:
@@ -341,17 +415,44 @@ func _check_phase(u: Dictionary) -> void:
 
 func _enemy_turn(u: Dictionary) -> void:
 	combat.spend_token(u)
-	var attacks := _current_attacks(u)
-	var atk: Dictionary = attacks[(combat.round_number - 1) % attacks.size()]
+	var ph := _current_phase(u)
+	if ph.has("summon") and not _has_summon(u):
+		await _summon(u, ph["summon"])
+		return
+	var atk: Dictionary
+	if u.has("charging"):
+		atk = u["charging"]
+		u.erase("charging")
+	else:
+		var attacks := _current_attacks(u)
+		atk = attacks[(combat.round_number - 1 + int(u.get("offset", 0))) % attacks.size()]
+		if atk.get("telegraph", false):
+			# Telegraphed: announced now, lands on its next turn. Guard or dodge it.
+			u["charging"] = atk
+			_log("%s telegraph %s" % [u["id"], atk["name"]])
+			await _say(atk.get("telegraph_text", "%s is getting ready to use %s!" % [u["name"], atk["name"]]))
+			return
 	if atk.get("guard", false):
 		combat.guard(u)
 		_log("%s guard" % u["id"])
 		await _say("%s uses %s! It braces itself." % [u["name"], atk["name"]])
 		return
+	if atk.get("support", "") == "haste":
+		for e in combat.side("enemy"):
+			if e != u:
+				e["haste"] = true
+		_log("%s haste" % u["id"])
+		await _say("%s uses %s! Its friends will move first next round." % [u["name"], atk["name"]])
+		return
 	var heroes := combat.side("hero")
 	var targets: Array = heroes if atk.get("target", "one") == "all" else [heroes[(combat.round_number - 1) % heroes.size()]]
 	var aim: Dictionary = targets[0]
 	_msg.text = "%s uses %s%s!" % [u["name"], atk["name"], "" if targets.size() > 1 else " on " + aim["name"]]
+	if atk.get("kind", "") == "status":
+		var landed := Combat.add_status(aim, atk["applies"], int(atk.get("turns", 1)))
+		_log("%s -> %s status %s" % [u["id"], aim["id"], atk["applies"]])
+		await _say("%s %s" % [aim["name"], STATUS_TEXT.get(atk["applies"], "is affected!") if landed else "isn't affected."])
+		return
 	_tutorial_hint("cue_dodge")
 	var judgement: String = await _cue(_sprites[aim["id"]].position + Vector2(0, -18), u["id"], aim["id"])
 	var parts: PackedStringArray = []
@@ -361,7 +462,42 @@ func _enemy_turn(u: Dictionary) -> void:
 		parts.append("%s dodged" % target["name"] if dmg == 0 else "%s takes %d" % [target["name"], dmg])
 		if target["hp"] <= 0:
 			_sprites[target["id"]].modulate.a = 0.35
+		elif dmg > 0 and atk.has("applies") and Combat.add_status(target, atk["applies"], int(atk.get("turns", 1))):
+			parts.append("%s %s" % [target["name"], STATUS_TEXT.get(atk["applies"], "")])
 	await _say(("Half dodged! " if judgement == "good" else "") + ", ".join(parts) + ".")
+
+
+const STATUS_TEXT := {
+	"slow": "is slowed!",
+	"fog": "forgets their skills for a turn!",
+	"shielded": "is shielded!",
+}
+
+
+func _has_summon(u: Dictionary) -> bool:
+	for e in combat.side("enemy"):
+		if e.get("summoner", "") == u["id"]:
+			return true
+	return false
+
+
+## Boss phase summons: one at a time, worth no XP (no farming).
+func _summon(u: Dictionary, def_id: String) -> void:
+	var def: Dictionary = _enemy_defs[def_id]
+	var uid := "%s_s%d" % [def_id, combat.round_number]
+	var m := Combat.make_unit(uid, def["name"], "enemy", def["stats"])
+	m["def_id"] = def_id
+	m["summoner"] = u["id"]
+	m["no_xp"] = true
+	m["token"] = false
+	m["offset"] = 1
+	combat.units.append(m)
+	if _sprites.has(uid):
+		_sprites[uid].queue_free()
+	_add_sprite(uid, def.get("character", def_id), ENEMY_POS[1], "left")
+	_log("%s summon %s" % [u["id"], def_id])
+	await _say("%s calls a %s!" % [u["name"], def["name"]])
+	_refresh_status()
 
 
 func _lowest_hp_hero() -> Dictionary:
@@ -383,7 +519,8 @@ func _lowest_mp_hero() -> Dictionary:
 func _win() -> void:
 	var xp := 0
 	for e in combat.side("enemy", false):
-		xp += int(_enemy_defs[e["def_id"]].get("xp", 0))
+		if not e.get("no_xp", false):
+			xp += int(_enemy_defs[e["def_id"]].get("xp", 0))
 	await _say("Victory! Gained %d XP." % xp, true)
 	var ups: Array[String] = []
 	for id: String in GameState.party():
@@ -510,10 +647,18 @@ func _tutorial_hint(key: String) -> void:
 func _refresh_status() -> void:
 	var lines: PackedStringArray = []
 	for h in combat.side("hero", false):
-		lines.append("%s%s  HP %d/%d  MP %d/%d" % [h["name"], " [G]" if h["guarding"] else "", h["hp"], h["max_hp"], h["mp"], h["max_mp"]])
-	for e in combat.side("enemy", false):
-		lines.append("%s  HP %d/%d" % [e["name"], e["hp"], e["max_hp"]])
+		lines.append("%s%s  HP %d/%d  MP %d/%d" % [h["name"], _tags(h), h["hp"], h["max_hp"], h["mp"], h["max_mp"]])
+	var foes := combat.side("enemy", false).filter(func(e: Dictionary) -> bool: return e["hp"] > 0 or not e.has("summoner"))
+	for e: Dictionary in foes.slice(0, 2):
+		lines.append("%s%s  HP %d/%d" % [e["name"], _tags(e), e["hp"], e["max_hp"]])
 	_status.text = "\n".join(lines)
+
+
+static func _tags(u: Dictionary) -> String:
+	var t := " [G]" if u["guarding"] else ""
+	for k: String in u["status"]:
+		t += " [%s]" % {"slow": "Slow", "shielded": "Shield", "fog": "Fog"}.get(k, k)
+	return t
 
 
 func _log(s: String) -> void:

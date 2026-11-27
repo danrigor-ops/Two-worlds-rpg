@@ -8,19 +8,22 @@
   "=": "laterite",
   "H": "shophouse",
   "T": "tree",
-  "S": "sign"
+  "D": "door",
+  "E": "exit",
+  ".": "grass",
+  "f": "flowers"
  },
  "rows": [
-  "TTHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTT",
-  "TTHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT==.===HHHHHHHHHHHHHHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHHHHHHHHHHHHH===.==TT",
   "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
   "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
   "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
-  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
-  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
-  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
-  "TT======HHHHHHHHHHHHHHHHHHHHHHHH======TT",
-  "TT======HHHHHHHHHHHHSHHHHHHHHHHH======TT",
+  "TT======HHHHHHHHHHHHDHHHHHHHHHHH======TT",
   "TT====================================TT",
   "TT====================================TT",
   "TT====================================TT",
@@ -29,14 +32,14 @@
   "TT====================================TT",
   "TT====================================TT",
   "TT====================================TT",
+  "TE====================================ET",
+  "TT====================================TT",
+  "TT======================fff===========TT",
+  "TT======================fff===========TT",
+  "TT======================fff===========TT",
   "TT====================================TT",
   "TT====================================TT",
-  "TT====================================TT",
-  "TT====================================TT",
-  "TT====================================TT",
-  "TT====================================TT",
-  "TT====================================TT",
-  "TT====================================TT",
+  "TT===.============================.===TT",
   "TT====================================TT",
   "TT====================================TT",
   "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
@@ -52,20 +55,69 @@
    "x": 20,
    "y": 20,
    "facing": "up"
+  },
+  "from_hall": {
+   "x": 20,
+   "y": 10,
+   "facing": "down"
+  },
+  "from_shed": {
+   "x": 2,
+   "y": 18,
+   "facing": "right"
+  },
+  "from_row": {
+   "x": 37,
+   "y": 18,
+   "facing": "left"
   }
  },
- "doors": [],
- "npcs": [],
- "objects": [],
- "overrides": [],
- "triggers": [],
- "signs": [
+ "doors": [
   {
+   "id": "to_hall",
    "x": 20,
    "y": 9,
-   "lines": [
-    "Bandar Senja Station.",
-    "(The station is built in the next part of Chapter 1.)"
+   "to_map": "BS-02",
+   "to_spawn": "from_forecourt"
+  },
+  {
+   "id": "to_shed",
+   "x": 1,
+   "y": 18,
+   "to_map": "BS-03",
+   "to_spawn": "from_forecourt"
+  },
+  {
+   "id": "to_row",
+   "x": 38,
+   "y": 18,
+   "to_map": "BS-04",
+   "to_spawn": "from_forecourt"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "mr_slot",
+   "character": "mr_slot",
+   "x": 24,
+   "y": 12,
+   "facing": "down",
+   "talk": [
+    {
+     "if_key_items": [
+      "item_postcard"
+     ],
+     "scene": "mr_slot_postcard"
+    },
+    {
+     "if_flags": [
+      "ch01_postcard_posted"
+     ],
+     "scene": "mr_slot_after"
+    },
+    {
+     "scene": "mr_slot"
+    }
    ]
   }
  ],
@@ -76,5 +128,10 @@
     "ch01_arrived_bandar_senja"
    ]
   }
- ]
+ ],
+ "signs": [],
+ "objects": [],
+ "overrides": [],
+ "triggers": [],
+ "movables": []
 }

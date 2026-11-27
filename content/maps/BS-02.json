@@ -1,0 +1,241 @@
+{
+ "id": "BS-02",
+ "name": "Station Hall",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 24,
+ "legend": {
+  "t": "tile_floor",
+  "#": "wall",
+  "c": "counter",
+  "k": "desk",
+  "D": "door"
+ },
+ "rows": [
+  "########################D#######",
+  "########################t#######",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttccccccccccccctttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttktttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#ttccccccttttttttttttttccccccttD",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "#tttttttttttttttttttttttttttttt#",
+  "################D###############"
+ ],
+ "spawns": {
+  "start": {
+   "x": 16,
+   "y": 21,
+   "facing": "up"
+  },
+  "from_forecourt": {
+   "x": 16,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_yard": {
+   "x": 30,
+   "y": 12,
+   "facing": "left"
+  },
+  "from_platform": {
+   "x": 24,
+   "y": 2,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_forecourt",
+   "x": 16,
+   "y": 23,
+   "to_map": "BS-01",
+   "to_spawn": "from_hall"
+  },
+  {
+   "id": "to_yard",
+   "x": 31,
+   "y": 12,
+   "to_map": "BS-05",
+   "to_spawn": "from_hall",
+   "require": [
+    {
+     "if_flags": [
+      "ch01_parcels_quest_started"
+     ],
+     "else_scene": "yard_not_yet"
+    }
+   ]
+  },
+  {
+   "id": "to_platform",
+   "x": 24,
+   "y": 0,
+   "to_map": "BS-06",
+   "to_spawn": "from_hall",
+   "require": [
+    {
+     "if_flags": [
+      "ch01_tickets_obtained"
+     ],
+     "else_scene": "platform_not_yet"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "pak_darus",
+   "character": "pak_darus",
+   "x": 6,
+   "y": 6,
+   "facing": "down",
+   "unaware": true,
+   "watch_facing": "down",
+   "facing_loop": [
+    {
+     "facing": "down",
+     "time": 2.5
+    },
+    {
+     "facing": "left",
+     "time": 3.5
+    }
+   ],
+   "talk": [
+    {
+     "scene": "human_pak_darus"
+    }
+   ]
+  },
+  {
+   "id": "ticket_clerk",
+   "character": "ticket_clerk",
+   "x": 16,
+   "y": 3,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_ticket_clerk"
+    }
+   ]
+  },
+  {
+   "id": "clockkeeper",
+   "character": "clockkeeper",
+   "x": 20,
+   "y": 2,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch01_tickets_obtained"
+     ],
+     "scene": "clock_stall"
+    },
+    {
+     "if_flags": [
+      "ch01_parcels_returned"
+     ],
+     "scene": "C08_tickets"
+    },
+    {
+     "if_flags": [
+      "ch01_parcels_quest_started"
+     ],
+     "scene": "clock_waiting"
+    },
+    {
+     "scene": "C04_clockkeeper"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "id": "desk",
+   "x": 6,
+   "y": 7,
+   "place_watcher": "pak_darus",
+   "place_items": [
+    "item_parcel_a",
+    "item_parcel_b",
+    "item_parcel_c"
+   ],
+   "talk": [
+    {
+     "if_any_key_items": [
+      "item_parcel_a",
+      "item_parcel_b",
+      "item_parcel_c"
+     ],
+     "if_watched": "pak_darus",
+     "scene": "place_wait"
+    },
+    {
+     "if_key_items": [
+      "item_parcel_a"
+     ],
+     "scene": "place_parcel_a"
+    },
+    {
+     "if_key_items": [
+      "item_parcel_b"
+     ],
+     "scene": "place_parcel_b"
+    },
+    {
+     "if_key_items": [
+      "item_parcel_c"
+     ],
+     "scene": "place_parcel_c"
+    },
+    {
+     "scene": "desk_idle"
+    }
+   ]
+  }
+ ],
+ "triggers": [
+  {
+   "cells": [
+    [
+     15,
+     20
+    ],
+    [
+     16,
+     20
+    ],
+    [
+     17,
+     20
+    ]
+   ],
+   "scene": "C04_overheard",
+   "if_not_flags": [
+    "ch01_darus_overheard"
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "on_enter": [],
+ "movables": []
+}

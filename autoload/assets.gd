@@ -267,6 +267,38 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			_rect(img, ox, 3, TILE, 1, Color("#2b5f47"))
 			_rect(img, ox + 2, 5, 12, 5, Color("#9fc0d8"))
 			_rect(img, ox, 12, TILE, 2, acc)
+		"box":
+			_rect(img, ox, 0, TILE, TILE, Color("#7a5a3a"))
+			_rect(img, ox + 1, 1, 14, 14, base)
+			_rect(img, ox + 1, 1, 14, 1, base.lightened(0.2))
+			_rect(img, ox + 1, 7, 14, 2, acc)
+			_rect(img, ox + 7, 1, 2, 14, acc)
+		"lever", "lever_on":
+			_rect(img, ox, 0, TILE, TILE, Color("#8a7a68"))
+			_rect(img, ox + 4, 11, 8, 4, base)
+			var tilt := 3 if def["pattern"] == "lever_on" else -3
+			for k in 9:
+				_rect(img, ox + 7 + (tilt * k) / 8, 11 - k, 2, 1, Color("#3a3a3a"))
+			_rect(img, ox + 6 + tilt, 1, 4, 3, acc)
+		"rail":
+			for x in [3, 11]:
+				_rect(img, ox + x, 0, 2, TILE, acc)
+			for y in [2, 7, 12]:
+				_rect(img, ox, y, TILE, 2, Color("#5a3e2b"))
+			for x in [3, 11]:
+				_rect(img, ox + x, 0, 2, TILE, acc.lightened(0.3))
+		"desk":
+			_rect(img, ox, 0, TILE, TILE, Color("#c8c0a8"))
+			_rect(img, ox, 3, TILE, 10, base)
+			_rect(img, ox + 2, 4, 6, 4, acc)
+			_rect(img, ox + 9, 5, 5, 3, acc.darkened(0.1))
+			_rect(img, ox + 1, 13, 2, 3, base.darkened(0.3))
+			_rect(img, ox + 13, 13, 2, 3, base.darkened(0.3))
+		"nest":
+			_rect(img, ox, 0, TILE, TILE, Color("#8a7a68"))
+			for p3: Vector2i in [Vector2i(1, 2), Vector2i(6, 1), Vector2i(10, 4), Vector2i(3, 8), Vector2i(9, 10), Vector2i(2, 12)]:
+				_rect(img, ox + p3.x, p3.y, 5, 3, base)
+				_rect(img, ox + p3.x + 1, p3.y + 1, 3, 1, acc)
 		"rug":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)
@@ -334,6 +366,10 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 10, 33, 7, 1, Color("#5a5a5a"))
 		_outline(img)
 		return img
+	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox"]:
+		_paint_spirit(img, order, fw, p["style"], hair, skin, body, acc, legs, eye)
+		_outline(img)
+		return img
 	var human: bool = p["style"] == "human"
 	for i in order.size():
 		var f: String = order[i]
@@ -388,6 +424,57 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 13, 1, 3, 2, Color("#6fbf4a"))  # leaf
 	_outline(img)
 	return img
+
+
+## Chapter 1 object spirits and Veil creatures. Placeholders only.
+static func _paint_spirit(img: Image, order: Array, fw: int, style: String, hair: Color, skin: Color, body: Color, acc: Color, legs: Color, eye: Color) -> void:
+	for i in order.size():
+		var o := i * fw
+		var f: String = order[i]
+		match style:
+			"moth", "monarch":
+				var big := style == "monarch"
+				var w := 14 if big else 10
+				_rect(img, o + 16 - w, 12, w, 14 if big else 10, hair)       # wings
+				_rect(img, o + 16, 12, w, 14 if big else 10, hair)
+				_rect(img, o + 16 - w + 2, 15, 4, 3, acc)
+				_rect(img, o + 16 + w - 6, 15, 4, 3, acc)
+				_rect(img, o + 14, 10, 4, 18 if big else 14, body)          # body
+				_rect(img, o + 13, 7, 1, 4, body)                           # feelers
+				_rect(img, o + 18, 7, 1, 4, body)
+				if big:
+					_rect(img, o + 11, 4, 10, 3, skin)                      # a paper crown
+				if f != "up":
+					_rect(img, o + 14, 11, 1, 1, acc)
+					_rect(img, o + 17, 11, 1, 1, acc)
+			"dust":
+				_rect(img, o + 6, 18, 20, 18, body)
+				_rect(img, o + 4, 22, 24, 12, body)
+				for d: Vector2i in [Vector2i(8, 20), Vector2i(20, 24), Vector2i(12, 30), Vector2i(23, 31)]:
+					_rect(img, o + d.x, d.y, 3, 2, hair)
+				if f != "up":
+					_rect(img, o + 11, 24, 3, 3, acc)
+					_rect(img, o + 18, 24, 3, 3, acc)
+			"flicker":
+				_rect(img, o + 14, 18, 4, 20, legs)                         # post
+				_rect(img, o + 10, 4, 12, 16, body)                         # lamp head
+				_rect(img, o + 13, 6, 6, 5, acc)                            # red lamp
+				_rect(img, o + 13, 13, 6, 5, skin)                          # green lamp
+			"clock":
+				_rect(img, o + 4, 6, 24, 24, body)
+				_rect(img, o + 6, 8, 20, 20, skin)                          # face
+				_rect(img, o + 15, 10, 2, 9, eye)                           # hands
+				_rect(img, o + 16, 17, 7, 2, eye)
+				_rect(img, o + 14, 30, 4, 8, legs)                          # bracket
+				_rect(img, o + 15, 7, 2, 2, acc)
+			"postbox":
+				_rect(img, o + 9, 10, 14, 28, body)
+				_rect(img, o + 8, 7, 16, 5, hair)                           # cap
+				_rect(img, o + 11, 16, 10, 2, acc)                          # the slot (his mouth)
+				if f != "up":
+					_rect(img, o + 12, 12, 2, 2, Color("#f4ecd2"))
+					_rect(img, o + 18, 12, 2, 2, Color("#f4ecd2"))
+				_rect(img, o + 11, 24, 10, 6, legs)
 
 
 ## A small walking leaf wearing a parcel. Placeholder only.

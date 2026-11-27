@@ -7,6 +7,8 @@ extends RefCounted
 ##   {"choice": [{"text": "...", "then": [steps]}]} up to three flavour choices
 ##   {"set_flag": "x"} {"key_item": "id"} {"take_key_item": "id"} {"join": "lumi"}
 ##   {"item": "id", "count": n} {"quest": "PRO-002", "state": "active"}
+##   {"toggle_flag": "x"} flips a flag (levers); {"goto": "scene"} continues with another scene
+##   {"event": "name"} story events the field handles (travel, shop, coin_jar, autosave, reset_map)
 ## Any step can carry "if_flags" / "if_not_flags" to only run sometimes.
 
 const DIR := "res://content/dialogue/"
@@ -70,5 +72,8 @@ static func _validate_steps(id: String, steps: Array, e: Array[String]) -> void:
 			var item: String = step.get("key_item", step.get("item", step.get("take_key_item", "")))
 			if not JsonUtil.load_dict("res://content/items.json").get("items", {}).has(item):
 				e.append("scene %s: unknown item '%s'" % [id, item])
-		elif not (step.has("set_flag") or step.has("join") or step.has("quest") or step.has("event")):
+		elif step.has("goto"):
+			if not _scenes.has(step["goto"]):
+				e.append("scene %s: goto missing scene '%s'" % [id, step["goto"]])
+		elif not (step.has("set_flag") or step.has("toggle_flag") or step.has("join") or step.has("quest") or step.has("event")):
 			e.append("scene %s: step has no known type: %s" % [id, str(step)])

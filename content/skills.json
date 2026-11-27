@@ -30,7 +30,25 @@
    "cues": 3,
    "mult": 1.5,
    "text": "Reno spins, Lumi's echoes follow. Uses both heroes' turns. Three timed presses; misses weaken it but it always lands.",
-   "requires_flag": "spirit_cyclone_learned"
+   "requires_flag": "spirit_cyclone_learned",
+   "short": "Cyclone"
+  },
+  "guardian_bloom": {
+   "name": "Guardian Bloom",
+   "short": "Bloom",
+   "kind": "support",
+   "users": [
+    "reno",
+    "lumi"
+   ],
+   "mp_each": 5,
+   "cues": 2,
+   "applies": "shielded",
+   "turns": 2,
+   "heal_pct": 15,
+   "heal_pct_miss": 10,
+   "requires_flag": "ch01_guardian_bloom_learned",
+   "text": "Both heroes' turns, 5 MP each. Shields both (damage x0.7 for 2 turns) and heals 15% of max HP (10% if a cue is missed)."
   }
  }
 }

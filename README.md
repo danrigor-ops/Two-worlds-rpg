@@ -57,6 +57,18 @@ The touch pad shows itself on touch screens. On desktop, press F2 and click its 
 19. Ride the bus on the luggage rack (C03) to Bandar Senja Station. The game autosaves on arrival.
 20. Optional: the north lane leads to the jetty, where a fisherman has dropped a postcard (C01-S01). It gets posted in part B.
 
+**Chapter 1, part B (Bandar Senja).**
+
+21. Post the postcard with **Mr Slot**, the post box in the forecourt.
+22. In the Station Hall, overhear Pak Darus about his three lost parcels, then talk to **the Clockkeeper** above the ticket window (C04). He also has a Dewdrop stall.
+23. **Goods Shed** (west of the forecourt, PZ-103): as Reno, face a crate and press A to Root Grip it one tile toward you. Clear the aisle to Parcel A. The lever by the door resets the crates. Optional: as Lumi, read the 1951 tag on the dead-letter shelf (C01-S02).
+24. **Shophouse Row** (east, PZ-105): as Lumi, Memory Touch the smudged note on the board, then find the shop sign that matches the fragments (Parcel C).
+25. **Place:** put each parcel on Pak Darus's desk while he looks away. A small glow shows when it's safe. If he's looking, Lumi tells you to wait. There's no timer and no fail state.
+26. **Rail Yard** (east door of the hall, PZ-104): set the three signal levers (Lumi's Echo Sight on the old marker shows the route) and shove the handcar to open the moth siding. Then fight the **Paper Moth Monarch** (BOSS-101). Below half HP it calls Ticket Moths, and you pick your target.
+27. The win gives Parcel B, the Moth-Wing Charm (Lumi SPD +2) and the team skill **Guardian Bloom**. Return the last parcel, and the Clockkeeper stamps your Veil tickets. Platform 2 opens; the train itself is part C.
+
+New battle rules: Slow (SPD x0.7), Shielded (damage x0.7), Memory Fog (Skill sealed for a turn), telegraphed attacks (the Dust Bundle announces Roll Over a turn early), and immunities.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -116,5 +128,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 7. ✅ The rest of the prologue: Thornkeeper, Spirit Cyclone, the gate and Sungai Melor
 8. Chapter 1: The Last Train to Bandar Senja (design approved in `docs/chapter-01/`)
    - ✅ Part A: Sungai Melor, Old Kettle, the Coin Jar, the bus (plus level growth, MP items, Dewdrop stalls)
-   - Part B: Bandar Senja, the Clockkeeper's parcels, Paper Moth Monarch
+   - ✅ Part B: Bandar Senja, the Clockkeeper's parcels, Paper Moth Monarch, Guardian Bloom
    - Part C: the Veil train, the Forgotten Conductor, the Veil Halt
