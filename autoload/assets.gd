@@ -214,6 +214,19 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 			_rect(img, ox, 4, TILE, 1, acc)
 			_rect(img, ox, 11, TILE, 1, acc)
 			_rect(img, ox + 4, 7, 3, 2, acc)
+		"float_crate":
+			_rect(img, ox, 0, TILE, TILE, Color("#3f7fc4"))
+			_rect(img, ox, 13, TILE, 2, Color("#8fc3ef"))
+			_rect(img, ox + 2, 2, 12, 12, acc)
+			_rect(img, ox + 3, 3, 10, 10, base)
+			_rect(img, ox + 3, 7, 10, 1, acc)
+		"pillar":
+			_rect(img, ox, 0, TILE, TILE, Color("#3f7fc4"))
+			_rect(img, ox + 1, 0, 5, TILE, base)
+			_rect(img, ox + 10, 0, 5, TILE, base)
+			_rect(img, ox, 2, TILE, 3, acc)
+			for p: Vector2i in [Vector2i(2, 9), Vector2i(12, 12), Vector2i(3, 13)]:
+				_rect(img, ox + p.x, p.y, 2, 2, Color("#d8d0b8"))
 		"post":
 			_rect(img, ox, 0, TILE, TILE, Color("#4b8a3d"))
 			_rect(img, ox + 5, 1, 6, 15, base)
@@ -378,7 +391,7 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 10, 33, 7, 1, Color("#5a5a5a"))
 		_outline(img)
 		return img
-	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox", "conductor", "bird", "fish", "snail", "pole"]:
+	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox", "conductor", "bird", "fish", "snail", "pole", "bell"]:
 		_paint_spirit(img, order, fw, p["style"], hair, skin, body, acc, legs, eye)
 		_outline(img)
 		return img
@@ -518,6 +531,17 @@ static func _paint_spirit(img: Image, order: Array, fw: int, style: String, hair
 				_rect(img, o + 22, 19, 1, 5, skin)
 				_rect(img, o + 25, 19, 1, 5, skin)
 				_rect(img, o + 22, 18, 2, 2, eye)
+			"bell":
+				_rect(img, o + 13, 4, 6, 4, body.darkened(0.3))          # crown
+				_rect(img, o + 10, 8, 12, 8, body)
+				_rect(img, o + 8, 16, 16, 12, body)
+				_rect(img, o + 5, 28, 22, 4, body.lightened(0.1))       # lip
+				_rect(img, o + 14, 32, 4, 4, acc)                       # clapper
+				for d: Vector2i in [Vector2i(9, 18), Vector2i(19, 12), Vector2i(21, 22), Vector2i(7, 29)]:
+					_rect(img, o + d.x, d.y, 3, 2, hair)               # barnacles
+				if f != "up":
+					_rect(img, o + 12, 18, 2, 3, eye)
+					_rect(img, o + 18, 18, 2, 3, eye)
 			"pole":
 				_rect(img, o + 11, 4, 10, 36, body)                         # an old jetty post
 				for y in [10, 20, 30]:

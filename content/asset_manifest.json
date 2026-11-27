@@ -975,6 +975,144 @@
     "accent": "#8fc3ef",
     "legs": "#5a4028"
    }
+  },
+  "rust_crab_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#c94f4f",
+    "skin": "#e8843a",
+    "body": "#a0482a",
+    "accent": "#5a2a1a",
+    "legs": "#7a3a20"
+   }
+  },
+  "barnacle_bell_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "bell",
+    "hair": "#d8d0b8",
+    "skin": "#c9b88a",
+    "body": "#6a8a7a",
+    "accent": "#d8d0b8",
+    "legs": "#3f5a5a"
+   }
+  },
+  "undertow_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "monarch",
+    "hair": "#1f3f6a",
+    "skin": "#5a8ab0",
+    "body": "#2a4a6a",
+    "accent": "#8fc3ef",
+    "legs": "#1f3f6a"
+   }
+  },
+  "nenek_arus_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "elder",
+    "hair": "#8fc3ef",
+    "skin": "#b8d8e8",
+    "body": "#5a8ab0",
+    "accent": "#c9f0e8",
+    "legs": "#3f6f9e"
+   }
+  },
+  "veil_boat_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#e8b84a",
+    "skin": "#e8b84a",
+    "body": "#4a3a7a",
+    "accent": "#e8b84a",
+    "legs": "#4a3a7a"
+   }
+  },
+  "lost_thing_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#f2d45c",
+    "skin": "#f2d45c",
+    "body": "#f2d45c",
+    "accent": "#ffffff",
+    "legs": "#f2d45c"
+   }
   }
  },
  "characters": {
@@ -1019,6 +1157,12 @@
   "river_spirit": "river_spirit_overworld",
   "fisher_friend": "fisher_friend_overworld",
   "driftnet_tangle": "driftnet_tangle_overworld",
-  "silt_wisp": "silt_wisp_overworld"
+  "silt_wisp": "silt_wisp_overworld",
+  "rust_crab": "rust_crab_overworld",
+  "barnacle_bell": "barnacle_bell_overworld",
+  "undertow": "undertow_overworld",
+  "nenek_arus": "nenek_arus_overworld",
+  "veil_boat": "veil_boat_overworld",
+  "lost_thing": "lost_thing_overworld"
  }
 }

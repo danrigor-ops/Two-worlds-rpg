@@ -336,7 +336,7 @@ func _interact() -> void:
 			_talk_to(npc)
 			return
 	var cell := MapData.feet_to_cell(probe)
-	if map.movables.has(cell):
+	if map.movables.has(cell) and map.tile_name(cell) != "crate_float":
 		_root_grip(lead, cell)
 		return
 	if map.signs.has(cell):

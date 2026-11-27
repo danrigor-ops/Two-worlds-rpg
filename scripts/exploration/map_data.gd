@@ -143,7 +143,13 @@ func tile_name(cell: Vector2i) -> String:
 	if not in_bounds(cell) or cell.y >= rows.size() or cell.x >= rows[cell.y].length():
 		return ""
 	if movables.has(cell):
-		return movables[cell]
+		# A crate on flooded ground floats: a stepping stone (PZ-202).
+		return "crate_float" if _ground(cell) == "water" else movables[cell]
+	return _ground(cell)
+
+
+## The tile under any crate: an override (tides, levers) or the map itself.
+func _ground(cell: Vector2i) -> String:
 	if _override_tiles.has(cell):
 		return _override_tiles[cell]
 	return legend.get(rows[cell.y][cell.x], "")

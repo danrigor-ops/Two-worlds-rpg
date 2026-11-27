@@ -1,6 +1,6 @@
 {
  "status": "WORKING_PROPOSAL",
- "note": "Chapter 2 part A (C2-01 to C2-03) from docs/chapter-02/CHAPTER_02_PRODUCTION.md section 5. Human lines are overheard; humans can't see or hear the spirits.",
+ "note": "Chapter 2 (C2-01 to C2-09) from docs/chapter-02/CHAPTER_02_PRODUCTION.md section 5. Human lines are overheard; humans can't see or hear the spirits.",
  "speakers": {
   "kilat": {
    "name": "Kilat",
@@ -29,6 +29,18 @@
   "fisher_friend": {
    "name": "Fisherman's friend",
    "character": "fisher_friend"
+  },
+  "barnacle_bell": {
+   "name": "Barnacle Bell",
+   "character": "barnacle_bell"
+  },
+  "undertow": {
+   "name": "The Undertow",
+   "character": "undertow"
+  },
+  "nenek_arus": {
+   "name": "Nenek Arus",
+   "character": "nenek_arus"
   }
  },
  "scenes": {
@@ -137,6 +149,50 @@
   "kingfishers_hint": [
    {
     "speaker": "kilat",
+    "text": "You have all three! Talk to us—",
+    "if_flags": [
+     "ch02_verse_3"
+    ],
+    "if_not_flags": [
+     "ch02_boat_called"
+    ]
+   },
+   {
+    "speaker": "kilat",
+    "text": "The boat's waiting at the end of the pier—",
+    "if_flags": [
+     "ch02_boat_called"
+    ],
+    "if_not_flags": [
+     "ch02_undertow_calmed"
+    ]
+   },
+   {
+    "speaker": "kilau",
+    "text": "—it won't wait forever. Well. It might.",
+    "if_flags": [
+     "ch02_boat_called"
+    ],
+    "if_not_flags": [
+     "ch02_undertow_calmed"
+    ]
+   },
+   {
+    "speaker": "kilat",
+    "text": "Look at the river! The right way round—",
+    "if_flags": [
+     "ch02_undertow_calmed"
+    ]
+   },
+   {
+    "speaker": "kilau",
+    "text": "—like it always should have been.",
+    "if_flags": [
+     "ch02_undertow_calmed"
+    ]
+   },
+   {
+    "speaker": "kilat",
     "text": "Old Pole is in Kampung Air, past the mangroves—",
     "if_flags": [
      "ch02_verse_1"
@@ -157,16 +213,22 @@
    },
    {
     "speaker": "kilat",
-    "text": "Two verses! The last one is under the old jetty—",
+    "text": "Two verses! The last one is at the Sunken Jetty, past Kampung Air—",
     "if_flags": [
      "ch02_verse_2"
+    ],
+    "if_not_flags": [
+     "ch02_verse_3"
     ]
    },
    {
     "speaker": "kilau",
-    "text": "—but the boardwalk there is still flooded. Soon, soon.",
+    "text": "—where the bell won't stop ringing.",
     "if_flags": [
      "ch02_verse_2"
+    ],
+    "if_not_flags": [
+     "ch02_verse_3"
     ]
    },
    {
@@ -187,11 +249,25 @@
   "human_rv_fisherman": [
    {
     "speaker": "fisherman",
-    "text": "(muttering, mending a net) A toy boat. A bicycle bell. Who loses a bicycle bell in a river?"
+    "text": "(muttering, mending a net) A toy boat. A bicycle bell. My neighbour's wedding ring, gone ten years. The river took them all back out again."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to his friend) I put a box out. If anything washes up, it goes in there. Somebody might want it."
    },
    {
     "speaker": "reno",
     "text": "He can't hear us. Still weird."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Lost things... we've seen some of those glinting around the river.",
+    "if_not_flags": [
+     "ch02_lost_things_heard"
+    ]
+   },
+   {
+    "set_flag": "ch02_lost_things_heard"
    }
   ],
   "human_rv_friend": [
@@ -409,7 +485,7 @@
    },
    {
     "speaker": "old_pole",
-    "text": "(far away) Many voices, one river. Every tide comes back."
+    "text": "(far away) Many voices, one river."
    },
    {
     "speaker": "narrator",
@@ -446,7 +522,7 @@
    },
    {
     "speaker": "old_pole",
-    "text": "The last verse sank with the old jetty. The bell there won't stop ringing over it."
+    "text": "The last verse sank with the old jetty, east of here. The bell there won't stop ringing over it."
    }
   ],
   "pole_after": [
@@ -492,6 +568,637 @@
    {
     "speaker": "river_spirit",
     "text": "My cousin drifted upriver last night. Backwards! She was furious."
+   }
+  ],
+  "tackle_box_idle": [
+   {
+    "speaker": "narrator",
+    "text": "The fisherman's tackle box. Hooks, string, and a space he's keeping clear for lost things."
+   }
+  ],
+  "place_toy_boat": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's looking at the water: Reno slips the toy boat into the tackle box."
+   },
+   {
+    "take_key_item": "item_lost_toy_boat"
+   },
+   {
+    "set_flag": "ch02_boat_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The fisherman turns back and stares into the box."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to himself) A boat? My son sailed one like this in the monsoon drain. ...He'll laugh."
+   },
+   {
+    "goto": "lost_reaction"
+   }
+  ],
+  "place_bell": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's looking at the water: Reno slips the bicycle bell into the tackle box."
+   },
+   {
+    "take_key_item": "item_lost_bell"
+   },
+   {
+    "set_flag": "ch02_bell_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The fisherman turns back and stares into the box."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to himself) Ting! Ha. That's the one from the postman's old bicycle."
+   },
+   {
+    "goto": "lost_reaction"
+   }
+  ],
+  "place_ring": [
+   {
+    "speaker": "narrator",
+    "text": "Quick, while he's looking at the water: Reno slips the wedding ring into the tackle box."
+   },
+   {
+    "take_key_item": "item_lost_ring"
+   },
+   {
+    "set_flag": "ch02_ring_returned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The fisherman turns back and stares into the box."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to himself) ...Mak Yam's ring. Ten years. I'll walk it over to her myself."
+   },
+   {
+    "goto": "lost_reaction"
+   }
+  ],
+  "lost_reaction": [
+   {
+    "set_flag": "ch02_lost_things_returned",
+    "if_flags": [
+     "ch02_boat_returned",
+     "ch02_bell_returned",
+     "ch02_ring_returned"
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "That's all three. The river gave them back, really. We just carried them.",
+    "if_flags": [
+     "ch02_boat_returned",
+     "ch02_bell_returned",
+     "ch02_ring_returned"
+    ]
+   }
+  ],
+  "find_toy_boat": [
+   {
+    "speaker": "narrator",
+    "text": "A little wooden toy boat, stuck in the roots."
+   },
+   {
+    "key_item": "item_lost_toy_boat"
+   },
+   {
+    "set_flag": "ch02_boat_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Toy Boat. (Key item)"
+   },
+   {
+    "speaker": "reno",
+    "text": "That's one of the fisherman's lost things! Let's put it in his box."
+   }
+  ],
+  "find_bell": [
+   {
+    "speaker": "narrator",
+    "text": "A rusty bicycle bell, caught on a stilt."
+   },
+   {
+    "key_item": "item_lost_bell"
+   },
+   {
+    "set_flag": "ch02_bell_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Bicycle Bell. (Key item)"
+   },
+   {
+    "speaker": "reno",
+    "text": "That's one of the fisherman's lost things! Let's put it in his box."
+   }
+  ],
+  "find_ring": [
+   {
+    "speaker": "narrator",
+    "text": "Something gold, half buried in the mud. A wedding ring."
+   },
+   {
+    "key_item": "item_lost_ring"
+   },
+   {
+    "set_flag": "ch02_ring_found"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Wedding Ring. (Key item)"
+   },
+   {
+    "speaker": "reno",
+    "text": "That's one of the fisherman's lost things! Let's put it in his box."
+   }
+  ],
+  "rv03_jetty_not_yet": [
+   {
+    "speaker": "old_pole",
+    "text": "(calling from up the walk) Little ones! Don't go out to the jetty without the song in your heads. Come and see me first."
+   }
+  ],
+  "C2_04_jetty": [
+   {
+    "set_flag": "ch02_jetty_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The old ferry jetty. Half of it has sunk. Out past the gap, a bell is clanging over and over from a flooded bell house."
+   },
+   {
+    "speaker": "reno",
+    "text": "The boardwalk's broken. And the far side is way up there."
+   },
+   {
+    "speaker": "lumi",
+    "text": "At low tide the deck is too high. At high tide we'd float up level with it... if we had something to float on."
+   },
+   {
+    "speaker": "reno",
+    "text": "Those crates down in the mud! I can pull them with Root Grip."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Low tide: Root Grip two crates into the gap. High tide: they float, and you can walk across. The rope by the entrance puts everything back.)"
+   }
+  ],
+  "rv04_tide_toggle": [
+   {
+    "speaker": "narrator",
+    "text": "Reno blows the whistle. Hoo-ee, hoo-oo."
+   },
+   {
+    "toggle_flag": "rv04_tide_high"
+   },
+   {
+    "speaker": "narrator",
+    "text": "High tide. The mud flat floods. Anything wooden bobs up.",
+    "if_flags": [
+     "rv04_tide_high"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Low tide. The water drains off the mud flat.",
+    "if_not_flags": [
+     "rv04_tide_high"
+    ]
+   }
+  ],
+  "rv04_reset": [
+   {
+    "speaker": "narrator",
+    "text": "A rope tied to the old jetty post. Pull it to put the crates back where they were?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Pull the rope",
+      "then": [
+       {
+        "toggle_flag": "rv04_tide_high",
+        "if_flags": [
+         "rv04_tide_high"
+        ]
+       },
+       {
+        "event": "reset_map:from_village"
+       }
+      ]
+     },
+     {
+      "text": "Leave it",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "pz202_crossed": [
+   {
+    "set_flag": "pz202_jetty_crossed"
+   },
+   {
+    "speaker": "reno",
+    "text": "Crate, crate, deck! Easy."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You nearly fell in twice."
+   }
+  ],
+  "rv04_crab_beaten": [
+   {
+    "set_flag": "rv04_crab_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Its claws were mostly rust. Mostly."
+   }
+  ],
+  "rv04_deck_beaten": [
+   {
+    "set_flag": "rv04_deck_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Everything out here is tangled up in something."
+   }
+  ],
+  "C2_04_bell_intro": [
+   {
+    "speaker": "narrator",
+    "text": "In the flooded bell house, a great bell crusted with barnacles swings by itself. CLANG. CLANG. CLANG."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Excuse me! We're looking for a verse of the Tide Song!"
+   },
+   {
+    "speaker": "barnacle_bell",
+    "text": "CLANG! Can't stop! If it goes quiet I'll forget! CLANG!"
+   },
+   {
+    "speaker": "reno",
+    "text": "It's ringing right over the verse. We have to make it stop."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Gently, Reno."
+   }
+  ],
+  "C2_04_bell_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Barnacle Bell slows. Swings. Stops. The quiet is enormous."
+   },
+   {
+    "speaker": "barnacle_bell",
+    "text": "...If I stop ringing, I'll forget I was ever a bell."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Then we'll remember for you."
+   },
+   {
+    "speaker": "barnacle_bell",
+    "text": "(very softly) ...Every tide comes back. That's the verse. That's the one I was keeping. Take it."
+   },
+   {
+    "key_item": "item_tide_verse_3"
+   },
+   {
+    "set_flag": "ch02_verse_3"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Tide Song, Verse 3. (Key item)"
+   },
+   {
+    "speaker": "barnacle_bell",
+    "text": "And take this. It's soggy. I won't need it to be quiet."
+   },
+   {
+    "key_item": "equip_bell_clapper"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Soggy Bell Clapper. Reno wears it: DEF +3."
+   },
+   {
+    "speaker": "reno",
+    "text": "All three verses! Back to the Kingfishers!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "There's a little skiff tied up by the back wall. It'll take us to Kampung Air."
+   },
+   {
+    "event": "autosave"
+   }
+  ],
+  "C2_05_tide_song": [
+   {
+    "speaker": "kilat",
+    "text": "All three verses—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—sing it! Sing it here, where the ferry used to come in!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi stands at the end of the pier and sings. Reno lifts the whistle."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Low water, show the way..."
+   },
+   {
+    "choice": [
+     {
+      "text": "Blow the whistle on the beat",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Hoo!"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "High water, carry home. Many voices, one river..."
+   },
+   {
+    "choice": [
+     {
+      "text": "Blow the whistle on the beat",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Hoo-ee!"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "speaker": "lumi",
+    "text": "...Every tide comes back."
+   },
+   {
+    "choice": [
+     {
+      "text": "Blow the whistle on the beat",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Hoo-ee, hoo-oo!"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "set_flag": "pz203_song_sung"
+   },
+   {
+    "set_flag": "ch02_tide_song_complete"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The river holds its breath. Then, out of the dark water, a boat rises: long and quiet, with a lantern at each end and nobody rowing."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to his friend) Did you see that ripple? Like something big turned over."
+   },
+   {
+    "speaker": "fisher_friend",
+    "text": "Fish. Big fish. Let's go home."
+   },
+   {
+    "speaker": "kilat",
+    "text": "The Veil boat! It goes down to the Drowned Crossing—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—that's where the Undertow is. Be careful!"
+   },
+   {
+    "set_flag": "ch02_boat_called"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: ride the Veil boat to the Drowned Crossing."
+   },
+   {
+    "goto": "board_veil_boat"
+   }
+  ],
+  "board_veil_boat": [
+   {
+    "speaker": "narrator",
+    "text": "The Veil boat waits at the end of the pier, lanterns glowing."
+   },
+   {
+    "choice": [
+     {
+      "text": "Climb aboard",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "The boat sinks gently under the water. The air stays dry."
+       },
+       {
+        "event": "travel:RV-05:arrive:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We should be ready first. The Undertow is strong."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C2_06_crossing": [
+   {
+    "set_flag": "ch02_crossing_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The old ferry crossing lies on the riverbed. Lost things circle slowly overhead: nets, sandals, a bicycle wheel, letters with the ink run."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Everything the river lost ends up here."
+   },
+   {
+    "speaker": "narrator",
+    "text": "In the middle, all of it knots together into one dark, turning shape."
+   }
+  ],
+  "C2_06_undertow_intro": [
+   {
+    "speaker": "undertow",
+    "text": "Keep. Everything. Nothing floats away if I keep it all."
+   },
+   {
+    "speaker": "reno",
+    "text": "That's a lot of sandals."
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's not angry. It's scared of losing things. ...So are we, a bit."
+   },
+   {
+    "speaker": "undertow",
+    "text": "Then STAY. Stay and be kept!"
+   }
+  ],
+  "C2_07_calmed": [
+   {
+    "speaker": "narrator",
+    "text": "The Undertow sags. Lumi steps forward and sings the whole Tide Song, all three verses, slow and clear."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Low water, show the way. High water, carry home. Many voices, one river. Every tide comes back."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The knot loosens. One by one the lost things drift up toward the surface, toward the people who lost them."
+   },
+   {
+    "speaker": "undertow",
+    "text": "...Back? They come back?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Every tide comes back."
+   },
+   {
+    "set_flag": "ch02_undertow_calmed"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The current turns. Somewhere upstream, a guardian's pool begins to fill."
+   },
+   {
+    "event": "travel:RV-06:arrive"
+   }
+  ],
+  "C2_08_nenek_arus": [
+   {
+    "speaker": "narrator",
+    "text": "A still pool where the river begins to turn the right way. An old spirit made of reflections sits at its edge, reeds in her hair. She is pale, and fading at the edges."
+   },
+   {
+    "speaker": "nenek_arus",
+    "text": "Thank you, little ones. My river remembers its way again. But I still don't feel whole."
+   },
+   {
+    "speaker": "narrator",
+    "text": "She turns, and they see it: a page-shaped hole in her reflection, its edge as straight as a ruler."
+   },
+   {
+    "speaker": "nenek_arus",
+    "text": "Someone cut part of my name from the Book. Neatly. With ink on their fingers. Names don't fall out by themselves."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Who would do that?"
+   },
+   {
+    "speaker": "nenek_arus",
+    "text": "Someone who wants the worlds to stop touching. Follow the ink. It smelled of a town that trades in paper: Bandar Kencana."
+   },
+   {
+    "speaker": "nenek_arus",
+    "text": "And you, little singer. Your humming is an old echo. Keep it safe."
+   },
+   {
+    "speaker": "nenek_arus",
+    "text": "Take this. It will hum the song when you need it."
+   },
+   {
+    "key_item": "item_tide_pearl"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Tide Pearl. (Key item)"
+   },
+   {
+    "set_flag": "ch02_name_cut_learned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The pool's light grows, and grows, until it is simply morning."
+   },
+   {
+    "event": "travel:RV-01:morning"
+   }
+  ],
+  "C2_09_morning": [
+   {
+    "speaker": "narrator",
+    "text": "Dawn at Senja River Landing. The river runs the right way."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(on the jetty rail, holding up a spoon) My grandmother's spoon! Who put this here? ...Never mind. Never mind!"
+   },
+   {
+    "speaker": "fisher_friend",
+    "text": "(laughing) The river's giving things back now?"
+   },
+   {
+    "speaker": "reno",
+    "text": "Bandar Kencana. Do they have trains?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno."
+   },
+   {
+    "speaker": "reno",
+    "text": "Boats? Buses? A flying kettle?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "We'll find out."
+   },
+   {
+    "set_flag": "bandar_kencana_route_unlocked"
+   },
+   {
+    "set_flag": "chapter_02_completed"
+   },
+   {
+    "set_flag": "chapter_03_unlocked"
+   },
+   {
+    "event": "chapter_end"
    }
   ]
  }

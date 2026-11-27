@@ -323,6 +323,55 @@
     "active": "Find the three verses of the Tide Song. Pak Lumpur in the Mangrove Walk (east of the landing) has the first. Old Pole in Kampung Air has the second. The third is somewhere at the Sunken Jetty.",
     "completed": "We have all three verses of the Tide Song."
    }
+  },
+  {
+   "id": "C02-003",
+   "name": "The Drowned Crossing",
+   "start": "locked",
+   "start_flags": [
+    "ch02_tide_song_complete"
+   ],
+   "complete_flags": [
+    "ch02_undertow_calmed"
+   ],
+   "journal": {
+    "active": "The Veil boat is waiting at Senja River Landing. Ride it down to the Drowned Crossing.",
+    "completed": "The Undertow let go of everything it was keeping."
+   }
+  },
+  {
+   "id": "C02-004",
+   "name": "A Name Cut Out",
+   "start": "locked",
+   "start_flags": [
+    "ch02_undertow_calmed"
+   ],
+   "complete_flags": [
+    "chapter_02_completed"
+   ],
+   "journal": {
+    "active": "Nenek Arus is waiting at her pool.",
+    "completed": "Someone cut part of Nenek Arus's name from the Book of Names. The ink smelled of Bandar Kencana."
+   }
+  },
+  {
+   "id": "C02-S01",
+   "name": "Things the River Kept",
+   "optional": true,
+   "start": "locked",
+   "start_flags": [
+    "ch02_lost_things_heard"
+   ],
+   "complete_flags": [
+    "ch02_lost_things_returned"
+   ],
+   "reward": {
+    "dewdrops": 3
+   },
+   "journal": {
+    "active": "The river has been keeping lost things. Find a toy boat (Mangrove Walk), a bicycle bell (Kampung Air) and a wedding ring (Sunken Jetty), and put them in the fisherman's tackle box at the landing while he isn't looking.",
+    "completed": "Three lost things went home."
+   }
   }
  ]
 }

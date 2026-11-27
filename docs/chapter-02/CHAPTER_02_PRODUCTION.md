@@ -167,3 +167,9 @@ Autosave points: arrival at RV-01, after the Barnacle Bell, before boarding the 
 - Water in RV-02 stays solid rather than a "deep" tile you fall into: you simply can't walk into it, and if the tide rises under you, you're moved to the nearest dry tile.
 - Tide markers sit in the mangrove wall, so you can only reach them from dry ground.
 - The C02-S01 lost-things side quest moves to part B with RV-01's morning scene.
+- **Part B build (28 Nov 2026):**
+  - **PZ-202.** A crate on flooded ground becomes a floating stepping stone. At low tide, the deck edge is a pillar too high to climb. At high tide, it's level with the crates.
+  - **The bell house** has a skiff exit back to Kampung Air, so you can't get stuck on the far side after a reload.
+  - **PZ-203 (the Tide Song)** is three "blow on the beat" prompts in dialogue. It has no fail state and doesn't use the cue ring yet.
+  - **C02-S01's lost things** are a toy boat, a bicycle bell and a wedding ring. The grandmother's spoon stays for the C2-09 morning scene. You return them with the Chapter 1 Place rule: the tackle box, while the fisherman looks at the water.
+  - **The Veil boat** stays at the pier until the Undertow is calmed, so loading the pre-boarding autosave still lets you board.

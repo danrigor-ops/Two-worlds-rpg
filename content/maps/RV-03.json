@@ -27,7 +27,7 @@
   "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
   "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
   "WjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjS",
-  "EjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjM",
+  "EjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjE",
   "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
   "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
   "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
@@ -54,6 +54,11 @@
    "x": 1,
    "y": 14,
    "facing": "right"
+  },
+  "from_jetty": {
+   "x": 38,
+   "y": 14,
+   "facing": "left"
   }
  },
  "doors": [
@@ -63,6 +68,21 @@
    "y": 14,
    "to_map": "RV-02",
    "to_spawn": "from_village"
+  },
+  {
+   "id": "to_jetty",
+   "x": 39,
+   "y": 14,
+   "to_map": "RV-04",
+   "to_spawn": "from_village",
+   "require": [
+    {
+     "if_flags": [
+      "ch02_verse_2"
+     ],
+     "else_scene": "rv03_jetty_not_yet"
+    }
+   ]
   }
  ],
  "npcs": [
@@ -123,6 +143,20 @@
      "scene": "kampung_spirit_b"
     }
    ]
+  },
+  {
+   "id": "lost_bell",
+   "character": "lost_thing",
+   "x": 31,
+   "y": 22,
+   "facing": "down",
+   "hide_if_flag": "ch02_bell_found",
+   "talk": [
+    {
+     "scene": "find_bell"
+    }
+   ],
+   "show_if_flag": "ch02_lost_things_heard"
   }
  ],
  "objects": [],
@@ -132,7 +166,7 @@
    "y": 13,
    "lines": [
     "TO THE SUNKEN JETTY.",
-    "The boardwalk past here is still under the river. (The jetty comes in the next part of Chapter 2.)"
+    "Mind the tide. Mind the bell."
    ]
   }
  ],

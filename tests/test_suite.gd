@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 18
+const SECTIONS := 19
 
 
 func check(cond: bool, label: String) -> void:
@@ -88,6 +88,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 2 part A: the river, the tides and the first two verses")
 	await _test_chapter2_a(gs, im)
+
+	print("Chapter 2 part B: the Sunken Jetty, the Undertow and Nenek Arus")
+	await _test_chapter2_b(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1626,4 +1629,167 @@ func _test_chapter2_a(gs: Node, im: Node) -> void:
 
 	scene.queue_free()
 	await _wait(2)
+	_sections_done += 1
+
+
+func _test_chapter2_b(gs: Node, im: Node) -> void:
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_guardian_bloom_learned", "ch01_gentle_float_unlocked",
+			"chapter_01_completed", "chapter_02_unlocked", "ch02_started", "ch02_song_quest_started", "ch02_tide_call_learned", "ch02_mangrove_seen",
+			"pz201_mangrove_crossed", "ch02_verse_1", "ch02_village_seen", "ch02_verse_2", "ch02_ripple_learned"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	for k in ["item_conductors_whistle", "item_lantern", "item_tide_verse_1", "item_tide_verse_2"]:
+		gs.add_key_item(k)
+	gs.gain_xp("reno", 420)
+	gs.gain_xp("lumi", 420)
+	gs.set_spawn("RV-01", "from_mangrove")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+
+	# C02-S01 starts by overhearing the fisherman.
+	await _talk(scene, Vector2i(19, 21), im)
+	check(gs.get_flag("ch02_lost_things_heard") and gs.quest_state("C02-S01") == "active", "C02-S01: the river is keeping lost things")
+	scene.warp("RV-02", "from_landing")
+	await _wait(3)
+	await _talk(scene, Vector2i(4, 20), im)
+	check(gs.has_key_item("item_lost_toy_boat"), "the toy boat in the mangrove roots")
+	scene.warp("RV-03", "from_mangrove")
+	await _wait(3)
+	await _talk(scene, Vector2i(31, 22), im)
+	check(gs.has_key_item("item_lost_bell"), "the bicycle bell on a Kampung Air stilt")
+
+	# RV-04: PZ-202, crates and tides.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(37, 14)), "right")
+	await _press_for("move_right", 40)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-04" and im.current_mode() == im.Mode.DIALOGUE, "C2-04 at the Sunken Jetty")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(10, 19), im)
+	check(gs.has_key_item("item_lost_ring"), "the wedding ring in the jetty mud")
+	check(not scene.map.is_walkable(Vector2i(22, 8)), "low tide: the far deck is out of reach")
+	for y in range(12, 7, -1):
+		await _face_and_press(scene, Vector2i(20, y), "down", im)
+		await _wait(2)
+	for y in range(14, 7, -1):
+		await _face_and_press(scene, Vector2i(21, y), "down", im)
+		await _wait(2)
+	check(scene.map.movables.has(Vector2i(20, 8)) and scene.map.movables.has(Vector2i(21, 8)), "PZ-202: Root Grip lines two crates up in the gap")
+	await _talk(scene, Vector2i(5, 6), im)
+	check(gs.get_flag("rv04_tide_high"), "the jetty's tide marker raises the tide")
+	check(scene.map.tile_name(Vector2i(20, 8)) == "crate_float" and scene.map.is_walkable(Vector2i(21, 8)) and scene.map.is_walkable(Vector2i(22, 8)),
+		"high tide: the crates float and the deck is level")
+	await _face_and_press(scene, Vector2i(19, 8), "right", im)
+	await _wait(2)
+	check(im.current_mode() == im.Mode.EXPLORE, "a floating crate can't be gripped")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(19, 8)), "right")
+	await _press_for("move_right", 200)
+	await _wait(2)
+	if im.current_mode() == im.Mode.BATTLE:
+		await _run_battle_with(scene, im, ["skill", "ripple_echo", "attack"])
+		await _wait(3)
+		await _finish_dialogue(im)
+		await _press_for("move_right", 120)
+		await _wait(2)
+	await _finish_dialogue(im)
+	check(gs.get_flag("pz202_jetty_crossed"), "PZ-202 solved: into the bell house")
+
+	# BOSS-201: the Barnacle Bell.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(35, 7)), "right")
+	await _press_for("move_right", 40)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Barnacle Bell fight starts")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon rust_crab")), "below half HP the Bell calls a Rust Crab")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait(3)
+	check(gs.get_flag("ch02_bell_quieted") and gs.has_key_item("item_tide_verse_3"), "C2-04: the third verse")
+	check(gs.equip_bonus("reno").get("def", 0) == 3, "the Soggy Bell Clapper: Reno DEF +3")
+	check(gs.quest_state("C02-002") in ["completed", "rewarded"], "C02-002 The Tide Song is complete")
+	var auto: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(saves.save_dir + "autosave.json"))
+	check(auto["state"]["flags"].get("ch02_bell_quieted", false), "autosave after the Barnacle Bell")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(36, 12)), "down")
+	await _press_for("move_down", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-03", "the skiff goes back to Kampung Air")
+
+	# Things the River Kept: back at the landing, while the fisherman looks away.
+	scene.warp("RV-01", "from_mangrove")
+	await _wait(3)
+	var returned := 0
+	for i in 600:
+		if returned == 3:
+			break
+		var fisher: Dictionary = scene._npc_by_id("fisherman")
+		if not fisher.is_empty() and fisher["node"].facing != "left":
+			await _face_and_press(scene, Vector2i(18, 20), "down", im)
+			await _finish_dialogue(im)
+			returned = int(gs.get_flag("ch02_boat_returned")) + int(gs.get_flag("ch02_bell_returned")) + int(gs.get_flag("ch02_ring_returned"))
+		await tree.process_frame
+	check(gs.get_flag("ch02_lost_things_returned") and gs.quest_state("C02-S01") in ["completed", "rewarded"], "C02-S01: three lost things go home")
+
+	# C2-05: the Tide Song calls the Veil boat.
+	await _talk(scene, Vector2i(23, 14), im)
+	await _wait(3)
+	check(gs.get_flag("pz203_song_sung") and gs.get_flag("ch02_boat_called"), "C2-05: the Tide Song calls the Veil boat")
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-05", "the boat sinks to the Drowned Crossing")
+	auto = JSON.parse_string(FileAccess.get_file_as_string(saves.save_dir + "autosave.json"))
+	check(auto["state"]["map_id"] == "RV-01" and auto["state"]["flags"].get("ch02_boat_called", false), "autosave before boarding, none at the boss")
+	await _finish_dialogue(im)
+
+	# BOSS-202: the Undertow.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 12)), "up")
+	await _press_for("move_up", 40)
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Undertow fight starts")
+	blog = await _run_battle_with(scene, im, ["attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("telegraph Whirlpool")), "Whirlpool is announced a round ahead")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch02_undertow_calmed"), "C2-07: the Undertow is calmed at the story threshold")
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-06", "C2-08: Nenek Arus's pool")
+	await _finish_dialogue(im)
+	check(gs.has_key_item("item_tide_pearl") and gs.get_flag("ch02_name_cut_learned"), "Nenek Arus: a name cut out, and the Tide Pearl")
+	await _wait(5)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-01" and scene._tint.color == Color.WHITE, "C2-09: morning on the river")
+	await _finish_dialogue(im)
+	for i in 240:
+		if tree.current_scene != null and tree.current_scene != scene:
+			break
+		await tree.process_frame
+	var need := ["ch02_tide_song_complete", "ch02_boat_called", "ch02_undertow_calmed", "ch02_name_cut_learned", "bandar_kencana_route_unlocked",
+		"chapter_02_completed", "chapter_03_unlocked"]
+	check(need.all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C02-002", "C02-003", "C02-004"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]),
+		"C02-002 to C02-004 are finished")
+	check(tree.current_scene != null and tree.current_scene.name == "EndOfContent", "the Chapter 2 complete screen shows")
+	gs.new_game()
+	saves.load_slot("auto")
+	check(gs.get_flag("chapter_02_completed") and gs.data["map_id"] == "RV-01", "the chapter ending is autosaved")
+	if is_instance_valid(scene):
+		if scene.is_inside_tree():
+			root.remove_child(scene)
+		scene.free()
+	var end_screen := tree.current_scene
+	if end_screen:
+		root.remove_child(end_screen)
+		end_screen.free()
+	saves.delete_all()
 	_sections_done += 1
