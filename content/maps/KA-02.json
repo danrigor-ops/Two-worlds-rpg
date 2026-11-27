@@ -51,5 +51,13 @@
   }
  ],
  "npcs": [],
- "signs": []
+ "signs": [],
+ "on_enter": [
+  {
+   "scene": "P00_wake",
+   "if_not_flags": [
+    "p00_seen"
+   ]
+  }
+ ]
 }

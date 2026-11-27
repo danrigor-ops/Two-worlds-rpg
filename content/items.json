@@ -1,0 +1,31 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Item registry. kind: key (can't be sold or used up) or consumable (stack cap 99). Effects come with the combat step.",
+ "items": {
+  "item_railway_token": {
+   "name": "Old Railway Token",
+   "kind": "key",
+   "text": "Reno's lucky token. Nenek says he had it when she found him."
+  },
+  "item_lantern": {
+   "name": "Antique Lantern",
+   "kind": "key",
+   "text": "Covered in antique dust."
+  },
+  "item_dewdrop_candy": {
+   "name": "Dewdrop Candy",
+   "kind": "consumable",
+   "text": "A sweet spirit candy. (Effect comes with the combat step.)"
+  },
+  "item_gate_key": {
+   "name": "Gate Key",
+   "kind": "key",
+   "text": "An old key from the Whispering Roots."
+  },
+  "item_guardian_seed": {
+   "name": "Guardian Seed",
+   "kind": "key",
+   "text": "A seed left by the Thornkeeper."
+  }
+ }
+}

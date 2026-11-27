@@ -54,7 +54,7 @@ func default_state() -> Dictionary:
 		"flags": {},
 		"rewards_claimed": {},
 		"playtime_sec": 0.0,
-		"settings": {"diagonal_movement": true, "timing_window_scale": 1.0},
+		"settings": {"diagonal_movement": true, "timing_window_scale": 1.0, "instant_text": false},
 	}
 
 
@@ -135,14 +135,91 @@ func has_key_item(item_id: String) -> bool:
 	return item_id in data["key_items"]
 
 
+const ITEMS_PATH := "res://content/items.json"
+const STACK_CAP := 99
+
+static var _items: Dictionary = {}
+
+
+static func item_defs() -> Dictionary:
+	if _items.is_empty():
+		_items = JsonUtil.load_dict(ITEMS_PATH).get("items", {})
+	return _items
+
+
+func item_count(item_id: String) -> int:
+	return int(data["inventory"].get(item_id, 0))
+
+
+## Adds (or with a negative n removes) consumables. Never goes below 0 or above the cap.
+func add_item(item_id: String, n: int = 1) -> bool:
+	var now := item_count(item_id)
+	var next := now + n
+	if next < 0 or next > STACK_CAP:
+		return false
+	if next == 0:
+		data["inventory"].erase(item_id)
+	else:
+		data["inventory"][item_id] = next
+	return true
+
+
+func add_dewdrops(n: int) -> bool:
+	var next := int(data["wallet"]["dewdrops"]) + n
+	if next < 0:
+		return false
+	data["wallet"]["dewdrops"] = next
+	return true
+
+
+func is_reward_claimed(reward_id: String) -> bool:
+	return data["rewards_claimed"].has(reward_id)
+
+
+## Grants a reward exactly once. Returns false (and changes nothing) if it was
+## already claimed. reward: {key_items: [], items: {id: n}, dewdrops: n, flags: []}
+func claim_reward(reward_id: String, reward: Dictionary) -> bool:
+	if is_reward_claimed(reward_id):
+		return false
+	data["rewards_claimed"][reward_id] = true
+	for k: String in reward.get("key_items", []):
+		add_key_item(k)
+	var items: Dictionary = reward.get("items", {})
+	for i: String in items:
+		add_item(i, mini(int(items[i]), STACK_CAP - item_count(i)))
+	if reward.has("dewdrops"):
+		add_dewdrops(int(reward["dewdrops"]))
+	for f: String in reward.get("flags", []):
+		set_flag(f)
+	return true
+
+
+## True when every flag in if_flags is set and none in if_not_flags is.
+func conditions_met(def: Dictionary) -> bool:
+	for f: String in def.get("if_flags", []):
+		if not get_flag(f):
+			return false
+	for f: String in def.get("if_not_flags", []):
+		if get_flag(f):
+			return false
+	return true
+
+
 func quest_state(quest_id: String) -> String:
 	return data["quests"].get(quest_id, "locked")
 
 
+signal quest_changed(quest_id: String, state: String)
+
+
+## Quests only move forward: locked -> active -> completed -> rewarded.
 func set_quest_state(quest_id: String, state: String) -> bool:
 	if state not in QUEST_STATES or not data["quests"].has(quest_id):
 		return false
+	if QUEST_STATES.find(state) <= QUEST_STATES.find(quest_state(quest_id)):
+		return false
 	data["quests"][quest_id] = state
+	quest_changed.emit(quest_id, state)
 	return true
 
 

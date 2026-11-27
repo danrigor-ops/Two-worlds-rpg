@@ -10,11 +10,13 @@ var map: MapData
 var tilemap: TileMapLayer
 var actors: Node2D
 var camera: Camera2D
-var message_box: MessageBox
+var dialogue: DialogueBox
+var menu: PauseMenu
 var fade: ColorRect
 var map_label: Label
 var members := {}           # member id -> PartyMember (in the party)
 var npcs: Array[Dictionary] = []   # {"node": PartyMember, "def": Dictionary}
+var _notices: Array[String] = []
 var trail := FollowTrail.new()
 var transitioning := false
 var _label_time := 0.0
@@ -43,8 +45,12 @@ func _ready() -> void:
 	map_label.add_theme_color_override("font_outline_color", Color("#140f1c"))
 	map_label.add_theme_constant_override("outline_size", 2)
 	hud.add_child(map_label)
-	message_box = MessageBox.new()
-	add_child(message_box)
+	dialogue = DialogueBox.new()
+	add_child(dialogue)
+	menu = PauseMenu.new()
+	add_child(menu)
+	GameState.party_changed.connect(_on_party_changed)
+	Quests.notice.connect(_on_notice)
 	var fade_layer := CanvasLayer.new()
 	fade_layer.layer = 20
 	add_child(fade_layer)
@@ -56,6 +62,18 @@ func _ready() -> void:
 	fade_layer.add_child(fade)
 
 	load_map(GameState.data["map_id"], GameState.data["spawn"])
+	_run_on_enter()
+
+
+func _exit_tree() -> void:
+	if GameState.party_changed.is_connected(_on_party_changed):
+		GameState.party_changed.disconnect(_on_party_changed)
+	if Quests.notice.is_connected(_on_notice):
+		Quests.notice.disconnect(_on_notice)
+
+
+func _on_notice(text: String) -> void:
+	_notices.append(text)
 
 
 func leader() -> PartyMember:
@@ -102,7 +120,7 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 			continue
 		if def.has("member") and GameState.has_member(def["member"]):
 			continue
-		var npc := _spawn_member(def.get("member", "lumi"), MapData.cell_to_feet(def["cell"]), def.get("facing", "down"))
+		var npc := _spawn_member(def.get("member", def.get("character", "")), MapData.cell_to_feet(def["cell"]), def.get("facing", "down"))
 		npcs.append({"node": npc, "def": def})
 
 	GameState.set_position(map.id, start["cell"], start["facing"])
@@ -162,10 +180,19 @@ func _process(delta: float) -> void:
 	if _label_time > 0.0:
 		_label_time -= delta
 		map_label.visible = _label_time > 0.0
-	if InputManager.just_pressed("confirm", InputManager.Mode.EXPLORE):
+	var mode := InputManager.Mode.EXPLORE
+	if InputManager.current_mode() != mode or transitioning:
+		return
+	if not _notices.is_empty():
+		var lines := _notices.duplicate()
+		_notices.clear()
+		dialogue.show_lines(lines)
+	elif InputManager.just_pressed("confirm", mode):
 		_interact()
-	elif InputManager.just_pressed("swap", InputManager.Mode.EXPLORE):
+	elif InputManager.just_pressed("swap", mode):
 		swap_leader()
+	elif InputManager.just_pressed("menu", mode):
+		menu.open()
 
 
 # --- Actions -----------------------------------------------------------------
@@ -188,36 +215,41 @@ func _interact() -> void:
 			return
 	var cell := MapData.feet_to_cell(probe)
 	if map.signs.has(cell):
-		message_box.show_lines(map.signs[cell])
+		dialogue.show_lines(map.signs[cell])
 
 
 func _talk_to(npc: Dictionary) -> void:
-	var def: Dictionary = npc["def"]
 	var node: PartyMember = npc["node"]
 	node.face(leader().global_position - node.global_position)
-	if def.get("member") == "lumi":
-		# Placeholder for scene P01. The full scene arrives with the dialogue step.
-		message_box.show_lines([
-			"Lumi: You're late.",
-			"Reno: For what?",
-			"Lumi: For the ridiculous plan you made yesterday.",
-			"Lumi joined the party! (Placeholder. The full P01 scene comes with the dialogue step.)",
-		], _join_member.bind(npc))
+	var scene_id := pick_scene(npc["def"].get("talk", []))
+	if scene_id != "":
+		dialogue.play_scene(scene_id)
 
 
-func _join_member(npc: Dictionary) -> void:
-	var node: PartyMember = npc["node"]
-	var id := node.member_id
-	if not GameState.add_member(id):
-		return
-	npcs.erase(npc)
-	members[id] = node
-	if id == "lumi":
-		GameState.set_flag("lumi_joined")
-		GameState.set_quest_state("PRO-001", "completed")
-	# Start the trail where she stood, so she walks over to Reno's path.
-	var path: Array[Vector2] = [node.global_position, leader().global_position]
-	trail.reset_path(path)
+## First entry whose conditions hold.
+static func pick_scene(entries: Array) -> String:
+	for t: Dictionary in entries:
+		if GameState.conditions_met(t):
+			return t.get("scene", "")
+	return ""
+
+
+func _run_on_enter() -> void:
+	var scene_id := pick_scene(map.on_enter)
+	if scene_id != "":
+		dialogue.play_scene(scene_id)
+
+
+## A dialogue step added someone to the party: if they're standing on this
+## map as an NPC, they become the follower from where they stand.
+func _on_party_changed() -> void:
+	for npc in npcs.duplicate():
+		var node: PartyMember = npc["node"]
+		if GameState.has_member(node.member_id) and not members.has(node.member_id):
+			npcs.erase(npc)
+			members[node.member_id] = node
+			var path: Array[Vector2] = [node.global_position, leader().global_position]
+			trail.reset_path(path)
 
 
 func _use_door(door: Dictionary) -> void:
@@ -239,4 +271,12 @@ func _use_door(door: Dictionary) -> void:
 	InputManager.pop_mode(InputManager.Mode.TRANSITION)
 	transitioning = false
 	if not notes.is_empty():
-		message_box.show_lines(notes)
+		dialogue.show_lines(notes)
+	_run_on_enter()
+
+
+## Instant map change without the fade (used by tests and debug tools).
+func warp(map_id: String, spawn: String) -> void:
+	GameState.set_spawn(map_id, spawn)
+	load_map(map_id, spawn)
+	_run_on_enter()

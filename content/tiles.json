@@ -1,21 +1,126 @@
 {
-  "status": "PLACEHOLDER",
-  "note": "Generated 16x16 placeholder tiles. Replace by setting 'tileset' path in asset_manifest.json to a PNG with the same tile order.",
-  "tile_size": 16,
-  "tiles": {
-    "grass":   {"index": 0,  "solid": false, "color": "#5d9e4b", "accent": "#4b8a3d", "pattern": "speckle"},
-    "path":    {"index": 1,  "solid": false, "color": "#d9b77e", "accent": "#c49d62", "pattern": "speckle"},
-    "flowers": {"index": 2,  "solid": false, "color": "#5d9e4b", "accent": "#f2d45c", "pattern": "flowers"},
-    "tree":    {"index": 3,  "solid": true,  "color": "#2f6b3a", "accent": "#1f4a28", "pattern": "tree"},
-    "water":   {"index": 4,  "solid": true,  "color": "#3f7fc4", "accent": "#8fc3ef", "pattern": "water"},
-    "house":   {"index": 5,  "solid": true,  "color": "#a0623c", "accent": "#7a4528", "pattern": "planks"},
-    "door":    {"index": 6,  "solid": false, "color": "#4a2c1a", "accent": "#e8b84a", "pattern": "door"},
-    "sign":    {"index": 7,  "solid": true,  "color": "#2f6b3a", "accent": "#c49d62", "pattern": "sign"},
-    "root":    {"index": 8,  "solid": true,  "color": "#6b4a8f", "accent": "#e8b84a", "pattern": "root"},
-    "floor":   {"index": 9,  "solid": false, "color": "#b98a5a", "accent": "#a37549", "pattern": "planks"},
-    "wall":    {"index": 10, "solid": true,  "color": "#5a3e2b", "accent": "#3e2a1c", "pattern": "brick"},
-    "bed":     {"index": 11, "solid": true,  "color": "#c94f4f", "accent": "#f4ecd2", "pattern": "bed"},
-    "table":   {"index": 12, "solid": true,  "color": "#7a4528", "accent": "#5a3320", "pattern": "planks"},
-    "rug":     {"index": 13, "solid": false, "color": "#3d5a9e", "accent": "#e8b84a", "pattern": "rug"}
+ "status": "PLACEHOLDER",
+ "note": "Generated 16x16 placeholder tiles. Replace by setting 'tileset' path in asset_manifest.json to a PNG with the same tile order.",
+ "tile_size": 16,
+ "tiles": {
+  "grass": {
+   "index": 0,
+   "solid": false,
+   "color": "#5d9e4b",
+   "accent": "#4b8a3d",
+   "pattern": "speckle"
+  },
+  "path": {
+   "index": 1,
+   "solid": false,
+   "color": "#d9b77e",
+   "accent": "#c49d62",
+   "pattern": "speckle"
+  },
+  "flowers": {
+   "index": 2,
+   "solid": false,
+   "color": "#5d9e4b",
+   "accent": "#f2d45c",
+   "pattern": "flowers"
+  },
+  "tree": {
+   "index": 3,
+   "solid": true,
+   "color": "#2f6b3a",
+   "accent": "#1f4a28",
+   "pattern": "tree"
+  },
+  "water": {
+   "index": 4,
+   "solid": true,
+   "color": "#3f7fc4",
+   "accent": "#8fc3ef",
+   "pattern": "water"
+  },
+  "house": {
+   "index": 5,
+   "solid": true,
+   "color": "#a0623c",
+   "accent": "#7a4528",
+   "pattern": "planks"
+  },
+  "door": {
+   "index": 6,
+   "solid": false,
+   "color": "#4a2c1a",
+   "accent": "#e8b84a",
+   "pattern": "door"
+  },
+  "sign": {
+   "index": 7,
+   "solid": true,
+   "color": "#2f6b3a",
+   "accent": "#c49d62",
+   "pattern": "sign"
+  },
+  "root": {
+   "index": 8,
+   "solid": true,
+   "color": "#6b4a8f",
+   "accent": "#e8b84a",
+   "pattern": "root"
+  },
+  "floor": {
+   "index": 9,
+   "solid": false,
+   "color": "#b98a5a",
+   "accent": "#a37549",
+   "pattern": "planks"
+  },
+  "wall": {
+   "index": 10,
+   "solid": true,
+   "color": "#5a3e2b",
+   "accent": "#3e2a1c",
+   "pattern": "brick"
+  },
+  "bed": {
+   "index": 11,
+   "solid": true,
+   "color": "#c94f4f",
+   "accent": "#f4ecd2",
+   "pattern": "bed"
+  },
+  "table": {
+   "index": 12,
+   "solid": true,
+   "color": "#7a4528",
+   "accent": "#5a3320",
+   "pattern": "planks"
+  },
+  "rug": {
+   "index": 13,
+   "solid": false,
+   "color": "#3d5a9e",
+   "accent": "#e8b84a",
+   "pattern": "rug"
+  },
+  "exit": {
+   "index": 14,
+   "solid": false,
+   "color": "#d9b77e",
+   "accent": "#2f6b3a",
+   "pattern": "exit"
+  },
+  "stall": {
+   "index": 15,
+   "solid": true,
+   "color": "#d6503c",
+   "accent": "#f4ecd2",
+   "pattern": "stall"
+  },
+  "crate": {
+   "index": 16,
+   "solid": true,
+   "color": "#a87a4a",
+   "accent": "#6e4a2a",
+   "pattern": "crate"
   }
+ }
 }

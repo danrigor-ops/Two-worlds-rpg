@@ -20,6 +20,7 @@ var spawns: Dictionary = {}   # name -> {"cell": Vector2i, "facing": String}
 var doors: Array[Dictionary] = []  # {"id", "cell", "to_map", "to_spawn", "one_way"}
 var npcs: Array[Dictionary] = []
 var signs: Dictionary = {}    # Vector2i -> Array of lines
+var on_enter: Array = []      # [{"scene", "if_flags", "if_not_flags"}]
 
 
 static func tile_defs() -> Dictionary:
@@ -65,6 +66,7 @@ static func load_map(map_id: String) -> MapData:
 		var n := npc.duplicate()
 		n["cell"] = Vector2i(int(npc["x"]), int(npc["y"]))
 		m.npcs.append(n)
+	m.on_enter = d.get("on_enter", [])
 	for sign: Dictionary in d.get("signs", []):
 		m.signs[Vector2i(int(sign["x"]), int(sign["y"]))] = sign.get("lines", [])
 	return m
@@ -127,16 +129,22 @@ func validate_self() -> Array[String]:
 		var c: Vector2i = spawns[s]["cell"]
 		if not is_walkable(c):
 			e.append(p + "spawn '%s' at %s is not on a walkable tile" % [s, c])
-		elif tile_name(c) == "door":
+		elif not door_at(c).is_empty():
 			e.append(p + "spawn '%s' at %s is on a door and would re-trigger it" % [s, c])
 		if spawns[s]["facing"] not in ["down", "left", "right", "up"]:
 			e.append(p + "spawn '%s' has a bad facing" % s)
 	for door in doors:
-		if tile_name(door["cell"]) != "door":
+		if tile_name(door["cell"]) not in ["door", "exit"]:
 			e.append(p + "door '%s' at %s is not on a door tile" % [door["id"], door["cell"]])
 	for npc in npcs:
 		if not is_walkable(npc["cell"]):
 			e.append(p + "npc '%s' at %s is not on a walkable tile" % [npc.get("id", "?"), npc["cell"]])
+		for t: Dictionary in npc.get("talk", []):
+			if not Dialogue.has_scene(t.get("scene", "")):
+				e.append(p + "npc '%s' uses missing scene '%s'" % [npc.get("id", "?"), t.get("scene", "")])
+	for t: Dictionary in on_enter:
+		if not Dialogue.has_scene(t.get("scene", "")):
+			e.append(p + "on_enter uses missing scene '%s'" % t.get("scene", ""))
 	for cell: Vector2i in signs:
 		if tile_name(cell) != "sign":
 			e.append(p + "sign at %s is not on a sign tile" % cell)

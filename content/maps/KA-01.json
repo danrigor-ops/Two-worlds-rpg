@@ -13,11 +13,12 @@
   "H": "house",
   "D": "door",
   "S": "sign",
-  "r": "root"
+  "r": "root",
+  "E": "exit"
  },
  "rows": [
   "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TTTTTTTTTTTTTTTTTTTTSTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTT",
   "TT..................=.................TT",
   "TT..HHHHHHHH........=.................TT",
   "TT..HHHHHHHH.T......=..f..........T...TT",
@@ -31,7 +32,7 @@
   "TT..T..=......============.........T..TT",
   "TT.....=......============....f.......TT",
   "TT.....=......====rrrr====............TT",
-  "TT.....===========rrrr================ST",
+  "TT.....===========rrrr================ET",
   "TT...f........====rrrr====............TT",
   "TT............============............TT",
   "TT............============............TT",
@@ -57,6 +58,16 @@
    "x": 7,
    "y": 8,
    "facing": "down"
+  },
+  "from_hollow": {
+   "x": 20,
+   "y": 2,
+   "facing": "down"
+  },
+  "from_market": {
+   "x": 37,
+   "y": 15,
+   "facing": "left"
   }
  },
  "doors": [
@@ -65,6 +76,20 @@
    "x": 7,
    "y": 7,
    "to_map": "KA-02",
+   "to_spawn": "from_square"
+  },
+  {
+   "id": "exit_to_hollow",
+   "x": 20,
+   "y": 1,
+   "to_map": "KA-05",
+   "to_spawn": "from_square"
+  },
+  {
+   "id": "exit_to_market",
+   "x": 38,
+   "y": 15,
+   "to_map": "KA-04",
    "to_spawn": "from_square"
   }
  ],
@@ -75,33 +100,23 @@
    "x": 15,
    "y": 12,
    "facing": "left",
-   "hide_if_flag": "lumi_joined"
+   "hide_if_flag": "lumi_joined",
+   "talk": [
+    {
+     "scene": "P01_lumi_joins"
+    }
+   ]
   }
  ],
  "signs": [
-  {
-   "x": 20,
-   "y": 1,
-   "lines": [
-    "North: Elder's Hollow (KA-05).",
-    "This map isn't built yet."
-   ]
-  },
-  {
-   "x": 38,
-   "y": 15,
-   "lines": [
-    "East: Root Market (KA-04).",
-    "This map isn't built yet."
-   ]
-  },
   {
    "x": 19,
    "y": 28,
    "lines": [
     "South: Training Glade (KA-06).",
-    "This map isn't built yet."
+    "(The glade is built in the next step.)"
    ]
   }
- ]
+ ],
+ "on_enter": []
 }

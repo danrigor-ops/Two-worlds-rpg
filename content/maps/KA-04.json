@@ -1,0 +1,97 @@
+{
+ "id": "KA-04",
+ "name": "Root Market",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 24,
+ "legend": {
+  ".": "grass",
+  "=": "path",
+  "f": "flowers",
+  "T": "tree",
+  "E": "exit",
+  "k": "stall",
+  "c": "crate"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TT............................TT",
+  "TT.T.....f..................T.TT",
+  "TT............====............TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT........c...====............TT",
+  "TT............====.........f..TT",
+  "TT============================TT",
+  "TE============================TT",
+  "TT============================TT",
+  "TT============================TT",
+  "TT..c.........====............TT",
+  "TT............====......cc....TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT...kkkkkk...====..kkkkkk....TT",
+  "TT............====............TT",
+  "TT.T........................T.TT",
+  "TT..........T.........f.......TT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 11,
+   "facing": "right"
+  },
+  "from_square": {
+   "x": 2,
+   "y": 11,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "exit_to_square",
+   "x": 1,
+   "y": 11,
+   "to_map": "KA-01",
+   "to_spawn": "from_market"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "bobo",
+   "character": "bobo",
+   "x": 8,
+   "y": 9,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "bobo_parcel_returned"
+     ],
+     "scene": "bobo_after"
+    },
+    {
+     "if_flags": [
+      "leafling_tutorial_complete"
+     ],
+     "scene": "P03_bobo_return"
+    },
+    {
+     "if_flags": [
+      "bobo_parcel_quest_started"
+     ],
+     "scene": "bobo_waiting"
+    },
+    {
+     "scene": "P03_bobo"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "on_enter": []
+}

@@ -16,6 +16,7 @@ var buttons := {
 	"a": [Vector2(222, 122), 11.0, "confirm", "A"],
 	"b": [Vector2(200, 140), 9.0, "cancel", "B"],
 	"swap": [Vector2(200, 108), 8.0, "swap", "S"],
+	"menu": [Vector2(228, 12), 7.0, "menu", "M"],
 }
 var _touches := {}  # touch index -> button name
 

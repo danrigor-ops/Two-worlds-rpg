@@ -8,6 +8,7 @@ func _ready() -> void:
 	var errors: Array[String] = []
 	errors.append_array(Assets.validate())
 	errors.append_array(MapData.validate_all(GameState.NEW_GAME_MAP, GameState.NEW_GAME_SPAWN))
+	errors.append_array(Dialogue.validate())
 	if not errors.is_empty():
 		for e in errors:
 			push_error(e)

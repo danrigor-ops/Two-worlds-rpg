@@ -1,11 +1,98 @@
 {
-  "status": "WORKING_PROPOSAL",
-  "note": "Starter registry from data/prologue-quests.json. Quest logic arrives in build step 3.",
-  "quests": [
-    {"id": "PRO-001", "name": "Find Lumi", "complete_flags": ["lumi_joined"], "start": "active"},
-    {"id": "PRO-002", "name": "Gather Supplies", "complete_flags": ["lantern_obtained"], "start": "locked"},
-    {"id": "PRO-003", "name": "Whispering Roots", "complete_flags": ["gate_key_collected", "root_bridge_restored"], "start": "locked"},
-    {"id": "PRO-004", "name": "The Thornkeeper", "complete_flags": ["thornkeeper_defeated"], "start": "locked"},
-    {"id": "PRO-005", "name": "A Strange New World", "complete_flags": ["prologue_completed"], "start": "locked"}
-  ]
+ "status": "WORKING_PROPOSAL",
+ "note": "Lifecycle: locked -> active -> completed -> rewarded. 'start_flags' activate a locked quest, 'complete_flags' complete it, and the reward is granted once (tracked in rewards_claimed).",
+ "quests": [
+  {
+   "id": "PRO-001",
+   "name": "Find Lumi",
+   "start": "active",
+   "complete_flags": [
+    "lumi_joined"
+   ],
+   "journal": {
+    "active": "Lumi is waiting somewhere in Root Square.",
+    "completed": "Lumi joined the adventure. Well, the short, careful visit."
+   }
+  },
+  {
+   "id": "PRO-002",
+   "name": "Gather Supplies",
+   "start": "locked",
+   "start_flags": [
+    "bobo_parcel_quest_started"
+   ],
+   "complete_flags": [
+    "bobo_parcel_returned"
+   ],
+   "reward": {
+    "key_items": [
+     "item_lantern"
+    ],
+    "items": {
+     "item_dewdrop_candy": 2
+    },
+    "flags": [
+     "lantern_obtained"
+    ]
+   },
+   "journal": {
+    "active": "Bobo will trade his lantern for the parcel a Leafling took into the Training Glade.",
+    "completed": "Bobo got his parcel back. We have a lantern!"
+   }
+  },
+  {
+   "id": "PRO-003",
+   "name": "Whispering Roots",
+   "start": "locked",
+   "start_flags": [
+    "thornkeeper_route_open"
+   ],
+   "complete_flags": [
+    "gate_key_collected",
+    "root_bridge_restored"
+   ],
+   "journal": {
+    "active": "Find the gate key and a way across the Whispering Roots."
+   }
+  },
+  {
+   "id": "PRO-004",
+   "name": "The Thornkeeper",
+   "start": "locked",
+   "start_flags": [
+    "root_bridge_restored"
+   ],
+   "complete_flags": [
+    "thornkeeper_defeated"
+   ],
+   "reward": {
+    "key_items": [
+     "item_guardian_seed"
+    ],
+    "dewdrops": 3
+   },
+   "journal": {
+    "active": "Something guards the Forbidden Gate."
+   }
+  },
+  {
+   "id": "PRO-005",
+   "name": "A Strange New World",
+   "start": "locked",
+   "start_flags": [
+    "forbidden_gate_open"
+   ],
+   "complete_flags": [
+    "prologue_completed"
+   ],
+   "reward": {
+    "flags": [
+     "chapter_01_unlocked"
+    ]
+   },
+   "journal": {
+    "active": "Go through the gate."
+   }
+  }
+ ]
 }

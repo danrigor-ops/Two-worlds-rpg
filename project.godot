@@ -16,6 +16,7 @@ config/icon="res://icon.svg"
 GameState="*res://autoload/game_state.gd"
 InputManager="*res://autoload/input_manager.gd"
 Assets="*res://autoload/assets.gd"
+Quests="*res://autoload/quests.gd"
 
 [display]
 
