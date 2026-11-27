@@ -1389,6 +1389,167 @@
     "accent": "#f2d45c",
     "legs": "#8a6a48"
    }
+  },
+  "lorry_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#5a7a5a",
+    "skin": "#5a7a5a",
+    "body": "#3a5a3a",
+    "accent": "#e8b84a",
+    "legs": "#2a2a2a"
+   }
+  },
+  "tapper_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#a8784a",
+    "body": "#7a6a5a",
+    "accent": "#e8e0c0",
+    "legs": "#4a3a2a"
+   }
+  },
+  "tapper_b_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a2a20",
+    "skin": "#8a5a3a",
+    "body": "#5a6a7a",
+    "accent": "#d8d0b8",
+    "legs": "#3a3a3a"
+   }
+  },
+  "titis_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#f4f0e0",
+    "skin": "#f4f0e0",
+    "body": "#f4f0e0",
+    "accent": "#9fc8e0",
+    "legs": "#f4f0e0"
+   }
+  },
+  "fear_shadow_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "monarch",
+    "hair": "#1a1420",
+    "skin": "#2a2030",
+    "body": "#1a1a2a",
+    "accent": "#8a6ad8",
+    "legs": "#1a1420"
+   }
+  },
+  "latex_lurker_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#e8e0c8",
+    "skin": "#d8d0b8",
+    "body": "#c8c0a8",
+    "accent": "#5a4a3a",
+    "legs": "#a89878"
+   }
+  },
+  "grove_shade_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#2a3a2a",
+    "skin": "#3a4a3a",
+    "body": "#1a2a1a",
+    "accent": "#8ac88a",
+    "legs": "#1a2a1a"
+   }
   }
  },
  "characters": {
@@ -1451,6 +1612,13 @@
   "ink_blot": "ink_blot_overworld",
   "typeset_beetle": "typeset_beetle_overworld",
   "blank_clerk": "blank_clerk_overworld",
-  "radio_glow": "radio_glow_overworld"
+  "radio_glow": "radio_glow_overworld",
+  "lorry": "lorry_overworld",
+  "tapper": "tapper_overworld",
+  "tapper_b": "tapper_b_overworld",
+  "titis": "titis_overworld",
+  "fear_shadow": "fear_shadow_overworld",
+  "latex_lurker": "latex_lurker_overworld",
+  "grove_shade": "grove_shade_overworld"
  }
 }

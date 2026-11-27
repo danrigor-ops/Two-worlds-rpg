@@ -1,0 +1,792 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 4 from docs/chapter-04/CHAPTER_04_PRODUCTION.md. Human lines are overheard.",
+ "speakers": {
+  "tapper": {
+   "name": "Tapper",
+   "character": "tapper"
+  },
+  "tapper_b": {
+   "name": "Tapper",
+   "character": "tapper_b"
+  },
+  "titis": {
+   "name": "Titis",
+   "character": "titis"
+  },
+  "fear_shadow": {
+   "name": "The Fear-Shadow",
+   "character": "fear_shadow"
+  }
+ },
+ "scenes": {
+  "C4_00_lorry": [
+   {
+    "speaker": "narrator",
+    "text": "An estate lorry, loaded with empty latex drums, is heading up the hill road to Bukit Getah."
+   },
+   {
+    "speaker": "elias",
+    "text": "I know the radio in this cab. Terrible taste in music. Hop in the back!"
+   },
+   {
+    "choice": [
+     {
+      "text": "Ride to Bukit Getah",
+      "then": [
+       {
+        "set_flag": "ch04_started"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The lorry grinds up the hill road into the night."
+       },
+       {
+        "event": "travel:GT-01:from_lorry"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "gt01_lorry_back": [
+   {
+    "speaker": "narrator",
+    "text": "The lorry goes back down to Bandar Kencana at dawn and dusk."
+   },
+   {
+    "choice": [
+     {
+      "text": "Ride back",
+      "then": [
+       {
+        "event": "travel:BK-01:from_estate"
+       }
+      ]
+     },
+     {
+      "text": "Stay",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C4_01_estate": [
+   {
+    "set_flag": "ch04_estate_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Bukit Getah Estate, after midnight. Rows of rubber trees stretch up the hill. The tappers' lanterns flicker."
+   },
+   {
+    "speaker": "tapper",
+    "text": "(to her friend) Third lantern gone out tonight. And no wind."
+   },
+   {
+    "speaker": "tapper_b",
+    "text": "Leave it. Start on the lower rows. The top lanes feel... wrong."
+   },
+   {
+    "speaker": "reno",
+    "text": "The trees are whispering. Can you hear them? They sound scared."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Something here is very frightened, and it's making everything else frightened too."
+   },
+   {
+    "speaker": "elias",
+    "text": "And that ink smell again. Faint, but it's here."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: find out what's frightening the grove (north)."
+   }
+  ],
+  "human_tapper": [
+   {
+    "speaker": "tapper",
+    "text": "(scoring a tree, catching the drip in a cup) Slow tonight. The trees bleed slow when it's cold. It isn't cold."
+   }
+  ],
+  "human_tapper_b": [
+   {
+    "speaker": "tapper_b",
+    "text": "(to herself) My grandmother said the grove had a little keeper. You'd leave the first cup alone for her. Silly."
+   }
+  ],
+  "human_tapper_after": [
+   {
+    "speaker": "tapper",
+    "text": "(at dawn, surprised) The cups are full. Every one. Like the trees woke up happy."
+   }
+  ],
+  "human_tapper_b_after": [
+   {
+    "speaker": "tapper_b",
+    "text": "(quietly, leaving the first cup alone) For the little keeper. Just in case."
+   }
+  ],
+  "C4_02_grove": [
+   {
+    "set_flag": "ch04_grove_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Deep in the grove, three trees have turned black and twisted across the lanes."
+   },
+   {
+    "speaker": "reno",
+    "text": "This one's shaking. Trees don't shake."
+   },
+   {
+    "speaker": "elias",
+    "text": "Maybe if someone spoke its language..."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno. You were raised in a village made of roots. Try listening."
+   }
+  ],
+  "tree_look": [
+   {
+    "speaker": "narrator",
+    "text": "A rubber tree, black with fright, twisted across the lane."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno should try. He grew up talking to roots."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Reno with C.)"
+   }
+  ],
+  "tree_calm": [
+   {
+    "speaker": "narrator",
+    "text": "The tree stands up straight again, a little embarrassed."
+   }
+  ],
+  "whisper_1": [
+   {
+    "speaker": "narrator",
+    "text": "Reno puts both hands on the bark and listens.",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno learned Forest Whisper! (Reno leads, A at a frightened tree.) And Root Uppercut! (5 MP)",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "set_flag": "ch04_whisper_learned",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "The tree shivers. Its bark still has old knife scores, healed over."
+   },
+   {
+    "choice": [
+     {
+      "text": "\"Nobody's going to cut you tonight.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Nobody's going to cut you tonight."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree sighs, all its leaves at once, and untwists out of the lane."
+       },
+       {
+        "set_flag": "ch04_tree_1"
+       },
+       {
+        "goto": "trees_check"
+       }
+      ]
+     },
+     {
+      "text": "\"The moon is up, see?\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "The moon is up, see?"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     },
+     {
+      "text": "\"Your neighbours are right here.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Your neighbours are right here."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "whisper_2": [
+   {
+    "speaker": "narrator",
+    "text": "Reno puts both hands on the bark and listens.",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno learned Forest Whisper! (Reno leads, A at a frightened tree.) And Root Uppercut! (5 MP)",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "set_flag": "ch04_whisper_learned",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "The tree's leaves are curled tight against the dark. It can't see the sky."
+   },
+   {
+    "choice": [
+     {
+      "text": "\"Nobody's going to cut you tonight.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Nobody's going to cut you tonight."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     },
+     {
+      "text": "\"The moon is up, see?\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "The moon is up, see?"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree sighs, all its leaves at once, and untwists out of the lane."
+       },
+       {
+        "set_flag": "ch04_tree_2"
+       },
+       {
+        "goto": "trees_check"
+       }
+      ]
+     },
+     {
+      "text": "\"Your neighbours are right here.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Your neighbours are right here."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "whisper_3": [
+   {
+    "speaker": "narrator",
+    "text": "Reno puts both hands on the bark and listens.",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno learned Forest Whisper! (Reno leads, A at a frightened tree.) And Root Uppercut! (5 MP)",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "set_flag": "ch04_whisper_learned",
+    "if_not_flags": [
+     "ch04_whisper_learned"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "The tree stands alone at the edge of a gap where its neighbours were cleared."
+   },
+   {
+    "choice": [
+     {
+      "text": "\"Nobody's going to cut you tonight.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Nobody's going to cut you tonight."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     },
+     {
+      "text": "\"The moon is up, see?\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "The moon is up, see?"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree shivers harder."
+       },
+       {
+        "speaker": "lumi",
+        "text": "That's not what it's scared of. Look at it again."
+       }
+      ]
+     },
+     {
+      "text": "\"Your neighbours are right here.\"",
+      "then": [
+       {
+        "speaker": "reno",
+        "text": "Your neighbours are right here."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The tree sighs, all its leaves at once, and untwists out of the lane."
+       },
+       {
+        "set_flag": "ch04_tree_3"
+       },
+       {
+        "goto": "trees_check"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "trees_check": [
+   {
+    "set_flag": "pz401_grove_calm",
+    "if_flags": [
+     "ch04_tree_1",
+     "ch04_tree_2",
+     "ch04_tree_3"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "All through the grove, the trees settle. But past the last row, something small is crying.",
+    "if_flags": [
+     "ch04_tree_1",
+     "ch04_tree_2",
+     "ch04_tree_3"
+    ]
+   }
+  ],
+  "gt02_lurker_beaten": [
+   {
+    "set_flag": "gt02_lurker_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Sticky! It's all over my scarf!"
+   }
+  ],
+  "gt02_shades_beaten": [
+   {
+    "set_flag": "gt02_shades_beaten"
+   },
+   {
+    "speaker": "elias",
+    "text": "Grove Shades. Little pieces of fear, floating loose."
+   }
+  ],
+  "gt02_mixed_beaten": [
+   {
+    "set_flag": "gt02_mixed_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "They're coming from the same place. Past the last row."
+   }
+  ],
+  "C4_03_clearing": [
+   {
+    "set_flag": "ch04_clearing_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A clearing by the old smokehouse, on the spirit side. A tiny pale spirit, like a drop of morning sap, is curled up by the wall."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Everyone stay back. Let me go first. Slowly."
+   }
+  ],
+  "mediation_1": [
+   {
+    "speaker": "titis",
+    "text": "Who are you? Did HE send you? The one with ink on his fingers?"
+   },
+   {
+    "choice": [
+     {
+      "text": "\"Nobody sent us. We came because the trees were scared.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Nobody sent us. We came because the trees were scared."
+       },
+       {
+        "goto": "mediation_2"
+       }
+      ]
+     },
+     {
+      "text": "\"We're here to stop you!\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "We're here to stop you!"
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     },
+     {
+      "text": "\"Tell us where he went, now.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Tell us where he went, now."
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "mediation_2": [
+   {
+    "speaker": "titis",
+    "text": "He took my name. I don't know who I am now. If I don't know, how can I keep the grove?"
+   },
+   {
+    "choice": [
+     {
+      "text": "\"You don't need a name to be brave.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "You don't need a name to be brave."
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     },
+     {
+      "text": "\"The tappers still leave you the first cup. They remember you.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "The tappers still leave you the first cup. They remember you."
+       },
+       {
+        "goto": "mediation_3"
+       }
+      ]
+     },
+     {
+      "text": "\"Just get a new name.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Just get a new name."
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "mediation_3": [
+   {
+    "speaker": "titis",
+    "text": "I'm so scared. It's so big. It's all the scared I ever was, and it won't go away."
+   },
+   {
+    "choice": [
+     {
+      "text": "\"Then let it go. We'll stand between you and it.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Then let it go. We'll stand between you and it."
+       },
+       {
+        "goto": "mediation_done"
+       }
+      ]
+     },
+     {
+      "text": "\"Stop being scared.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Stop being scared."
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     },
+     {
+      "text": "\"Run away with us.\"",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Run away with us."
+       },
+       {
+        "speaker": "titis",
+        "text": "(hiding her face) ...No. Go away."
+       },
+       {
+        "speaker": "narrator",
+        "text": "Titis curls up again. (Talk to her again, gently.)"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C4_04_mediation": [
+   {
+    "speaker": "titis",
+    "text": "(flinching) Stay back!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Titis, keeper of the grove, peers out from behind her own hands."
+   },
+   {
+    "goto": "mediation_1"
+   }
+  ],
+  "mediation_done": [
+   {
+    "speaker": "titis",
+    "text": "...You'd stand there? Between me and that?"
+   },
+   {
+    "speaker": "reno",
+    "text": "All three of us. Elias is very tall."
+   },
+   {
+    "speaker": "elias",
+    "text": "I'm medium."
+   },
+   {
+    "speaker": "titis",
+    "text": "Then... I'll let it go."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Titis opens her hands. Something huge and dark pours out of her, and keeps pouring, and stands up behind the party."
+   },
+   {
+    "set_flag": "ch04_titis_calmed"
+   },
+   {
+    "speaker": "titis",
+    "text": "That's it. That's all of it. Please don't let it back in."
+   }
+  ],
+  "titis_waiting": [
+   {
+    "speaker": "titis",
+    "text": "(small) It's still there. Behind you."
+   }
+  ],
+  "titis_after": [
+   {
+    "speaker": "titis",
+    "text": "The grove is quiet. The tappers will fill their cups. Thank you."
+   }
+  ],
+  "C4_05_shadow_intro": [
+   {
+    "speaker": "fear_shadow",
+    "text": "EVERYONE LEAVES. EVERYONE CUTS. EVERYONE FORGETS."
+   },
+   {
+    "speaker": "reno",
+    "text": "Not us!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Stay in front of Titis!"
+   }
+  ],
+  "C4_05_shadow_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Fear-Shadow shrinks, and shrinks, until it is the size of a drop of sap, and then it is just morning mist."
+   },
+   {
+    "speaker": "titis",
+    "text": "It's gone. I feel... small. Small is fine. Small is me."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Sap-Drop Charm (Lumi: MAG +3)."
+   },
+   {
+    "speaker": "titis",
+    "text": "The man with ink on his fingers. He wasn't angry. He was sad, like me. He asked the way to Hutan Seribu Bunga."
+   },
+   {
+    "speaker": "lumi",
+    "text": "The forest of a thousand flowers?"
+   },
+   {
+    "speaker": "titis",
+    "text": "He wanted a flower that helps people forget. He said, \"so nobody has to remember\"."
+   },
+   {
+    "speaker": "elias",
+    "text": "That's... not a villain's line. That's a sad person's line."
+   },
+   {
+    "set_flag": "seribu_bunga_route_unlocked"
+   },
+   {
+    "event": "travel:GT-01:from_grove"
+   }
+  ],
+  "C4_06_dawn": [
+   {
+    "speaker": "narrator",
+    "text": "Dawn on Bukit Getah. The lanterns are lit, and the cups are full."
+   },
+   {
+    "speaker": "tapper",
+    "text": "(laughing) Full cups. Every tree! What happened up here last night?"
+   },
+   {
+    "speaker": "tapper_b",
+    "text": "Leave the first cup. Just in case."
+   },
+   {
+    "speaker": "reno",
+    "text": "A forest of a thousand flowers! Do they have trains?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno."
+   },
+   {
+    "speaker": "elias",
+    "text": "They have bees. I've heard them on shortwave. Very organised."
+   },
+   {
+    "set_flag": "chapter_04_completed"
+   },
+   {
+    "set_flag": "chapter_05_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

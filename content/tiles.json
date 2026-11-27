@@ -429,6 +429,27 @@
    "color": "#5a3e2b",
    "accent": "#d8d0b8",
    "pattern": "sign"
+  },
+  "rubber_tree": {
+   "index": 61,
+   "solid": true,
+   "color": "#3a5a3a",
+   "accent": "#d8d0b8",
+   "pattern": "tree"
+  },
+  "shadow_tree": {
+   "index": 62,
+   "solid": true,
+   "color": "#1a1a2a",
+   "accent": "#5a4a8a",
+   "pattern": "tree"
+  },
+  "estate_path": {
+   "index": 63,
+   "solid": false,
+   "color": "#8a6a48",
+   "accent": "#6b4a2f",
+   "pattern": "speckle"
   }
  }
 }

@@ -123,6 +123,17 @@ Optional, **Things the River Kept** (C02-S01): overhear the fisherman at the lan
 
 Party rules from Chapter 3: up to three heroes fight; anyone else waits in reserve and still earns XP. Companions join at the party's level and travel along without walking the map.
 
+**Chapter 4: The Rubber Grove at Midnight.** Design: `docs/chapter-04/CHAPTER_04_PRODUCTION.md`.
+
+49. From the Chapter 3 screen, press A. The **estate lorry** on the wharf takes you up to **Bukit Getah** at night.
+50. In **the Rubber Grove** (PZ-401), three frightened trees block the lanes. With Reno leading, use **Forest Whisper** and pick what each tree needs to hear. Reno also learns Root Uppercut. Grove Shades can **Poison** (6% of max HP after each action).
+51. In the **Smokehouse Clearing** (PZ-402), talk gently with **Titis**, the grove's little keeper. A harsh answer only makes her hide again.
+52. Her fear pulls loose as **the Fear-Shadow** (BOSS-401):
+    - Loom and Dread in phase 1.
+    - From 60% it adds Bitter Rain and splits off Grove Shades.
+    - From 30% it uses Nightfall, announced a round ahead.
+53. At dawn the tappers find every cup full. Titis says the ink-fingered stranger went looking for a forgetting-flower in **Hutan Seribu Bunga**.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -188,4 +199,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
    - ✅ Part A: the river landing, Tide Call and the mangroves, Kampung Air, Soaked, Ripple Echo
    - ✅ Part B: the Sunken Jetty, the Barnacle Bell, the Tide Song, the Undertow, Nenek Arus, Things the River Kept
 10. ✅ Chapter 3: The Town That Forgot Its Name (Elias joins, three-hero battles)
-11. Chapters 4 to 10 and the epilogue
+11. ✅ Chapter 4: The Rubber Grove at Midnight (Forest Whisper, mediation, Poison)
+12. Chapters 5 to 10 and the epilogue

@@ -762,6 +762,145 @@
      "enter_text": "Blank Clerk: Everything will be blank, and everything will be SAFE."
     }
    ]
+  },
+  "latex_lurker": {
+   "name": "Latex Lurker",
+   "character": "latex_lurker",
+   "stats": {
+    "level": 11,
+    "max_hp": 150,
+    "atk": 26,
+    "def": 20,
+    "mag": 10,
+    "res": 16,
+    "spd": 9
+   },
+   "xp": 36,
+   "attacks": [
+    {
+     "name": "Sticky Grab",
+     "kind": "physical",
+     "mult": 1.1,
+     "applies": "slow",
+     "turns": 2
+    }
+   ]
+  },
+  "grove_shade": {
+   "name": "Grove Shade",
+   "character": "grove_shade",
+   "stats": {
+    "level": 11,
+    "max_hp": 110,
+    "atk": 14,
+    "def": 14,
+    "mag": 28,
+    "res": 22,
+    "spd": 17
+   },
+   "xp": 34,
+   "attacks": [
+    {
+     "name": "Bitter Sap",
+     "kind": "magical",
+     "mult": 0.9,
+     "applies": "poison",
+     "turns": 3
+    }
+   ]
+  },
+  "fear_shadow": {
+   "name": "The Fear-Shadow",
+   "character": "fear_shadow",
+   "stats": {
+    "level": 12,
+    "max_hp": 950,
+    "atk": 28,
+    "def": 22,
+    "mag": 30,
+    "res": 22,
+    "spd": 13
+   },
+   "xp": 180,
+   "immune": [
+    "slow",
+    "fog",
+    "poison"
+   ],
+   "attacks": [
+    {
+     "name": "Loom",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Loom",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Dread",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Bitter Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Loom",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Dread",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ],
+     "summon": "grove_shade",
+     "enter_text": "The Fear-Shadow splits. Pieces of it scatter into the trees!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Nightfall",
+       "kind": "magical",
+       "mult": 1.9,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Fear-Shadow swallows the moon. (Nightfall lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Bitter Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Loom",
+       "kind": "physical",
+       "mult": 1.2
+      }
+     ],
+     "enter_text": "Fear-Shadow: GO AWAY. Everyone goes away in the end. Go away FIRST."
+    }
+   ]
   }
  },
  "encounters": {
@@ -939,6 +1078,36 @@
    ],
    "win_key_items": [
     "equip_crystal_earpiece"
+   ]
+  },
+  "gt02_lurker": {
+   "enemies": [
+    "latex_lurker"
+   ]
+  },
+  "gt02_shades": {
+   "enemies": [
+    "grove_shade",
+    "grove_shade"
+   ]
+  },
+  "gt02_mixed": {
+   "enemies": [
+    "latex_lurker",
+    "grove_shade"
+   ]
+  },
+  "fear_boss": {
+   "enemies": [
+    "fear_shadow"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch04_shadow_beaten"
+   ],
+   "win_key_items": [
+    "equip_sap_drop_charm"
    ]
   }
  }
