@@ -1,5 +1,5 @@
 {
-  "currency": "humanCents",
+  "currency": "dewdrops",
   "items": [
     {
       "id": "item_kaya_toast",
@@ -8,49 +8,61 @@
       "effect": {
         "healHp": 20
       },
-      "priceHumanCents": 15,
-      "sellable": true,
+      "priceDewdrops": null,
+      "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
     {
-      "id": "item_banana_fritter",
-      "name": "Banana Fritter",
+      "id": "item_moonleaf_bun",
+      "name": "Moonleaf Bun",
       "type": "consumable",
       "effect": {
-        "healHp": 15
+        "healHp": 20
       },
-      "priceHumanCents": 10,
-      "sellable": true,
+      "priceDewdrops": 1,
+      "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
     {
-      "id": "item_herbal_tea",
-      "name": "Herbal Tea",
+      "id": "item_starfruit_dumpling",
+      "name": "Starfruit Dumpling",
+      "type": "consumable",
+      "effect": {
+        "healHp": 35
+      },
+      "priceDewdrops": 2,
+      "sellable": false,
+      "status": "WORKING_PROPOSAL"
+    },
+    {
+      "id": "item_firefly_tea",
+      "name": "Firefly Tea",
       "type": "consumable",
       "effect": {
         "restoreMp": 12
       },
-      "priceHumanCents": 30,
-      "sellable": true,
+      "priceDewdrops": 2,
+      "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
     {
-      "id": "item_curry_puff",
-      "name": "Curry Puff",
+      "id": "item_dewdrop_candy",
+      "name": "Dewdrop Candy",
       "type": "consumable",
       "effect": {
-        "healHp": 30
+        "healHp": 10,
+        "restoreMp": 4
       },
-      "priceHumanCents": 20,
-      "sellable": true,
+      "priceDewdrops": 1,
+      "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
     {
-      "id": "item_evening_ticket",
-      "name": "Evening Train Ticket",
+      "id": "item_veil_ticket",
+      "name": "Veil-Stamped Ticket",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -59,7 +71,7 @@
       "name": "Stationmaster's Parcel A",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -68,7 +80,7 @@
       "name": "Stationmaster's Parcel B",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -77,7 +89,7 @@
       "name": "Stationmaster's Parcel C",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -86,7 +98,7 @@
       "name": "Postcard Home",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -95,7 +107,7 @@
       "name": "Blank Punched Ticket",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -104,7 +116,7 @@
       "name": "Conductor's Whistle",
       "type": "key",
       "effect": {},
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -115,7 +127,7 @@
       "effect": {
         "spd": 2
       },
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     },
@@ -126,7 +138,7 @@
       "effect": {
         "mag": 3
       },
-      "priceHumanCents": null,
+      "priceDewdrops": null,
       "sellable": false,
       "status": "WORKING_PROPOSAL"
     }
@@ -134,19 +146,21 @@
   "shops": [
     {
       "map": "SM-03",
+      "keeper": "Old Kettle",
       "stock": [
-        "item_kaya_toast",
-        "item_banana_fritter",
-        "item_herbal_tea"
+        "item_moonleaf_bun",
+        "item_firefly_tea",
+        "item_dewdrop_candy"
       ]
     },
     {
       "map": "BS-02",
+      "keeper": "The Clockkeeper",
       "stock": [
-        "item_kaya_toast",
-        "item_banana_fritter",
-        "item_herbal_tea",
-        "item_curry_puff"
+        "item_moonleaf_bun",
+        "item_starfruit_dumpling",
+        "item_firefly_tea",
+        "item_dewdrop_candy"
       ]
     }
   ],
@@ -156,6 +170,12 @@
       "map": "SM-04",
       "mandatory": true,
       "solvedFlag": "pz101_coin_jar_solved"
+    },
+    {
+      "id": "PZ-102",
+      "map": "SM-05",
+      "mandatory": true,
+      "solvedFlag": "pz102_bus_boarded"
     },
     {
       "id": "PZ-103",
@@ -194,5 +214,6 @@
       "solvedFlag": "pz108_lantern_keyhole_found"
     }
   ],
-  "note": "Chapter 1 proposal data, NEEDS_APPROVAL. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+  "note": "Chapter 1 proposal data, revision 2 (humans cannot see the spirits). Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md.",
+  "currencyNote": "Humans cannot see the duo, so Chapter 1 shops are spirit stalls priced in Dewdrops. humanCents stays in the schema for later chapters."
 }

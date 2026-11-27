@@ -2,26 +2,35 @@
   "quests": [
     {
       "id": "C01-001",
-      "name": "Human Money",
+      "name": "Unseen",
       "status": "WORKING_PROPOSAL",
       "optional": false,
       "prerequisiteFlag": "prologue_completed",
-      "completeFlag": "ch01_bus_fare_earned",
       "reward": {
-        "humanCents": 50
-      }
+        "dewdrops": 3,
+        "items": {
+          "item_kaya_toast": 2
+        }
+      },
+      "completeFlags": [
+        "ch01_visibility_learned",
+        "ch01_coin_jar_solved",
+        "ch01_kettle_tip_heard"
+      ]
     },
     {
       "id": "C01-002",
       "name": "The Bus to Bandar Senja",
       "status": "WORKING_PROPOSAL",
       "optional": false,
-      "prerequisiteFlag": "ch01_bus_fare_earned",
-      "completeFlag": "ch01_arrived_bandar_senja",
+      "prerequisiteFlag": "ch01_kettle_tip_heard",
       "reward": {
-        "autosave": true,
-        "costHumanCents": 30
-      }
+        "autosave": true
+      },
+      "completeFlags": [
+        "ch01_bus_boarded",
+        "ch01_arrived_bandar_senja"
+      ]
     },
     {
       "id": "C01-003",
@@ -30,15 +39,15 @@
       "optional": false,
       "prerequisiteFlag": "ch01_arrived_bandar_senja",
       "completeFlags": [
-        "ch01_parcel_a_found",
-        "ch01_parcel_b_found",
-        "ch01_parcel_c_found",
+        "ch01_parcel_a_returned",
+        "ch01_parcel_b_returned",
+        "ch01_parcel_c_returned",
         "ch01_parcels_returned"
       ],
       "reward": {
         "items": {
-          "item_evening_ticket": 2,
-          "item_kaya_toast": 2
+          "item_veil_ticket": 2,
+          "item_moonleaf_bun": 2
         },
         "setFlags": [
           "ch01_tickets_obtained"
@@ -131,10 +140,10 @@
       "prerequisiteFlag": "ch01_started",
       "completeFlag": "ch01_postcard_posted",
       "reward": {
-        "items": {
-          "item_banana_fritter": 2
-        },
-        "humanCents": 20
+        "dewdrops": 2,
+        "memoryAlbum": [
+          "album_postcard_home"
+        ]
       }
     },
     {
@@ -175,10 +184,10 @@
       ],
       "reward": {
         "items": {
-          "item_herbal_tea": 2
+          "item_firefly_tea": 2
         }
       }
     }
   ],
-  "note": "Chapter 1 proposal data, NEEDS_APPROVAL. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+  "note": "Chapter 1 proposal data, revision 2 (humans cannot see the spirits). Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
 }
