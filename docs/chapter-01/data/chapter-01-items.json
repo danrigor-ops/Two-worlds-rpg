@@ -10,7 +10,7 @@
       },
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_moonleaf_bun",
@@ -21,7 +21,7 @@
       },
       "priceDewdrops": 1,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_starfruit_dumpling",
@@ -32,7 +32,7 @@
       },
       "priceDewdrops": 2,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_firefly_tea",
@@ -43,7 +43,7 @@
       },
       "priceDewdrops": 2,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_dewdrop_candy",
@@ -55,7 +55,7 @@
       },
       "priceDewdrops": 1,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_veil_ticket",
@@ -64,7 +64,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_parcel_a",
@@ -73,7 +73,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_parcel_b",
@@ -82,7 +82,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_parcel_c",
@@ -91,7 +91,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_postcard",
@@ -100,7 +100,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_blank_punched_ticket",
@@ -109,7 +109,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "item_conductors_whistle",
@@ -118,7 +118,7 @@
       "effect": {},
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "equip_moth_wing_charm",
@@ -129,7 +129,7 @@
       },
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "equip_brass_lantern_hook",
@@ -140,7 +140,7 @@
       },
       "priceDewdrops": null,
       "sellable": false,
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     }
   ],
   "shops": [
@@ -214,6 +214,6 @@
       "solvedFlag": "pz108_lantern_keyhole_found"
     }
   ],
-  "note": "Chapter 1 proposal data, revision 2 (humans cannot see the spirits). Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md.",
+  "note": "Chapter 1 proposal data, revision 2, approved by Dennis 2026-11-27; stats and prices remain prototype values. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md.",
   "currencyNote": "Humans cannot see the duo, so Chapter 1 shops are spirit stalls priced in Dewdrops. humanCents stays in the schema for later chapters."
 }

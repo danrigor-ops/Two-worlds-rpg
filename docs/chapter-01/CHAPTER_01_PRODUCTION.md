@@ -1,6 +1,6 @@
 # Chapter 1 Production — The Last Train to Bandar Senja
 
-> **Status: WORKING_PROPOSAL, revision 2 (27 November 2026).** Written from the one-paragraph synopsis in `02_STORY_AND_WORLD.md`. Dennis has decided that **humans cannot see Reno and Lumi**, and asked for the doc's other recommendations to be adopted. He treats the handover and this doc as a guide that can change freely. Those decisions are recorded in section 12. Names, scripts, stats, prices, map sizes and coordinates remain prototype data. Items marked `PLACEHOLDER` are stand-ins until researched or replaced.
+> **Status: CONFIRMED_USER (approved by Dennis on 27 November 2026), revision 2.** Dennis decided that **humans cannot see Reno and Lumi**, then approved the rest of this design and its recommendations, including the dreaming-passengers rule. He treats it as a guide that can change freely. Approval covers the story, structure, scenes and rules. Stats, prices, map sizes and coordinates are still prototype data to tune in playtests (01 rule), and items marked `PLACEHOLDER` stay stand-ins until researched or replaced.
 >
 > Shape follows `05_PROLOGUE_PRODUCTION.md`. Formulas follow `04_GAMEPLAY_SYSTEMS.md`. Canon follows `01_CANON_AND_DECISIONS.md`. Machine-readable companions live in `docs/chapter-01/data/`.
 
@@ -15,7 +15,7 @@ Pacing target: **60–80 minutes** main path, plus 15–20 minutes optional (not
 - In the Human World, humans cannot see or hear Reno, Lumi or other spirits. They can notice the **effects**: a parcel that "appears" on a desk, a door that swings, coins that sort themselves. Humans explain these away ("the fan must be broken").
 - Reno and Lumi can see and hear humans, so they learn about the world by **overhearing**. Human dialogue is written as people talking to each other or to themselves, never to the duo.
 - Spirits can carry and place small human objects. Doing so to help is fine; taking from humans is not something the heroes do. This is a tone rule, not a mechanic the player can break.
-- **Proposal for the Veil (needs a check):** humans caught inside a Veil Crossing are half-dreaming and can see spirits dimly, as in a dream. This lets the train passengers in C09 speak to the duo. Afterwards they remember only "a strange dream about two children".
+- **Inside the Veil (approved):** humans caught inside a Veil Crossing are half-dreaming and can see spirits dimly, as in a dream. This lets the train passengers in C09 speak to the duo. Afterwards they remember only "a strange dream about two children".
 - Consequence for the economy: human shops and human money (`humanCents`) are out of reach in Chapter 1. Shopping uses **Dewdrops** at spirit stalls. Human money stays in the save schema for later chapters.
 
 ### Canon guardrails applied in this chapter
@@ -384,21 +384,21 @@ Autosave points: arrival at BS-01, before boarding at BS-06, after C11. No autos
 - **Real places.** Bandar Senja, Sungai Melor and the train's destination are fictional. The train's printed destination stays blank or uses a fictional name (`PLACEHOLDER`: "Tanjung Lampu").
 
 ## 12. Decisions
-Dennis answered on 27 November 2026: "Humans cannot see, follow your recommendations, this is a guide and we can freely change accordingly."
+Dennis answered on 27 November 2026: "Humans cannot see, follow your recommendations, this is a guide and we can freely change accordingly." After revision 2 he replied "Follow recommendation and proceed", approving the design.
 
 | # | Question | Decision | Source |
 |---|---|---|---|
 | 1 | Can humans see Reno and Lumi? | **No.** Rule in section 1. Bus fare, ticket buying and stationmaster dialogue were rewritten around it. | CONFIRMED_USER |
-| 1a | Can dreaming humans inside the Veil see them dimly? | Yes, as proposed in section 1. This is a new consequence of decision 1 and worth a quick look. | WORKING_PROPOSAL |
-| 2 | How much of Lumi's origin to reveal | As written: nothing exists before Kampung Akar, plus the lullaby and "Remember the way home" callbacks. Seri is not named. | Recommendation adopted |
-| 3 | Reno's token on the 1951 parcel tag | Keep it optional (C01-S02). | Recommendation adopted |
-| 4 | The Conductor's fate | Calmed; stays at the Veil Halt as a recurring friendly NPC with his name still missing. | Recommendation adopted |
-| 5 | Guardian Bloom in Chapter 1 | Yes, learned after BOSS-101. | Recommendation adopted |
-| 6 | Gentle Float unlock | Chapter 1, on the train roof. | Recommendation adopted |
-| 7 | Placeholder names | Kept as working names: Pak Darus, Encik Lim, Tanjung Lampu. New in revision 2: Old Kettle, the Clockkeeper, Mr Slot. The kopitiam owner is now unnamed. | Recommendation adopted |
-| 8 | Length | 60–80 minutes main path. | Recommendation adopted |
-| 9 | Hero growth table | Adopted as the starting point (7.2). | Recommendation adopted |
-| 10 | Engine and data format | The doc stays engine-neutral; JSON follows the handover's `data/` naming so the Godot build can import it. | Recommendation adopted |
+| 1a | Can dreaming humans inside the Veil see them dimly? | Yes, as written in section 1. | CONFIRMED_USER |
+| 2 | How much of Lumi's origin to reveal | As written: nothing exists before Kampung Akar, plus the lullaby and "Remember the way home" callbacks. Seri is not named. | Approved |
+| 3 | Reno's token on the 1951 parcel tag | Keep it optional (C01-S02). | Approved |
+| 4 | The Conductor's fate | Calmed; stays at the Veil Halt as a recurring friendly NPC with his name still missing. | Approved |
+| 5 | Guardian Bloom in Chapter 1 | Yes, learned after BOSS-101. | Approved |
+| 6 | Gentle Float unlock | Chapter 1, on the train roof. | Approved |
+| 7 | Placeholder names | Kept as working names: Pak Darus, Encik Lim, Tanjung Lampu. New in revision 2: Old Kettle, the Clockkeeper, Mr Slot. The kopitiam owner is now unnamed. | Approved |
+| 8 | Length | 60–80 minutes main path. | Approved |
+| 9 | Hero growth table | Adopted as the starting point (7.2). | Approved |
+| 10 | Engine and data format | The doc stays engine-neutral; JSON follows the handover's `data/` naming so the Godot build can import it. | Approved |
 
 ## 13. Content that still needs authoring
 Painted maps and collision, interaction coordinates, spawn geometry, the stationmaster's facing loop timings for Place, full NPC ambient lines and expressions, passenger scripts beyond the three mandatory ones, battle animation timing, sound cue timeline (bus engine, train whistle, Veil transition, clock tick), cutscene skip transactions, sprite and portrait atlas paths for all new NPCs, spirits and enemies. None of this exists yet.

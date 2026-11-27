@@ -7,7 +7,7 @@
       "widthTiles": 40,
       "heightTiles": 30,
       "function": "Prologue arrival, chapter hub start",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "SM-02",
@@ -15,7 +15,7 @@
       "widthTiles": 48,
       "heightTiles": 32,
       "function": "Market, jetty, postcard quest",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "SM-03",
@@ -23,7 +23,7 @@
       "widthTiles": 20,
       "heightTiles": 15,
       "function": "Shop",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "SM-04",
@@ -31,7 +31,7 @@
       "widthTiles": 16,
       "heightTiles": 12,
       "function": "PZ-101 Coin Jar",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "SM-05",
@@ -39,7 +39,7 @@
       "widthTiles": 32,
       "heightTiles": 20,
       "function": "Bus boarding",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "TR-01",
@@ -47,7 +47,7 @@
       "widthTiles": 24,
       "heightTiles": 10,
       "function": "Cutscene map",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-01",
@@ -55,7 +55,7 @@
       "widthTiles": 40,
       "heightTiles": 30,
       "function": "Town hub",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-02",
@@ -63,7 +63,7 @@
       "widthTiles": 32,
       "heightTiles": 24,
       "function": "Stationmaster, shop",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-03",
@@ -71,7 +71,7 @@
       "widthTiles": 36,
       "heightTiles": 28,
       "function": "PZ-103, Parcel A",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-04",
@@ -79,7 +79,7 @@
       "widthTiles": 48,
       "heightTiles": 28,
       "function": "PZ-105, Parcel C",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-05",
@@ -87,7 +87,7 @@
       "widthTiles": 44,
       "heightTiles": 32,
       "function": "PZ-104, BOSS-101, Parcel B",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "BS-06",
@@ -95,7 +95,7 @@
       "widthTiles": 40,
       "heightTiles": 20,
       "function": "Boarding, dawn ending",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-01",
@@ -103,7 +103,7 @@
       "widthTiles": 40,
       "heightTiles": 12,
       "function": "Encounters",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-02",
@@ -111,7 +111,7 @@
       "widthTiles": 40,
       "heightTiles": 12,
       "function": "PZ-107",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-03",
@@ -119,7 +119,7 @@
       "widthTiles": 48,
       "heightTiles": 12,
       "function": "PZ-106, Gentle Float",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-04",
@@ -127,7 +127,7 @@
       "widthTiles": 40,
       "heightTiles": 12,
       "function": "PZ-108 optional",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-05",
@@ -135,7 +135,7 @@
       "widthTiles": 30,
       "heightTiles": 14,
       "function": "BOSS-102",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "VT-06",
@@ -143,8 +143,8 @@
       "widthTiles": 36,
       "heightTiles": 24,
       "function": "Ending, river route",
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     }
   ],
-  "note": "Chapter 1 proposal data, revision 2 (humans cannot see the spirits). Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md. Tile sizes are design anchors only."
+  "note": "Chapter 1 proposal data, revision 2, approved by Dennis 2026-11-27; stats and prices remain prototype values. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md. Tile sizes are design anchors only."
 }

@@ -27,7 +27,7 @@
           "defense": "dodge"
         }
       ],
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "EN-102",
@@ -56,7 +56,7 @@
           "defense": "guard_or_dodge"
         }
       ],
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "EN-103",
@@ -92,7 +92,7 @@
           "effect": "act_first_next_round"
         }
       ],
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "EN-104",
@@ -121,7 +121,7 @@
           "defense": "dodge"
         }
       ],
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "EN-105",
@@ -151,7 +151,7 @@
           "applies": "memory_fog"
         }
       ],
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     },
     {
       "id": "EN-106",
@@ -180,7 +180,7 @@
           "defense": "guard_or_dodge"
         }
       ],
-      "status": "WORKING_PROPOSAL",
+      "status": "CONFIRMED_USER",
       "optional": true,
       "canEscape": false,
       "guaranteedDrops": [
@@ -223,7 +223,7 @@
           "defense": "dodge"
         }
       ],
-      "status": "WORKING_PROPOSAL",
+      "status": "CONFIRMED_USER",
       "phases": [
         {
           "hpAbovePercent": 50,
@@ -308,7 +308,7 @@
           "defense": "guard"
         }
       ],
-      "status": "WORKING_PROPOSAL",
+      "status": "CONFIRMED_USER",
       "phases": [
         {
           "name": "Tickets, Please",
@@ -370,8 +370,8 @@
         "healPercentMaxHp": 15,
         "healPercentOnMiss": 10
       },
-      "status": "WORKING_PROPOSAL"
+      "status": "CONFIRMED_USER"
     }
   ],
-  "note": "Chapter 1 proposal data, revision 2 (humans cannot see the spirits). Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
+  "note": "Chapter 1 proposal data, revision 2, approved by Dennis 2026-11-27; stats and prices remain prototype values. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md."
 }
