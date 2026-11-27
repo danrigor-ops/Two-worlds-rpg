@@ -1,0 +1,405 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 5 from docs/chapter-05/CHAPTER_05_PRODUCTION.md.",
+ "speakers": {
+  "maris": {
+   "name": "Maris",
+   "character": "maris"
+  },
+  "forgetting_bloom": {
+   "name": "The Forgetting Bloom",
+   "character": "forgetting_bloom"
+  },
+  "bee_spirit": {
+   "name": "Bee spirit",
+   "character": "bee_spirit"
+  }
+ },
+ "scenes": {
+  "gt01_forest_closed": [
+   {
+    "speaker": "narrator",
+    "text": "An overgrown trail runs east into old forest."
+   },
+   {
+    "speaker": "reno",
+    "text": "Later. The grove still needs us."
+   }
+  ],
+  "C5_01_trail": [
+   {
+    "set_flag": "ch05_trail_seen"
+   },
+   {
+    "set_flag": "ch05_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The old trail into Hutan Seribu Bunga. The flowers along it are drooping, grey at the edges, like they've forgotten what colour they were."
+   },
+   {
+    "speaker": "elias",
+    "text": "No radio signal at all out here. Just bees. Very organised bees."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Up ahead, someone is calling from inside a knot of dead vines."
+   },
+   {
+    "speaker": "maris",
+    "text": "Hello? Is someone there? I'm a bit... stuck."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: help whoever is stuck in the vines."
+   }
+  ],
+  "maris_tangled": [
+   {
+    "speaker": "maris",
+    "text": "The vines went dead around me in the night. They're too tough for me to pull. Is there a root spirit with you?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Reno with C.)"
+   }
+  ],
+  "C5_02_free_maris": [
+   {
+    "speaker": "narrator",
+    "text": "Reno digs his heels in and pulls. Root Grip! The dead vines crack and fall apart."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A spirit in leaf-green tumbles out, flowers tangled in her hair."
+   },
+   {
+    "speaker": "maris",
+    "text": "Oh! Thank you. I'm Maris. I keep the sanctuary. Or I did, until it started forgetting how to grow."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We're following a man with ink on his fingers. He came here for a forgetting flower."
+   },
+   {
+    "speaker": "maris",
+    "text": "Lupa-bloom. It grows nowhere but here, and we keep it small, very small, for a reason. He planted a whole pocketful at the Heart."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then let's go pull it up!"
+   },
+   {
+    "speaker": "maris",
+    "text": "Not so fast. The stream bridges have wilted. But I can Regrow them. Let me come."
+   },
+   {
+    "join": "maris"
+   },
+   {
+    "set_flag": "ch05_maris_joined"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Maris joined the party! In battle: Bloom Heal (heals everyone) and Thorn Lash. In the field: Regrow, at wilted vine bridges."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Four in the party now: the first three fight. Change the order in Menu > Party.)"
+   }
+  ],
+  "sb01_not_yet": [
+   {
+    "speaker": "lumi",
+    "text": "Someone's calling back there. We should help them first."
+   }
+  ],
+  "sb01_thorns_beaten": [
+   {
+    "set_flag": "sb01_thorns_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Ow. Ow. Prickly."
+   }
+  ],
+  "C5_03_flowers": [
+   {
+    "set_flag": "ch05_flowers_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Thousand Flowers: a valley of every colour, fading at the centre. Two streams cut across it."
+   },
+   {
+    "speaker": "maris",
+    "text": "Three of the oldest blossoms remember things for the whole sanctuary. If Lumi listens, they'll show us what happened."
+   },
+   {
+    "speaker": "elias",
+    "text": "And the bridges?"
+   },
+   {
+    "speaker": "maris",
+    "text": "Leave the bridges to me."
+   }
+  ],
+  "regrow_done": [
+   {
+    "speaker": "narrator",
+    "text": "A healthy vine bridge, humming with bees."
+   }
+  ],
+  "regrow_1": [
+   {
+    "speaker": "narrator",
+    "text": "A wilted vine, drooping over the stream where a bridge used to be."
+   },
+   {
+    "speaker": "maris",
+    "text": "Come on, old friend. Remember how to reach."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Maris Regrows the vine. It stretches, thickens, and lies down across the water as a bridge."
+   },
+   {
+    "set_flag": "ch05_bridge_1"
+   }
+  ],
+  "regrow_2": [
+   {
+    "speaker": "narrator",
+    "text": "A wilted vine, drooping over the stream where a bridge used to be."
+   },
+   {
+    "speaker": "maris",
+    "text": "Come on, old friend. Remember how to reach."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Maris Regrows the vine. It stretches, thickens, and lies down across the water as a bridge."
+   },
+   {
+    "set_flag": "ch05_bridge_2"
+   }
+  ],
+  "blossom_look": [
+   {
+    "speaker": "narrator",
+    "text": "A huge old blossom, its petals half-closed."
+   },
+   {
+    "speaker": "maris",
+    "text": "Lumi should listen to this one."
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C.)"
+   }
+  ],
+  "blossom_done": [
+   {
+    "speaker": "narrator",
+    "text": "The blossom is open now, and smells of rain."
+   }
+  ],
+  "memory_1": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the blossom. Memory Touch."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The memory is very old. Humans and spirits, side by side, planting the first flowers here together. A woman says: \"We choose to share this. Nobody is made to.\""
+   },
+   {
+    "speaker": "lumi",
+    "text": "The Great Promise wasn't a wall. It was a garden."
+   },
+   {
+    "set_flag": "ch05_memory_1"
+   },
+   {
+    "goto": "memories_check"
+   }
+  ],
+  "memory_2": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the blossom. Memory Touch."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A young spirit in an Oathkeeper's grey coat kneels in the flowers, crying. Smoke on the horizon, a railway signal bent double. \"I couldn't hold the crossing. I couldn't hold it.\""
+   },
+   {
+    "speaker": "lumi",
+    "text": "1951... Something went very wrong at a crossing. He blamed himself."
+   },
+   {
+    "set_flag": "ch05_memory_2"
+   },
+   {
+    "goto": "memories_check"
+   }
+  ],
+  "memory_3": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi touches the blossom. Memory Touch."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Last week. A tired man in a grey coat, ink on his fingers, kneels in the same spot. He plants seeds very carefully. \"So nobody has to remember. So it never hurts like that again.\""
+   },
+   {
+    "speaker": "lumi",
+    "text": "It's the same person. Older. He's still crying, he's just doing it quietly."
+   },
+   {
+    "set_flag": "ch05_memory_3"
+   },
+   {
+    "goto": "memories_check"
+   }
+  ],
+  "memories_check": [
+   {
+    "set_flag": "ch05_memories_seen",
+    "if_flags": [
+     "ch05_memory_1",
+     "ch05_memory_2",
+     "ch05_memory_3"
+    ]
+   },
+   {
+    "speaker": "maris",
+    "text": "That's all three. And now we know what's at the Heart.",
+    "if_flags": [
+     "ch05_memory_1",
+     "ch05_memory_2",
+     "ch05_memory_3"
+    ]
+   }
+  ],
+  "sb02_heart_closed": [
+   {
+    "speaker": "maris",
+    "text": "The Heart is just past here. But let's hear what the blossoms remember first. We should know what we're facing."
+   }
+  ],
+  "sb02_puffs_beaten": [
+   {
+    "set_flag": "sb02_puffs_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Achoo!"
+   }
+  ],
+  "sb02_mixed_beaten": [
+   {
+    "set_flag": "sb02_mixed_beaten"
+   },
+   {
+    "speaker": "maris",
+    "text": "Poor things. They're only like that because the Heart is sick."
+   }
+  ],
+  "bee_spirit": [
+   {
+    "speaker": "bee_spirit",
+    "text": "Bzz. Queen's orders: fix the Heart, please. Thank you. Bzz."
+   },
+   {
+    "speaker": "elias",
+    "text": "Very organised."
+   }
+  ],
+  "C5_05_bloom_intro": [
+   {
+    "speaker": "narrator",
+    "text": "At the Heart, a flower the size of a house sways over the grass. Its petals are every colour and no colour."
+   },
+   {
+    "speaker": "forgetting_bloom",
+    "text": "Shh. Lie down. Forget the trains. Forget the river. Forget your names. It doesn't hurt if you forget."
+   },
+   {
+    "speaker": "reno",
+    "text": "I'm NOT forgetting trains!"
+   },
+   {
+    "speaker": "maris",
+    "text": "Everyone stay near me. I'll keep you standing."
+   }
+  ],
+  "C5_05_bloom_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Forgetting Bloom folds up, smaller, smaller, until it's a single little purple flower, the size it was always meant to be."
+   },
+   {
+    "speaker": "maris",
+    "text": "There. Lupa-bloom should be small. A little forgetting helps you sleep. A lot of it... does that."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Petal Brooch (Maris: MAG +2, RES +2)."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Something is tangled in the roots: a ticket stub, ink on its edge."
+   },
+   {
+    "key_item": "item_carnival_stub"
+   },
+   {
+    "speaker": "elias",
+    "text": "\"Pasar Malam Impian. Admit one.\" The midnight carnival. It never stays in one place."
+   },
+   {
+    "set_flag": "carnival_route_unlocked"
+   },
+   {
+    "goto": "C5_06_breathing"
+   }
+  ],
+  "C5_06_breathing": [
+   {
+    "speaker": "narrator",
+    "text": "The Heart of the Sanctuary breathes out. Colour runs back into the flowers like water into a dry stream."
+   },
+   {
+    "speaker": "maris",
+    "text": "He came here because he's hurting, and he thought forgetting would help. I'd like to tell him it doesn't. If we find him."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We'll find him."
+   },
+   {
+    "speaker": "reno",
+    "text": "A carnival! Do they have trains?"
+   },
+   {
+    "speaker": "elias",
+    "text": "They have a ghost train. I'm told it's terrible."
+   },
+   {
+    "speaker": "reno",
+    "text": "PERFECT."
+   },
+   {
+    "set_flag": "chapter_05_completed"
+   },
+   {
+    "set_flag": "chapter_06_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

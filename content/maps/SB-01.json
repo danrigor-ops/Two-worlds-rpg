@@ -1,0 +1,132 @@
+{
+ "id": "SB-01",
+ "name": "Old Forest Trail",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "T": "tree",
+  "=": "path",
+  ".": "grass",
+  "f": "flowers",
+  "v": "dead_vine",
+  "E": "exit"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTvvvTTTTTTTTTTTTTTTTT",
+  "TTTT...........TTTTTvvvTTTTTTTTTTTTTTTTT",
+  "T================f=====================T",
+  "T=====f======================f=========T",
+  "E======================================E",
+  "T======================================T",
+  "T==========f======================f====T",
+  "T======================f===============T",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_estate": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_flowers": {
+   "x": 38,
+   "y": 14,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_estate",
+   "x": 0,
+   "y": 14,
+   "to_map": "GT-01",
+   "to_spawn": "from_forest"
+  },
+  {
+   "id": "to_flowers",
+   "x": 39,
+   "y": 14,
+   "to_map": "SB-02",
+   "to_spawn": "from_trail",
+   "require": [
+    {
+     "if_flags": [
+      "ch05_maris_joined"
+     ],
+     "else_scene": "sb01_not_yet"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "maris_npc",
+   "member": "maris",
+   "character": "maris",
+   "x": 21,
+   "y": 12,
+   "facing": "down",
+   "talk": [
+    {
+     "if_leader": "reno",
+     "scene": "C5_02_free_maris"
+    },
+    {
+     "scene": "maris_tangled"
+    }
+   ]
+  },
+  {
+   "id": "thorns",
+   "character": "thorn_sprite",
+   "x": 30,
+   "y": 15,
+   "facing": "left",
+   "hide_if_flag": "sb01_thorns_beaten",
+   "encounter": {
+    "id": "sb01_thorns",
+    "outro_scene": "sb01_thorns_beaten"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C5_01_trail",
+   "if_not_flags": [
+    "ch05_trail_seen"
+   ]
+  }
+ ],
+ "movables": []
+}

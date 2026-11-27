@@ -1550,6 +1550,121 @@
     "accent": "#8ac88a",
     "legs": "#1a2a1a"
    }
+  },
+  "maris_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#6fbf4a",
+    "skin": "#c9e0a8",
+    "body": "#3a7a4a",
+    "accent": "#f2a0c8",
+    "legs": "#4a6a3a"
+   }
+  },
+  "thorn_sprite_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "leafling",
+    "hair": "#2f6b3a",
+    "skin": "#5d9e4b",
+    "body": "#3a5a2a",
+    "accent": "#c94f4f",
+    "legs": "#2f4a28"
+   }
+  },
+  "pollen_puff_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#f2d45c",
+    "skin": "#f4ecd2",
+    "body": "#e8d080",
+    "accent": "#f2a0c8",
+    "legs": "#c9b060"
+   }
+  },
+  "forgetting_bloom_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "monarch",
+    "hair": "#8a6ad8",
+    "skin": "#d8c8f0",
+    "body": "#6a4aa8",
+    "accent": "#f4ecd2",
+    "legs": "#4a3a7a"
+   }
+  },
+  "bee_spirit_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "moth",
+    "hair": "#f2d45c",
+    "skin": "#2b2420",
+    "body": "#e8b84a",
+    "accent": "#2b2420",
+    "legs": "#2b2420"
+   }
   }
  },
  "characters": {
@@ -1619,6 +1734,11 @@
   "titis": "titis_overworld",
   "fear_shadow": "fear_shadow_overworld",
   "latex_lurker": "latex_lurker_overworld",
-  "grove_shade": "grove_shade_overworld"
+  "grove_shade": "grove_shade_overworld",
+  "maris": "maris_overworld",
+  "thorn_sprite": "thorn_sprite_overworld",
+  "pollen_puff": "pollen_puff_overworld",
+  "forgetting_bloom": "forgetting_bloom_overworld",
+  "bee_spirit": "bee_spirit_overworld"
  }
 }

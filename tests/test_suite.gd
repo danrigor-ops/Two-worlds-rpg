@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 21
+const SECTIONS := 22
 
 
 func check(cond: bool, label: String) -> void:
@@ -97,6 +97,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 4: The Rubber Grove at Midnight")
 	await _test_chapter4(gs, im)
+
+	print("Chapter 5: A Thousand Flowers, One Promise")
+	await _test_chapter5(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -2081,4 +2084,79 @@ func _test_chapter4(gs: Node, im: Node) -> void:
 	check(["seribu_bunga_route_unlocked", "chapter_04_completed", "chapter_05_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C04-001", "C04-002", "C04-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C04-001 to C04-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 4")
+	_sections_done += 1
+
+
+func _test_chapter5(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_unlocked", "ch04_estate_seen",
+		"ch04_shadow_beaten", "ch04_whisper_learned"], 1300, "GT-01", "from_forest")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(37, 23)), "right")
+	await _press_for("move_right", 40)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "SB-01", "C5-01: the old forest trail")
+	await _finish_dialogue(im)
+	await _tap("swap")
+	await _talk(scene, Vector2i(21, 12), im)
+	check(not gs.has_member("maris"), "Lumi can't pull the dead vines")
+	await _tap("swap")
+	await _talk(scene, Vector2i(21, 12), im)
+	check(gs.has_member("maris") and gs.get_flag("ch05_maris_joined") and not scene.members.has("maris"), "C5-02: Maris joins and travels along")
+	check(gs.active_party() == ["reno", "lumi", "elias"] and gs.party().size() == 4, "four members: Maris starts in reserve")
+	var rows: Array = PauseMenu.party_rows()
+	check(rows[3]["text"].begins_with("(R)") and rows[3].has("action"), "the Party menu marks the reserve and can move her up")
+	rows[3]["action"].call()
+	check(gs.active_party().has("maris") and not gs.active_party().has("elias"), "Formation: Maris moves to the front, Elias to reserve")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(37, 14)), "right")
+	await _press_for("move_right", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "SB-02", "the Thousand Flowers")
+	await _finish_dialogue(im)
+	check(not scene.map.is_walkable(Vector2i(15, 8)), "the stream has no bridge")
+	await _face_and_press(scene, Vector2i(12, 8), "right", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch05_bridge_1") and scene.map.is_walkable(Vector2i(15, 8)) and scene.map.is_walkable(Vector2i(13, 8)), "PZ-501: Maris Regrows a vine bridge")
+	await _talk(scene, Vector2i(6, 4), im)
+	check(not gs.get_flag("ch05_memory_1"), "the blossom needs Lumi")
+	await _tap("swap")
+	await _talk(scene, Vector2i(6, 4), im)
+	await _talk(scene, Vector2i(23, 24), im)
+	await _face_and_press(scene, Vector2i(28, 20), "right", im)
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(40, 6), im)
+	check(gs.get_flag("ch05_memories_seen") and gs.quest_state("C05-002") in ["completed", "rewarded"], "PZ-502: three memories, the Promise and the crying Oathkeeper")
+	await _tap("swap")
+
+	# Bloom Heal in a fight.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(22, 13)), "up")
+	await _press_for("move_up", 40)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["skill", "bloom_heal", "attack"])
+	check(blog.size() > 2, "the Pollen Puff fight ran")
+	await _wait(3)
+	await _finish_dialogue(im)
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(45, 14)), "right")
+	await _press_for("move_right", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "SB-03", "the Heart of the Sanctuary")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 9)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")   # walked up to it: A starts the fight
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Forgetting Bloom fight starts")
+	blog = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "skill", "bloom_heal", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("heal")), "Maris heals in the boss fight")
+	check(blog.any(func(l: String) -> bool: return l.contains("summon thorn_sprite")), "the Bloom calls Thorn Sprites")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch05_bloom_beaten") and gs.has_key_item("item_carnival_stub") and gs.equip_bonus("maris").get("res", 0) == 2, "BOSS-501: the Petal Brooch and a carnival ticket")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(["carnival_route_unlocked", "chapter_05_completed", "chapter_06_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C05-001", "C05-002", "C05-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C05-001 to C05-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 5")
 	_sections_done += 1

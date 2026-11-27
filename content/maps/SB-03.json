@@ -1,0 +1,93 @@
+{
+ "id": "SB-03",
+ "name": "Heart of the Sanctuary",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 24,
+ "legend": {
+  "T": "tree",
+  "f": "flowers",
+  ".": "grass",
+  "E": "exit"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "Tfffffffff..........fffffffffT",
+  "Tfffffffff..........fffffffffT",
+  "Tfffffffff..........fffffffffT",
+  "Tfffffffff..........fffffffffT",
+  "Tfffffffff..........fffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "EffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TffffffffffffffffffffffffffffT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 12,
+   "facing": "right"
+  },
+  "from_flowers": {
+   "x": 1,
+   "y": 12,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_flowers",
+   "x": 0,
+   "y": 12,
+   "to_map": "SB-02",
+   "to_spawn": "from_heart"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "bloom",
+   "character": "forgetting_bloom",
+   "x": 15,
+   "y": 5,
+   "facing": "down",
+   "hide_if_flag": "ch05_bloom_beaten",
+   "encounter": {
+    "id": "bloom_boss",
+    "intro_scene": "C5_05_bloom_intro",
+    "outro_scene": "C5_05_bloom_outro"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C5_06_breathing",
+   "if_flags": [
+    "ch05_bloom_beaten"
+   ],
+   "if_not_flags": [
+    "chapter_05_completed"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#e8c8e8",
+ "tint_until_flag": "ch05_bloom_beaten"
+}

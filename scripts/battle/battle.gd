@@ -256,7 +256,9 @@ func _hero_turn(u: Dictionary) -> bool:
 					continue
 				var sk: Dictionary = _skills[sid]
 				combat.spend_mp(u, int(sk["mp"]))
-				if sk.get("target", "one") == "all":
+				if sk["kind"] == "heal":
+					await _heal(u, sk)
+				elif sk.get("target", "one") == "all":
 					await _attack_all(u, sk["kind"], float(sk["mult"]), "%s uses %s!" % [u["name"], sk["name"]])
 				else:
 					await _attack(u, sk["kind"], float(sk["mult"]), "%s uses %s!" % [u["name"], sk["name"]])
@@ -324,6 +326,25 @@ func _attack(u: Dictionary, kind: String, mult: float, text: String) -> void:
 	await _say("%s %d damage!%s" % [_judgement_text(judgement), dmg, " (It's guarding.)" if target["guarding"] else ""])
 	if target["hp"] <= 0:
 		_sprites[target["id"]].modulate.a = 0.25
+
+
+## Healing skills (Maris): MAG x mult HP to the weakest ally, or to everyone
+## standing with target "all". No timing cue: healing always lands in full.
+func _heal(u: Dictionary, sk: Dictionary) -> void:
+	combat.spend_token(u)
+	var allies := combat.side("hero")
+	var targets: Array = allies
+	if sk.get("target", "one") != "all":
+		allies.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return float(a["hp"]) / a["max_hp"] < float(b["hp"]) / b["max_hp"])
+		targets = [allies[0]]
+	var amount := roundi(float(u["mag"]) * float(sk["mult"]))
+	var parts: PackedStringArray = []
+	for t: Dictionary in targets:
+		var before := int(t["hp"])
+		t["hp"] = mini(int(t["max_hp"]), before + amount)
+		parts.append("%s +%d" % [t["name"], int(t["hp"]) - before])
+		_log("%s heal %s %d" % [u["id"], t["id"], int(t["hp"]) - before])
+	await _say("%s uses %s! %s HP." % [u["name"], sk["name"], ", ".join(parts)])
 
 
 ## Area skills (Ripple Echo): one cue, every standing enemy is hit.
