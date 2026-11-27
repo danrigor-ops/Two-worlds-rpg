@@ -1,0 +1,405 @@
+{
+ "id": "RV-02",
+ "name": "Mangrove Walk",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 48,
+ "height": 30,
+ "legend": {
+  "M": "mangrove",
+  ".": "grass",
+  "W": "water",
+  "m": "mud",
+  "P": "tide_post",
+  "E": "exit",
+  "f": "flowers"
+ },
+ "rows": [
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM..................M",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM.......f..........M",
+  "MMMMMMMMMPMMMMMPMMMMMMMMPMMMM.P................M",
+  "M..........mmmm..WWWWWW..mmmm..................M",
+  "E..........mmmm..WWWWWW..mmmm..................E",
+  "M..........mmmm..WWWWWW..mmmm..................M",
+  "M..........mmmm..WWWWWW..mmmm..................M",
+  "MM........MMMMMMMMMMMMMMMMMMM............f.....M",
+  "MM........MMMMMMMMMMMMMMMMMMM..................M",
+  "MM..f.....MMMMMMMMMMMMMMMMMMM..................M",
+  "MM........MMMMMMMMMMMMMMMMMMMWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_landing": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_village": {
+   "x": 46,
+   "y": 14,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_landing",
+   "x": 0,
+   "y": 14,
+   "to_map": "RV-01",
+   "to_spawn": "from_mangrove"
+  },
+  {
+   "id": "to_village",
+   "x": 47,
+   "y": 14,
+   "to_map": "RV-03",
+   "to_spawn": "from_mangrove",
+   "require": [
+    {
+     "if_flags": [
+      "ch02_verse_1"
+     ],
+     "else_scene": "rv02_lumpur_calls"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "pak_lumpur",
+   "character": "pak_lumpur",
+   "x": 36,
+   "y": 14,
+   "facing": "left",
+   "talk": [
+    {
+     "if_flags": [
+      "ch02_verse_1"
+     ],
+     "scene": "lumpur_after"
+    },
+    {
+     "scene": "C2_02_lumpur"
+    }
+   ]
+  },
+  {
+   "id": "tangle",
+   "character": "driftnet_tangle",
+   "x": 6,
+   "y": 18,
+   "facing": "up",
+   "hide_if_flag": "rv02_tangle_beaten",
+   "encounter": {
+    "id": "rv02_tangle",
+    "outro_scene": "rv02_tangle_beaten"
+   }
+  },
+  {
+   "id": "wisps",
+   "character": "silt_wisp",
+   "x": 33,
+   "y": 17,
+   "facing": "left",
+   "hide_if_flag": "rv02_wisps_beaten",
+   "encounter": {
+    "id": "rv02_wisps",
+    "outro_scene": "rv02_wisps_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "marker_1",
+   "x": 9,
+   "y": 12,
+   "talk": [
+    {
+     "if_not_flags": [
+      "ch02_tide_call_learned"
+     ],
+     "scene": "C2_02_tide_call"
+    },
+    {
+     "scene": "tide_toggle"
+    }
+   ]
+  },
+  {
+   "id": "marker_2",
+   "x": 15,
+   "y": 12,
+   "talk": [
+    {
+     "if_not_flags": [
+      "ch02_tide_call_learned"
+     ],
+     "scene": "C2_02_tide_call"
+    },
+    {
+     "scene": "tide_toggle"
+    }
+   ]
+  },
+  {
+   "id": "marker_3",
+   "x": 24,
+   "y": 12,
+   "talk": [
+    {
+     "if_not_flags": [
+      "ch02_tide_call_learned"
+     ],
+     "scene": "C2_02_tide_call"
+    },
+    {
+     "scene": "tide_toggle"
+    }
+   ]
+  },
+  {
+   "id": "marker_4",
+   "x": 30,
+   "y": 12,
+   "talk": [
+    {
+     "if_not_flags": [
+      "ch02_tide_call_learned"
+     ],
+     "scene": "C2_02_tide_call"
+    },
+    {
+     "scene": "tide_toggle"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "rv02_tide_high"
+   ],
+   "tile": "water",
+   "cells": [
+    [
+     11,
+     13
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     13
+    ],
+    [
+     14,
+     13
+    ],
+    [
+     25,
+     13
+    ],
+    [
+     26,
+     13
+    ],
+    [
+     27,
+     13
+    ],
+    [
+     28,
+     13
+    ],
+    [
+     11,
+     14
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     14
+    ],
+    [
+     25,
+     14
+    ],
+    [
+     26,
+     14
+    ],
+    [
+     27,
+     14
+    ],
+    [
+     28,
+     14
+    ],
+    [
+     11,
+     15
+    ],
+    [
+     12,
+     15
+    ],
+    [
+     13,
+     15
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     25,
+     15
+    ],
+    [
+     26,
+     15
+    ],
+    [
+     27,
+     15
+    ],
+    [
+     28,
+     15
+    ],
+    [
+     11,
+     16
+    ],
+    [
+     12,
+     16
+    ],
+    [
+     13,
+     16
+    ],
+    [
+     14,
+     16
+    ],
+    [
+     25,
+     16
+    ],
+    [
+     26,
+     16
+    ],
+    [
+     27,
+     16
+    ],
+    [
+     28,
+     16
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "rv02_tide_high"
+   ],
+   "tile": "log",
+   "cells": [
+    [
+     17,
+     14
+    ],
+    [
+     18,
+     14
+    ],
+    [
+     19,
+     14
+    ],
+    [
+     20,
+     14
+    ],
+    [
+     21,
+     14
+    ],
+    [
+     22,
+     14
+    ]
+   ]
+  }
+ ],
+ "triggers": [
+  {
+   "cells": [
+    [
+     29,
+     13
+    ],
+    [
+     29,
+     14
+    ],
+    [
+     29,
+     15
+    ],
+    [
+     29,
+     16
+    ]
+   ],
+   "scene": "pz201_crossed",
+   "if_not_flags": [
+    "pz201_mangrove_crossed"
+   ]
+  }
+ ],
+ "on_enter": [
+  {
+   "scene": "C2_02_mangrove",
+   "if_not_flags": [
+    "ch02_mangrove_seen"
+   ]
+  }
+ ],
+ "movables": []
+}

@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 17
+const SECTIONS := 18
 
 
 func check(cond: bool, label: String) -> void:
@@ -85,6 +85,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 1 part C: the Veil train and the ending")
 	await _test_chapter1_c(gs, im)
+
+	print("Chapter 2 part A: the river, the tides and the first two verses")
+	await _test_chapter2_a(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1499,4 +1502,128 @@ func _test_chapter1_c(gs: Node, im: Node) -> void:
 		root.remove_child(end_screen)
 		end_screen.free()
 	saves.delete_all()
+	_sections_done += 1
+
+
+func _test_chapter2_a(gs: Node, im: Node) -> void:
+	# Soaked: physical hits treat the target's DEF as 30% lower.
+	var hit_by := Combat.make_unit("h", "H", "enemy", {"max_hp": 40, "atk": 10, "def": 5, "mag": 5, "res": 5, "spd": 5})
+	var wet := Combat.make_unit("w", "W", "hero", {"max_hp": 40, "atk": 5, "def": 10, "mag": 5, "res": 10, "spd": 5})
+	check(Combat.base_damage("physical", hit_by, wet) == 10, "dry: 2*10 - 10")
+	Combat.add_status(wet, "soaked", 2)
+	check(Combat.base_damage("physical", hit_by, wet) == 13, "Soaked: DEF 10 counts as 7 for physical hits")
+	check(Combat.base_damage("magical", hit_by, wet) == 1, "Soaked doesn't touch RES")
+
+	var saves: Node = root.get_node("Saves")
+	saves.delete_all()
+	gs.new_game()
+	gs.data["settings"]["instant_text"] = true
+	for f in ["prologue_completed", "lumi_joined", "spirit_cyclone_learned", "ch01_guardian_bloom_learned", "ch01_gentle_float_unlocked",
+			"chapter_01_completed", "chapter_02_unlocked", "river_route_unlocked", "ch01_arrived_bandar_senja"]:
+		gs.set_flag(f)
+	gs.add_member("lumi")
+	for k in ["item_conductors_whistle", "item_lantern"]:
+		gs.add_key_item(k)
+	gs.gain_xp("reno", 300)
+	gs.gain_xp("lumi", 300)
+	gs.set_spawn("BS-01", "from_river")
+	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
+	scene.battle_auto_judge = "perfect"
+	scene.battle_speed = 20.0
+	root.add_child(scene)
+	tree.current_scene = scene
+	await _wait(3)
+
+	# BS-01's south road leads down to the river.
+	await _press_for("move_down", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-01" and im.current_mode() == im.Mode.DIALOGUE, "C2-01 plays at Senja River Landing")
+	await _finish_dialogue(im)
+	await _wait(3)
+	check(gs.get_flag("ch02_started") and gs.get_flag("ch02_song_quest_started"), "the Kingfisher sisters ask for help")
+	check(gs.quest_state("C02-001") in ["completed", "rewarded"] and gs.quest_state("C02-002") == "active", "C02-001 done, C02-002 The Tide Song begins")
+	check(scene._tint != null and scene._tint.color != Color.WHITE, "the landing is dark until the Undertow is calmed")
+	var auto: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(saves.save_dir + "autosave.json"))
+	check(auto["state"]["map_id"] == "RV-01", "autosave on arrival at the river")
+
+	# RV-02: PZ-201, the mangrove tides.
+	scene.warp("RV-02", "from_landing")
+	await _wait(2)
+	await _finish_dialogue(im)
+	check(scene._tint == null or scene._tint.color == Color.WHITE, "the tint stays on the landing")
+	check(scene.map.is_walkable(Vector2i(12, 14)) and not scene.map.is_walkable(Vector2i(18, 14)), "low tide: mud path, deep channel")
+	await _talk(scene, Vector2i(9, 12), im)
+	check(gs.get_flag("ch02_tide_call_learned") and gs.get_flag("rv02_tide_high"), "Tide Call learned at the first marker; the tide rises")
+	check(not scene.map.is_walkable(Vector2i(12, 14)) and scene.map.is_walkable(Vector2i(18, 14)), "high tide: mud floods, logs float")
+	await _talk(scene, Vector2i(9, 12), im)
+	check(not gs.get_flag("rv02_tide_high") and scene.map.is_walkable(Vector2i(12, 14)), "the whistle sends the tide back down")
+	# Flooding the mud under the party puts them back on dry land.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(12, 14)), "right")
+	await _wait(3)
+	gs.set_flag("rv02_tide_high")
+	await _wait(2)
+	check(scene.map.is_walkable(_cell_of(scene.leader())), "a rising tide never strands the party in deep water")
+	gs.set_flag("rv02_tide_high", false)
+	await _wait(2)
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(10, 14)), "right")
+	await _press_for("move_right", 90)
+	check(_cell_of(scene.leader()) == Vector2i(16, 14), "low tide: across the mud to the first islet, stopped by the channel")
+	await _talk(scene, Vector2i(15, 12), im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(16, 14)), "right")
+	await _press_for("move_right", 160)
+	check(_cell_of(scene.leader()) == Vector2i(24, 14), "high tide: over the logs to the second islet, stopped by flooded mud")
+	await _talk(scene, Vector2i(24, 12), im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(24, 14)), "right")
+	await _press_for("move_right", 90)
+	await _wait(2)
+	check(im.current_mode() == im.Mode.DIALOGUE, "reaching Pak Lumpur's island plays a line")
+	await _finish_dialogue(im)
+	check(gs.get_flag("pz201_mangrove_crossed"), "PZ-201 solved")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(44, 14)), "right")
+	await _press_for("move_right", 60)
+	await _wait(2)
+	check(scene.map.id == "RV-02" and im.current_mode() == im.Mode.DIALOGUE, "Pak Lumpur won't let us leave without the verse")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(36, 14), im)
+	check(gs.has_key_item("item_tide_verse_1") and gs.get_flag("ch02_verse_1"), "C2-02: Pak Lumpur sings the first verse")
+
+	# RV-03: Kampung Air, Old Pole and Ripple Echo.
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(45, 14)), "right")
+	await _press_for("move_right", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "RV-03", "east through the roots to Kampung Air")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(21, 6), im)
+	check(not gs.get_flag("ch02_verse_2"), "Old Pole only remembers a feeling for Reno")
+	await _tap("swap")
+	await _talk(scene, Vector2i(21, 6), im)
+	check(gs.has_key_item("item_tide_verse_2") and gs.get_flag("ch02_ripple_learned"), "C2-03: Lumi's Memory Touch finds verse 2 and Ripple Echo")
+	await _tap("swap")
+	await _face_and_press(scene, Vector2i(8, 21), "left", im)
+	await _wait(2)
+	check(im.current_mode() == im.Mode.DIALOGUE, "Mak Siput's stall")
+	await _finish_dialogue(im)
+	await _wait(3)
+	check(scene.shop.visible, "her stall opens")
+	scene.shop.close()
+	await _wait(2)
+
+	# Back in the mangroves: Ripple Echo hits both Silt Wisps.
+	scene.warp("RV-02", "from_village")
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(31, 17)), "right")
+	await _press_for("move_right", 30)
+	var blog: Array[String] = await _run_battle_with(scene, im, ["skill", "ripple_echo", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("lumi") and l.ends_with("(all)")), "Ripple Echo hits every enemy")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("rv02_wisps_beaten"), "the Silt Wisps settle")
+	check(gs.quest_state("C02-002") == "active", "two verses so far; the third is in part B")
+
+	scene.queue_free()
+	await _wait(2)
 	_sections_done += 1

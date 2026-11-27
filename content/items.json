@@ -134,6 +134,30 @@
     "mag": 3
    },
    "text": "A hook for the lantern. Lumi carries it: MAG +3."
+  },
+  "item_river_rice_cake": {
+   "name": "River Rice Cake",
+   "kind": "consumable",
+   "heal_hp": 45,
+   "price_dp": 3,
+   "text": "Wrapped in a leaf that smells of the river. Restores 45 HP."
+  },
+  "item_lotus_tea": {
+   "name": "Lotus Tea",
+   "kind": "consumable",
+   "heal_mp": 18,
+   "price_dp": 3,
+   "text": "Pale and calm. Restores 18 MP."
+  },
+  "item_tide_verse_1": {
+   "name": "Tide Song, Verse 1",
+   "kind": "key",
+   "text": "From Pak Lumpur: \"Low water, show the way.\""
+  },
+  "item_tide_verse_2": {
+   "name": "Tide Song, Verse 2",
+   "kind": "key",
+   "text": "From Old Pole: \"Many voices, one river.\""
   }
  }
 }

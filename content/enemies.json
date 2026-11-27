@@ -1,6 +1,6 @@
 {
  "status": "WORKING_PROPOSAL",
- "note": "Prologue and Chapter 1 stats from 04_GAMEPLAY_SYSTEMS.md and docs/chapter-01/data/chapter-01-battles.json. Not balanced. Attack fields: kind, mult, target (one/all), telegraph (lands next turn), applies + turns (status), support haste, guard. Phase fields: above, attacks, summon (one at a time, no XP), enter_text, ensure_mp, teach_flag, hint. end_below ends a story boss at an HP share.",
+ "note": "Prologue, Chapter 1 and Chapter 2 stats from 04_GAMEPLAY_SYSTEMS.md and docs/chapter-01/data/chapter-01-battles.json. Not balanced. Attack fields: kind, mult, target (one/all), telegraph (lands next turn), applies + turns (status), support haste, guard. Phase fields: above, attacks, summon (one at a time, no XP), enter_text, ensure_mp, teach_flag, hint. end_below ends a story boss at an HP share.",
  "enemies": {
   "leafling": {
    "name": "Leafling",
@@ -386,6 +386,52 @@
      "enter_text": "Conductor: Final stop. Everyone off. Everyone... nowhere."
     }
    ]
+  },
+  "driftnet_tangle": {
+   "name": "Driftnet Tangle",
+   "character": "driftnet_tangle",
+   "stats": {
+    "level": 6,
+    "max_hp": 80,
+    "atk": 16,
+    "def": 12,
+    "mag": 6,
+    "res": 10,
+    "spd": 7
+   },
+   "xp": 18,
+   "attacks": [
+    {
+     "name": "Snare",
+     "kind": "physical",
+     "mult": 1.0,
+     "applies": "slow",
+     "turns": 2
+    }
+   ]
+  },
+  "silt_wisp": {
+   "name": "Silt Wisp",
+   "character": "silt_wisp",
+   "stats": {
+    "level": 6,
+    "max_hp": 58,
+    "atk": 8,
+    "def": 9,
+    "mag": 17,
+    "res": 14,
+    "spd": 16
+   },
+   "xp": 17,
+   "attacks": [
+    {
+     "name": "Mud Splash",
+     "kind": "magical",
+     "mult": 0.9,
+     "applies": "soaked",
+     "turns": 2
+    }
+   ]
   }
  },
  "encounters": {
@@ -491,6 +537,17 @@
    "boss": true,
    "win_flags": [
     "ch01_conductor_calmed"
+   ]
+  },
+  "rv02_tangle": {
+   "enemies": [
+    "driftnet_tangle"
+   ]
+  },
+  "rv02_wisps": {
+   "enemies": [
+    "silt_wisp",
+    "silt_wisp"
    ]
   }
  }

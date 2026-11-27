@@ -1,0 +1,150 @@
+{
+ "id": "RV-03",
+ "name": "Kampung Air (spirit side)",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "W": "water",
+  "M": "mangrove",
+  "j": "jetty",
+  "H": "house",
+  "E": "exit",
+  "S": "sign"
+ },
+ "rows": [
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWHHHHHHHHWWWWHHHHHHHHWWWHHHHHHHWWWWW",
+  "WWWWWHHHHHHHHWWWWHHHHHHHHWWWHHHHHHHWWWWW",
+  "WWWWWWWWjjWWWWWWWHHHHHHHHWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WWWWWWWWjjWWWWWWWWWWjjWWWWWWWWjjWWWWWWWW",
+  "WjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjS",
+  "EjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjM",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWWWWjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWjjjjjjjjWWWWWWWWWWWWjjWWWWWWWWWWWW",
+  "WWWWWWWWWHHHHHHHHWWWWWWWWWjjjjjjWWWWWWWW",
+  "WWWWWWWWWHHHHHHHHWWWWWWHHHHHHHHWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWHHHHHHHHWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+  "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 14,
+   "facing": "right"
+  },
+  "from_mangrove": {
+   "x": 1,
+   "y": 14,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_mangrove",
+   "x": 0,
+   "y": 14,
+   "to_map": "RV-02",
+   "to_spawn": "from_village"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "old_pole",
+   "character": "old_pole",
+   "x": 21,
+   "y": 6,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch02_verse_2"
+     ],
+     "scene": "pole_after"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C2_03_old_pole"
+    },
+    {
+     "scene": "pole_reno"
+    }
+   ]
+  },
+  {
+   "id": "mak_siput",
+   "character": "mak_siput",
+   "x": 7,
+   "y": 21,
+   "facing": "right",
+   "talk": [
+    {
+     "scene": "siput_stall"
+    }
+   ]
+  },
+  {
+   "id": "river_spirit_a",
+   "character": "river_spirit",
+   "x": 30,
+   "y": 8,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "kampung_spirit_a"
+    }
+   ]
+  },
+  {
+   "id": "river_spirit_b",
+   "character": "river_spirit",
+   "x": 27,
+   "y": 19,
+   "facing": "up",
+   "talk": [
+    {
+     "scene": "kampung_spirit_b"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [
+  {
+   "x": 39,
+   "y": 13,
+   "lines": [
+    "TO THE SUNKEN JETTY.",
+    "The boardwalk past here is still under the river. (The jetty comes in the next part of Chapter 2.)"
+   ]
+  }
+ ],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C2_03_village",
+   "if_not_flags": [
+    "ch02_village_seen"
+   ]
+  }
+ ],
+ "movables": []
+}

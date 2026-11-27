@@ -1,0 +1,160 @@
+{
+ "id": "RV-01",
+ "name": "Senja River Landing",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "tint": "#7a86c8",
+ "tint_until_flag": "ch02_undertow_calmed",
+ "legend": {
+  "T": "tree",
+  ".": "grass",
+  "=": "path",
+  "W": "water",
+  "j": "jetty",
+  "H": "house",
+  "E": "exit",
+  "S": "sign"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTT=TTTTTTTTTTTTTTTTTTT",
+  "TT..................=.................TT",
+  "TT..................=.................TT",
+  "TT...HHH............=.........HHH.....TT",
+  "TT...HHH............=.........HHH.....TT",
+  "TT..................=.................TT",
+  "TT..................=.................TT",
+  "TT........HHH.......=.................TT",
+  "TT........HHH.......=.................TT",
+  "TT..................=.................TT",
+  "TT..................=...S.............TT",
+  "TT..................===================E",
+  "TT..................=.................TT",
+  "TT..................=.................TT",
+  "TT....................................TT",
+  "TTWWWWWWjjjjjjjjjjjjjjjjjjjjjjjjjWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWjjjjWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT",
+  "TTWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 2,
+   "facing": "down"
+  },
+  "from_station": {
+   "x": 20,
+   "y": 2,
+   "facing": "down"
+  },
+  "from_mangrove": {
+   "x": 37,
+   "y": 12,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_station",
+   "x": 20,
+   "y": 0,
+   "to_map": "BS-01",
+   "to_spawn": "from_river"
+  },
+  {
+   "id": "to_mangrove",
+   "x": 39,
+   "y": 12,
+   "to_map": "RV-02",
+   "to_spawn": "from_landing"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "fisherman",
+   "character": "fisherman",
+   "x": 19,
+   "y": 21,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_rv_fisherman"
+    }
+   ]
+  },
+  {
+   "id": "fisher_friend",
+   "character": "fisher_friend",
+   "x": 20,
+   "y": 21,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_rv_friend"
+    }
+   ]
+  },
+  {
+   "id": "kilat",
+   "character": "kilat",
+   "x": 23,
+   "y": 14,
+   "facing": "down",
+   "show_if_flag": "ch02_started",
+   "talk": [
+    {
+     "scene": "kingfishers_hint"
+    }
+   ]
+  },
+  {
+   "id": "kilau",
+   "character": "kilau",
+   "x": 25,
+   "y": 14,
+   "facing": "down",
+   "show_if_flag": "ch02_started",
+   "talk": [
+    {
+     "scene": "kingfishers_hint"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [
+  {
+   "x": 24,
+   "y": 11,
+   "lines": [
+    "SENJA RIVER LANDING. Mind the tide.",
+    "(Someone has scratched a question mark after \"tide\".)"
+   ]
+  }
+ ],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C2_01_arrive",
+   "if_not_flags": [
+    "ch02_started"
+   ]
+  }
+ ],
+ "movables": []
+}

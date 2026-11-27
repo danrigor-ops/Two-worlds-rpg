@@ -1,0 +1,498 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 2 part A (C2-01 to C2-03) from docs/chapter-02/CHAPTER_02_PRODUCTION.md section 5. Human lines are overheard; humans can't see or hear the spirits.",
+ "speakers": {
+  "kilat": {
+   "name": "Kilat",
+   "character": "kilat"
+  },
+  "kilau": {
+   "name": "Kilau",
+   "character": "kilau"
+  },
+  "pak_lumpur": {
+   "name": "Pak Lumpur",
+   "character": "pak_lumpur"
+  },
+  "old_pole": {
+   "name": "Old Pole",
+   "character": "old_pole"
+  },
+  "mak_siput": {
+   "name": "Mak Siput",
+   "character": "mak_siput"
+  },
+  "river_spirit": {
+   "name": "River spirit",
+   "character": "river_spirit"
+  },
+  "fisher_friend": {
+   "name": "Fisherman's friend",
+   "character": "fisher_friend"
+  }
+ },
+ "scenes": {
+  "bs01_south_closed": [
+   {
+    "speaker": "narrator",
+    "text": "Steps lead down past the station toward the sound of water."
+   },
+   {
+    "speaker": "reno",
+    "text": "Later! We've got a train to catch first."
+   }
+  ],
+  "C2_01_arrive": [
+   {
+    "set_flag": "ch02_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Night at the river below Bandar Senja. The water is flowing uphill, past the jetty, the wrong way."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "(to his friend) Third night running. Nets come up full of old things. A spoon from my grandmother's house!"
+   },
+   {
+    "speaker": "fisher_friend",
+    "text": "The tide tables must be printed wrong."
+   },
+   {
+    "speaker": "fisherman",
+    "text": "Tide tables don't make spoons."
+   },
+   {
+    "speaker": "reno",
+    "text": "The water's going the wrong way! Is it lost?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Rivers don't get lost."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Two kingfisher spirits flash down and land on the rail, one blue, one teal."
+   },
+   {
+    "speaker": "kilat",
+    "text": "You're the train kids—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—with the Conductor's whistle!"
+   },
+   {
+    "speaker": "kilat",
+    "text": "I'm Kilat. That's Kilau. Nenek Arus needs—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—help. She's the river's guardian, and she's forgetting the Tide Song."
+   },
+   {
+    "speaker": "kilat",
+    "text": "Without the song the river can't remember—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—which way is home."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Where do we find it?"
+   },
+   {
+    "speaker": "kilat",
+    "text": "Three verses. Pak Lumpur in the Mangrove Walk has one, east of here—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—Old Pole in Kampung Air has another. And the last one sank with the old jetty."
+   },
+   {
+    "speaker": "kilat",
+    "text": "Oh! The carved posts in the mangroves are tide markers. Blow your whistle at one—"
+   },
+   {
+    "speaker": "kilau",
+    "text": "—and hum what we sing. Listen: hoo-ee, hoo-oo."
+   },
+   {
+    "speaker": "reno",
+    "text": "Hoo-ee, hoo-oo. Got it."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You sang it flat."
+   },
+   {
+    "set_flag": "ch02_song_quest_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: find the three verses of the Tide Song."
+   }
+  ],
+  "kingfishers_hint": [
+   {
+    "speaker": "kilat",
+    "text": "Old Pole is in Kampung Air, past the mangroves—",
+    "if_flags": [
+     "ch02_verse_1"
+    ],
+    "if_not_flags": [
+     "ch02_verse_2"
+    ]
+   },
+   {
+    "speaker": "kilau",
+    "text": "—he only lets Lumi hear him properly.",
+    "if_flags": [
+     "ch02_verse_1"
+    ],
+    "if_not_flags": [
+     "ch02_verse_2"
+    ]
+   },
+   {
+    "speaker": "kilat",
+    "text": "Two verses! The last one is under the old jetty—",
+    "if_flags": [
+     "ch02_verse_2"
+    ]
+   },
+   {
+    "speaker": "kilau",
+    "text": "—but the boardwalk there is still flooded. Soon, soon.",
+    "if_flags": [
+     "ch02_verse_2"
+    ]
+   },
+   {
+    "speaker": "kilat",
+    "text": "Pak Lumpur's island is east, in the Mangrove Walk—",
+    "if_not_flags": [
+     "ch02_verse_1"
+    ]
+   },
+   {
+    "speaker": "kilau",
+    "text": "—blow the whistle at the carved posts. High tide, low tide!",
+    "if_not_flags": [
+     "ch02_verse_1"
+    ]
+   }
+  ],
+  "human_rv_fisherman": [
+   {
+    "speaker": "fisherman",
+    "text": "(muttering, mending a net) A toy boat. A bicycle bell. Who loses a bicycle bell in a river?"
+   },
+   {
+    "speaker": "reno",
+    "text": "He can't hear us. Still weird."
+   }
+  ],
+  "human_rv_friend": [
+   {
+    "speaker": "fisher_friend",
+    "text": "(to the fisherman) My father said the river ran backwards once before. Nobody believed him either."
+   }
+  ],
+  "C2_02_mangrove": [
+   {
+    "set_flag": "ch02_mangrove_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Mangrove roots knot over the water. A strip of mud runs east, then disappears into a deep channel."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Look, a carved post. Wave lines, like the kingfishers said."
+   },
+   {
+    "speaker": "reno",
+    "text": "A tide marker! Let's try the whistle."
+   }
+  ],
+  "C2_02_tide_call": [
+   {
+    "speaker": "lumi",
+    "text": "Hoo-ee, hoo-oo..."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno blows the Conductor's Whistle on the last note. Far off, the river answers."
+   },
+   {
+    "set_flag": "ch02_tide_call_learned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Learned Tide Call! At a tide marker, press A to switch between low and high tide."
+   },
+   {
+    "toggle_flag": "rv02_tide_high"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The water rises. The mud path is gone and logs bob up in the deep channel."
+   },
+   {
+    "speaker": "reno",
+    "text": "We can boss the river around now?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "We can ask the river nicely. Blow again and it goes back down."
+   }
+  ],
+  "tide_toggle": [
+   {
+    "speaker": "narrator",
+    "text": "Reno blows the whistle. Hoo-ee, hoo-oo."
+   },
+   {
+    "toggle_flag": "rv02_tide_high"
+   },
+   {
+    "speaker": "narrator",
+    "text": "High tide. Mud paths sink and logs float up in the deep channel.",
+    "if_flags": [
+     "rv02_tide_high"
+    ]
+   },
+   {
+    "speaker": "narrator",
+    "text": "Low tide. The water slides away and the mud paths show again.",
+    "if_not_flags": [
+     "rv02_tide_high"
+    ]
+   }
+  ],
+  "pz201_crossed": [
+   {
+    "set_flag": "pz201_mangrove_crossed"
+   },
+   {
+    "speaker": "reno",
+    "text": "Made it! And only one shoe is muddy."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Both of mine are."
+   }
+  ],
+  "C2_02_lumpur": [
+   {
+    "speaker": "pak_lumpur",
+    "text": "Low water, show the... show the... ah, no. Start again. Low water..."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Pak Lumpur? The kingfishers sent us. We're collecting the Tide Song for Nenek Arus."
+   },
+   {
+    "speaker": "pak_lumpur",
+    "text": "Visitors! On my island! Nobody crosses the channel anymore. The tide's gone silly."
+   },
+   {
+    "speaker": "pak_lumpur",
+    "text": "I keep losing my place. You hum along, little one, and maybe I'll get to the end."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Hmm-mm, hmm..."
+   },
+   {
+    "speaker": "pak_lumpur",
+    "text": "(singing) Low water, show the way. High water, carry home. ...There! The whole verse!"
+   },
+   {
+    "key_item": "item_tide_verse_1"
+   },
+   {
+    "set_flag": "ch02_verse_1"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Tide Song, Verse 1. (Key item)"
+   },
+   {
+    "speaker": "pak_lumpur",
+    "text": "Old Pole in Kampung Air remembers the next one. East, through the roots."
+   },
+   {
+    "speaker": "reno",
+    "text": "One down!"
+   }
+  ],
+  "lumpur_after": [
+   {
+    "speaker": "pak_lumpur",
+    "text": "Low water, show the way... I remember it now. Mostly. Kampung Air is east!"
+   }
+  ],
+  "rv02_lumpur_calls": [
+   {
+    "speaker": "pak_lumpur",
+    "text": "Wait, wait! Nobody leaves my island without hearing my verse!"
+   }
+  ],
+  "rv02_tangle_beaten": [
+   {
+    "set_flag": "rv02_tangle_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "It was just an old net. A really grabby old net."
+   }
+  ],
+  "rv02_wisps_beaten": [
+   {
+    "set_flag": "rv02_wisps_beaten"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Silt. Stirred up from the bottom. The river's upset."
+   }
+  ],
+  "C2_03_village": [
+   {
+    "set_flag": "ch02_village_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Kampung Air on the spirit side: stilt houses of driftwood and reeds, lanterns made from snail shells."
+   },
+   {
+    "speaker": "reno",
+    "text": "A whole village on the water! Do they ever fall in?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "They're river spirits, Reno. Falling in is the point."
+   },
+   {
+    "speaker": "narrator",
+    "text": "At the top of a jetty walk stands a very old post, wrapped in rope and barnacles. It seems to be listening."
+   }
+  ],
+  "pole_reno": [
+   {
+    "speaker": "old_pole",
+    "text": "Mmm... a song? Yes. I remember it like warm water. But the words..."
+   },
+   {
+    "speaker": "reno",
+    "text": "He remembers it as a feeling. Lumi, can your Memory Touch reach that?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C, then talk to Old Pole again.)"
+   }
+  ],
+  "C2_03_old_pole": [
+   {
+    "speaker": "lumi",
+    "text": "May I? I'll be gentle."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi rests her hand on the old wood. Memory Touch."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lanterns on the water. A festival, long ago. Many voices singing from boats and doorways, all together."
+   },
+   {
+    "speaker": "old_pole",
+    "text": "(far away) Many voices, one river. Every tide comes back."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The memory fades. Lumi is humming the tune before she notices."
+   },
+   {
+    "speaker": "old_pole",
+    "text": "Oh... oh. You sound like an echo of someone who sang to this river once."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi doesn't answer."
+   },
+   {
+    "speaker": "reno",
+    "text": "SO! That verse! Very nice verse! Lots of words in it!"
+   },
+   {
+    "key_item": "item_tide_verse_2"
+   },
+   {
+    "set_flag": "ch02_verse_2"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Tide Song, Verse 2. (Key item)"
+   },
+   {
+    "set_flag": "ch02_ripple_learned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Lumi's humming spreads out in rings. She learned Ripple Echo! (6 MP, hits every enemy.)"
+   },
+   {
+    "speaker": "old_pole",
+    "text": "The last verse sank with the old jetty. The bell there won't stop ringing over it."
+   }
+  ],
+  "pole_after": [
+   {
+    "speaker": "old_pole",
+    "text": "Many voices, one river. Thank you for remembering with me."
+   }
+  ],
+  "siput_stall": [
+   {
+    "speaker": "mak_siput",
+    "text": "Slow down, slow down. Nothing good was ever sold in a hurry."
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse the stall",
+      "then": [
+       {
+        "event": "shop:kampung_air_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": [
+       {
+        "speaker": "mak_siput",
+        "text": "I'll be here. I'm always here. It takes me a week to leave."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "kampung_spirit_a": [
+   {
+    "speaker": "river_spirit",
+    "text": "The tide used to come in with the song. Now it comes in whenever it feels like it."
+   }
+  ],
+  "kampung_spirit_b": [
+   {
+    "speaker": "river_spirit",
+    "text": "My cousin drifted upriver last night. Backwards! She was furious."
+   }
+  ]
+ }
+}

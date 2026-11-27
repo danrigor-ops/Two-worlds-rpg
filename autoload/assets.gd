@@ -208,6 +208,18 @@ func _paint_tile(img: Image, ox: int, def: Dictionary) -> void:
 				_rect(img, ox + (y % 3), y, 13, 2, acc)
 			_rect(img, ox + 5, 0, 2, TILE, acc)
 			_rect(img, ox + 11, 4, 2, 9, base.lightened(0.15))
+		"log":
+			_rect(img, ox, 0, TILE, TILE, Color("#3f7fc4"))
+			_rect(img, ox, 4, TILE, 8, base)
+			_rect(img, ox, 4, TILE, 1, acc)
+			_rect(img, ox, 11, TILE, 1, acc)
+			_rect(img, ox + 4, 7, 3, 2, acc)
+		"post":
+			_rect(img, ox, 0, TILE, TILE, Color("#4b8a3d"))
+			_rect(img, ox + 5, 1, 6, 15, base)
+			_rect(img, ox + 5, 4, 6, 1, acc)
+			_rect(img, ox + 5, 9, 6, 1, acc)
+			_rect(img, ox + 7, 6, 2, 2, Color("#8fc3ef"))
 		"pit":
 			_rect(img, ox, 0, TILE, 1, acc)
 			_rect(img, ox, 15, TILE, 1, acc)
@@ -366,7 +378,7 @@ func _make_character_sheet(a: Dictionary) -> Image:
 			_rect(img, o + 10, 33, 7, 1, Color("#5a5a5a"))
 		_outline(img)
 		return img
-	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox", "conductor"]:
+	if p["style"] in ["moth", "monarch", "dust", "flicker", "clock", "postbox", "conductor", "bird", "fish", "snail", "pole"]:
 		_paint_spirit(img, order, fw, p["style"], hair, skin, body, acc, legs, eye)
 		_outline(img)
 		return img
@@ -477,6 +489,44 @@ static func _paint_spirit(img: Image, order: Array, fw: int, style: String, hair
 				_rect(img, o + 13, 4, 6, 7, skin)
 				_rect(img, o + 9, 0, 14, 3, hair)                           # cap, badge rubbed blank
 				_rect(img, o + 14, 0, 4, 2, acc.darkened(0.5))
+			"bird":
+				_rect(img, o + 10, 18, 12, 10, body)                        # round body
+				_rect(img, o + 12, 26, 8, 4, skin)                          # orange belly
+				_rect(img, o + 11, 12, 10, 8, body)                         # head
+				_rect(img, o + (21 if f != "left" else 5), 15, 6, 2, acc)   # long beak
+				_rect(img, o + 13, 30, 2, 6, legs)
+				_rect(img, o + 17, 30, 2, 6, legs)
+				if f != "up":
+					_rect(img, o + 15, 14, 2, 2, eye)
+			"fish":
+				_rect(img, o + 7, 24, 18, 10, body)                         # mudskipper body
+				_rect(img, o + 10, 20, 8, 6, body)
+				_rect(img, o + 11, 18, 3, 3, hair)                          # goggly eyes on top
+				_rect(img, o + 16, 18, 3, 3, hair)
+				_rect(img, o + 12, 19, 1, 1, eye)
+				_rect(img, o + 17, 19, 1, 1, eye)
+				_rect(img, o + 4, 30, 5, 4, acc)                            # fins
+				_rect(img, o + 23, 30, 5, 4, acc)
+				for d: Vector2i in [Vector2i(10, 27), Vector2i(18, 29)]:
+					_rect(img, o + d.x, d.y, 2, 2, skin)
+			"snail":
+				_rect(img, o + 4, 32, 24, 5, skin)                          # foot
+				_rect(img, o + 8, 18, 16, 15, body)                         # shell
+				_rect(img, o + 12, 22, 8, 7, acc)
+				_rect(img, o + 14, 24, 4, 3, body)
+				_rect(img, o + 22, 24, 4, 9, skin)                          # head
+				_rect(img, o + 22, 19, 1, 5, skin)
+				_rect(img, o + 25, 19, 1, 5, skin)
+				_rect(img, o + 22, 18, 2, 2, eye)
+			"pole":
+				_rect(img, o + 11, 4, 10, 36, body)                         # an old jetty post
+				for y in [10, 20, 30]:
+					_rect(img, o + 11, y, 10, 1, body.darkened(0.3))
+				_rect(img, o + 10, 26, 12, 3, acc)                          # rope
+				if f != "up":
+					_rect(img, o + 13, 13, 2, 2, eye)
+					_rect(img, o + 18, 13, 2, 2, eye)
+					_rect(img, o + 14, 17, 4, 1, eye)
 			"postbox":
 				_rect(img, o + 9, 10, 14, 28, body)
 				_rect(img, o + 8, 7, 16, 5, hair)                           # cap

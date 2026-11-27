@@ -239,14 +239,17 @@ func _hero_turn(u: Dictionary) -> bool:
 				var opts := []
 				for sid: String in _skills:
 					var sk: Dictionary = _skills[sid]
-					if sk["user"] == u["id"]:
+					if sk["user"] == u["id"] and (not sk.has("requires_flag") or GameState.get_flag(sk["requires_flag"])):
 						opts.append({"text": "%s %dMP" % [sk["name"], sk["mp"]], "enabled": u["mp"] >= int(sk["mp"]), "value": sid})
 				var sid: Variant = await _choose("Skill", opts, true)
 				if sid == null:
 					continue
 				var sk: Dictionary = _skills[sid]
 				combat.spend_mp(u, int(sk["mp"]))
-				await _attack(u, sk["kind"], float(sk["mult"]), "%s uses %s!" % [u["name"], sk["name"]])
+				if sk.get("target", "one") == "all":
+					await _attack_all(u, sk["kind"], float(sk["mult"]), "%s uses %s!" % [u["name"], sk["name"]])
+				else:
+					await _attack(u, sk["kind"], float(sk["mult"]), "%s uses %s!" % [u["name"], sk["name"]])
 				return false
 			"guard":
 				combat.spend_token(u)
@@ -311,6 +314,22 @@ func _attack(u: Dictionary, kind: String, mult: float, text: String) -> void:
 	await _say("%s %d damage!%s" % [_judgement_text(judgement), dmg, " (It's guarding.)" if target["guarding"] else ""])
 	if target["hp"] <= 0:
 		_sprites[target["id"]].modulate.a = 0.25
+
+
+## Area skills (Ripple Echo): one cue, every standing enemy is hit.
+func _attack_all(u: Dictionary, kind: String, mult: float, text: String) -> void:
+	combat.spend_token(u)
+	var foes := combat.side("enemy")
+	_msg.text = text
+	var judgement: String = await _cue(Vector2(186, 56), u["id"], foes[0]["id"])
+	var parts: PackedStringArray = []
+	for t in foes:
+		var dmg := combat.hit(u, t, kind, mult, judgement)
+		_log("%s -> %s %s %d (all)" % [u["id"], t["id"], judgement, dmg])
+		parts.append("%s %d" % [t["name"], dmg])
+		if t["hp"] <= 0:
+			_sprites[t["id"]].modulate.a = 0.25
+	await _say("%s%s." % [(_judgement_text(judgement) + " ") if judgement != "miss" else "", ", ".join(parts)])
 
 
 func _team_attack(t: Dictionary) -> void:
@@ -477,6 +496,7 @@ const STATUS_TEXT := {
 	"slow": "is slowed!",
 	"fog": "forgets their skills for a turn!",
 	"shielded": "is shielded!",
+	"soaked": "is soaked! (DEF down)",
 }
 
 
@@ -663,7 +683,7 @@ func _refresh_status() -> void:
 static func _tags(u: Dictionary) -> String:
 	var t := " [G]" if u["guarding"] else ""
 	for k: String in u["status"]:
-		t += " [%s]" % {"slow": "Slow", "shielded": "Shield", "fog": "Fog"}.get(k, k)
+		t += " [%s]" % {"slow": "Slow", "shielded": "Shield", "fog": "Fog", "soaked": "Soak"}.get(k, k)
 	return t
 
 

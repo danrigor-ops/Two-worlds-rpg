@@ -17,6 +17,16 @@
    "kind": "magical",
    "mult": 1.4,
    "text": "A spark of remembered light."
+  },
+  "ripple_echo": {
+   "name": "Ripple Echo",
+   "user": "lumi",
+   "mp": 6,
+   "kind": "magical",
+   "mult": 0.9,
+   "target": "all",
+   "requires_flag": "ch02_ripple_learned",
+   "text": "Lumi hums and the echo ripples out. Hits every enemy."
   }
  },
  "team": {

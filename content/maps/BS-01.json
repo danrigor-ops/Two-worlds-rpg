@@ -42,8 +42,8 @@
   "TT===.============================.===TT",
   "TT====================================TT",
   "TT====================================TT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+  "TTTTTTTTTTTTTTTTTTTT=TTTTTTTTTTTTTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTT"
  ],
  "spawns": {
   "start": {
@@ -70,6 +70,11 @@
    "x": 37,
    "y": 18,
    "facing": "left"
+  },
+  "from_river": {
+   "x": 20,
+   "y": 27,
+   "facing": "up"
   }
  },
  "doors": [
@@ -93,6 +98,21 @@
    "y": 18,
    "to_map": "BS-04",
    "to_spawn": "from_forecourt"
+  },
+  {
+   "id": "to_river",
+   "x": 20,
+   "y": 29,
+   "to_map": "RV-01",
+   "to_spawn": "from_station",
+   "require": [
+    {
+     "if_flags": [
+      "chapter_02_unlocked"
+     ],
+     "else_scene": "bs01_south_closed"
+    }
+   ]
   }
  ],
  "npcs": [

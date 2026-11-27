@@ -161,3 +161,9 @@ Autosave points: arrival at RV-01, after the Barnacle Bell, before boarding the 
 2. The culprit hint: "ink on their fingers" plus Bandar Kencana. Default: yes; the Keeper isn't seen.
 3. Lumi's echo line from Old Pole: keep it, with Seri unnamed. Default: yes.
 4. Whether the night river scenes need a day/night palette. Default: a simple tint for now.
+
+## 12. Decision log
+- **Part A build (28 Nov 2026): Tide Call is learned at the first tide marker in RV-02, not after Pak Lumpur's verse.** PZ-201 needs the tide to reach Pak Lumpur, so the Kingfisher sisters teach the whistle tune in C2-01 and the first marker teaches the ability. Pak Lumpur still sings verse 1, and Reno and Lumi's "boss the river / ask nicely" lines move to the first marker. C02-002's reward becomes 3 Dewdrops.
+- Water in RV-02 stays solid rather than a "deep" tile you fall into: you simply can't walk into it, and if the tide rises under you, you're moved to the nearest dry tile.
+- Tide markers sit in the mangrove wall, so you can only reach them from dry ground.
+- The C02-S01 lost-things side quest moves to part B with RV-01's morning scene.

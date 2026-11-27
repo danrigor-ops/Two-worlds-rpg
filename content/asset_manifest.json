@@ -768,6 +768,213 @@
     "accent": "#8a6ad8",
     "legs": "#c9f0e8"
    }
+  },
+  "kilat_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "bird",
+    "hair": "#1f4a8a",
+    "skin": "#e8843a",
+    "body": "#2f7fc4",
+    "accent": "#2b2420",
+    "legs": "#c94f4f"
+   }
+  },
+  "kilau_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "bird",
+    "hair": "#1f6a6a",
+    "skin": "#e8a83a",
+    "body": "#3fa8a8",
+    "accent": "#2b2420",
+    "legs": "#c94f4f"
+   }
+  },
+  "pak_lumpur_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "fish",
+    "hair": "#c9b88a",
+    "skin": "#a89060",
+    "body": "#7a6a4a",
+    "accent": "#5a8a6a",
+    "legs": "#5a4028"
+   }
+  },
+  "mak_siput_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "snail",
+    "hair": "#c98a4a",
+    "skin": "#c9b8a0",
+    "body": "#c98a4a",
+    "accent": "#8a5a2a",
+    "legs": "#c9b8a0"
+   }
+  },
+  "old_pole_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "pole",
+    "hair": "#6b4a2f",
+    "skin": "#6b4a2f",
+    "body": "#7a5a3a",
+    "accent": "#d9b77e",
+    "legs": "#6b4a2f"
+   }
+  },
+  "river_spirit_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "fish",
+    "hair": "#d8e8f0",
+    "skin": "#8fc3ef",
+    "body": "#5a8ab0",
+    "accent": "#3f6f9e",
+    "legs": "#3f6f9e"
+   }
+  },
+  "fisher_friend_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#4a3a30",
+    "skin": "#b07a4a",
+    "body": "#9e7a5a",
+    "accent": "#d9b77e",
+    "legs": "#4a3a2a"
+   }
+  },
+  "driftnet_tangle_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#c9b88a",
+    "skin": "#a89060",
+    "body": "#6b7a5a",
+    "accent": "#d9b77e",
+    "legs": "#5a4a3a"
+   }
+  },
+  "silt_wisp_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#c9a87a",
+    "skin": "#8a6a48",
+    "body": "#7a5a3a",
+    "accent": "#8fc3ef",
+    "legs": "#5a4028"
+   }
   }
  },
  "characters": {
@@ -803,6 +1010,15 @@
   "fog_porter": "fog_porter_overworld",
   "lost_luggage": "lost_luggage_overworld",
   "conductor": "conductor_overworld",
-  "slip_marker": "slip_marker_overworld"
+  "slip_marker": "slip_marker_overworld",
+  "kilat": "kilat_overworld",
+  "kilau": "kilau_overworld",
+  "pak_lumpur": "pak_lumpur_overworld",
+  "mak_siput": "mak_siput_overworld",
+  "old_pole": "old_pole_overworld",
+  "river_spirit": "river_spirit_overworld",
+  "fisher_friend": "fisher_friend_overworld",
+  "driftnet_tangle": "driftnet_tangle_overworld",
+  "silt_wisp": "silt_wisp_overworld"
  }
 }
