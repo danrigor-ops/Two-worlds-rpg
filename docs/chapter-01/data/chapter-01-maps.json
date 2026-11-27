@@ -1,0 +1,150 @@
+{
+  "tileSize": 16,
+  "maps": [
+    {
+      "id": "SM-01",
+      "name": "Sungai Melor Entrance",
+      "widthTiles": 40,
+      "heightTiles": 30,
+      "function": "Prologue arrival, chapter hub start",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "SM-02",
+      "name": "Jetty and Market Lane",
+      "widthTiles": 48,
+      "heightTiles": 32,
+      "function": "Market, jetty, postcard quest",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "SM-03",
+      "name": "Kopitiam",
+      "widthTiles": 20,
+      "heightTiles": 15,
+      "function": "Shop",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "SM-04",
+      "name": "Sundry Shop",
+      "widthTiles": 16,
+      "heightTiles": 12,
+      "function": "PZ-101 Coin Jar",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "SM-05",
+      "name": "Village Road Bus Stop",
+      "widthTiles": 32,
+      "heightTiles": 20,
+      "function": "Bus boarding",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "TR-01",
+      "name": "Country Bus",
+      "widthTiles": 24,
+      "heightTiles": 10,
+      "function": "Cutscene map",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-01",
+      "name": "Bandar Senja Station Forecourt",
+      "widthTiles": 40,
+      "heightTiles": 30,
+      "function": "Town hub",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-02",
+      "name": "Station Hall and Ticket Office",
+      "widthTiles": 32,
+      "heightTiles": 24,
+      "function": "Stationmaster, shop",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-03",
+      "name": "Goods Shed",
+      "widthTiles": 36,
+      "heightTiles": 28,
+      "function": "PZ-103, Parcel A",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-04",
+      "name": "Shophouse Row",
+      "widthTiles": 48,
+      "heightTiles": 28,
+      "function": "PZ-105, Parcel C",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-05",
+      "name": "Rail Yard",
+      "widthTiles": 44,
+      "heightTiles": 32,
+      "function": "PZ-104, BOSS-101, Parcel B",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "BS-06",
+      "name": "Platform 2",
+      "widthTiles": 40,
+      "heightTiles": 20,
+      "function": "Boarding, dawn ending",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-01",
+      "name": "Veil Train: Third-Class Carriage",
+      "widthTiles": 40,
+      "heightTiles": 12,
+      "function": "Encounters",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-02",
+      "name": "Veil Train: Dining Car",
+      "widthTiles": 40,
+      "heightTiles": 12,
+      "function": "PZ-107",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-03",
+      "name": "Veil Train: Carriage Roof",
+      "widthTiles": 48,
+      "heightTiles": 12,
+      "function": "PZ-106, Gentle Float",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-04",
+      "name": "Veil Train: Luggage Van",
+      "widthTiles": 40,
+      "heightTiles": 12,
+      "function": "PZ-108 optional",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-05",
+      "name": "Veil Train: Guard's Van",
+      "widthTiles": 30,
+      "heightTiles": 14,
+      "function": "BOSS-102",
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "VT-06",
+      "name": "The Veil Halt",
+      "widthTiles": 36,
+      "heightTiles": 24,
+      "function": "Ending, river route",
+      "status": "CONFIRMED_USER"
+    }
+  ],
+  "note": "Chapter 1 proposal data, revision 2, approved by Dennis 2026-11-27; stats and prices remain prototype values. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md. Tile sizes are design anchors only."
+}

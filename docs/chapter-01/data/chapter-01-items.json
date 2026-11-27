@@ -1,0 +1,219 @@
+{
+  "currency": "dewdrops",
+  "items": [
+    {
+      "id": "item_kaya_toast",
+      "name": "Kaya Toast",
+      "type": "consumable",
+      "effect": {
+        "healHp": 20
+      },
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_moonleaf_bun",
+      "name": "Moonleaf Bun",
+      "type": "consumable",
+      "effect": {
+        "healHp": 20
+      },
+      "priceDewdrops": 1,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_starfruit_dumpling",
+      "name": "Starfruit Dumpling",
+      "type": "consumable",
+      "effect": {
+        "healHp": 35
+      },
+      "priceDewdrops": 2,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_firefly_tea",
+      "name": "Firefly Tea",
+      "type": "consumable",
+      "effect": {
+        "restoreMp": 12
+      },
+      "priceDewdrops": 2,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_dewdrop_candy",
+      "name": "Dewdrop Candy",
+      "type": "consumable",
+      "effect": {
+        "healHp": 10,
+        "restoreMp": 4
+      },
+      "priceDewdrops": 1,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_veil_ticket",
+      "name": "Veil-Stamped Ticket",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_parcel_a",
+      "name": "Stationmaster's Parcel A",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_parcel_b",
+      "name": "Stationmaster's Parcel B",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_parcel_c",
+      "name": "Stationmaster's Parcel C",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_postcard",
+      "name": "Postcard Home",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_blank_punched_ticket",
+      "name": "Blank Punched Ticket",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "item_conductors_whistle",
+      "name": "Conductor's Whistle",
+      "type": "key",
+      "effect": {},
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "equip_moth_wing_charm",
+      "name": "Moth-Wing Charm",
+      "type": "charm",
+      "effect": {
+        "spd": 2
+      },
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    },
+    {
+      "id": "equip_brass_lantern_hook",
+      "name": "Brass Lantern Hook",
+      "type": "tool",
+      "effect": {
+        "mag": 3
+      },
+      "priceDewdrops": null,
+      "sellable": false,
+      "status": "CONFIRMED_USER"
+    }
+  ],
+  "shops": [
+    {
+      "map": "SM-03",
+      "keeper": "Old Kettle",
+      "stock": [
+        "item_moonleaf_bun",
+        "item_firefly_tea",
+        "item_dewdrop_candy"
+      ]
+    },
+    {
+      "map": "BS-02",
+      "keeper": "The Clockkeeper",
+      "stock": [
+        "item_moonleaf_bun",
+        "item_starfruit_dumpling",
+        "item_firefly_tea",
+        "item_dewdrop_candy"
+      ]
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "PZ-101",
+      "map": "SM-04",
+      "mandatory": true,
+      "solvedFlag": "pz101_coin_jar_solved"
+    },
+    {
+      "id": "PZ-102",
+      "map": "SM-05",
+      "mandatory": true,
+      "solvedFlag": "pz102_bus_boarded"
+    },
+    {
+      "id": "PZ-103",
+      "map": "BS-03",
+      "mandatory": true,
+      "solvedFlag": "pz103_crates_solved"
+    },
+    {
+      "id": "PZ-104",
+      "map": "BS-05",
+      "mandatory": true,
+      "solvedFlag": "pz104_signals_solved"
+    },
+    {
+      "id": "PZ-105",
+      "map": "BS-04",
+      "mandatory": true,
+      "solvedFlag": "pz105_label_solved"
+    },
+    {
+      "id": "PZ-106",
+      "map": "VT-03",
+      "mandatory": true,
+      "solvedFlag": "pz106_roof_crossed"
+    },
+    {
+      "id": "PZ-107",
+      "map": "VT-02",
+      "mandatory": true,
+      "solvedFlag": "pz107_destinations_matched"
+    },
+    {
+      "id": "PZ-108",
+      "map": "VT-04",
+      "mandatory": false,
+      "solvedFlag": "pz108_lantern_keyhole_found"
+    }
+  ],
+  "note": "Chapter 1 proposal data, revision 2, approved by Dennis 2026-11-27; stats and prices remain prototype values. Prototype values, not production-ready schema. See docs/chapter-01/CHAPTER_01_PRODUCTION.md.",
+  "currencyNote": "Humans cannot see the duo, so Chapter 1 shops are spirit stalls priced in Dewdrops. humanCents stays in the schema for later chapters."
+}
