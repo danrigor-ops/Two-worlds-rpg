@@ -1,0 +1,185 @@
+{
+ "id": "PM-01",
+ "name": "Pasar Malam Impian",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 40,
+ "height": 30,
+ "legend": {
+  "T": "tree",
+  "c": "carnival_floor",
+  "t": "tent",
+  "D": "door",
+  "E": "exit",
+  ".": "grass"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTTTT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccttttttcccttttttccccttttttcccttttttccT",
+  "TccttttttcccttttttccccttttttcccttttttccT",
+  "TccttttttcccttttttccccttttttcccttttttccT",
+  "TccttttttcccttDtttccccttttttcccttDtttccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "Tccccccccccccc............cccccccccccccT",
+  "Tccccccccccccc............cccccccccccccT",
+  "Tccccccccccccc............cccccccccccccT",
+  "Tccccccccccccc............cccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccttttttccccccccccccccccccccccttttttccT",
+  "TccttttttccccccccccccccccccccccttttttccT",
+  "TccttttttccccccccccccccccccccccttttttccT",
+  "TccttttttccccccccccccccccccccccttttttccT",
+  "TccttttttccccccccccccccccccccccttttttccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TccccccccccccccccccccccccccccccccccccccT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 20,
+   "y": 2,
+   "facing": "down"
+  },
+  "from_forest": {
+   "x": 20,
+   "y": 1,
+   "facing": "down"
+  },
+  "from_mirrors": {
+   "x": 14,
+   "y": 7,
+   "facing": "down"
+  },
+  "from_train": {
+   "x": 33,
+   "y": 7,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_forest",
+   "x": 20,
+   "y": 0,
+   "to_map": "SB-01",
+   "to_spawn": "from_carnival"
+  },
+  {
+   "id": "to_mirrors",
+   "x": 14,
+   "y": 6,
+   "to_map": "PM-02",
+   "to_spawn": "from_midway"
+  },
+  {
+   "id": "to_train",
+   "x": 33,
+   "y": 6,
+   "to_map": "PM-03",
+   "to_spawn": "from_midway",
+   "require": [
+    {
+     "if_flags": [
+      "ch06_taro_joined"
+     ],
+     "else_scene": "pm01_train_closed"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "taro_npc",
+   "member": "taro",
+   "character": "taro",
+   "x": 20,
+   "y": 13,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ch06_taro_lied"
+     ],
+     "scene": "taro_again"
+    },
+    {
+     "scene": "C6_02_taro_show"
+    }
+   ]
+  },
+  {
+   "id": "hawker",
+   "character": "hawker",
+   "x": 10,
+   "y": 26,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_hawker"
+    }
+   ]
+  },
+  {
+   "id": "family",
+   "character": "family",
+   "x": 28,
+   "y": 26,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_family"
+    }
+   ]
+  },
+  {
+   "id": "vendor",
+   "character": "carnival_vendor",
+   "x": 24,
+   "y": 8,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "carnival_stall"
+    }
+   ]
+  },
+  {
+   "id": "imps",
+   "character": "balloon_imp",
+   "x": 6,
+   "y": 15,
+   "facing": "right",
+   "hide_if_flag": "pm01_imps_beaten",
+   "encounter": {
+    "id": "pm01_imps",
+    "outro_scene": "pm01_imps_beaten"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C6_01_carnival",
+   "if_not_flags": [
+    "ch06_started"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#d8b8e8"
+}

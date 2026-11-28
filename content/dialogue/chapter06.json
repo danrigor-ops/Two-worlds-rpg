@@ -1,0 +1,439 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 6 from docs/chapter-06/CHAPTER_06_PRODUCTION.md. Human lines are overheard.",
+ "speakers": {
+  "taro": {
+   "name": "Taro",
+   "character": "taro"
+  },
+  "hawker": {
+   "name": "Satay hawker",
+   "character": "hawker"
+  },
+  "family": {
+   "name": "A mother",
+   "character": "family"
+  },
+  "carnival_vendor": {
+   "name": "Sweets vendor",
+   "character": "carnival_vendor"
+  },
+  "ticket_taker": {
+   "name": "Ticket-taker",
+   "character": "ticket_taker"
+  },
+  "ringmaster": {
+   "name": "The Ringmaster",
+   "character": "ringmaster"
+  }
+ },
+ "scenes": {
+  "sb01_lights_not_yet": [
+   {
+    "speaker": "narrator",
+    "text": "Just dark forest to the south."
+   },
+   {
+    "speaker": "maris",
+    "text": "Nothing down there. Yet."
+   }
+  ],
+  "C6_01_carnival": [
+   {
+    "set_flag": "ch06_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Pasar Malam Impian. Coloured lights, a ferris wheel that turns the wrong way, and a ghost train whose cars have no wheels."
+   },
+   {
+    "speaker": "narrator",
+    "text": "At the edges, the ordinary night market carries on: satay smoke, toy stalls, families. The humans walk right past the impossible rides without a glance."
+   },
+   {
+    "speaker": "reno",
+    "text": "A GHOST TRAIN!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Reno. Focus."
+   },
+   {
+    "speaker": "reno",
+    "text": "I am focusing. On the ghost train."
+   },
+   {
+    "speaker": "elias",
+    "text": "The stub came from here. Somebody must have sold it to him."
+   },
+   {
+    "speaker": "narrator",
+    "text": "In the middle of the midway, a paper lantern in a waistcoat is juggling fire for a crowd of spirits."
+   }
+  ],
+  "human_hawker": [
+   {
+    "speaker": "hawker",
+    "text": "(calling) Satay! Satay! Ten sticks, best in the pasar malam!"
+   }
+  ],
+  "human_family": [
+   {
+    "speaker": "family",
+    "text": "(to her son) No, we're not going on the wheel again. It made you sick last time. ...Which wheel? THAT wheel. What do you mean, there isn't one?"
+   }
+  ],
+  "carnival_stall": [
+   {
+    "speaker": "carnival_vendor",
+    "text": "Toffee apples! Sugarcane! Things that make you feel brave!"
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse",
+      "then": [
+       {
+        "event": "shop:carnival_stall"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C6_02_taro_show": [
+   {
+    "speaker": "taro",
+    "text": "Ladies, gentlespirits, and small leafy persons! The Great Taro!"
+   },
+   {
+    "speaker": "lumi",
+    "text": "We're looking for a man in a grey coat. Ink on his fingers. He had a ticket from here."
+   },
+   {
+    "speaker": "taro",
+    "text": "Grey coat? Ink? Oh, absolutely, him. He's in the Hall of Mirrors. Right at the back. Can't miss him. Go on, go on!"
+   },
+   {
+    "speaker": "elias",
+    "text": "...He blinked a lot just then."
+   },
+   {
+    "set_flag": "ch06_taro_lied"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: search the Hall of Mirrors (the north-west tent)."
+   }
+  ],
+  "taro_again": [
+   {
+    "speaker": "taro",
+    "text": "Hall of Mirrors! Back! Way, way back! Bye now!"
+   }
+  ],
+  "pm01_train_closed": [
+   {
+    "speaker": "ticket_taker",
+    "text": "(from inside) Ghost Train is closed to the public. Performers only."
+   },
+   {
+    "speaker": "reno",
+    "text": "NOOOO."
+   }
+  ],
+  "pm01_imps_beaten": [
+   {
+    "set_flag": "pm01_imps_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "Pop! Pop! Ha!"
+   }
+  ],
+  "C6_03_mirrors": [
+   {
+    "set_flag": "ch06_mirrors_entered"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Hall of Mirrors. A hundred Renos stare back at Reno. A hundred Renos make the same face."
+   },
+   {
+    "speaker": "lumi",
+    "text": "There's an old echo marker by the door. If I look with Echo Sight, I might see which mirrors are really doorways."
+   }
+  ],
+  "mirror_echo_reno": [
+   {
+    "speaker": "narrator",
+    "text": "An echo marker, faintly glowing."
+   },
+   {
+    "speaker": "reno",
+    "text": "It just shows me my own face. Lumi?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "(Swap to Lumi with C.)"
+   }
+  ],
+  "C6_03_echo_sight": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi looks with Echo Sight. Most of the mirrors are just mirrors. But three of them shimmer: old doorways, painted over with reflection."
+   },
+   {
+    "set_flag": "ch06_mirrors_seen"
+   },
+   {
+    "speaker": "lumi",
+    "text": "There, there and there. We can walk through those."
+   }
+  ],
+  "pm02_doubles_beaten": [
+   {
+    "set_flag": "pm02_doubles_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "I beat myself up! ...That sounds bad."
+   }
+  ],
+  "C6_04_taro_caught": [
+   {
+    "speaker": "narrator",
+    "text": "At the very back of the Hall of Mirrors there's no man in a grey coat. Just Taro, sitting on a crate, eating a toffee apple."
+   },
+   {
+    "speaker": "taro",
+    "text": "Oh. You actually got through. Nobody gets through."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You lied to us."
+   },
+   {
+    "speaker": "taro",
+    "text": "I lie to everyone. It's my act. ...He asked me to. The grey-coat man. He said people would come asking, and I should send them the wrong way."
+   },
+   {
+    "speaker": "maris",
+    "text": "Why would you do that for him?"
+   },
+   {
+    "speaker": "taro",
+    "text": "Because he looked so sad. And I thought, what's the harm, it's only a little lie. But Ringmaster's been hiding his trail ever since, and the whole carnival feels... wrong. Like a trick nobody's enjoying."
+   },
+   {
+    "speaker": "reno",
+    "text": "So help us fix it!"
+   },
+   {
+    "speaker": "taro",
+    "text": "...Fine. Yes. The Great Taro, honest for one whole night. Don't tell anyone."
+   },
+   {
+    "join": "taro"
+   },
+   {
+    "set_flag": "ch06_taro_joined"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Taro joined the party! In battle: Trick Shot and Dazzle (hits every enemy). In the field: Decoy."
+   },
+   {
+    "speaker": "taro",
+    "text": "The Ringmaster's in the Big Top. Only way in is the Ghost Train. Performers' entrance. Come on."
+   }
+  ],
+  "ticket_taker": [
+   {
+    "speaker": "ticket_taker",
+    "text": "Performers only. Tickets, tickets. No funny business near my lever."
+   }
+  ],
+  "C6_05_decoy_offer": [
+   {
+    "set_flag": "ch06_decoy_offered"
+   },
+   {
+    "speaker": "taro",
+    "text": "Ticket-taker never takes his eyes off that lever for long. I could make a Decoy and walk him off. Or you could be quick."
+   },
+   {
+    "choice": [
+     {
+      "text": "Make a Decoy",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Taro claps. A second, slightly wobblier Taro bows, waves, and strolls off down the platform. The ticket-taker follows it, shouting \"Oi! Tickets!\""
+       },
+       {
+        "set_flag": "ch06_decoy_used"
+       }
+      ]
+     },
+     {
+      "text": "We'll be quick",
+      "then": [
+       {
+        "speaker": "taro",
+        "text": "Wait until he looks away. Then go!"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "lever_caught": [
+   {
+    "speaker": "ticket_taker",
+    "text": "Oi! Hands off the lever!"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Wait until he looks away."
+   }
+  ],
+  "C6_05_lever": [
+   {
+    "speaker": "narrator",
+    "text": "Clunk. The ride lever goes over. Down the track, a train with no wheels glides up to the platform."
+   },
+   {
+    "set_flag": "ch06_lever_pulled"
+   },
+   {
+    "speaker": "reno",
+    "text": "It's HERE."
+   }
+  ],
+  "lever_done": [
+   {
+    "speaker": "narrator",
+    "text": "The lever is down. The Ghost Train is waiting."
+   }
+  ],
+  "pm03_mixed_beaten": [
+   {
+    "set_flag": "pm03_mixed_beaten"
+   },
+   {
+    "speaker": "taro",
+    "text": "Sorry. Those were my understudies."
+   }
+  ],
+  "C6_06_ride": [
+   {
+    "speaker": "narrator",
+    "text": "The Ghost Train waits, lanterns swinging."
+   },
+   {
+    "choice": [
+     {
+      "text": "All aboard!",
+      "then": [
+       {
+        "set_flag": "ch06_ride_taken"
+       },
+       {
+        "speaker": "narrator",
+        "text": "The Ghost Train plunges into the dark. Skeleton puppets, howling paper ghosts, a cardboard moon."
+       },
+       {
+        "speaker": "reno",
+        "text": "AAAAAAAA! AGAIN! AGAIN!"
+       },
+       {
+        "event": "travel:PM-04:from_train:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C6_06_bigtop": [
+   {
+    "set_flag": "ch06_bigtop_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Big Top. Empty seats in rings, and one spotlight on a tall spirit in a red coat and a top hat."
+   }
+  ],
+  "C6_07_ring_intro": [
+   {
+    "speaker": "ringmaster",
+    "text": "Welcome, welcome! Is there a grey-coat man here? Maybe! Did he come through? Maybe! Will you find him? MAYBE!"
+   },
+   {
+    "speaker": "taro",
+    "text": "Boss. They're friends. Just tell them."
+   },
+   {
+    "speaker": "ringmaster",
+    "text": "Taro, my star! You'll understand after the show. The show must go on!"
+   }
+  ],
+  "C6_07_ring_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Ringmaster's hat falls off. Without it he's quite short, and very tired."
+   },
+   {
+    "speaker": "ringmaster",
+    "text": "...All right. All right. He came here because the carnival is where people come to forget for a night. He wanted it to be forever."
+   },
+   {
+    "speaker": "ringmaster",
+    "text": "I hid his trail because I felt sorry for him. He bought a one-way ticket. East, over the sea, to the mountain where the Oathkeepers swore their oath."
+   },
+   {
+    "key_item": "item_oneway_ticket"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the One-Way Ticket Stub and the Juggler's Ribbon (Taro: SPD +3, ATK +2)."
+   },
+   {
+    "set_flag": "eastern_route_unlocked"
+   },
+   {
+    "speaker": "lumi",
+    "text": "The Oathkeepers. The crying spirit in the memory wore their coat."
+   },
+   {
+    "speaker": "taro",
+    "text": "Then that's where we're going. Boss, I'm taking a holiday."
+   },
+   {
+    "speaker": "ringmaster",
+    "text": "(putting his hat back on) Maybe you'll come back. ...Maybe!"
+   },
+   {
+    "speaker": "reno",
+    "text": "A ship over the sea! Do they have... boats? I like boats now."
+   },
+   {
+    "set_flag": "chapter_06_completed"
+   },
+   {
+    "set_flag": "chapter_07_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

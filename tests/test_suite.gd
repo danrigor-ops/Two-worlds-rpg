@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 22
+const SECTIONS := 23
 
 
 func check(cond: bool, label: String) -> void:
@@ -100,6 +100,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 5: A Thousand Flowers, One Promise")
 	await _test_chapter5(gs, im)
+
+	print("Chapter 6: The Midnight Carnival")
+	await _test_chapter6(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1981,6 +1984,8 @@ func _chapter_start(gs: Node, flags: Array, xp: int, map_id: String, spawn: Stri
 	gs.gain_xp("lumi", xp)
 	if "ch03_elias_joined" in flags:
 		gs.add_member("elias")
+	if "ch05_maris_joined" in flags:
+		gs.add_member("maris")
 	gs.set_spawn(map_id, spawn)
 	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
 	scene.battle_auto_judge = "perfect"
@@ -2159,4 +2164,87 @@ func _test_chapter5(gs: Node, im: Node) -> void:
 	check(["carnival_route_unlocked", "chapter_05_completed", "chapter_06_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C05-001", "C05-002", "C05-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C05-001 to C05-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 5")
+	_sections_done += 1
+
+
+func _test_chapter6(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_unlocked", "ch05_started"], 2200, "SB-01", "from_carnival")
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(31, 28)), "down")
+	await _press_for("move_down", 30)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "PM-01", "C6-01: the south path leads to Pasar Malam Impian")
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch06_started"), "the carnival opens")
+	await _talk(scene, Vector2i(20, 13), im)
+	check(gs.get_flag("ch06_taro_lied") and not gs.has_member("taro"), "C6-02: Taro sends us the wrong way")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(33, 7)), "up")
+	await _press_for("move_up", 20)
+	await _finish_dialogue(im)
+	check(scene.map.id == "PM-01", "the Ghost Train is performers only")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(14, 7)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "PM-02", "the Hall of Mirrors")
+	await _finish_dialogue(im)
+	check(not scene.map.is_walkable(Vector2i(7, 15)), "the false mirrors look solid")
+	if gs.leader() == "lumi":
+		await _tap("swap")
+	await _talk(scene, Vector2i(2, 1), im)
+	check(not gs.get_flag("ch06_mirrors_seen"), "Reno only sees his own face")
+	await _tap("swap")
+	await _talk(scene, Vector2i(2, 1), im)
+	check(gs.get_flag("ch06_mirrors_seen") and scene.map.is_walkable(Vector2i(7, 15)) and scene.map.is_walkable(Vector2i(21, 11)), "PZ-601: Echo Sight shows the doorway mirrors")
+	await _talk(scene, Vector2i(25, 11), im)
+	check(gs.has_member("taro") and gs.get_flag("ch06_taro_joined") and not scene.members.has("taro") and gs.party().size() == 5, "C6-04: Taro joins (five in the party)")
+	gs.move_to_front("taro")
+	check(gs.active_party().has("taro"), "Taro moves to the front")
+	await _tap("swap")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(3, 18)), "down")
+	await _press_for("move_down", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(33, 7)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "PM-03", "the Ghost Train platform")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 13)), "up")
+	await _press_for("move_up", 16)
+	await _finish_dialogue_choices(im, [1])
+	check(gs.get_flag("ch06_decoy_offered") and not gs.get_flag("ch06_decoy_used"), "C6-05: Taro offers a Decoy (we try to be quick)")
+	scene.set_loop_step("ticket_taker", 0)
+	await _talk(scene, Vector2i(22, 5), im)
+	check(not gs.get_flag("ch06_lever_pulled"), "PZ-602: the ticket-taker catches us at the lever")
+	scene.set_loop_step("ticket_taker", 1)
+	await _talk(scene, Vector2i(22, 5), im)
+	check(gs.get_flag("ch06_lever_pulled"), "the lever goes over while he looks away")
+	await _talk(scene, Vector2i(10, 4), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "PM-04" and gs.get_flag("ch06_ride_taken"), "C6-06: the Ghost Train rides to the Big Top")
+	await _finish_dialogue(im)
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 9)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Ringmaster fight starts")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "skill", "dazzle", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("taro") and l.contains("(all)")), "Taro's Dazzle hits every enemy")
+	check(blog.any(func(l: String) -> bool: return l.contains("summon funhouse_double")), "the Ringmaster calls a Funhouse Double")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch06_ringmaster_beaten") and gs.has_key_item("item_oneway_ticket") and gs.equip_bonus("taro").get("spd", 0) == 3, "BOSS-601: the Juggler's Ribbon and a one-way ticket")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(["eastern_route_unlocked", "chapter_06_completed", "chapter_07_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C06-001", "C06-002", "C06-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C06-001 to C06-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 6")
 	_sections_done += 1

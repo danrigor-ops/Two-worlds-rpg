@@ -37,6 +37,15 @@
    "mag": 2,
    "res": 2,
    "spd": 1
+  },
+  "taro": {
+   "max_hp": 5,
+   "max_mp": 2,
+   "atk": 2,
+   "def": 1,
+   "mag": 1,
+   "res": 1,
+   "spd": 2
   }
  }
 }

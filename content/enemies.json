@@ -1045,6 +1045,148 @@
      "enter_text": "The Bloom whispers in every voice at once: forget, forget, it doesn't hurt if you forget."
     }
    ]
+  },
+  "funhouse_double": {
+   "name": "Funhouse Double",
+   "character": "funhouse_double",
+   "stats": {
+    "level": 15,
+    "max_hp": 190,
+    "atk": 34,
+    "def": 24,
+    "mag": 14,
+    "res": 20,
+    "spd": 16
+   },
+   "xp": 50,
+   "attacks": [
+    {
+     "name": "Copycat",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ]
+  },
+  "balloon_imp": {
+   "name": "Balloon Imp",
+   "character": "balloon_imp",
+   "stats": {
+    "level": 15,
+    "max_hp": 140,
+    "atk": 14,
+    "def": 18,
+    "mag": 34,
+    "res": 26,
+    "spd": 19
+   },
+   "xp": 48,
+   "attacks": [
+    {
+     "name": "Pop!",
+     "kind": "magical",
+     "mult": 1.0,
+     "applies": "fog",
+     "turns": 1
+    }
+   ]
+  },
+  "ringmaster": {
+   "name": "The Ringmaster of Maybe",
+   "character": "ringmaster",
+   "stats": {
+    "level": 16,
+    "max_hp": 1250,
+    "atk": 34,
+    "def": 24,
+    "mag": 36,
+    "res": 24,
+    "spd": 18
+   },
+   "xp": 260,
+   "immune": [
+    "slow",
+    "fog"
+   ],
+   "attacks": [
+    {
+     "name": "Cane Twirl",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Cane Twirl",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Now You Don't",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      },
+      {
+       "name": "Confetti Blast",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Confetti Blast",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Cane Twirl",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Now You Don't",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ],
+     "summon": "funhouse_double",
+     "enter_text": "Ringmaster: Is that me? Or is THAT me? Maybe! Maybe!"
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Grand Finale",
+       "kind": "magical",
+       "mult": 2.0,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "Ringmaster: Ladies and gentlespirits... for my final trick... (Grand Finale lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Confetti Blast",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Cane Twirl",
+       "kind": "physical",
+       "mult": 1.2
+      }
+     ],
+     "enter_text": "Ringmaster: The show must go on. The show must ALWAYS go on."
+    }
+   ]
   }
  },
  "encounters": {
@@ -1282,6 +1424,36 @@
    ],
    "win_key_items": [
     "equip_petal_brooch"
+   ]
+  },
+  "pm01_imps": {
+   "enemies": [
+    "balloon_imp",
+    "balloon_imp"
+   ]
+  },
+  "pm02_doubles": {
+   "enemies": [
+    "funhouse_double"
+   ]
+  },
+  "pm03_mixed": {
+   "enemies": [
+    "funhouse_double",
+    "balloon_imp"
+   ]
+  },
+  "ringmaster_boss": {
+   "enemies": [
+    "ringmaster"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch06_ringmaster_beaten"
+   ],
+   "win_key_items": [
+    "equip_jugglers_ribbon"
    ]
   }
  }

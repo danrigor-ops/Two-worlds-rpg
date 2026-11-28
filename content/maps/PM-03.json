@@ -1,0 +1,169 @@
+{
+ "id": "PM-03",
+ "name": "Ghost Train Platform",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 16,
+ "legend": {
+  "w": "wall",
+  "c": "carnival_floor",
+  "r": "rail",
+  "D": "door",
+  "L": "lever"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "wccccccccccccccccccccccccccccw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wccccccccccccccccccccccccccccw",
+  "wcccccccccccccccccccccLccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wccccccccccccccccccccccccccccw",
+  "wwwwwwwwwwwwwwwDwwwwwwwwwwwwww"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 13,
+   "facing": "up"
+  },
+  "from_midway": {
+   "x": 15,
+   "y": 14,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 15,
+   "y": 15,
+   "to_map": "PM-01",
+   "to_spawn": "from_train"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "ticket_taker",
+   "character": "ticket_taker",
+   "x": 18,
+   "y": 6,
+   "facing": "right",
+   "watch_facing": "right",
+   "facing_loop": [
+    {
+     "facing": "right",
+     "time": 2.5
+    },
+    {
+     "facing": "down",
+     "time": 2.5
+    }
+   ],
+   "hide_if_flag": "ch06_decoy_used",
+   "talk": [
+    {
+     "scene": "ticket_taker"
+    }
+   ]
+  },
+  {
+   "id": "ghost_train",
+   "character": "ghost_train",
+   "x": 10,
+   "y": 4,
+   "facing": "down",
+   "show_if_flag": "ch06_lever_pulled",
+   "talk": [
+    {
+     "scene": "C6_06_ride"
+    }
+   ]
+  },
+  {
+   "id": "mixed",
+   "character": "funhouse_double",
+   "x": 6,
+   "y": 10,
+   "facing": "right",
+   "hide_if_flag": "pm03_mixed_beaten",
+   "encounter": {
+    "id": "pm03_mixed",
+    "outro_scene": "pm03_mixed_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "ride_lever",
+   "x": 22,
+   "y": 5,
+   "talk": [
+    {
+     "if_flags": [
+      "ch06_lever_pulled"
+     ],
+     "scene": "lever_done"
+    },
+    {
+     "if_watched": "ticket_taker",
+     "if_not_flags": [
+      "ch06_decoy_used"
+     ],
+     "scene": "lever_caught"
+    },
+    {
+     "scene": "C6_05_lever"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch06_lever_pulled"
+   ],
+   "tile": "lever_on",
+   "cells": [
+    [
+     22,
+     5
+    ]
+   ]
+  }
+ ],
+ "triggers": [
+  {
+   "cells": [
+    [
+     14,
+     12
+    ],
+    [
+     15,
+     12
+    ],
+    [
+     16,
+     12
+    ]
+   ],
+   "scene": "C6_05_decoy_offer",
+   "if_not_flags": [
+    "ch06_decoy_offered"
+   ]
+  }
+ ],
+ "on_enter": [],
+ "movables": [],
+ "tint": "#b8a8d8"
+}

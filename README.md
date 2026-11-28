@@ -145,6 +145,18 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
     - Wilt, announced a round ahead, from 30%.
 58. A carnival ticket stub points to **Pasar Malam Impian**.
 
+**Chapter 6: The Midnight Carnival.** Design: `docs/chapter-06/CHAPTER_06_PRODUCTION.md`.
+
+59. From the Chapter 5 screen, press A. Walk back to the Old Forest Trail and take the new south path to **Pasar Malam Impian**. The humans at the edges only see an ordinary night market.
+60. **Taro**, the star performer, says the man is in the Hall of Mirrors. He's lying.
+61. In **the Hall of Mirrors** (PZ-601), swap to Lumi and use Echo Sight at the marker by the door: three mirrors are really doorways. Taro is hiding at the back, and joins: Trick Shot, Dazzle (hits every enemy), and **Decoy** in the field.
+62. On **the Ghost Train platform** (PZ-602), pull the ride lever while the ticket-taker looks away, or let Taro's Decoy lead him off. Ride the Ghost Train to the Big Top.
+63. **The Ringmaster of Maybe** (BOSS-601):
+    - Cane Twirl, Now You Don't (Fog) and Confetti Blast in phase 1.
+    - Funhouse Doubles from 60%.
+    - Grand Finale, announced a round ahead, from 30%.
+64. The Ringmaster admits the stranger bought a one-way ticket east, over the sea, to the Oathkeepers' mountain.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -212,4 +224,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 10. ✅ Chapter 3: The Town That Forgot Its Name (Elias joins, three-hero battles)
 11. ✅ Chapter 4: The Rubber Grove at Midnight (Forest Whisper, mediation, Poison)
 12. ✅ Chapter 5: A Thousand Flowers, One Promise (Maris joins, healing, formation)
-13. Chapters 6 to 10 and the epilogue
+13. ✅ Chapter 6: The Midnight Carnival (Taro joins, false mirrors, Decoy)
+14. Chapters 7 to 10 and the epilogue
