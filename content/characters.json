@@ -71,6 +71,22 @@
         "res": 9,
         "spd": 15
       }
+    },
+    "galen": {
+      "name": "Galen",
+      "walks": false,
+      "draws_fire": true,
+      "counter": true,
+      "stats": {
+        "level": 1,
+        "max_hp": 52,
+        "max_mp": 14,
+        "atk": 14,
+        "def": 14,
+        "mag": 5,
+        "res": 11,
+        "spd": 6
+      }
     }
   }
 }

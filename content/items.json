@@ -279,6 +279,28 @@
    "name": "One-Way Ticket Stub",
    "kind": "key",
    "text": "Torn from the Ringmaster's book: EAST, OVER THE SEA. ONE WAY. The ink is the same ink."
+  },
+  "equip_moss_mantle": {
+   "name": "Moss Mantle",
+   "kind": "charm",
+   "equip_to": "galen",
+   "bonus": {
+    "def": 3,
+    "res": 2
+   },
+   "text": "Soft, green and older than the road. Galen wears it: DEF +3, RES +2."
+  },
+  "item_cloud_honey": {
+   "name": "Cloud Honey",
+   "kind": "consumable",
+   "heal_hp": 160,
+   "price_dp": 12,
+   "text": "From bees that live above the mist. Restores 160 HP."
+  },
+  "item_oath_rubbing": {
+   "name": "Oath Stone Rubbing",
+   "kind": "key",
+   "text": "Charcoal on paper: the Oathkeepers' names. One has been scraped away, by the same hand that wrote it."
   }
  }
 }

@@ -87,6 +87,23 @@
    "mult": 0.9,
    "target": "all",
    "text": "A burst of lantern light and paper birds. Hits every enemy."
+  },
+  "boulder_smash": {
+   "name": "Boulder Smash",
+   "user": "galen",
+   "mp": 6,
+   "kind": "physical",
+   "mult": 1.7,
+   "text": "Slow, heavy, certain."
+  },
+  "stone_rain": {
+   "name": "Stone Rain",
+   "user": "galen",
+   "mp": 9,
+   "kind": "physical",
+   "mult": 0.9,
+   "target": "all",
+   "text": "Pebbles from a very great height. Hits every enemy."
   }
  },
  "team": {

@@ -1,0 +1,193 @@
+{
+ "id": "EH-02",
+ "name": "The Moss Forest",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 34,
+ "height": 24,
+ "legend": {
+  "T": "tree",
+  "m": "moss",
+  "~": "mist",
+  "p": "pitcher",
+  "E": "exit"
+ },
+ "rows": [
+  "TTTTTTTTTETTTTTTTTTTTTTTTTTTTTTTTT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmpmmmmmmmmmmmmmpmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TTTTTTTT~~~TTTTTTTTTTTTTTTTTTTTTTT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmpmmmmmmmmT",
+  "TmmmpmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TTTTTTTTTTTTTTTT~~~TTTTTTTTTTTTTTT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmpmmmmmT",
+  "TmmmmpmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmT",
+  "TTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 17,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_foothills": {
+   "x": 17,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_gate": {
+   "x": 9,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_foothills",
+   "x": 17,
+   "y": 23,
+   "to_map": "EH-01",
+   "to_spawn": "from_moss"
+  },
+  {
+   "id": "to_gate",
+   "x": 9,
+   "y": 0,
+   "to_map": "EH-03",
+   "to_spawn": "from_moss"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "mixed",
+   "character": "stone_silencer",
+   "x": 25,
+   "y": 11,
+   "facing": "left",
+   "hide_if_flag": "eh02_mixed_beaten",
+   "encounter": {
+    "id": "eh02_mixed",
+    "outro_scene": "eh02_mixed_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "mist_2",
+   "x": 17,
+   "y": 15,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_mist_2"
+     ],
+     "scene": "mist_gone"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "C7_02_mist_2"
+    },
+    {
+     "scene": "mist_lumi"
+    }
+   ]
+  },
+  {
+   "id": "mist_3",
+   "x": 9,
+   "y": 7,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_mist_cleared"
+     ],
+     "scene": "mist_gone"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "C7_02_mist_3"
+    },
+    {
+     "scene": "mist_lumi"
+    }
+   ]
+  },
+  {
+   "id": "pitcher",
+   "x": 15,
+   "y": 3,
+   "talk": [
+    {
+     "scene": "pitcher_look"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch07_mist_2"
+   ],
+   "tile": "moss",
+   "cells": [
+    [
+     16,
+     15
+    ],
+    [
+     17,
+     15
+    ],
+    [
+     18,
+     15
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch07_mist_cleared"
+   ],
+   "tile": "moss",
+   "cells": [
+    [
+     8,
+     7
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     10,
+     7
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C7_02_moss",
+   "if_not_flags": [
+    "ch07_moss_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#c8d8d0"
+}

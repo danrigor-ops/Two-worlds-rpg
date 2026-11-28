@@ -602,6 +602,59 @@
     "active": "The Ringmaster is hiding the stranger's trail behind illusions.",
     "completed": "The Ringmaster told the truth, for once."
    }
+  },
+  {
+   "id": "C07-001",
+   "name": "Above the Clouds",
+   "start": "locked",
+   "start_flags": [
+    "ch07_started"
+   ],
+   "complete_flags": [
+    "ch07_mist_cleared"
+   ],
+   "reward": {
+    "dewdrops": 6
+   },
+   "journal": {
+    "active": "Banjaran Awan, the Cloud Range. A thick mist hides the trail. Reno's Spirit Cyclone can blow it away.",
+    "completed": "The mist is gone. Something old is waiting at the Guardian's Gate."
+   }
+  },
+  {
+   "id": "C07-002",
+   "name": "The Guardian's Trial",
+   "start": "locked",
+   "start_flags": [
+    "ch07_mist_cleared"
+   ],
+   "complete_flags": [
+    "ch07_galen_joined"
+   ],
+   "reward": {
+    "items": {
+     "item_cloud_honey": 2
+    }
+   },
+   "journal": {
+    "active": "The guardian Galen thinks we came with the ink-fingered man. Prove him wrong.",
+    "completed": "Galen joined us. He knew the man, once."
+   }
+  },
+  {
+   "id": "C07-003",
+   "name": "The Oath Stone",
+   "start": "locked",
+   "start_flags": [
+    "ch07_galen_joined"
+   ],
+   "complete_flags": [
+    "ch07_hush_beaten"
+   ],
+   "journal": {
+    "active": "Galen can break the silent stones. The Oath Stone is at the summit.",
+    "completed": "The Hush is gone. The stone remembered a warning."
+   }
   }
  ]
 }

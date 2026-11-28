@@ -157,6 +157,17 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
     - Grand Finale, announced a round ahead, from 30%.
 64. The Ringmaster admits the stranger bought a one-way ticket east, over the sea, to the Oathkeepers' mountain.
 
+**Chapter 7: The Guardian of the Eastern Mountains.** Design: `docs/chapter-07/CHAPTER_07_PRODUCTION.md`. The highlands are fictional and flagged for cultural research.
+
+65. From the Chapter 6 screen, press A. Leave the Big Top and talk to the carnival caravan on the midway to ride east to **Banjaran Awan**.
+66. With Reno leading, use Spirit Cyclone on three still mist banks (PZ-701) through the foothills and the Moss Forest.
+67. At **the Guardian's Gate**, Galen tests you in a trial fight, yields at half HP, and joins. He's the tank: he draws attacks, counters physical hits, and has Boulder Smash and Stone Rain. In the field he breaks the three **silent stones** (PZ-702).
+68. **The Hush** (BOSS-701):
+    - Hush (Fog), Stone Drop and Echo Ache in phase 1.
+    - A Stone Silencer from 60%.
+    - Great Silence, announced a round ahead, from 30%.
+69. The Oath Stone plays back the stranger's warning: when the Lantern Moon rises, the worlds will touch, and then he will close every door.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -225,4 +236,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 11. ✅ Chapter 4: The Rubber Grove at Midnight (Forest Whisper, mediation, Poison)
 12. ✅ Chapter 5: A Thousand Flowers, One Promise (Maris joins, healing, formation)
 13. ✅ Chapter 6: The Midnight Carnival (Taro joins, false mirrors, Decoy)
-14. Chapters 7 to 10 and the epilogue
+14. ✅ Chapter 7: The Guardian of the Eastern Mountains (Galen joins, tank passives, mist and silent stones)
+15. Chapters 8 to 10 and the epilogue

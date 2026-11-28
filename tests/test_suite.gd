@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 23
+const SECTIONS := 24
 
 
 func check(cond: bool, label: String) -> void:
@@ -103,6 +103,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 6: The Midnight Carnival")
 	await _test_chapter6(gs, im)
+
+	print("Chapter 7: The Guardian of the Eastern Mountains")
+	await _test_chapter7(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1345,7 +1348,7 @@ func _run_battle_with(scene: Node, im: Node, prefs: Array) -> Array[String]:
 	if battle == null:
 		return out
 	var used := {}
-	for i in 4000:
+	for i in 8000:
 		if not is_instance_valid(battle) or im.current_mode() != im.Mode.BATTLE:
 			break
 		out.assign(battle.battle_log)
@@ -1986,6 +1989,8 @@ func _chapter_start(gs: Node, flags: Array, xp: int, map_id: String, spawn: Stri
 		gs.add_member("elias")
 	if "ch05_maris_joined" in flags:
 		gs.add_member("maris")
+	if "ch06_taro_joined" in flags:
+		gs.add_member("taro")
 	gs.set_spawn(map_id, spawn)
 	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
 	scene.battle_auto_judge = "perfect"
@@ -2247,4 +2252,82 @@ func _test_chapter6(gs: Node, im: Node) -> void:
 	check(["eastern_route_unlocked", "chapter_06_completed", "chapter_07_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C06-001", "C06-002", "C06-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C06-001 to C06-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 6")
+	_sections_done += 1
+
+
+func _test_chapter7(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_completed", "ch06_started", "ch06_taro_joined", "ch06_ringmaster_beaten", "chapter_07_unlocked"], 2700, "PM-01", "from_train")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(20, 26), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "EH-01", "C7-01: the carnival caravan rides east to the Cloud Range")
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch07_started"), "the chapter starts")
+	if gs.leader() == "reno":
+		await _tap("swap")
+	await _talk(scene, Vector2i(18, 8), im)
+	check(not gs.get_flag("ch07_mist_1"), "Lumi can't push the mist")
+	await _tap("swap")
+	await _talk(scene, Vector2i(18, 8), im)
+	check(gs.get_flag("ch07_mist_1") and scene.map.is_walkable(Vector2i(18, 8)), "PZ-701: Spirit Cyclone blows the mist away")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(18, 1)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "EH-02", "the Moss Forest")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(17, 15), im)
+	await _talk(scene, Vector2i(9, 7), im)
+	check(gs.get_flag("ch07_mist_cleared") and gs.quest_state("C07-001") in ["completed", "rewarded"], "all three mist banks are gone")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(9, 1)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "EH-03", "the Guardian's Gate")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(15, 12), im)
+	check(not gs.get_flag("ch07_stone_1") and not scene.map.is_walkable(Vector2i(15, 12)), "nobody can break a silent stone yet")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 19)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "C7-03: Galen's trial starts")
+	await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "skill", "attack"])
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch07_galen_trial_won") and gs.has_member("galen") and gs.get_flag("ch07_galen_joined") and gs.party().size() == 6, "Galen yields and joins (six in the party)")
+	gs.move_to_front("galen")
+	for c in [Vector2i(15, 12), Vector2i(8, 8), Vector2i(22, 4)]:
+		await _talk(scene, c, im)
+	check(["ch07_stone_1", "ch07_stone_2", "ch07_stone_3"].all(gs.get_flag) and scene.map.is_walkable(Vector2i(22, 4)), "PZ-702: Galen breaks the three silent stones")
+
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(22, 1)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "EH-04", "the Oath Stone summit")
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 10)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Hush fight starts")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "skill", "stone_rain", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("galen counter")), "Galen counters a physical hit")
+	check(blog.any(func(l: String) -> bool: return l.contains("-> galen")), "attacks are drawn to Galen")
+	check(blog.any(func(l: String) -> bool: return l.contains("summon stone_silencer")), "the Hush wakes a Stone Silencer")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch07_hush_beaten") and gs.has_key_item("item_oath_rubbing") and gs.equip_bonus("galen").get("def", 0) == 3, "BOSS-701: the Moss Mantle and the Oath Stone rubbing")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(["ch07_lantern_moon_warned", "chapter_07_completed", "chapter_08_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C07-001", "C07-002", "C07-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C07-001 to C07-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 7")
 	_sections_done += 1

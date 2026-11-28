@@ -131,7 +131,11 @@ func _setup_combat() -> void:
 		var bonus := GameState.equip_bonus(id)
 		for k: String in bonus:
 			stats[k] = int(stats[k]) + int(bonus[k])
-		heroes.append(Combat.make_unit(id, names.get(id, {}).get("name", id), "hero", stats))
+		var hu := Combat.make_unit(id, names.get(id, {}).get("name", id), "hero", stats)
+		# Tanks (Galen): "draws_fire" takes every other single-target hit, "counter" hits back.
+		hu["draws_fire"] = names.get(id, {}).get("draws_fire", false)
+		hu["counter"] = names.get(id, {}).get("counter", false)
+		heroes.append(hu)
 		var pos: Vector2 = HERO_POS.get(id, Vector2(54, 75)) if active.size() <= 2 else HERO_SLOTS[active.find(id)]
 		_add_sprite(id, id, pos, "right")
 	var enemies: Array = []
@@ -220,7 +224,7 @@ func _hero_turn(u: Dictionary) -> bool:
 			_hint.text = "Memory Fog: %s can't remember any skills this turn." % u["name"]
 		var items := [
 			{"text": "Attack", "enabled": true, "value": "attack"},
-			{"text": "Skill", "enabled": not fogged, "value": "skill"},
+			{"text": "Skill", "enabled": not fogged and _can_afford_a_skill(u), "value": "skill"},
 			{"text": "Guard", "enabled": true, "value": "guard"},
 			{"text": "Item", "enabled": true, "value": "item"},
 		]
@@ -502,6 +506,10 @@ func _enemy_turn(u: Dictionary) -> void:
 		return
 	var heroes := combat.side("hero")
 	var targets: Array = heroes if atk.get("target", "one") == "all" else [heroes[(combat.round_number - 1) % heroes.size()]]
+	if targets.size() == 1 and combat.round_number % 2 == 0:
+		for h: Dictionary in heroes:
+			if h.get("draws_fire", false):
+				targets = [h]
 	var aim: Dictionary = targets[0]
 	_msg.text = "%s uses %s%s!" % [u["name"], atk["name"], "" if targets.size() > 1 else " on " + aim["name"]]
 	if atk.get("kind", "") == "status":
@@ -520,8 +528,27 @@ func _enemy_turn(u: Dictionary) -> void:
 			_sprites[target["id"]].modulate.a = 0.35
 		elif dmg > 0 and atk.has("applies") and Combat.add_status(target, atk["applies"], int(atk.get("turns", 1))):
 			parts.append("%s %s" % [target["name"], STATUS_TEXT.get(atk["applies"], "")])
+		if target["hp"] > 0 and target.get("counter", false) and atk["kind"] == "physical" and u["hp"] > 0:
+			var cdmg := combat.hit(target, u, "physical", COUNTER_MULT, "miss")
+			_log("%s counter %s %d" % [target["id"], u["id"], cdmg])
+			parts.append("%s counters for %d" % [target["name"], cdmg])
+			if u["hp"] <= 0:
+				_sprites[u["id"]].modulate.a = 0.25
+				break
 	await _say(("Half dodged! " if judgement == "good" else "") + ", ".join(parts) + ".")
 
+
+## Skill is greyed out when every skill costs more MP than the unit has.
+func _can_afford_a_skill(u: Dictionary) -> bool:
+	for sid: String in _skills:
+		var sk: Dictionary = _skills[sid]
+		if sk["user"] == u["id"] and (not sk.has("requires_flag") or GameState.get_flag(sk["requires_flag"])) and u["mp"] >= int(sk["mp"]):
+			return true
+	return false
+
+
+## Galen hits back at physical attackers for this much of a normal hit.
+const COUNTER_MULT := 0.6
 
 const STATUS_TEXT := {
 	"poison": "is poisoned!",
