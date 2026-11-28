@@ -1,0 +1,133 @@
+{
+ "id": "PM-02",
+ "name": "Hall of Mirrors",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 20,
+ "legend": {
+  "m": "mirror",
+  "f": "mirror_false",
+  "c": "carnival_floor",
+  "D": "door",
+  "e": "echo_marker"
+ },
+ "rows": [
+  "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+  "mceccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccfccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccfcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccfccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mccccccmccccccmccccccmcccccccm",
+  "mmmDmmmmmmmmmmmmmmmmmmmmmmmmmm"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 18,
+   "facing": "up"
+  },
+  "from_midway": {
+   "x": 3,
+   "y": 18,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 3,
+   "y": 19,
+   "to_map": "PM-01",
+   "to_spawn": "from_mirrors"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "taro_mirror",
+   "character": "taro",
+   "x": 25,
+   "y": 11,
+   "facing": "left",
+   "hide_if_flag": "ch06_taro_joined",
+   "talk": [
+    {
+     "scene": "C6_04_taro_caught"
+    }
+   ]
+  },
+  {
+   "id": "doubles",
+   "character": "funhouse_double",
+   "x": 11,
+   "y": 9,
+   "facing": "left",
+   "hide_if_flag": "pm02_doubles_beaten",
+   "encounter": {
+    "id": "pm02_doubles",
+    "outro_scene": "pm02_doubles_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "echo",
+   "x": 2,
+   "y": 1,
+   "talk": [
+    {
+     "if_leader": "lumi",
+     "scene": "C6_03_echo_sight"
+    },
+    {
+     "scene": "mirror_echo_reno"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch06_mirrors_seen"
+   ],
+   "tile": "mirror_shown",
+   "cells": [
+    [
+     7,
+     15
+    ],
+    [
+     14,
+     4
+    ],
+    [
+     21,
+     11
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C6_03_mirrors",
+   "if_not_flags": [
+    "ch06_mirrors_entered"
+   ]
+  }
+ ],
+ "movables": []
+}

@@ -549,6 +549,59 @@
     "active": "The forgetting seeds have grown at the Heart of the Sanctuary.",
     "completed": "The Forgetting Bloom wilted. The sanctuary is breathing again."
    }
+  },
+  {
+   "id": "C06-001",
+   "name": "Admit One",
+   "start": "locked",
+   "start_flags": [
+    "ch06_started"
+   ],
+   "complete_flags": [
+    "ch06_taro_joined"
+   ],
+   "reward": {
+    "dewdrops": 5
+   },
+   "journal": {
+    "active": "Pasar Malam Impian, the midnight carnival. The star performer Taro says the man we want is in the Hall of Mirrors. Is he telling the truth?",
+    "completed": "Taro was lying. Then he joined us anyway."
+   }
+  },
+  {
+   "id": "C06-002",
+   "name": "The Last Ride",
+   "start": "locked",
+   "start_flags": [
+    "ch06_taro_joined"
+   ],
+   "complete_flags": [
+    "ch06_ride_taken"
+   ],
+   "reward": {
+    "items": {
+     "item_coconut_jelly": 3
+    }
+   },
+   "journal": {
+    "active": "The Ghost Train goes to the Big Top. Pull the ride lever while the ticket-taker isn't looking, or let Taro make a Decoy.",
+    "completed": "We rode the Ghost Train. Reno screamed. Happily."
+   }
+  },
+  {
+   "id": "C06-003",
+   "name": "The Ringmaster of Maybe",
+   "start": "locked",
+   "start_flags": [
+    "ch06_ride_taken"
+   ],
+   "complete_flags": [
+    "ch06_ringmaster_beaten"
+   ],
+   "journal": {
+    "active": "The Ringmaster is hiding the stranger's trail behind illusions.",
+    "completed": "The Ringmaster told the truth, for once."
+   }
   }
  ]
 }

@@ -250,6 +250,35 @@
    "name": "Carnival Ticket Stub",
    "kind": "key",
    "text": "PASAR MALAM IMPIAN. ADMIT ONE. The ink on the edge is the same ink."
+  },
+  "equip_jugglers_ribbon": {
+   "name": "Juggler's Ribbon",
+   "kind": "charm",
+   "equip_to": "taro",
+   "bonus": {
+    "spd": 3,
+    "atk": 2
+   },
+   "text": "Never tangles. Taro wears it: SPD +3, ATK +2."
+  },
+  "item_toffee_apple": {
+   "name": "Toffee Apple",
+   "kind": "consumable",
+   "heal_hp": 120,
+   "price_dp": 8,
+   "text": "Crunchy, sticky, glorious. Restores 120 HP."
+  },
+  "item_sugarcane_juice": {
+   "name": "Sugarcane Juice",
+   "kind": "consumable",
+   "heal_mp": 35,
+   "price_dp": 8,
+   "text": "Pressed fresh at the stall. Restores 35 MP."
+  },
+  "item_oneway_ticket": {
+   "name": "One-Way Ticket Stub",
+   "kind": "key",
+   "text": "Torn from the Ringmaster's book: EAST, OVER THE SEA. ONE WAY. The ink is the same ink."
   }
  }
 }

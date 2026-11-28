@@ -1,0 +1,88 @@
+{
+ "id": "PM-04",
+ "name": "The Big Top",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 22,
+ "legend": {
+  "t": "tent",
+  "c": "carnival_floor",
+  ".": "grass",
+  "D": "door"
+ },
+ "rows": [
+  "tttttttttttttttttttttttttttttt",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tccccccccc..........ccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tcccccccccccccccccccccccccccct",
+  "tttttttttttttttDtttttttttttttt"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 18,
+   "facing": "up"
+  },
+  "from_train": {
+   "x": 15,
+   "y": 18,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "out",
+   "x": 15,
+   "y": 21,
+   "to_map": "PM-01",
+   "to_spawn": "from_train",
+   "one_way": true
+  }
+ ],
+ "npcs": [
+  {
+   "id": "ringmaster",
+   "character": "ringmaster",
+   "x": 15,
+   "y": 6,
+   "facing": "down",
+   "hide_if_flag": "ch06_ringmaster_beaten",
+   "encounter": {
+    "id": "ringmaster_boss",
+    "intro_scene": "C6_07_ring_intro",
+    "outro_scene": "C6_07_ring_outro"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C6_06_bigtop",
+   "if_not_flags": [
+    "ch06_bigtop_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#f0d0c0"
+}

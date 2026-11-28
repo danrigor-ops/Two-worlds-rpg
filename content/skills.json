@@ -70,6 +70,23 @@
    "kind": "magical",
    "mult": 1.3,
    "text": "A whip of flowering thorns."
+  },
+  "trick_shot": {
+   "name": "Trick Shot",
+   "user": "taro",
+   "mp": 5,
+   "kind": "physical",
+   "mult": 1.5,
+   "text": "A juggling club that comes from somewhere unexpected."
+  },
+  "dazzle": {
+   "name": "Dazzle",
+   "user": "taro",
+   "mp": 7,
+   "kind": "magical",
+   "mult": 0.9,
+   "target": "all",
+   "text": "A burst of lantern light and paper birds. Hits every enemy."
   }
  },
  "team": {

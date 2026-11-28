@@ -40,6 +40,16 @@
     "item_river_rice_cake",
     "item_lotus_tea"
    ]
+  },
+  "carnival_stall": {
+   "name": "Midnight Sweets",
+   "currency": "dewdrops",
+   "items": [
+    "item_toffee_apple",
+    "item_sugarcane_juice",
+    "item_coconut_jelly",
+    "item_chrysanthemum_tea"
+   ]
   }
  }
 }

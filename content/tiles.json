@@ -471,6 +471,41 @@
    "color": "#5d9e4b",
    "accent": "#f2a0c8",
    "pattern": "flowers"
+  },
+  "mirror": {
+   "index": 67,
+   "solid": true,
+   "color": "#9fb8d8",
+   "accent": "#f4f8ff",
+   "pattern": "water"
+  },
+  "mirror_false": {
+   "index": 68,
+   "solid": true,
+   "color": "#9fb8d8",
+   "accent": "#f4f8ff",
+   "pattern": "water"
+  },
+  "mirror_shown": {
+   "index": 69,
+   "solid": false,
+   "color": "#8a6ad8",
+   "accent": "#f4f8ff",
+   "pattern": "speckle"
+  },
+  "carnival_floor": {
+   "index": 70,
+   "solid": false,
+   "color": "#5a3a5a",
+   "accent": "#e8b84a",
+   "pattern": "checker"
+  },
+  "tent": {
+   "index": 71,
+   "solid": true,
+   "color": "#c94f4f",
+   "accent": "#f4ecd2",
+   "pattern": "stall"
   }
  }
 }

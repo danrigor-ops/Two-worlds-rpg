@@ -39,10 +39,10 @@
   "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
   "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
   "TTTTTTTTTTTTTTTTTTTTTTTTTT...........TTT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.TTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.TTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT.TTTTTTTT",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTETTTTTTTT"
  ],
  "spawns": {
   "start": {
@@ -59,6 +59,11 @@
    "x": 38,
    "y": 14,
    "facing": "left"
+  },
+  "from_carnival": {
+   "x": 31,
+   "y": 27,
+   "facing": "up"
   }
  },
  "doors": [
@@ -81,6 +86,21 @@
       "ch05_maris_joined"
      ],
      "else_scene": "sb01_not_yet"
+    }
+   ]
+  },
+  {
+   "id": "to_carnival",
+   "x": 31,
+   "y": 29,
+   "to_map": "PM-01",
+   "to_spawn": "from_forest",
+   "require": [
+    {
+     "if_flags": [
+      "chapter_06_unlocked"
+     ],
+     "else_scene": "sb01_lights_not_yet"
     }
    ]
   }
