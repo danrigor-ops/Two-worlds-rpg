@@ -62,6 +62,11 @@
    "x": 17,
    "y": 6,
    "facing": "down"
+  },
+  "from_archive": {
+   "x": 17,
+   "y": 6,
+   "facing": "down"
   }
  },
  "doors": [],
@@ -110,6 +115,12 @@
    "facing": "down",
    "show_if_flag": "ch08_two_sealed",
    "talk": [
+    {
+     "if_flags": [
+      "chapter_09_unlocked"
+     ],
+     "scene": "C9_00_archive_door"
+    },
     {
      "if_flags": [
       "ch08_echo_beaten"

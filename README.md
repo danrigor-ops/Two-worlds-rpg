@@ -177,6 +177,16 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
 72. **Railway tear (north): Reno and Lumi.** It opens once the other two are sealed. It shows 1951: a railway worker with Reno's token, and a guardian spirit Lumi somehow knows. Beat the Echo of 1951.
 73. The man in the grey coat names himself **the Keeper of Silence**, names Maya and Seri, and points the duo to the Archive.
 
+**Chapter 9: The Keeper of Forgotten Years.** Design: `docs/chapter-09/CHAPTER_09_PRODUCTION.md`.
+
+74. From the Chapter 8 screen, press A. The railway tear is now a door into **the Archive Between Worlds**.
+75. Open three catalogue gates (PZ-901):
+    - the Oath Stone Rubbing opens the first;
+    - for the second, answer Index: the Promise belongs to "everyone who keeps it";
+    - the Ticket to Nowhere opens the third.
+76. In **the Reading Room of 1951** (PZ-902), Lumi reads three pages written in light. They reveal the truth: Reno was the spirit child Maya saved, and Lumi is an echo of Seri. A hidden fourth page holds Maya's last words.
+77. At **the Keeper's Desk**, the first confrontation (BOSS-901): he breaks off at 40% and flees to the First Crossing.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -247,4 +257,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 13. ✅ Chapter 6: The Midnight Carnival (Taro joins, false mirrors, Decoy)
 14. ✅ Chapter 7: The Guardian of the Eastern Mountains (Galen joins, tank passives, mist and silent stones)
 15. ✅ Chapter 8: The Night the Worlds Touched (mission parties, three split-up missions)
-16. Chapters 9 and 10 and the epilogue
+16. ✅ Chapter 9: The Keeper of Forgotten Years (the Archive, the truth about 1951)
+17. Chapter 10 and the epilogue

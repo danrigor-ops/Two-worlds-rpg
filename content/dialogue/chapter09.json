@@ -1,0 +1,434 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 9 from docs/chapter-09/CHAPTER_09_PRODUCTION.md.",
+ "speakers": {
+  "index": {
+   "name": "Index",
+   "character": "index"
+  },
+  "keeper": {
+   "name": "The Keeper of Silence",
+   "character": "keeper"
+  },
+  "maya": {
+   "name": "Maya",
+   "character": "hidden_page"
+  }
+ },
+ "scenes": {
+  "C9_00_archive_door": [
+   {
+    "speaker": "narrator",
+    "text": "The railway tear has closed into a door. The Ticket to Nowhere is warm in Reno's pocket."
+   },
+   {
+    "choice": [
+     {
+      "text": "Open the Archive door",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "The door opens onto shelves that go up forever."
+       },
+       {
+        "event": "travel:AR-01:from_tear:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C9_01_archive": [
+   {
+    "set_flag": "ch09_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Archive Between Worlds. Every forgotten thing ends up here: names, songs, birthdays, the smell of a grandmother's kitchen. Shelf after shelf, all the way up."
+   },
+   {
+    "speaker": "index",
+    "text": "Shh. Welcome. I am Index. I keep the catalogue. You are... ah. Reno and Lumi. You have a very thick file."
+   },
+   {
+    "speaker": "reno",
+    "text": "I have a FILE?"
+   },
+   {
+    "speaker": "index",
+    "text": "Everyone does. His is the thickest. He has been here every night for twelve years, filing things away."
+   },
+   {
+    "speaker": "index",
+    "text": "The stacks are behind three catalogue gates. Each wants something you carried here."
+   }
+  ],
+  "index_hint": [
+   {
+    "speaker": "index",
+    "text": "Gate one is O, for Oathkeepers. Gate two asks a question. Gate three is 1951. Shh."
+   }
+  ],
+  "gate_locked": [
+   {
+    "speaker": "narrator",
+    "text": "A catalogue gate with a brass slot. It wants something."
+   },
+   {
+    "speaker": "index",
+    "text": "Not that. Something you carried from the journey."
+   }
+  ],
+  "gate_open": [
+   {
+    "speaker": "narrator",
+    "text": "The gate stands open."
+   }
+  ],
+  "C9_01_gate_1": [
+   {
+    "speaker": "narrator",
+    "text": "Galen slides the Oath Stone Rubbing into the slot. The gate reads it, sighs, and swings open."
+   },
+   {
+    "set_flag": "ch09_gate_1"
+   },
+   {
+    "speaker": "galen",
+    "text": "It knows those names."
+   }
+  ],
+  "C9_01_gate_2": [
+   {
+    "speaker": "index",
+    "text": "Gate two asks: whose Promise is it?"
+   },
+   {
+    "choice": [
+     {
+      "text": "The Oathkeepers'",
+      "then": [
+       {
+        "speaker": "index",
+        "text": "No. They only kept it. Try again."
+       }
+      ]
+     },
+     {
+      "text": "Everyone who keeps it",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "The gate clicks open."
+       },
+       {
+        "speaker": "index",
+        "text": "Yes. That's what the flowers remembered, isn't it?"
+       },
+       {
+        "set_flag": "ch09_gate_2"
+       }
+      ]
+     },
+     {
+      "text": "Nobody's any more",
+      "then": [
+       {
+        "speaker": "index",
+        "text": "That's what HE would say. Try again."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C9_01_gate_3": [
+   {
+    "speaker": "narrator",
+    "text": "Reno feeds the Ticket to Nowhere into the last slot. The gate stamps it 1951, and opens."
+   },
+   {
+    "set_flag": "ch09_gates_open"
+   },
+   {
+    "speaker": "index",
+    "text": "The reading room of 1951 is ahead. Only Lumi can read those pages, I think. They're written in light."
+   }
+  ],
+  "ar01_pages_beaten": [
+   {
+    "set_flag": "ar01_pages_beaten"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The blank pages flutter back onto their shelf."
+   }
+  ],
+  "ar02_wraith_beaten": [
+   {
+    "set_flag": "ar02_wraith_beaten"
+   },
+   {
+    "speaker": "maris",
+    "text": "Hold still, everyone. That ink stings."
+   }
+  ],
+  "C9_02_reading": [
+   {
+    "set_flag": "ch09_reading_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The reading room of 1951. Three pages glow on three desks. The air smells like rain on a railway platform."
+   },
+   {
+    "speaker": "lumi",
+    "text": "These pages are... me. I can feel them."
+   }
+  ],
+  "page_reno": [
+   {
+    "speaker": "narrator",
+    "text": "A glowing page. The writing is made of light and slides away when Reno looks at it."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi? Your turn. (Swap with C.)"
+   }
+  ],
+  "page_read": [
+   {
+    "speaker": "narrator",
+    "text": "The page has gone quiet."
+   }
+  ],
+  "C9_02_page_1": [
+   {
+    "speaker": "narrator",
+    "text": "Page one. 1951, the night of a Lantern Moon. The Oathkeepers gather to open a crossing, the way they did every twelve years, so the worlds can visit."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The youngest Oathkeeper is leading it for the first time. His hands are shaking."
+   },
+   {
+    "set_flag": "ch09_page_1"
+   },
+   {
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ],
+    "set_flag": "ch09_pages_read"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A fourth page slides out from under the desks, as if someone hid it there.",
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ]
+   }
+  ],
+  "C9_02_page_2": [
+   {
+    "speaker": "narrator",
+    "text": "Page two. The crossing opens under the railway station, just as a train arrives. Too many people. The gap starts to tear."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The young Oathkeeper freezes. A railway worker named Maya and a guardian named Seri run into the gap and hold it open with their hands, while everyone else gets across."
+   },
+   {
+    "set_flag": "ch09_page_2"
+   },
+   {
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ],
+    "set_flag": "ch09_pages_read"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A fourth page slides out from under the desks, as if someone hid it there.",
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ]
+   }
+  ],
+  "C9_02_page_3": [
+   {
+    "speaker": "narrator",
+    "text": "Page three. The last one across is a very small spirit child, crying. Maya presses her railway token into his hand. Seri's light wraps around him, then breaks into a thousand tiny echoes, and one of them follows him."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The gap closes. Maya and Seri are on the other side of it."
+   },
+   {
+    "speaker": "reno",
+    "text": "...That's me. The baby with the token. That's ME."
+   },
+   {
+    "speaker": "lumi",
+    "text": "And the echo that followed you. That's me, Reno. I'm a piece of Seri."
+   },
+   {
+    "set_flag": "ch09_page_3"
+   },
+   {
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ],
+    "set_flag": "ch09_pages_read"
+   },
+   {
+    "speaker": "narrator",
+    "text": "A fourth page slides out from under the desks, as if someone hid it there.",
+    "if_flags": [
+     "ch09_page_1",
+     "ch09_page_2",
+     "ch09_page_3"
+    ]
+   }
+  ],
+  "desk_not_yet": [
+   {
+    "speaker": "narrator",
+    "text": "A door marked PRIVATE. It won't open."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Not until we've read the pages."
+   }
+  ],
+  "C9_03_mayas_page": [
+   {
+    "speaker": "narrator",
+    "text": "A small page, folded many times, in the Keeper's careful handwriting. At the top: \"Things to forget.\""
+   },
+   {
+    "speaker": "narrator",
+    "text": "It's Maya's last words, written down by the young Oathkeeper as she said them through the gap:"
+   },
+   {
+    "speaker": "maya",
+    "text": "\"Tell them to keep the doors open. Don't let this make anyone afraid.\""
+   },
+   {
+    "speaker": "elias",
+    "text": "He heard her. And he filed it away, so he'd never have to hear it again."
+   },
+   {
+    "key_item": "item_mayas_page"
+   },
+   {
+    "set_flag": "ch09_truth_known"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got Maya's Page. The door at the top of the reading room opens."
+   }
+  ],
+  "C9_04_desk": [
+   {
+    "set_flag": "ch09_desk_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Keeper's desk. Ledgers piled high. Ink everywhere. He is writing, and doesn't look up."
+   }
+  ],
+  "C9_04_keeper_intro": [
+   {
+    "speaker": "keeper",
+    "text": "You read them. Then you know. I froze. Two people paid for it."
+   },
+   {
+    "speaker": "reno",
+    "text": "You didn't make the gap. You were scared. That's different."
+   },
+   {
+    "speaker": "keeper",
+    "text": "If the worlds never touch, nobody is ever lost again. I'm so close. Don't make me erase you too."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We have something of yours. Something you hid."
+   },
+   {
+    "speaker": "keeper",
+    "text": "...Then I'll have to take it back."
+   }
+  ],
+  "C9_04_keeper_flees": [
+   {
+    "speaker": "narrator",
+    "text": "The Keeper stumbles against his desk. Ledgers slide to the floor."
+   },
+   {
+    "speaker": "reno",
+    "text": "(holding up the page) She said keep the doors open. She said don't be afraid. You WROTE it down!"
+   },
+   {
+    "speaker": "keeper",
+    "text": "..."
+   },
+   {
+    "speaker": "narrator",
+    "text": "For a long moment he just looks at the page. His ink-stained hand reaches for it, and stops."
+   },
+   {
+    "speaker": "keeper",
+    "text": "If I stop now, then everything I've done was for nothing. Twelve years of nothing."
+   },
+   {
+    "speaker": "keeper",
+    "text": "The First Crossing. Where the very first Promise was made. I'll unmake it there, and it will all be over."
+   },
+   {
+    "speaker": "narrator",
+    "text": "He folds into his grey coat like a closing book and is gone. Something small and bright rolls across the floor."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Oathkeeper's Pin (Reno: ATK +3, SPD +2)."
+   },
+   {
+    "speaker": "index",
+    "text": "The First Crossing is the oldest place there is. If the Promise is unmade there, every door closes. Forever."
+   },
+   {
+    "speaker": "galen",
+    "text": "Then we go to the First Crossing. All of us. And we bring him home."
+   },
+   {
+    "set_flag": "chapter_09_completed"
+   },
+   {
+    "set_flag": "chapter_10_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ],
+  "crossing_door_wait": [
+   {
+    "speaker": "narrator",
+    "text": "A door of warm gold light. Beyond it, the First Crossing."
+   }
+  ]
+ }
+}

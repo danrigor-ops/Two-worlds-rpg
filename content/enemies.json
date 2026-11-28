@@ -1618,6 +1618,161 @@
      ]
     }
    ]
+  },
+  "erased_page": {
+   "name": "Erased Page",
+   "character": "erased_page",
+   "stats": {
+    "level": 21,
+    "max_hp": 230,
+    "atk": 28,
+    "def": 26,
+    "mag": 42,
+    "res": 32,
+    "spd": 22
+   },
+   "xp": 72,
+   "attacks": [
+    {
+     "name": "Blank Out",
+     "kind": "status",
+     "applies": "fog",
+     "turns": 1
+    },
+    {
+     "name": "Paper Cut",
+     "kind": "physical",
+     "mult": 1.1
+    }
+   ]
+  },
+  "ink_wraith": {
+   "name": "Ink Wraith",
+   "character": "ink_wraith",
+   "stats": {
+    "level": 21,
+    "max_hp": 280,
+    "atk": 44,
+    "def": 28,
+    "mag": 30,
+    "res": 24,
+    "spd": 16
+   },
+   "xp": 76,
+   "attacks": [
+    {
+     "name": "Smudge",
+     "kind": "physical",
+     "mult": 1.2,
+     "applies": "poison",
+     "turns": 3
+    },
+    {
+     "name": "Blot",
+     "kind": "magical",
+     "mult": 1.0
+    }
+   ]
+  },
+  "keeper_first": {
+   "name": "The Keeper of Silence",
+   "character": "keeper",
+   "stats": {
+    "level": 22,
+    "max_hp": 2600,
+    "atk": 40,
+    "def": 30,
+    "mag": 44,
+    "res": 32,
+    "spd": 18
+   },
+   "xp": 400,
+   "immune": [
+    "slow",
+    "fog",
+    "poison"
+   ],
+   "end_below": 0.4,
+   "attacks": [
+    {
+     "name": "Quiet Hand",
+     "kind": "physical",
+     "mult": 1.3
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.75,
+     "attacks": [
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      },
+      {
+       "name": "Silence Ink",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ]
+    },
+    {
+     "above": 0.55,
+     "attacks": [
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      },
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Silence Ink",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ],
+     "summon": "erased_page",
+     "enter_text": "Keeper: Every page I erase is one less thing to lose."
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Forget Everything",
+       "kind": "magical",
+       "mult": 2.0,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Keeper opens his ledger. Page after page goes blank... (Forget Everything lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      }
+     ],
+     "enter_text": "Keeper: Please. Just let it be quiet."
+    }
+   ]
   }
  },
  "encounters": {
@@ -1964,6 +2119,31 @@
    ],
    "win_key_items": [
     "equip_lantern_charm"
+   ]
+  },
+  "ar01_pages": {
+   "enemies": [
+    "erased_page",
+    "erased_page"
+   ]
+  },
+  "ar02_wraith": {
+   "enemies": [
+    "ink_wraith",
+    "erased_page"
+   ]
+  },
+  "keeper_first": {
+   "enemies": [
+    "keeper_first"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch09_keeper_confronted"
+   ],
+   "win_key_items": [
+    "equip_oathkeeper_pin"
    ]
   }
  }

@@ -1,0 +1,214 @@
+{
+ "id": "AR-01",
+ "name": "The Archive Between Worlds",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 26,
+ "legend": {
+  "#": "archive_shelf",
+  "f": "archive_floor",
+  "G": "archive_gate",
+  "P": "memory_page",
+  "D": "door"
+ },
+ "rows": [
+  "######################D#########",
+  "#ffffffffffffffffffffffffffffff#",
+  "#fff###ffffff###fffffffffffffff#",
+  "#fff###ffffff###fffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "######################G#########",
+  "#ffffffffffffffffffffffffffffff#",
+  "#fffffffffff###fffffffffff###ff#",
+  "#fffffffffff###fffffffffff###ff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#########G######################",
+  "#ffffffffffffffffffffffffffffff#",
+  "#fff###fffffffffffff###ffffffff#",
+  "#fff###fffffffffffff###ffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "################G###############",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ff###ffffffffffffffffff###ffff#",
+  "#ff###ffffffffffffffffff###ffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffffff#",
+  "################D###############"
+ ],
+ "spawns": {
+  "start": {
+   "x": 16,
+   "y": 23,
+   "facing": "up"
+  },
+  "from_tear": {
+   "x": 16,
+   "y": 23,
+   "facing": "up"
+  },
+  "from_reading": {
+   "x": 22,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_hub",
+   "x": 16,
+   "y": 25,
+   "to_map": "LM-01",
+   "to_spawn": "from_archive",
+   "one_way": true
+  },
+  {
+   "id": "to_reading",
+   "x": 22,
+   "y": 0,
+   "to_map": "AR-02",
+   "to_spawn": "from_stacks"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "index",
+   "character": "index",
+   "x": 13,
+   "y": 21,
+   "facing": "right",
+   "talk": [
+    {
+     "scene": "index_hint"
+    }
+   ]
+  },
+  {
+   "id": "pages",
+   "character": "erased_page",
+   "x": 26,
+   "y": 16,
+   "facing": "left",
+   "hide_if_flag": "ar01_pages_beaten",
+   "encounter": {
+    "id": "ar01_pages",
+    "outro_scene": "ar01_pages_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "gate_1",
+   "x": 16,
+   "y": 18,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_gate_1"
+     ],
+     "scene": "gate_open"
+    },
+    {
+     "if_key_items": [
+      "item_oath_rubbing"
+     ],
+     "scene": "C9_01_gate_1"
+    },
+    {
+     "scene": "gate_locked"
+    }
+   ]
+  },
+  {
+   "id": "gate_2",
+   "x": 9,
+   "y": 12,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_gate_2"
+     ],
+     "scene": "gate_open"
+    },
+    {
+     "scene": "C9_01_gate_2"
+    }
+   ]
+  },
+  {
+   "id": "gate_3",
+   "x": 22,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_gates_open"
+     ],
+     "scene": "gate_open"
+    },
+    {
+     "if_key_items": [
+      "item_archive_ticket"
+     ],
+     "scene": "C9_01_gate_3"
+    },
+    {
+     "scene": "gate_locked"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch09_gate_1"
+   ],
+   "tile": "gate_open",
+   "cells": [
+    [
+     16,
+     18
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch09_gate_2"
+   ],
+   "tile": "gate_open",
+   "cells": [
+    [
+     9,
+     12
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch09_gates_open"
+   ],
+   "tile": "gate_open",
+   "cells": [
+    [
+     22,
+     6
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C9_01_archive",
+   "if_not_flags": [
+    "ch09_started"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#c8c0e0"
+}

@@ -1,0 +1,180 @@
+{
+ "id": "AR-02",
+ "name": "The Reading Room of 1951",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 20,
+ "legend": {
+  "#": "archive_shelf",
+  "f": "archive_floor",
+  "G": "archive_gate",
+  "P": "memory_page",
+  "D": "door"
+ },
+ "rows": [
+  "###############D##############",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffPfffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#fffffPfffffffffffffffffPffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "###############D##############"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 17,
+   "facing": "up"
+  },
+  "from_stacks": {
+   "x": 15,
+   "y": 18,
+   "facing": "up"
+  },
+  "from_desk": {
+   "x": 15,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_stacks",
+   "x": 15,
+   "y": 19,
+   "to_map": "AR-01",
+   "to_spawn": "from_reading"
+  },
+  {
+   "id": "to_desk",
+   "x": 15,
+   "y": 0,
+   "to_map": "AR-03",
+   "to_spawn": "from_reading",
+   "require": [
+    {
+     "if_flags": [
+      "ch09_truth_known"
+     ],
+     "else_scene": "desk_not_yet"
+    }
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "hidden_page",
+   "character": "hidden_page",
+   "x": 15,
+   "y": 10,
+   "facing": "down",
+   "show_if_flag": "ch09_pages_read",
+   "hide_if_flag": "ch09_truth_known",
+   "talk": [
+    {
+     "scene": "C9_03_mayas_page"
+    }
+   ]
+  },
+  {
+   "id": "wraith",
+   "character": "ink_wraith",
+   "x": 4,
+   "y": 14,
+   "facing": "right",
+   "hide_if_flag": "ar02_wraith_beaten",
+   "encounter": {
+    "id": "ar02_wraith",
+    "outro_scene": "ar02_wraith_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "page_1",
+   "x": 6,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_page_1"
+     ],
+     "scene": "page_read"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C9_02_page_1"
+    },
+    {
+     "scene": "page_reno"
+    }
+   ]
+  },
+  {
+   "id": "page_2",
+   "x": 15,
+   "y": 4,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_page_2"
+     ],
+     "scene": "page_read"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C9_02_page_2"
+    },
+    {
+     "scene": "page_reno"
+    }
+   ]
+  },
+  {
+   "id": "page_3",
+   "x": 24,
+   "y": 6,
+   "talk": [
+    {
+     "if_flags": [
+      "ch09_page_3"
+     ],
+     "scene": "page_read"
+    },
+    {
+     "if_leader": "lumi",
+     "scene": "C9_02_page_3"
+    },
+    {
+     "scene": "page_reno"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C9_02_reading",
+   "if_not_flags": [
+    "ch09_reading_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#d0c8e0"
+}

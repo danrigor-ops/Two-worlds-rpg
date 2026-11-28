@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 25
+const SECTIONS := 26
 
 
 func check(cond: bool, label: String) -> void:
@@ -109,6 +109,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 8: The Night the Worlds Touched")
 	await _test_chapter8(gs, im)
+
+	print("Chapter 9: The Keeper of Forgotten Years")
+	await _test_chapter9(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -2436,4 +2439,69 @@ func _test_chapter8(gs: Node, im: Node) -> void:
 	check(not gs.in_mission() and ["ch08_archive_revealed", "chapter_08_completed", "chapter_09_unlocked"].all(gs.get_flag), "the party regroups and every end-of-chapter flag is set")
 	check(["C08-001", "C08-002", "C08-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C08-001 to C08-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 8")
+	_sections_done += 1
+
+
+func _test_chapter9(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_completed", "ch06_taro_joined", "chapter_07_completed", "ch07_galen_joined", "chapter_08_completed", "ch08_started", "ch08_two_sealed",
+		"ch08_river_sealed", "ch08_market_sealed", "ch08_echo_beaten", "chapter_09_unlocked"], 4000, "LM-01", "from_railway")
+	for k in ["item_oath_rubbing", "item_archive_ticket"]:
+		gs.add_key_item(k)
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(17, 4), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "AR-01", "C9-01: the railway tear opens into the Archive Between Worlds")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(16, 18), im)
+	check(gs.get_flag("ch09_gate_1") and scene.map.is_walkable(Vector2i(16, 18)), "PZ-901: the Oath Stone Rubbing opens gate one")
+	await _talk(scene, Vector2i(9, 12), im, 0)
+	check(not gs.get_flag("ch09_gate_2"), "the wrong answer keeps gate two shut")
+	await _talk(scene, Vector2i(9, 12), im, 1)
+	check(gs.get_flag("ch09_gate_2"), "\"Everyone who keeps it\" opens gate two")
+	await _talk(scene, Vector2i(22, 6), im)
+	check(gs.get_flag("ch09_gates_open") and gs.quest_state("C09-001") in ["completed", "rewarded"], "the Ticket to Nowhere opens gate three")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(22, 1)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "AR-02", "the Reading Room of 1951")
+	await _finish_dialogue(im)
+	if gs.leader() == "lumi":
+		await _tap("swap")
+	await _talk(scene, Vector2i(6, 6), im)
+	check(not gs.get_flag("ch09_page_1"), "Reno can't read pages written in light")
+	await _tap("swap")
+	for c in [Vector2i(6, 6), Vector2i(15, 4), Vector2i(24, 6)]:
+		await _talk(scene, c, im)
+	check(gs.get_flag("ch09_pages_read"), "PZ-902: Lumi reads all three pages of 1951")
+	await _wait(3)
+	await _talk(scene, Vector2i(15, 10), im)
+	check(gs.get_flag("ch09_truth_known") and gs.has_key_item("item_mayas_page"), "the hidden fourth page: Maya's last words")
+	await _tap("swap")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 1)), "up")
+	await _press_for("move_up", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "AR-03", "the Keeper's desk")
+	await _finish_dialogue(im)
+	gs.move_to_front("maris")
+	gs.move_to_front("galen")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 10)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "C9-04: the first confrontation with the Keeper")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "skill", "stone_rain", "bloom_heal", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon erased_page")), "the Keeper erases pages into enemies")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch09_keeper_confronted") and gs.equip_bonus("reno").get("atk", 0) >= 3, "BOSS-901: he breaks off at 40% and drops the Oathkeeper's Pin")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(["chapter_09_completed", "chapter_10_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C09-001", "C09-002", "C09-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C09-001 to C09-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 9")
 	_sections_done += 1
