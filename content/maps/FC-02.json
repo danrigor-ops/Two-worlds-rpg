@@ -84,6 +84,19 @@
     "intro_scene": "C10_03_silence_intro",
     "outro_scene": "C10_03_promise"
    }
+  },
+  {
+   "id": "first_train",
+   "character": "dawn_train",
+   "x": 15,
+   "y": 8,
+   "facing": "down",
+   "show_if_flag": "epilogue_unlocked",
+   "talk": [
+    {
+     "scene": "EP_00_train"
+    }
+   ]
   }
  ],
  "objects": [],

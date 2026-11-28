@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 27
+const SECTIONS := 28
 
 
 func check(cond: bool, label: String) -> void:
@@ -115,6 +115,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 10: Where Two Worlds Meet")
 	await _test_chapter10(gs, im)
+
+	print("Epilogue: The First Train of Tomorrow")
+	await _test_epilogue(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -2567,4 +2570,30 @@ func _test_chapter10(gs: Node, im: Node) -> void:
 	check(["chapter_10_completed", "epilogue_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C10-001", "C10-002"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C10-001 and C10-002 are finished")
 	await _chapter_end_screen(scene, "Chapter 10")
+	_sections_done += 1
+
+
+func _test_epilogue(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_completed", "ch06_taro_joined", "chapter_07_completed", "ch07_galen_joined", "chapter_08_completed", "chapter_09_completed",
+		"chapter_10_completed", "ch10_heart_seen", "ch10_keeper_down", "ch10_silence_beaten", "epilogue_unlocked"], 6000, "FC-02", "from_bridge")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(15, 8), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "EP-01", "EP-01: the first train of tomorrow carries the party home to Bandar Senja")
+	await _finish_dialogue(im)
+	check(scene.npcs.size() >= 8, "every friend is on the platform (companions appear as NPCs here)")
+	await _talk(scene, Vector2i(17, 5), im)
+	check(not gs.get_flag("ep_said_goodbye"), "the train waits until everyone has been thanked")
+	for c in [Vector2i(6, 9), Vector2i(11, 12), Vector2i(22, 9), Vector2i(28, 12), Vector2i(17, 10)]:
+		await _talk(scene, c, im)
+	check(gs.get_flag("ep_said_goodbye"), "character epilogues: Elias, Maris, Taro, Galen and the Keeper")
+	await _talk(scene, Vector2i(17, 5), im)
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("epilogue_completed"), "Reno and Lumi board the train: the end")
+	var stage: Array = load("res://scripts/core/end_of_content.gd").stage()
+	check(stage[1] == "THE END" and not stage[5], "THE END screen, which returns to the title")
+	await _chapter_end_screen(scene, "Epilogue")
 	_sections_done += 1
