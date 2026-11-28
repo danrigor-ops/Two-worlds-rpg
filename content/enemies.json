@@ -1363,6 +1363,261 @@
      "enter_text": "The Hush pulls every sound on the mountain into itself."
     }
    ]
+  },
+  "tear_sprite": {
+   "name": "Tear Sprite",
+   "character": "tear_sprite",
+   "stats": {
+    "level": 19,
+    "max_hp": 200,
+    "atk": 30,
+    "def": 24,
+    "mag": 38,
+    "res": 28,
+    "spd": 21
+   },
+   "xp": 64,
+   "attacks": [
+    {
+     "name": "Rift Spark",
+     "kind": "magical",
+     "mult": 1.0
+    },
+    {
+     "name": "Snag",
+     "kind": "physical",
+     "mult": 1.0,
+     "applies": "slow",
+     "turns": 1
+    }
+   ]
+  },
+  "riptide_wraith": {
+   "name": "Riptide Wraith",
+   "character": "riptide_wraith",
+   "stats": {
+    "level": 19,
+    "max_hp": 1300,
+    "atk": 28,
+    "def": 24,
+    "mag": 40,
+    "res": 26,
+    "spd": 17
+   },
+   "xp": 240,
+   "immune": [
+    "soaked"
+   ],
+   "attacks": [
+    {
+     "name": "Undertow",
+     "kind": "magical",
+     "mult": 1.1,
+     "applies": "soaked",
+     "turns": 2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.5,
+     "attacks": [
+      {
+       "name": "Undertow",
+       "kind": "magical",
+       "mult": 1.1,
+       "applies": "soaked",
+       "turns": 2
+      },
+      {
+       "name": "Cold Wave",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      }
+     ]
+    },
+    {
+     "above": 0.0,
+     "summon": "tear_sprite",
+     "enter_text": "The tear widens. Something small and bright climbs out.",
+     "attacks": [
+      {
+       "name": "Flood Bell",
+       "kind": "magical",
+       "mult": 1.8,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "Riptide Wraith: the river is rising... (Flood Bell lands next turn. Guard or heal!)"
+      },
+      {
+       "name": "Cold Wave",
+       "kind": "magical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Undertow",
+       "kind": "magical",
+       "mult": 1.1,
+       "applies": "soaked",
+       "turns": 2
+      }
+     ]
+    }
+   ]
+  },
+  "lantern_glutton": {
+   "name": "Lantern Glutton",
+   "character": "lantern_glutton",
+   "stats": {
+    "level": 19,
+    "max_hp": 1400,
+    "atk": 44,
+    "def": 26,
+    "mag": 20,
+    "res": 22,
+    "spd": 13
+   },
+   "xp": 240,
+   "attacks": [
+    {
+     "name": "Gobble",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.5,
+     "attacks": [
+      {
+       "name": "Gobble",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Hot Burp",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Belly Bump",
+       "kind": "physical",
+       "mult": 1.3
+      }
+     ]
+    },
+    {
+     "above": 0.0,
+     "summon": "tear_sprite",
+     "enter_text": "Lantern Glutton: MORE LIGHT! MORE!",
+     "attacks": [
+      {
+       "name": "Swallow the Moon",
+       "kind": "physical",
+       "mult": 2.0,
+       "telegraph": true,
+       "telegraph_text": "The Glutton opens its mouth wider than it is tall... (Swallow the Moon lands next turn. Guard!)"
+      },
+      {
+       "name": "Gobble",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Hot Burp",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ]
+    }
+   ]
+  },
+  "echo_1951": {
+   "name": "Echo of 1951",
+   "character": "echo_1951",
+   "stats": {
+    "level": 20,
+    "max_hp": 1000,
+    "atk": 34,
+    "def": 24,
+    "mag": 38,
+    "res": 26,
+    "spd": 16
+   },
+   "xp": 260,
+   "immune": [
+    "slow",
+    "fog"
+   ],
+   "attacks": [
+    {
+     "name": "Last Whistle",
+     "kind": "magical",
+     "mult": 1.0
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Last Whistle",
+       "kind": "magical",
+       "mult": 1.0
+      },
+      {
+       "name": "Iron Rain",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Lost Platform",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      },
+      {
+       "name": "Iron Rain",
+       "kind": "physical",
+       "mult": 0.8,
+       "target": "all"
+      },
+      {
+       "name": "Last Whistle",
+       "kind": "magical",
+       "mult": 1.0
+      }
+     ],
+     "enter_text": "The echo flickers: a crowd on a platform, a train that never stopped."
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "The Crossing Fails",
+       "kind": "magical",
+       "mult": 1.8,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The 1951 crossing is happening again, right now... (The Crossing Fails lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Last Whistle",
+       "kind": "magical",
+       "mult": 1.0
+      }
+     ]
+    }
+   ]
   }
  },
  "encounters": {
@@ -1670,6 +1925,45 @@
    ],
    "win_key_items": [
     "equip_moss_mantle"
+   ]
+  },
+  "lm_sprites": {
+   "enemies": [
+    "tear_sprite",
+    "tear_sprite"
+   ]
+  },
+  "river_boss": {
+   "enemies": [
+    "riptide_wraith"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch08_wraith_beaten"
+   ]
+  },
+  "market_boss": {
+   "enemies": [
+    "lantern_glutton"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch08_glutton_beaten"
+   ]
+  },
+  "railway_boss": {
+   "enemies": [
+    "echo_1951"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch08_echo_beaten"
+   ],
+   "win_key_items": [
+    "equip_lantern_charm"
    ]
   }
  }

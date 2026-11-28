@@ -2033,6 +2033,236 @@
     "accent": "#e8b84a",
     "legs": "#5a3a5a"
    }
+  },
+  "lantern_post_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#e8b84a",
+    "skin": "#f4e0a0",
+    "body": "#5a3a20",
+    "accent": "#f2d45c",
+    "legs": "#3a2a20"
+   }
+  },
+  "world_tear_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#8a6ad8",
+    "skin": "#f4f8ff",
+    "body": "#5a3aa8",
+    "accent": "#e8b84a",
+    "legs": "#2a2050"
+   }
+  },
+  "stationmaster_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c9a87a",
+    "body": "#2a3a5a",
+    "accent": "#e8b84a",
+    "legs": "#1a2030"
+   }
+  },
+  "moon_girl_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c9a87a",
+    "body": "#e8a0b0",
+    "accent": "#f4ecd2",
+    "legs": "#5a3a4a"
+   }
+  },
+  "watchman_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a2a20",
+    "skin": "#a8784a",
+    "body": "#5a6a4a",
+    "accent": "#c9b8a0",
+    "legs": "#3a3a2a"
+   }
+  },
+  "tear_sprite_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#8a6ad8",
+    "skin": "#d8c8f8",
+    "body": "#6a4ab8",
+    "accent": "#f4f8ff",
+    "legs": "#3a2a78"
+   }
+  },
+  "riptide_wraith_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "fish",
+    "hair": "#3a6a9a",
+    "skin": "#a8d0f0",
+    "body": "#2a4a7a",
+    "accent": "#f4f8ff",
+    "legs": "#1a2a4a"
+   }
+  },
+  "lantern_glutton_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "kettle",
+    "hair": "#c94f4f",
+    "skin": "#f4c080",
+    "body": "#8a3a20",
+    "accent": "#f2d45c",
+    "legs": "#5a2a10"
+   }
+  },
+  "echo_1951_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "conductor",
+    "hair": "#5a5476",
+    "skin": "#c8c0d8",
+    "body": "#3a3450",
+    "accent": "#9fb0d8",
+    "legs": "#2a2440"
+   }
+  },
+  "keeper_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a3a3a",
+    "skin": "#c9b8a0",
+    "body": "#6a6a6a",
+    "accent": "#2a2a40",
+    "legs": "#3a3a3a"
+   }
   }
  },
  "characters": {
@@ -2123,6 +2353,16 @@
   "mist_wisp": "mist_wisp_overworld",
   "stone_silencer": "stone_silencer_overworld",
   "hush": "hush_overworld",
-  "caravan": "caravan_overworld"
+  "caravan": "caravan_overworld",
+  "lantern_post": "lantern_post_overworld",
+  "world_tear": "world_tear_overworld",
+  "stationmaster": "stationmaster_overworld",
+  "moon_girl": "moon_girl_overworld",
+  "watchman": "watchman_overworld",
+  "tear_sprite": "tear_sprite_overworld",
+  "riptide_wraith": "riptide_wraith_overworld",
+  "lantern_glutton": "lantern_glutton_overworld",
+  "echo_1951": "echo_1951_overworld",
+  "keeper": "keeper_overworld"
  }
 }

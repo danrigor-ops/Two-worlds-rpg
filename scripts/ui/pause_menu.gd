@@ -147,12 +147,13 @@ static func item_rows() -> Array:
 static func party_rows() -> Array:
 	var rows: Array = []
 	var names: Dictionary = JsonUtil.load_dict(GameState.CHARACTERS_PATH).get("characters", {})
-	var many := GameState.party().size() > GameState.ACTIVE_SIZE
+	# No formation changes while the party is split up for a mission.
+	var many := GameState.party().size() > GameState.ACTIVE_SIZE and not GameState.in_mission()
 	for id: String in GameState.party():
 		var s: Dictionary = GameState.data["members"][id]
 		var reserve := not (id in GameState.active_party())
 		var row := {
-			"text": "%s%s Lv%d  HP %d/%d  MP %d/%d" % ["(R) " if reserve else "", names.get(id, {}).get("name", id), s["level"], s["hp"], s["max_hp"], s["mp"], s["max_mp"]],
+			"text": "%s%s Lv%d  HP %d/%d  MP %d/%d" % [("(away) " if GameState.in_mission() else "(R) ") if reserve else "", names.get(id, {}).get("name", id), s["level"], s["hp"], s["max_hp"], s["mp"], s["max_mp"]],
 			"detail": "ATK %d  DEF %d  MAG %d  RES %d  SPD %d" % [s["atk"], s["def"], s["mag"], s["res"], s["spd"]],
 		}
 		if many:

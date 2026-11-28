@@ -168,6 +168,15 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
     - Great Silence, announced a round ahead, from 30%.
 69. The Oath Stone plays back the stranger's warning: when the Lantern Moon rises, the worlds will touch, and then he will close every door.
 
+**Chapter 8: The Night the Worlds Touched.** Design: `docs/chapter-08/CHAPTER_08_PRODUCTION.md`.
+
+70. From the Chapter 7 screen, press A. Take the Lantern Path (the moonlit lantern on the summit) to **Bandar Senja** under the Lantern Moon. Three tears have opened.
+71. The party splits up. Only the mission team fights and walks, and the Party menu marks the others "(away)".
+    - **River tear (west): Lumi, Maris and Elias.** Regrow a bridge, find the knot with Echo Sight, and beat the Riptide Wraith.
+    - **Market tear (east): Reno, Taro and Galen.** Taro's paper-cat Decoy leads a human watchman away, Galen breaks the silent stone, and you beat the Lantern Glutton.
+72. **Railway tear (north): Reno and Lumi.** It opens once the other two are sealed. It shows 1951: a railway worker with Reno's token, and a guardian spirit Lumi somehow knows. Beat the Echo of 1951.
+73. The man in the grey coat names himself **the Keeper of Silence**, names Maya and Seri, and points the duo to the Archive.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -237,4 +246,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 12. ✅ Chapter 5: A Thousand Flowers, One Promise (Maris joins, healing, formation)
 13. ✅ Chapter 6: The Midnight Carnival (Taro joins, false mirrors, Decoy)
 14. ✅ Chapter 7: The Guardian of the Eastern Mountains (Galen joins, tank passives, mist and silent stones)
-15. Chapters 8 to 10 and the epilogue
+15. ✅ Chapter 8: The Night the Worlds Touched (mission parties, three split-up missions)
+16. Chapters 9 and 10 and the epilogue

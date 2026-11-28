@@ -47,6 +47,7 @@ func default_state() -> Dictionary:
 		"facing": "down",
 		"leader": "reno",
 		"party": ["reno"],
+		"mission": [],
 		"members": members,
 		"wallet": {"human_cents": 0, "dewdrops": 5},
 		"inventory": {},
@@ -85,8 +86,36 @@ func leader() -> String:
 
 
 ## The first three in party order fight; the rest wait in reserve (and still earn XP).
+## During a split-up mission (Chapter 8) only the mission team fights and walks.
 func active_party() -> Array:
-	return data["party"].slice(0, ACTIVE_SIZE)
+	var m: Array = data.get("mission", [])
+	return (m if not m.is_empty() else data["party"]).slice(0, ACTIVE_SIZE)
+
+
+## Who walks the map: Reno and/or Lumi, limited to the mission team if there is one.
+func walking_party() -> Array:
+	var m: Array = data.get("mission", [])
+	return (m if not m.is_empty() else data["party"]).filter(walks)
+
+
+func in_mission() -> bool:
+	return not data.get("mission", []).is_empty()
+
+
+## Splits the party: only these members fight and walk until clear_mission().
+## The leader moves to the team's first walker.
+func set_mission(ids: Array) -> void:
+	data["mission"] = ids.filter(has_member)
+	var walkers := walking_party()
+	if not walkers.is_empty() and leader() not in walkers:
+		data["leader"] = walkers[0]
+		leader_changed.emit(walkers[0])
+	party_changed.emit()
+
+
+func clear_mission() -> void:
+	data["mission"] = []
+	party_changed.emit()
 
 
 ## Only Reno and Lumi walk the map; companions travel along (characters.json "walks").
@@ -417,6 +446,8 @@ func load_from_dict(incoming: Dictionary) -> Array[String]:
 
 ## Upgrades older save versions. Version 1 is the first, so nothing to do yet.
 func migrate(d: Dictionary) -> Dictionary:
+	if not d.has("mission"):
+		d["mission"] = []
 	# Companions added in later chapters: older saves get their starting stats.
 	if d.get("members") is Dictionary:
 		var fresh: Dictionary = default_state()["members"]
@@ -460,6 +491,13 @@ static func validate(d: Dictionary) -> Array[String]:
 			e.append("party member '%s' has no stats" % str(id))
 	if d["leader"] not in d["party"]:
 		e.append("leader '%s' is not in the party" % d["leader"])
+	if d.has("mission"):
+		if typeof(d["mission"]) != TYPE_ARRAY:
+			e.append("'mission' must be a list")
+		else:
+			for id: Variant in d["mission"]:
+				if id not in d["party"]:
+					e.append("mission member '%s' is not in the party" % str(id))
 	for key: String in ["human_cents", "dewdrops"]:
 		var v: Variant = d["wallet"].get(key)
 		if not JsonUtil.is_whole(v) or int(v) < 0:

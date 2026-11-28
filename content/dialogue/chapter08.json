@@ -1,0 +1,554 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 8 from docs/chapter-08/CHAPTER_08_PRODUCTION.md. Human lines are overheard.",
+ "speakers": {
+  "stationmaster": {
+   "name": "Stationmaster",
+   "character": "stationmaster"
+  },
+  "moon_girl": {
+   "name": "A girl",
+   "character": "moon_girl"
+  },
+  "watchman": {
+   "name": "Night watchman",
+   "character": "watchman"
+  },
+  "lantern_glutton": {
+   "name": "Lantern Glutton",
+   "character": "lantern_glutton"
+  },
+  "keeper": {
+   "name": "The man in the grey coat",
+   "character": "keeper"
+  }
+ },
+ "scenes": {
+  "lantern_path": [
+   {
+    "speaker": "narrator",
+    "text": "A lantern on a post, burning with moonlight. Behind it, a path that shouldn't be there."
+   },
+   {
+    "speaker": "galen",
+    "text": "The Oathkeepers' road. It runs between places that are close in the other world. Bandar Senja is close tonight."
+   },
+   {
+    "choice": [
+     {
+      "text": "Take the Lantern Path",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Three nights pass in three steps. The Lantern Moon rises, huge and gold, over the old railway town."
+       },
+       {
+        "event": "travel:LM-01:from_path:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C8_01_hub": [
+   {
+    "set_flag": "ch08_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Bandar Senja, on the night of the Lantern Moon. The streetlamps flicker. In three places, the air has split like old paper, and the other world is leaking through."
+   },
+   {
+    "speaker": "elias",
+    "text": "Three tears. West by the river, east in the night market, and something stirring on the old railway."
+   },
+   {
+    "speaker": "galen",
+    "text": "If they open all the way, the worlds will touch. Things will be lost. People will be lost."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Like 1951."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then we split up! Like a heist! Lumi takes the river with Maris and Elias. I'll take the market with Taro and Galen."
+   },
+   {
+    "speaker": "maris",
+    "text": "That's... actually a good plan."
+   },
+   {
+    "speaker": "reno",
+    "text": "I KNOW."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: seal the river tear (west) and the market tear (east). Walk into a tear to send a team."
+   }
+  ],
+  "human_stationmaster": [
+   {
+    "speaker": "stationmaster",
+    "text": "(to himself) The signal lamps keep going green on their own. Like a train's coming. No train's come down that line since '51."
+   }
+  ],
+  "human_moon_girl": [
+   {
+    "speaker": "moon_girl",
+    "text": "Mak! Mak, the moon has a door in it! ...She can't hear me. Nobody ever believes me about the moon."
+   }
+  ],
+  "lm_sprites_beaten": [
+   {
+    "set_flag": "lm_sprites_beaten"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The sprites fizzle back through the cracks."
+   }
+  ],
+  "tear_sealed": [
+   {
+    "speaker": "narrator",
+    "text": "Just a faint line in the air, like a healed scratch."
+   }
+  ],
+  "C8_02_river_go": [
+   {
+    "speaker": "narrator",
+    "text": "The river tear. Cold water pours out of nothing and runs down the street."
+   },
+   {
+    "choice": [
+     {
+      "text": "Send Lumi, Maris, Elias",
+      "then": [
+       {
+        "speaker": "lumi",
+        "text": "Be careful, Reno."
+       },
+       {
+        "speaker": "reno",
+        "text": "YOU be careful. I'm always careful."
+       },
+       {
+        "speaker": "lumi",
+        "text": "You are never careful."
+       },
+       {
+        "event": "mission:lumi,maris,elias"
+       },
+       {
+        "event": "travel:LM-02:start"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C8_03_market_go": [
+   {
+    "speaker": "narrator",
+    "text": "The market tear. Lantern light spills out of it like honey, and something inside is chewing."
+   },
+   {
+    "choice": [
+     {
+      "text": "Send Reno, Taro, Galen",
+      "then": [
+       {
+        "speaker": "taro",
+        "text": "A night market! My natural habitat."
+       },
+       {
+        "event": "mission:reno,taro,galen"
+       },
+       {
+        "event": "travel:LM-03:start"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C8_04_railway_go": [
+   {
+    "speaker": "narrator",
+    "text": "The railway tear. Through it: a platform at night, a crowd, and a train that's about to not stop."
+   },
+   {
+    "speaker": "elias",
+    "text": "This one's different. It's pulling at the token on Reno's belt."
+   },
+   {
+    "speaker": "galen",
+    "text": "Then it's for the two of you. We'll hold the street."
+   },
+   {
+    "choice": [
+     {
+      "text": "Reno and Lumi go",
+      "then": [
+       {
+        "event": "mission:reno,lumi"
+       },
+       {
+        "event": "travel:LM-04:start"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "archive_door_shut": [
+   {
+    "speaker": "narrator",
+    "text": "The tear has closed into the shape of a door. It won't open. Not yet."
+   }
+  ],
+  "C8_02_arrive": [
+   {
+    "set_flag": "ch08_river_arrived"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The river tear. A street of shophouses, knee-deep in spirit water. Paper boats bump against doorsteps."
+   },
+   {
+    "speaker": "maris",
+    "text": "The water's coming from the far side. We need a way across."
+   },
+   {
+    "speaker": "elias",
+    "text": "And then we find the knot holding it open."
+   }
+  ],
+  "C8_02_regrow": [
+   {
+    "speaker": "narrator",
+    "text": "Maris kneels by the water. Vines wind out from the cracks in the road and knot themselves into a bridge."
+   },
+   {
+    "set_flag": "ch08_river_bridge"
+   }
+  ],
+  "regrow_done": [
+   {
+    "speaker": "narrator",
+    "text": "Maris's vine bridge holds steady."
+   }
+  ],
+  "C8_02_echo": [
+   {
+    "speaker": "narrator",
+    "text": "Lumi looks with Echo Sight. The water is all pulling towards one spot, like a drain: a knot in the air, glowing."
+   },
+   {
+    "set_flag": "ch08_knot_seen"
+   },
+   {
+    "speaker": "lumi",
+    "text": "There. Something's holding the tear open from inside."
+   }
+  ],
+  "echo_done": [
+   {
+    "speaker": "narrator",
+    "text": "The marker is quiet now."
+   }
+  ],
+  "C8_02_wraith_intro": [
+   {
+    "speaker": "narrator",
+    "text": "The knot unravels into a wraith of river water, wearing a hundred lost things: sandals, a fishing hat, a school bag."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Maris, Elias. Together."
+   }
+  ],
+  "C8_02_river_sealed": [
+   {
+    "speaker": "narrator",
+    "text": "The wraith sinks back into the tear. Elias tunes himself to the tear's hum, finds the right note, and holds it until the edges meet."
+   },
+   {
+    "speaker": "elias",
+    "text": "Sealed. Like closing a radio channel."
+   },
+   {
+    "set_flag": "ch08_river_sealed"
+   },
+   {
+    "if_flags": [
+     "ch08_river_sealed",
+     "ch08_market_sealed"
+    ],
+    "set_flag": "ch08_two_sealed"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Two tears sealed. In the old railway yard, the last one opens.",
+    "if_flags": [
+     "ch08_river_sealed",
+     "ch08_market_sealed"
+    ]
+   },
+   {
+    "event": "mission:"
+   },
+   {
+    "event": "travel:LM-01:from_river"
+   }
+  ],
+  "C8_03_arrive": [
+   {
+    "set_flag": "ch08_market_arrived"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The market tear. Ghostly stalls float half in, half out of the ordinary night market. At the far end, a silent stone blocks the alley."
+   },
+   {
+    "speaker": "galen",
+    "text": "He's been here too. That stone."
+   },
+   {
+    "speaker": "taro",
+    "text": "And there's a human standing right in front of it."
+   }
+  ],
+  "C8_03_watchman": [
+   {
+    "speaker": "watchman",
+    "text": "(muttering) Something's in that alley. I can feel it. I'm not moving till I know what."
+   },
+   {
+    "speaker": "taro",
+    "text": "If the tear opens wider, it'll swallow him. Tonight even humans can see a really good illusion. Want me to make a Decoy?"
+   },
+   {
+    "choice": [
+     {
+      "text": "Make a Decoy",
+      "then": [
+       {
+        "speaker": "narrator",
+        "text": "Taro folds the air into a paper cat. It meows, very convincingly, and trots away down the street. The watchman, astonished, follows it: \"Oi! Puss!\""
+       },
+       {
+        "set_flag": "ch08_watchman_gone"
+       }
+      ]
+     },
+     {
+      "text": "Leave him",
+      "then": [
+       {
+        "speaker": "taro",
+        "text": "Hmm. He's not going anywhere on his own."
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "C8_03_stone_wait": [
+   {
+    "speaker": "galen",
+    "text": "I can break it. Not with a human standing so close. The tear would take him."
+   }
+  ],
+  "C8_03_break": [
+   {
+    "speaker": "narrator",
+    "text": "Galen puts his shoulder to the silent stone. It cracks in half. Behind it, something enormous is eating the lantern light."
+   },
+   {
+    "set_flag": "ch08_market_stone"
+   }
+  ],
+  "stone_gone": [
+   {
+    "speaker": "narrator",
+    "text": "Rubble."
+   }
+  ],
+  "C8_03_glutton_intro": [
+   {
+    "speaker": "narrator",
+    "text": "A lantern spirit the size of a lorry, swollen with stolen light, turns around with its mouth full."
+   },
+   {
+    "speaker": "reno",
+    "text": "Excuse me! That's the market's light!"
+   },
+   {
+    "speaker": "lantern_glutton",
+    "text": "MINE NOW."
+   }
+  ],
+  "C8_03_market_sealed": [
+   {
+    "speaker": "narrator",
+    "text": "The Glutton coughs up a hundred lanterns, which float back to their stalls. It shrinks to the size of a teacup and scuttles into the tear, which snaps shut behind it."
+   },
+   {
+    "speaker": "taro",
+    "text": "Ta-da!"
+   },
+   {
+    "speaker": "galen",
+    "text": "We did that. Not you."
+   },
+   {
+    "speaker": "taro",
+    "text": "I said ta-da on everyone's behalf."
+   },
+   {
+    "set_flag": "ch08_market_sealed"
+   },
+   {
+    "if_flags": [
+     "ch08_river_sealed",
+     "ch08_market_sealed"
+    ],
+    "set_flag": "ch08_two_sealed"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Two tears sealed. In the old railway yard, the last one opens.",
+    "if_flags": [
+     "ch08_river_sealed",
+     "ch08_market_sealed"
+    ]
+   },
+   {
+    "event": "mission:"
+   },
+   {
+    "event": "travel:LM-01:from_market"
+   }
+  ],
+  "C8_04_arrive": [
+   {
+    "set_flag": "ch08_railway_arrived"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The railway tear. It isn't now. It's 1951: a platform crowded with people, rain, a train that won't stop, and the gap between the worlds wide open beneath it."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Through the crowd, two figures are pulling people back from the edge. A railway worker with a lantern, and a guardian spirit made of soft light."
+   },
+   {
+    "speaker": "lumi",
+    "text": "...Reno. That spirit. I know her. I don't know how, but I know her."
+   },
+   {
+    "speaker": "reno",
+    "text": "The railway lady has a token. Lumi, it's MY token. The same one."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The echo of that night gathers itself into something that can fight."
+   }
+  ],
+  "C8_04_echo_intro": [
+   {
+    "speaker": "narrator",
+    "text": "The Echo of 1951 rises off the rails: smoke, rain and a whistle that never stops."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We can't change what happened. But we can stop it happening again."
+   }
+  ],
+  "C8_04_keeper": [
+   {
+    "speaker": "narrator",
+    "text": "The echo fades. The rain stops. The platform is empty except for one man in a grey coat, with ink on his fingers."
+   },
+   {
+    "speaker": "keeper",
+    "text": "You held them. All three. I didn't think anyone could."
+   },
+   {
+    "speaker": "reno",
+    "text": "YOU. You made everyone forget! You put mist on a mountain! You were mean to a TREE!"
+   },
+   {
+    "speaker": "keeper",
+    "text": "I made them forget so it would hurt less. In 1951 I stood on this platform and I couldn't hold the crossing. Two people held it instead. A railway worker named Maya, and a guardian named Seri. They didn't come back."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Seri..."
+   },
+   {
+    "speaker": "keeper",
+    "text": "The Promise says the worlds should touch. Every time they touch, someone is lost. So I will close them. For good. They call me the Keeper now. The Keeper of Silence."
+   },
+   {
+    "speaker": "keeper",
+    "text": "If you want to stop me, you'll need to know the whole truth. It's in the Archive. I doubt you'll like it."
+   },
+   {
+    "speaker": "narrator",
+    "text": "He steps backwards into the air and is gone. Something falls where he stood."
+   },
+   {
+    "key_item": "item_archive_ticket"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Ticket to Nowhere and the Lantern Moon Charm (Lumi: MAG +3, RES +2)."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi. Maya had my token."
+   },
+   {
+    "speaker": "lumi",
+    "text": "And I think I came from Seri. Somehow."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Back in the street, the others are waiting. Nobody says anything for a while. Then Taro hands out toffee apples, and that helps."
+   },
+   {
+    "event": "mission:"
+   },
+   {
+    "set_flag": "ch08_archive_revealed"
+   },
+   {
+    "set_flag": "chapter_08_completed"
+   },
+   {
+    "set_flag": "chapter_09_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

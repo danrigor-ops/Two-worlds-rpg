@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 24
+const SECTIONS := 25
 
 
 func check(cond: bool, label: String) -> void:
@@ -106,6 +106,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 7: The Guardian of the Eastern Mountains")
 	await _test_chapter7(gs, im)
+
+	print("Chapter 8: The Night the Worlds Touched")
+	await _test_chapter8(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -1991,6 +1994,8 @@ func _chapter_start(gs: Node, flags: Array, xp: int, map_id: String, spawn: Stri
 		gs.add_member("maris")
 	if "ch06_taro_joined" in flags:
 		gs.add_member("taro")
+	if "ch07_galen_joined" in flags:
+		gs.add_member("galen")
 	gs.set_spawn(map_id, spawn)
 	var scene: Node = load("res://scenes/exploration.tscn").instantiate()
 	scene.battle_auto_judge = "perfect"
@@ -2330,4 +2335,105 @@ func _test_chapter7(gs: Node, im: Node) -> void:
 	check(["ch07_lantern_moon_warned", "chapter_07_completed", "chapter_08_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C07-001", "C07-002", "C07-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C07-001 to C07-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 7")
+	_sections_done += 1
+
+
+func _test_chapter8(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_completed", "ch06_taro_joined", "chapter_07_completed", "ch07_started", "ch07_galen_joined", "ch07_hush_beaten", "ch07_summit_seen", "chapter_08_unlocked"], 3300, "EH-04", "from_gate")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(12, 16), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "LM-01", "C8-01: the Lantern Path leads to Bandar Senja under the Lantern Moon")
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch08_started") and not scene.map.npcs.is_empty(), "three tears have opened")
+
+	# Mission A: Lumi, Maris and Elias.
+	await _talk(scene, Vector2i(4, 12), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "LM-02" and gs.active_party() == ["lumi", "maris", "elias"], "C8-02: the river team is Lumi, Maris and Elias")
+	check(scene.members.size() == 1 and scene.members.has("lumi") and gs.leader() == "lumi", "only Lumi walks the river mission")
+	var bad: Dictionary = gs.data.duplicate(true)
+	bad["mission"] = ["nobody"]
+	check(not gs.validate(bad).is_empty() and gs.validate(gs.data.duplicate(true)).is_empty(), "a save mid-mission is valid; a mission member outside the party is rejected")
+	var old: Dictionary = gs.data.duplicate(true)
+	old.erase("mission")
+	check(gs.migrate(old).get("mission") == [], "older saves get an empty mission")
+	var rows: Array = PauseMenu.party_rows()
+	check(rows.any(func(r: Dictionary) -> bool: return r["text"].begins_with("(away)")) and not rows.any(func(r: Dictionary) -> bool: return r.has("action")), "the Party menu shows who is away and locks formation")
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(12, 10), "right", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch08_river_bridge") and scene.map.is_walkable(Vector2i(15, 10)), "Maris regrows a bridge over the spill")
+	await _talk(scene, Vector2i(22, 4), im)
+	check(gs.get_flag("ch08_knot_seen"), "Lumi's Echo Sight finds the knot")
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(25, 15)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Riptide Wraith fight starts")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["skill", "bloom_heal", "attack"])
+	check(not blog.any(func(l: String) -> bool: return l.begins_with("reno"))and blog.any(func(l: String) -> bool: return l.begins_with("maris")), "only the river team fights")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait_transition(im)
+	await _wait(3)
+	check(gs.get_flag("ch08_river_sealed") and scene.map.id == "LM-01" and not gs.in_mission() and scene.members.size() == 2, "the river tear is sealed and the party regroups")
+
+	# Mission B: Reno, Taro and Galen.
+	await _talk(scene, Vector2i(29, 12), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "LM-03" and gs.active_party() == ["reno", "taro", "galen"] and gs.leader() == "reno", "C8-03: the market team is Reno, Taro and Galen")
+	await _finish_dialogue(im)
+	await _face_and_press(scene, Vector2i(21, 10), "right", im)
+	await _finish_dialogue(im)
+	check(not gs.get_flag("ch08_market_stone"), "Galen won't break the stone with a human so close")
+	await _face_and_press(scene, Vector2i(19, 10), "right", im)
+	await _finish_dialogue_choices(im, [0])
+	await _wait(3)
+	check(gs.get_flag("ch08_watchman_gone"), "Taro's paper-cat Decoy leads the watchman away")
+	await _face_and_press(scene, Vector2i(21, 10), "right", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch08_market_stone") and scene.map.is_walkable(Vector2i(22, 10)), "Galen breaks the silent stone")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(23, 10)), "right")
+	await _press_for("move_right", 30)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Lantern Glutton fight starts")
+	blog = await _run_battle_with(scene, im, ["skill", "dazzle", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("galen counter")), "Galen counters the Glutton")
+	await _wait(3)
+	await _finish_dialogue(im)
+	await _wait_transition(im)
+	await _wait(3)
+	check(gs.get_flag("ch08_market_sealed") and gs.get_flag("ch08_two_sealed") and scene.map.id == "LM-01", "both tears sealed: the railway tear opens")
+
+	# Mission C: Reno and Lumi.
+	await _wait(3)
+	await _talk(scene, Vector2i(17, 4), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "LM-04" and gs.active_party() == ["reno", "lumi"], "C8-04: Reno and Lumi take the railway tear together")
+	await _finish_dialogue(im)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 13)), "up")
+	await _press_for("move_up", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "the Echo of 1951 fight starts")
+	blog = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "attack"])
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch08_echo_beaten") and gs.has_key_item("item_archive_ticket") and gs.equip_bonus("lumi").get("mag", 0) == 3, "BOSS-803: the Lantern Moon Charm and the Keeper's ticket")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(not gs.in_mission() and ["ch08_archive_revealed", "chapter_08_completed", "chapter_09_unlocked"].all(gs.get_flag), "the party regroups and every end-of-chapter flag is set")
+	check(["C08-001", "C08-002", "C08-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C08-001 to C08-003 are finished")
+	await _chapter_end_screen(scene, "Chapter 8")
 	_sections_done += 1

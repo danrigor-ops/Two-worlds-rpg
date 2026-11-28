@@ -69,6 +69,19 @@
     "intro_scene": "C7_05_hush_intro",
     "outro_scene": "C7_05_hush_outro"
    }
+  },
+  {
+   "id": "lantern_path",
+   "character": "lantern_post",
+   "x": 12,
+   "y": 16,
+   "facing": "down",
+   "show_if_flag": "chapter_08_unlocked",
+   "talk": [
+    {
+     "scene": "lantern_path"
+    }
+   ]
   }
  ],
  "objects": [

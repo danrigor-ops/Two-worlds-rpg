@@ -1,0 +1,131 @@
+{
+ "id": "LM-02",
+ "name": "The River Tear",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 20,
+ "legend": {
+  "h": "shophouse",
+  "s": "lantern_street",
+  "w": "spill",
+  "e": "echo_marker"
+ },
+ "rows": [
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwsssssessssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hsssssssssssswwwwssssssssssssh",
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+ ],
+ "spawns": {
+  "start": {
+   "x": 4,
+   "y": 10,
+   "facing": "right"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "wraith",
+   "character": "riptide_wraith",
+   "x": 25,
+   "y": 12,
+   "facing": "left",
+   "show_if_flag": "ch08_knot_seen",
+   "hide_if_flag": "ch08_wraith_beaten",
+   "encounter": {
+    "id": "river_boss",
+    "intro_scene": "C8_02_wraith_intro",
+    "outro_scene": "C8_02_river_sealed"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "regrow",
+   "x": 13,
+   "y": 10,
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_river_bridge"
+     ],
+     "scene": "regrow_done"
+    },
+    {
+     "scene": "C8_02_regrow"
+    }
+   ]
+  },
+  {
+   "id": "echo",
+   "x": 22,
+   "y": 4,
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_knot_seen"
+     ],
+     "scene": "echo_done"
+    },
+    {
+     "scene": "C8_02_echo"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch08_river_bridge"
+   ],
+   "tile": "vine_bridge",
+   "cells": [
+    [
+     13,
+     10
+    ],
+    [
+     14,
+     10
+    ],
+    [
+     15,
+     10
+    ],
+    [
+     16,
+     10
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C8_02_arrive",
+   "if_not_flags": [
+    "ch08_river_arrived"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#a8c8e8"
+}
