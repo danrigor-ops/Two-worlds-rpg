@@ -1,0 +1,105 @@
+{
+ "id": "EH-04",
+ "name": "The Oath Stone",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 22,
+ "legend": {
+  "r": "rock",
+  ".": "grass",
+  "=": "path",
+  "O": "oath_stone",
+  "E": "exit"
+ },
+ "rows": [
+  "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+  "r............................r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........======O======.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r........=============.......r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "rrrrrrrrrrrrrrrErrrrrrrrrrrrrr"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 19,
+   "facing": "up"
+  },
+  "from_gate": {
+   "x": 15,
+   "y": 20,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_gate",
+   "x": 15,
+   "y": 21,
+   "to_map": "EH-03",
+   "to_spawn": "from_summit"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "the_hush",
+   "character": "hush",
+   "x": 15,
+   "y": 7,
+   "facing": "down",
+   "hide_if_flag": "ch07_hush_beaten",
+   "encounter": {
+    "id": "hush_boss",
+    "intro_scene": "C7_05_hush_intro",
+    "outro_scene": "C7_05_hush_outro"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "oath_stone",
+   "x": 15,
+   "y": 4,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_hush_beaten"
+     ],
+     "scene": "oath_stone_after"
+    },
+    {
+     "scene": "oath_stone_before"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C7_05_summit",
+   "if_not_flags": [
+    "ch07_summit_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#e0e4f0"
+}

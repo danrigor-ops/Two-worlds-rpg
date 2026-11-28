@@ -1,0 +1,176 @@
+{
+ "id": "EH-01",
+ "name": "Banjaran Awan Foothills",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 36,
+ "height": 26,
+ "legend": {
+  "T": "tree",
+  ".": "grass",
+  "=": "path",
+  "~": "mist",
+  "E": "exit"
+ },
+ "rows": [
+  "TTTTTTTTTTTTTTTTTTETTTTTTTTTTTTTTTTT",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.....T...........=................T",
+  "T.................=.........T......T",
+  "T.................=................T",
+  "T.................=................T",
+  "TTTTTTTTTTTTTTTTT~~~TTTTTTTTTTTTTTTT",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T........T........=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=........T.......T",
+  "T...T.............=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "T.................=................T",
+  "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+ ],
+ "spawns": {
+  "start": {
+   "x": 18,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_carnival": {
+   "x": 18,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_moss": {
+   "x": 18,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_moss",
+   "x": 18,
+   "y": 0,
+   "to_map": "EH-02",
+   "to_spawn": "from_foothills"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "farmer",
+   "character": "farmer",
+   "x": 12,
+   "y": 18,
+   "facing": "right",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_farmer"
+    }
+   ]
+  },
+  {
+   "id": "surveyor",
+   "character": "surveyor",
+   "x": 24,
+   "y": 14,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_surveyor"
+    }
+   ]
+  },
+  {
+   "id": "trader",
+   "character": "carnival_vendor",
+   "x": 21,
+   "y": 20,
+   "facing": "left",
+   "talk": [
+    {
+     "scene": "ridge_trader"
+    }
+   ]
+  },
+  {
+   "id": "wisps",
+   "character": "mist_wisp",
+   "x": 26,
+   "y": 4,
+   "facing": "left",
+   "hide_if_flag": "eh01_wisps_beaten",
+   "encounter": {
+    "id": "eh01_wisps",
+    "outro_scene": "eh01_wisps_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "mist_1",
+   "x": 18,
+   "y": 8,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_mist_1"
+     ],
+     "scene": "mist_gone"
+    },
+    {
+     "if_leader": "reno",
+     "scene": "C7_02_mist_1"
+    },
+    {
+     "scene": "mist_lumi"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch07_mist_1"
+   ],
+   "tile": "path",
+   "cells": [
+    [
+     17,
+     8
+    ],
+    [
+     18,
+     8
+    ],
+    [
+     19,
+     8
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C7_01_arrive",
+   "if_not_flags": [
+    "ch07_started"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#d8e0f0"
+}

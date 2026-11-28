@@ -1,0 +1,440 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 7 from docs/chapter-07/CHAPTER_07_PRODUCTION.md. Fictional highlands; see the cultural research note. Human lines are overheard.",
+ "speakers": {
+  "galen": {
+   "name": "Galen",
+   "character": "galen"
+  },
+  "farmer": {
+   "name": "Farmer",
+   "character": "farmer"
+  },
+  "surveyor": {
+   "name": "Road surveyor",
+   "character": "surveyor"
+  },
+  "keeper_voice": {
+   "name": "A voice in the stone",
+   "character": "hush"
+  }
+ },
+ "scenes": {
+  "caravan_east": [
+   {
+    "speaker": "narrator",
+    "text": "The carnival is packing up. Painted wagons, folded tents, a ferris wheel lying on its side. A sign on the last wagon says EAST."
+   },
+   {
+    "choice": [
+     {
+      "text": "Ride east",
+      "then": [
+       {
+        "speaker": "taro",
+        "text": "The carnival always goes where people want to forget. Tonight that's east, over the sea. Hop on."
+       },
+       {
+        "speaker": "narrator",
+        "text": "The wagons roll onto a ferry made of lantern light. By dawn there are mountains."
+       },
+       {
+        "event": "travel:EH-01:from_carnival:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C7_01_arrive": [
+   {
+    "set_flag": "ch07_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Banjaran Awan, the Cloud Range. Green ridges, vegetable terraces, and a mist so thick it sits on the trail like a sleeping animal."
+   },
+   {
+    "speaker": "reno",
+    "text": "It's so COLD. Is this what cold is?"
+   },
+   {
+    "speaker": "maris",
+    "text": "This is what cold is."
+   },
+   {
+    "speaker": "lumi",
+    "text": "The mist doesn't move. Mist always moves."
+   },
+   {
+    "speaker": "elias",
+    "text": "Something is holding it still. Reno, could your Spirit Cyclone shift it?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: clear the mist with Reno's Spirit Cyclone (Reno leads, face the mist, press A)."
+   }
+  ],
+  "human_farmer": [
+   {
+    "speaker": "farmer",
+    "text": "(to himself, digging) Cabbages like the cold. Cabbages like the cold. I do not like the cold, but cabbages do."
+   }
+  ],
+  "human_surveyor": [
+   {
+    "speaker": "surveyor",
+    "text": "(reading a map) The new road will go right over that ridge. Funny. The old people say nobody should build up there. They say it's spoken for."
+   }
+  ],
+  "ridge_trader": [
+   {
+    "speaker": "carnival_vendor",
+    "text": "Followed the carnival this far, did you? Honey from above the clouds!"
+   },
+   {
+    "choice": [
+     {
+      "text": "Browse",
+      "then": [
+       {
+        "event": "shop:ridge_trader"
+       }
+      ]
+     },
+     {
+      "text": "Not now",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "mist_lumi": [
+   {
+    "speaker": "narrator",
+    "text": "A wall of still, white mist."
+   },
+   {
+    "speaker": "lumi",
+    "text": "I can't push this. Reno's wind could. (Swap with C.)"
+   }
+  ],
+  "pitcher_look": [
+   {
+    "speaker": "narrator",
+    "text": "A pitcher plant as big as a bucket. Something small is asleep inside."
+   },
+   {
+    "speaker": "reno",
+    "text": "(whispering) Goodnight, small thing."
+   }
+  ],
+  "mist_gone": [
+   {
+    "speaker": "narrator",
+    "text": "Only a few wisps left, curling away."
+   }
+  ],
+  "C7_02_mist_1": [
+   {
+    "speaker": "narrator",
+    "text": "Reno spins up a Spirit Cyclone. The mist tears like wet paper and blows away down the valley."
+   },
+   {
+    "set_flag": "ch07_mist_1"
+   },
+   {
+    "speaker": "reno",
+    "text": "WHOOSH. I'm the weather now."
+   }
+  ],
+  "C7_02_mist_2": [
+   {
+    "speaker": "narrator",
+    "text": "Spirit Cyclone! The mist peels back off the moss."
+   },
+   {
+    "set_flag": "ch07_mist_2"
+   },
+   {
+    "speaker": "elias",
+    "text": "Under the mist, the stones are carved. Old boundary marks."
+   }
+  ],
+  "C7_02_mist_3": [
+   {
+    "speaker": "narrator",
+    "text": "Reno's last cyclone clears the trail. Beyond it, the mountain path climbs to a gate of grey stone."
+   },
+   {
+    "set_flag": "ch07_mist_cleared"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Somebody put that mist here on purpose."
+   },
+   {
+    "speaker": "taro",
+    "text": "Same somebody, probably."
+   }
+  ],
+  "eh01_wisps_beaten": [
+   {
+    "set_flag": "eh01_wisps_beaten"
+   },
+   {
+    "speaker": "maris",
+    "text": "Brr. Even their punches are cold."
+   }
+  ],
+  "eh02_mixed_beaten": [
+   {
+    "set_flag": "eh02_mixed_beaten"
+   },
+   {
+    "speaker": "reno",
+    "text": "That rock was SHUSHING me."
+   }
+  ],
+  "eh03_silencers_beaten": [
+   {
+    "set_flag": "eh03_silencers_beaten"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The stone settles back down, quiet and harmless."
+   }
+  ],
+  "C7_02_moss": [
+   {
+    "set_flag": "ch07_moss_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Moss Forest. Every branch wears a green coat. Pitcher plants as big as buckets."
+   },
+   {
+    "speaker": "maris",
+    "text": "This forest is very old. And very, very quiet. Too quiet. Birds should be singing."
+   }
+  ],
+  "C7_03_gate": [
+   {
+    "set_flag": "ch07_gate_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Guardian's Gate. Grey stones stand across the path in rows, and they are not making any sound at all. Not even the wind sounds near them."
+   },
+   {
+    "speaker": "narrator",
+    "text": "In the middle of the path sits a boulder wearing a fern cloak. It opens two mossy eyes."
+   }
+  ],
+  "stone_locked": [
+   {
+    "speaker": "narrator",
+    "text": "A grey stone, cold and silent. It's cracked, but none of us can break it."
+   },
+   {
+    "speaker": "reno",
+    "text": "I kicked it. My foot is sad now."
+   }
+  ],
+  "stone_gone": [
+   {
+    "speaker": "narrator",
+    "text": "Just rubble, and birdsong coming back."
+   }
+  ],
+  "C7_04_break_1": [
+   {
+    "speaker": "narrator",
+    "text": "Galen leans on the stone. It cracks, then crumbles. Somewhere nearby, a bird starts singing."
+   },
+   {
+    "set_flag": "ch07_stone_1"
+   }
+  ],
+  "C7_04_break_2": [
+   {
+    "speaker": "narrator",
+    "text": "Galen puts one hand on the stone and pushes. It falls over like it was tired anyway."
+   },
+   {
+    "set_flag": "ch07_stone_2"
+   }
+  ],
+  "C7_04_break_3": [
+   {
+    "speaker": "narrator",
+    "text": "Galen breaks the last silent stone. The sound of the whole mountain rushes back in: wind, water, birds, a faraway cowbell."
+   },
+   {
+    "set_flag": "ch07_stone_3"
+   },
+   {
+    "speaker": "galen",
+    "text": "He set these. Stones that eat sound. I used to think he only made quiet things for himself."
+   }
+  ],
+  "C7_03_galen_intro": [
+   {
+    "speaker": "galen",
+    "text": "Another one. Come to finish what the grey man started."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We're not with him! We're following him!"
+   },
+   {
+    "speaker": "galen",
+    "text": "That is what he said. Once. Long ago. Show me what you are."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Galen stands up. He is much, much bigger standing up."
+   }
+  ],
+  "C7_03_galen_joins": [
+   {
+    "speaker": "galen",
+    "text": "...Enough. He never fought like that. He fought like someone who wanted to lose."
+   },
+   {
+    "speaker": "galen",
+    "text": "I am Galen. I keep this gate. I kept it with the Oathkeepers, before they broke."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You knew him. The man in the grey coat."
+   },
+   {
+    "speaker": "galen",
+    "text": "He was the youngest of us. In 1951 there was a crossing on the railway, and it went wrong, and he could not save everyone. Afterwards he stopped speaking. Then he stopped coming."
+   },
+   {
+    "speaker": "galen",
+    "text": "Last week he came back up the mountain. He would not look at me. He put silent stones across my path and went to the Oath Stone."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then come with us! You can break those stones, right?"
+   },
+   {
+    "speaker": "galen",
+    "text": "I can break most things. Slowly."
+   },
+   {
+    "join": "galen"
+   },
+   {
+    "set_flag": "ch07_galen_joined"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Galen joined the party! In battle he draws attacks to himself and counters physical hits. Skills: Boulder Smash and Stone Rain (hits every enemy). In the field he breaks silent stones."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: break the silent stones and climb to the Oath Stone."
+   }
+  ],
+  "C7_05_summit": [
+   {
+    "set_flag": "ch07_summit_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The summit. A tall stone, carved with names, stands at the top of the world. Something without a face is wrapped around it like smoke."
+   }
+  ],
+  "oath_stone_before": [
+   {
+    "speaker": "narrator",
+    "text": "The Hush is wrapped around the stone. You can't get close."
+   }
+  ],
+  "oath_stone_after": [
+   {
+    "speaker": "narrator",
+    "text": "The Oath Stone. Names in old letters, and one long scrape where a name used to be."
+   }
+  ],
+  "C7_05_hush_intro": [
+   {
+    "speaker": "narrator",
+    "text": "The Hush turns. Where it looks, sound stops. Reno opens his mouth to shout and nothing comes out."
+   },
+   {
+    "speaker": "galen",
+    "text": "He left this here to guard the stone. To keep it from telling anyone what he did."
+   },
+   {
+    "speaker": "lumi",
+    "text": "(mouthing) Then let's make some noise."
+   }
+  ],
+  "C7_05_hush_outro": [
+   {
+    "speaker": "narrator",
+    "text": "The Hush breaks apart like a held breath let go. Reno's shout finally comes out, three minutes late. \"...AAAAH!\""
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Oath Stone hums. Up close the names glow faintly, all except the scraped one."
+   },
+   {
+    "speaker": "galen",
+    "text": "He scraped out his own name. He thinks he is not an Oathkeeper any more."
+   },
+   {
+    "key_item": "item_oath_rubbing"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Oath Stone Rubbing and the Moss Mantle (Galen: DEF +3, RES +2)."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Then the stone speaks, in a tired voice the party has never heard but somehow knows."
+   },
+   {
+    "speaker": "keeper_voice",
+    "text": "If anyone is listening: I am sorry. On the night of the Lantern Moon the worlds will touch, the way they did in 1951. This time I will be ready. When it is over, I will close every door between them. Nobody will be lost again."
+   },
+   {
+    "speaker": "reno",
+    "text": "Close every door? But then... Lumi and me..."
+   },
+   {
+    "speaker": "lumi",
+    "text": "We'd never see the human world again. And they'd never even know we were gone."
+   },
+   {
+    "speaker": "galen",
+    "text": "The Lantern Moon is three nights from now. The worlds will touch in many places at once."
+   },
+   {
+    "speaker": "elias",
+    "text": "Then we split up and hold them. All of us."
+   },
+   {
+    "set_flag": "ch07_lantern_moon_warned"
+   },
+   {
+    "set_flag": "chapter_07_completed"
+   },
+   {
+    "set_flag": "chapter_08_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

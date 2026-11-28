@@ -166,6 +166,19 @@
     "id": "pm01_imps",
     "outro_scene": "pm01_imps_beaten"
    }
+  },
+  {
+   "id": "caravan",
+   "character": "caravan",
+   "x": 20,
+   "y": 26,
+   "facing": "down",
+   "show_if_flag": "chapter_07_unlocked",
+   "talk": [
+    {
+     "scene": "caravan_east"
+    }
+   ]
   }
  ],
  "objects": [],

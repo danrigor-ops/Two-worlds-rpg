@@ -1187,6 +1187,182 @@
      "enter_text": "Ringmaster: The show must go on. The show must ALWAYS go on."
     }
    ]
+  },
+  "mist_wisp": {
+   "name": "Mist Wisp",
+   "character": "mist_wisp",
+   "stats": {
+    "level": 17,
+    "max_hp": 160,
+    "atk": 16,
+    "def": 20,
+    "mag": 38,
+    "res": 30,
+    "spd": 20
+   },
+   "xp": 56,
+   "attacks": [
+    {
+     "name": "Cold Mist",
+     "kind": "magical",
+     "mult": 1.0,
+     "applies": "slow",
+     "turns": 1
+    }
+   ]
+  },
+  "stone_silencer": {
+   "name": "Stone Silencer",
+   "character": "stone_silencer",
+   "stats": {
+    "level": 17,
+    "max_hp": 240,
+    "atk": 40,
+    "def": 34,
+    "mag": 10,
+    "res": 18,
+    "spd": 9
+   },
+   "xp": 60,
+   "attacks": [
+    {
+     "name": "Shush Slam",
+     "kind": "physical",
+     "mult": 1.2
+    },
+    {
+     "name": "Brace",
+     "kind": "physical",
+     "guard": true,
+     "mult": 0
+    }
+   ]
+  },
+  "galen_trial": {
+   "name": "Galen",
+   "character": "galen",
+   "stats": {
+    "level": 17,
+    "max_hp": 1000,
+    "atk": 38,
+    "def": 32,
+    "mag": 12,
+    "res": 26,
+    "spd": 10
+   },
+   "xp": 150,
+   "end_below": 0.5,
+   "attacks": [
+    {
+     "name": "Boulder Smash",
+     "kind": "physical",
+     "mult": 1.3
+    },
+    {
+     "name": "Moss Wall",
+     "kind": "physical",
+     "guard": true,
+     "mult": 0
+    }
+   ]
+  },
+  "the_hush": {
+   "name": "The Hush",
+   "character": "hush",
+   "stats": {
+    "level": 18,
+    "max_hp": 1700,
+    "atk": 36,
+    "def": 26,
+    "mag": 40,
+    "res": 28,
+    "spd": 16
+   },
+   "xp": 300,
+   "immune": [
+    "slow",
+    "fog"
+   ],
+   "attacks": [
+    {
+     "name": "Stone Drop",
+     "kind": "physical",
+     "mult": 1.2
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.6,
+     "attacks": [
+      {
+       "name": "Hush",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      },
+      {
+       "name": "Stone Drop",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Echo Ache",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      }
+     ]
+    },
+    {
+     "above": 0.3,
+     "attacks": [
+      {
+       "name": "Echo Ache",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Stone Drop",
+       "kind": "physical",
+       "mult": 1.2
+      },
+      {
+       "name": "Hush",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ],
+     "summon": "stone_silencer",
+     "enter_text": "The Hush presses on the stones. One of them stands up."
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Great Silence",
+       "kind": "magical",
+       "mult": 2.0,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Hush swells until there's no sound at all... (Great Silence lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Echo Ache",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Stone Drop",
+       "kind": "physical",
+       "mult": 1.2
+      }
+     ],
+     "enter_text": "The Hush pulls every sound on the mountain into itself."
+    }
+   ]
   }
  },
  "encounters": {
@@ -1454,6 +1630,46 @@
    ],
    "win_key_items": [
     "equip_jugglers_ribbon"
+   ]
+  },
+  "eh01_wisps": {
+   "enemies": [
+    "mist_wisp",
+    "mist_wisp"
+   ]
+  },
+  "eh02_mixed": {
+   "enemies": [
+    "mist_wisp",
+    "stone_silencer"
+   ]
+  },
+  "eh03_silencers": {
+   "enemies": [
+    "stone_silencer"
+   ]
+  },
+  "galen_trial": {
+   "enemies": [
+    "galen_trial"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch07_galen_trial_won"
+   ]
+  },
+  "hush_boss": {
+   "enemies": [
+    "the_hush"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch07_hush_beaten"
+   ],
+   "win_key_items": [
+    "equip_moss_mantle"
    ]
   }
  }

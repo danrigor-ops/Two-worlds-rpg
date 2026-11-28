@@ -46,6 +46,15 @@
    "mag": 1,
    "res": 1,
    "spd": 2
+  },
+  "galen": {
+   "max_hp": 8,
+   "max_mp": 1,
+   "atk": 2,
+   "def": 2,
+   "mag": 1,
+   "res": 1,
+   "spd": 1
   }
  }
 }

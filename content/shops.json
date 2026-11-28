@@ -50,6 +50,15 @@
     "item_coconut_jelly",
     "item_chrysanthemum_tea"
    ]
+  },
+  "ridge_trader": {
+   "name": "Ridge Trader",
+   "currency": "dewdrops",
+   "items": [
+    "item_cloud_honey",
+    "item_toffee_apple",
+    "item_sugarcane_juice"
+   ]
   }
  }
 }

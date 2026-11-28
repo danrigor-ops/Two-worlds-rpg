@@ -1872,6 +1872,167 @@
     "accent": "#e8b84a",
     "legs": "#2a2050"
    }
+  },
+  "galen_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#4a7a4a",
+    "skin": "#8a8a7a",
+    "body": "#6a6458",
+    "accent": "#7fae5a",
+    "legs": "#4a4438"
+   }
+  },
+  "farmer_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#a8784a",
+    "body": "#7a9a5a",
+    "accent": "#e8e0c0",
+    "legs": "#4a3a2a"
+   }
+  },
+  "surveyor_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a2a20",
+    "skin": "#c9a87a",
+    "body": "#e8e0c0",
+    "accent": "#c94f4f",
+    "legs": "#3a3a4a"
+   }
+  },
+  "mist_wisp_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#d8e0e8",
+    "skin": "#f4f8ff",
+    "body": "#c8d4e0",
+    "accent": "#8fc3ef",
+    "legs": "#a8b8c8"
+   }
+  },
+  "stone_silencer_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "postbox",
+    "hair": "#5a5476",
+    "skin": "#8a8a9a",
+    "body": "#5a5476",
+    "accent": "#2a2050",
+    "legs": "#3a3450"
+   }
+  },
+  "hush_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#2a2050",
+    "skin": "#5a5476",
+    "body": "#1a1430",
+    "accent": "#9fb0d8",
+    "legs": "#100c20"
+   }
+  },
+  "caravan_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#c94f4f",
+    "skin": "#c94f4f",
+    "body": "#5a3a5a",
+    "accent": "#e8b84a",
+    "legs": "#5a3a5a"
+   }
   }
  },
  "characters": {
@@ -1955,6 +2116,13 @@
   "funhouse_double": "funhouse_double_overworld",
   "balloon_imp": "balloon_imp_overworld",
   "ringmaster": "ringmaster_overworld",
-  "ghost_train": "ghost_train_overworld"
+  "ghost_train": "ghost_train_overworld",
+  "galen": "galen_overworld",
+  "farmer": "farmer_overworld",
+  "surveyor": "surveyor_overworld",
+  "mist_wisp": "mist_wisp_overworld",
+  "stone_silencer": "stone_silencer_overworld",
+  "hush": "hush_overworld",
+  "caravan": "caravan_overworld"
  }
 }

@@ -1,0 +1,219 @@
+{
+ "id": "EH-03",
+ "name": "The Guardian's Gate",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 26,
+ "legend": {
+  "r": "rock",
+  ".": "grass",
+  "s": "silent_stone",
+  "E": "exit"
+ },
+ "rows": [
+  "rrrrrrrrrrrrrrrrrrrrrrErrrrrrr",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "rrrrrrrrrrrrrrrrrrrrrrsrrrrrrr",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "rrrrrrrrsrrrrrrrrrrrrrrrrrrrrr",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "rrrrrrrrrrrrrrrsrrrrrrrrrrrrrr",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "r............................r",
+  "rrrrrrrrrrrrrrrErrrrrrrrrrrrrr"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 23,
+   "facing": "up"
+  },
+  "from_moss": {
+   "x": 15,
+   "y": 24,
+   "facing": "up"
+  },
+  "from_summit": {
+   "x": 22,
+   "y": 1,
+   "facing": "down"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_moss",
+   "x": 15,
+   "y": 25,
+   "to_map": "EH-02",
+   "to_spawn": "from_gate"
+  },
+  {
+   "id": "to_summit",
+   "x": 22,
+   "y": 0,
+   "to_map": "EH-04",
+   "to_spawn": "from_gate"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "galen_npc",
+   "character": "galen",
+   "x": 15,
+   "y": 16,
+   "facing": "down",
+   "hide_if_flag": "ch07_galen_trial_won",
+   "encounter": {
+    "id": "galen_trial",
+    "intro_scene": "C7_03_galen_intro",
+    "outro_scene": "C7_03_galen_joins"
+   }
+  },
+  {
+   "id": "silencers",
+   "character": "stone_silencer",
+   "x": 4,
+   "y": 10,
+   "facing": "right",
+   "hide_if_flag": "eh03_silencers_beaten",
+   "encounter": {
+    "id": "eh03_silencers",
+    "outro_scene": "eh03_silencers_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "stone_1",
+   "x": 15,
+   "y": 12,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_stone_1"
+     ],
+     "scene": "stone_gone"
+    },
+    {
+     "if_flags": [
+      "ch07_galen_joined"
+     ],
+     "scene": "C7_04_break_1"
+    },
+    {
+     "scene": "stone_locked"
+    }
+   ]
+  },
+  {
+   "id": "stone_2",
+   "x": 8,
+   "y": 8,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_stone_2"
+     ],
+     "scene": "stone_gone"
+    },
+    {
+     "if_flags": [
+      "ch07_galen_joined"
+     ],
+     "scene": "C7_04_break_2"
+    },
+    {
+     "scene": "stone_locked"
+    }
+   ]
+  },
+  {
+   "id": "stone_3",
+   "x": 22,
+   "y": 4,
+   "talk": [
+    {
+     "if_flags": [
+      "ch07_stone_3"
+     ],
+     "scene": "stone_gone"
+    },
+    {
+     "if_flags": [
+      "ch07_galen_joined"
+     ],
+     "scene": "C7_04_break_3"
+    },
+    {
+     "scene": "stone_locked"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch07_stone_1"
+   ],
+   "tile": "rubble",
+   "cells": [
+    [
+     15,
+     12
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch07_stone_2"
+   ],
+   "tile": "rubble",
+   "cells": [
+    [
+     8,
+     8
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch07_stone_3"
+   ],
+   "tile": "rubble",
+   "cells": [
+    [
+     22,
+     4
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C7_03_gate",
+   "if_not_flags": [
+    "ch07_gate_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#d0d4e0"
+}
