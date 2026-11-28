@@ -761,6 +761,39 @@
     "active": "The Keeper is at his desk at the heart of the Archive. Show him Maya's page.",
     "completed": "He ran to the First Crossing. This ends there."
    }
+  },
+  {
+   "id": "C10-001",
+   "name": "The Bridge of Lanterns",
+   "start": "locked",
+   "start_flags": [
+    "ch10_started"
+   ],
+   "complete_flags": [
+    "ch10_bridge_open"
+   ],
+   "reward": {
+    "dewdrops": 12
+   },
+   "journal": {
+    "active": "The First Crossing. The Keeper is putting out the lanterns on the oldest bridge there is. Each of our friends can relight one.",
+    "completed": "The bridge is lit again."
+   }
+  },
+  {
+   "id": "C10-002",
+   "name": "Where Two Worlds Meet",
+   "start": "locked",
+   "start_flags": [
+    "ch10_bridge_open"
+   ],
+   "complete_flags": [
+    "ch10_silence_beaten"
+   ],
+   "journal": {
+    "active": "Stop the Keeper at the heart of the Crossing, and bring him home.",
+    "completed": "The Promise is renewed. Everyone chose it."
+   }
   }
  ]
 }

@@ -1,0 +1,347 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Chapter 10 from docs/chapter-10/CHAPTER_10_PRODUCTION.md.",
+ "speakers": {
+  "maya_echo": {
+   "name": "Maya",
+   "character": "maya_echo"
+  },
+  "seri_echo": {
+   "name": "Seri",
+   "character": "seri_echo"
+  }
+ },
+ "scenes": {
+  "C10_00_door": [
+   {
+    "speaker": "narrator",
+    "text": "A door of warm gold light. Beyond it, the First Crossing, where the very first Promise was made."
+   },
+   {
+    "choice": [
+     {
+      "text": "Go to the First Crossing",
+      "then": [
+       {
+        "speaker": "galen",
+        "text": "All of us. Together."
+       },
+       {
+        "event": "travel:FC-01:from_door:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "C10_01_bridge": [
+   {
+    "set_flag": "ch10_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The First Crossing. A bridge of lanterns over nothing at all, between two worlds. Long ago, a human and a spirit met in the middle and promised to keep the way open."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Most of the lanterns are dark. At the far end, a wall of silence blocks the bridge."
+   },
+   {
+    "speaker": "lumi",
+    "text": "He's putting them out, one by one."
+   },
+   {
+    "speaker": "elias",
+    "text": "Four lanterns left on the posts. They're old Promise lanterns. They light for anyone who remembers why they keep the Promise."
+   },
+   {
+    "speaker": "reno",
+    "text": "Then everybody remember REALLY hard."
+   },
+   {
+    "speaker": "narrator",
+    "text": "New goal: relight the four lanterns. Each of your friends has a reason."
+   }
+  ],
+  "lantern_lit": [
+   {
+    "speaker": "narrator",
+    "text": "The lantern burns warm and steady."
+   }
+  ],
+  "C10_01_lantern_1": [
+   {
+    "speaker": "elias",
+    "text": "This one's mine. ...I was a radio that nobody listened to any more. Then a whole town remembered its name because I kept broadcasting. I keep the Promise because somebody should always be listening."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Elias crackles with static. The lantern lights."
+   },
+   {
+    "set_flag": "ch10_lit_1"
+   },
+   {
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ],
+    "set_flag": "ch10_bridge_open"
+   },
+   {
+    "speaker": "narrator",
+    "text": "All four lanterns burn. At the end of the bridge, the wall of silence cracks and falls away.",
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ]
+   }
+  ],
+  "C10_01_lantern_2": [
+   {
+    "speaker": "maris",
+    "text": "I was stuck in dead vines, forgetting I could grow. You pulled me out. I keep the Promise because things grow back, if you let them."
+   },
+   {
+    "speaker": "narrator",
+    "text": "A green shoot curls around the post. The lantern lights."
+   },
+   {
+    "set_flag": "ch10_lit_2"
+   },
+   {
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ],
+    "set_flag": "ch10_bridge_open"
+   },
+   {
+    "speaker": "narrator",
+    "text": "All four lanterns burn. At the end of the bridge, the wall of silence cracks and falls away.",
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ]
+   }
+  ],
+  "C10_01_lantern_3": [
+   {
+    "speaker": "taro",
+    "text": "I tell lies for a living. Here's a true thing: I was lonely in that carnival, every single night. I keep the Promise because it's better with an audience. Ahem. With friends."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Taro snaps his fingers. A real flame this time, not an illusion. The lantern lights."
+   },
+   {
+    "set_flag": "ch10_lit_3"
+   },
+   {
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ],
+    "set_flag": "ch10_bridge_open"
+   },
+   {
+    "speaker": "narrator",
+    "text": "All four lanterns burn. At the end of the bridge, the wall of silence cracks and falls away.",
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ]
+   }
+  ],
+  "C10_01_lantern_4": [
+   {
+    "speaker": "galen",
+    "text": "I kept a gate for longer than your town has had a name. I kept the Promise because I was told to. Now I keep it because I choose to."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Galen breathes on the lantern, slow and patient. It lights."
+   },
+   {
+    "set_flag": "ch10_lit_4"
+   },
+   {
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ],
+    "set_flag": "ch10_bridge_open"
+   },
+   {
+    "speaker": "narrator",
+    "text": "All four lanterns burn. At the end of the bridge, the wall of silence cracks and falls away.",
+    "if_flags": [
+     "ch10_lit_1",
+     "ch10_lit_2",
+     "ch10_lit_3",
+     "ch10_lit_4"
+    ]
+   }
+  ],
+  "fc01_shards_beaten": [
+   {
+    "set_flag": "fc01_shards_beaten"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The shards fall into the void without a sound."
+   }
+  ],
+  "C10_02_heart": [
+   {
+    "set_flag": "ch10_heart_seen"
+   },
+   {
+    "speaker": "narrator",
+    "text": "The Heart of the Crossing. A round floor of old gold, and in the middle, the Keeper, holding the last lantern in both hands, ready to put it out."
+   }
+  ],
+  "C10_02_keeper_intro": [
+   {
+    "speaker": "keeper",
+    "text": "You came. Of course you came. You're her token and her light. I should have known."
+   },
+   {
+    "speaker": "reno",
+    "text": "We came to bring you home."
+   },
+   {
+    "speaker": "keeper",
+    "text": "There is no home when the doors are open. Only people falling through them."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Then we'll catch them. That's what the Promise is FOR."
+   }
+  ],
+  "C10_02_silence_rises": [
+   {
+    "speaker": "narrator",
+    "text": "The Keeper falls to his knees. The last lantern rolls out of his hands, still burning."
+   },
+   {
+    "speaker": "keeper",
+    "text": "I can't... I'm so tired. Twelve years of keeping everything quiet."
+   },
+   {
+    "speaker": "narrator",
+    "text": "But the silence he made doesn't stop when he does. It pours out of his grey coat, out of every erased page, every forgotten name, and stands up behind him, enormous."
+   },
+   {
+    "speaker": "keeper",
+    "text": "No. No, no. I didn't mean... It's all of it. All the forgetting. It's going to swallow both worlds."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno's railway token glows in his hand. Lumi glows back. Somewhere, very faintly, two voices they have never heard but somehow know say: Together."
+   },
+   {
+    "set_flag": "ch10_promise_learned"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno and Lumi learned the team skill Promise Renewed! (Both heroes' turns, four timed presses.)"
+   }
+  ],
+  "C10_03_silence_intro": [
+   {
+    "speaker": "narrator",
+    "text": "The Great Silence turns its faceless head. Every lantern on the bridge flickers."
+   },
+   {
+    "speaker": "galen",
+    "text": "Stand together. All of us."
+   },
+   {
+    "speaker": "reno",
+    "text": "Hey, Silence! You're really, REALLY quiet! I'm gonna be really, really LOUD!"
+   }
+  ],
+  "C10_03_promise": [
+   {
+    "speaker": "narrator",
+    "text": "Promise Renewed. Reno's token and Lumi's light, and behind them every lantern on the bridge, all at once. The Great Silence breaks like a held breath let go, and the sound of two worlds comes rushing back."
+   },
+   {
+    "speaker": "narrator",
+    "text": "When the light settles, there are two more figures on the bridge. A railway worker with a lantern. A guardian made of soft light. Echoes, only echoes, but smiling."
+   },
+   {
+    "speaker": "maya_echo",
+    "text": "Look at you. You kept the token."
+   },
+   {
+    "speaker": "seri_echo",
+    "text": "And you kept each other. That's the whole Promise, really."
+   },
+   {
+    "speaker": "reno",
+    "text": "Are you... are you coming back?"
+   },
+   {
+    "speaker": "maya_echo",
+    "text": "We're keeping the door on our side. Someone has to. Visit us, every Lantern Moon."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Seri's echo touches Lumi's forehead. Then they're gone, and the bridge is warm."
+   },
+   {
+    "speaker": "keeper",
+    "text": "...I heard her. Twelve years ago. I heard her and I made myself forget."
+   },
+   {
+    "speaker": "lumi",
+    "text": "You can remember now. That's allowed."
+   },
+   {
+    "speaker": "galen",
+    "text": "The Oathkeepers were never meant to force anything. Will you help us keep it the right way? Anyone who wants to cross may cross. Anyone who wants to stay may stay."
+   },
+   {
+    "speaker": "keeper",
+    "text": "A Promise you choose. Not one that chooses for you. ...Yes. If you'll have me."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Everyone puts a hand on the last lantern: a radio, a flower, a juggler, a boulder, a tired man in a grey coat, and two kids from two worlds."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Got the Renewed Promise."
+   },
+   {
+    "set_flag": "chapter_10_completed"
+   },
+   {
+    "set_flag": "epilogue_unlocked"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

@@ -187,6 +187,13 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
 76. In **the Reading Room of 1951** (PZ-902), Lumi reads three pages written in light. They reveal the truth: Reno was the spirit child Maya saved, and Lumi is an echo of Seri. A hidden fourth page holds Maya's last words.
 77. At **the Keeper's Desk**, the first confrontation (BOSS-901): he breaks off at 40% and flees to the First Crossing.
 
+**Chapter 10: Where Two Worlds Meet.** Design: `docs/chapter-10/CHAPTER_10_PRODUCTION.md`.
+
+78. From the Chapter 9 screen, press A. The golden door at the Keeper's desk opens onto **the First Crossing**.
+79. On **the Bridge of Lanterns** (PZ-1001), Elias, Maris, Taro and Galen each relight a Promise lantern, and the wall of silence falls.
+80. At **the Heart of the Crossing**, fight the Keeper (BOSS-1001), who breaks at 30%. Then fight **the Great Silence** (BOSS-1002) with the new team skill **Promise Renewed**.
+81. Echoes of Maya and Seri say goodbye, the Keeper chooses to help, and the Promise is renewed as a choice: anyone who wants to cross may cross.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -258,4 +265,5 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 14. ✅ Chapter 7: The Guardian of the Eastern Mountains (Galen joins, tank passives, mist and silent stones)
 15. ✅ Chapter 8: The Night the Worlds Touched (mission parties, three split-up missions)
 16. ✅ Chapter 9: The Keeper of Forgotten Years (the Archive, the truth about 1951)
-17. Chapter 10 and the epilogue
+17. ✅ Chapter 10: Where Two Worlds Meet (two-stage finale, Promise Renewed)
+18. Epilogue

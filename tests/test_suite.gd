@@ -7,7 +7,7 @@ var root: Window
 var _passed := 0
 var _failed: Array[String] = []
 var _sections_done := 0
-const SECTIONS := 26
+const SECTIONS := 27
 
 
 func check(cond: bool, label: String) -> void:
@@ -112,6 +112,9 @@ func run(t: SceneTree) -> int:
 
 	print("Chapter 9: The Keeper of Forgotten Years")
 	await _test_chapter9(gs, im)
+
+	print("Chapter 10: Where Two Worlds Meet")
+	await _test_chapter10(gs, im)
 
 	_sections_done += 1
 	print("\n%d passed, %d failed" % [_passed, _failed.size()])
@@ -2504,4 +2507,64 @@ func _test_chapter9(gs: Node, im: Node) -> void:
 	check(["chapter_09_completed", "chapter_10_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
 	check(["C09-001", "C09-002", "C09-003"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C09-001 to C09-003 are finished")
 	await _chapter_end_screen(scene, "Chapter 9")
+	_sections_done += 1
+
+
+func _test_chapter10(gs: Node, im: Node) -> void:
+	var scene: Node = await _chapter_start(gs, ["chapter_03_completed", "ch03_elias_joined", "chapter_04_completed", "chapter_05_completed", "ch05_maris_joined",
+		"chapter_06_completed", "ch06_taro_joined", "chapter_07_completed", "ch07_galen_joined", "chapter_08_completed", "chapter_09_completed",
+		"ch09_desk_seen", "ch09_keeper_confronted", "chapter_10_unlocked"], 5200, "AR-03", "from_reading")
+	gs.add_key_item("item_mayas_page")
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(15, 6), im, 0)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "FC-01", "C10-01: the golden door opens onto the First Crossing")
+	await _finish_dialogue(im)
+	check(not scene.map.is_walkable(Vector2i(28, 12)), "a wall of silence blocks the bridge")
+	await _talk(scene, Vector2i(6, 10), im)
+	await _face_and_press(scene, Vector2i(12, 13), "down", im)
+	await _finish_dialogue(im)
+	await _talk(scene, Vector2i(19, 10), im)
+	check(not gs.get_flag("ch10_bridge_open"), "three lanterns aren't enough")
+	await _face_and_press(scene, Vector2i(25, 13), "down", im)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch10_bridge_open") and scene.map.is_walkable(Vector2i(28, 12)), "PZ-1001: Elias, Maris, Taro and Galen relight the Promise lanterns")
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(30, 12)), "right")
+	await _press_for("move_right", 20)
+	await _wait_transition(im)
+	await _wait(3)
+	check(scene.map.id == "FC-02", "the Heart of the Crossing")
+	await _finish_dialogue(im)
+	for id in ["galen", "lumi", "reno"]:
+		gs.move_to_front(id)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(12, 12)), "right")
+	await _press_for("move_right", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "C10-02: the final battle with the Keeper")
+	var blog: Array[String] = await _run_battle_with(scene, im, ["team:guardian_bloom", "team:spirit_cyclone", "skill", "stone_rain", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.contains("summon erased_page")), "the Keeper fights in phases")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch10_keeper_down") and gs.get_flag("ch10_promise_learned"), "the Keeper falls; the Great Silence rises; Promise Renewed is learned")
+	await _wait(3)
+	scene.leader().place_at(MapData.cell_to_feet(Vector2i(15, 12)), "right")
+	await _press_for("move_right", 40)
+	if im.current_mode() == im.Mode.EXPLORE:
+		await _tap("confirm")
+	await _finish_dialogue(im)
+	check(im.current_mode() == im.Mode.BATTLE, "C10-03: the Great Silence")
+	blog = await _run_battle_with(scene, im, ["team:promise_renewed", "team:guardian_bloom", "skill", "stone_rain", "attack"])
+	check(blog.any(func(l: String) -> bool: return l.begins_with("team reno,lumi perfect,perfect,perfect,perfect")), "Promise Renewed lands (four cues)")
+	check(blog.any(func(l: String) -> bool: return l.contains("summon silence_shard")), "the Silence breaks into shards")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(gs.get_flag("ch10_silence_beaten") and gs.has_key_item("item_renewed_promise"), "BOSS-1002: the Promise is renewed")
+	await _wait(3)
+	await _finish_dialogue(im)
+	check(["chapter_10_completed", "epilogue_unlocked"].all(gs.get_flag), "every end-of-chapter flag is set")
+	check(["C10-001", "C10-002"].all(func(q: String) -> bool: return gs.quest_state(q) in ["completed", "rewarded"]), "C10-001 and C10-002 are finished")
+	await _chapter_end_screen(scene, "Chapter 10")
 	_sections_done += 1

@@ -604,6 +604,48 @@
    "color": "#3a3458",
    "accent": "#f4ecd2",
    "pattern": "desk"
+  },
+  "void": {
+   "index": 86,
+   "solid": true,
+   "color": "#100c20",
+   "accent": "#3a3450",
+   "pattern": "speckle"
+  },
+  "lantern_bridge": {
+   "index": 87,
+   "solid": false,
+   "color": "#8a6a3a",
+   "accent": "#e8b84a",
+   "pattern": "bridge"
+  },
+  "lantern_dark": {
+   "index": 88,
+   "solid": true,
+   "color": "#3a3450",
+   "accent": "#5a5476",
+   "pattern": "post"
+  },
+  "lantern_lit": {
+   "index": 89,
+   "solid": true,
+   "color": "#e8b84a",
+   "accent": "#f4f8ff",
+   "pattern": "post"
+  },
+  "silence_wall": {
+   "index": 90,
+   "solid": true,
+   "color": "#2a2050",
+   "accent": "#9fb0d8",
+   "pattern": "stone"
+  },
+  "crossing_floor": {
+   "index": 91,
+   "solid": false,
+   "color": "#c9a84a",
+   "accent": "#f4ecd2",
+   "pattern": "checker"
   }
  }
 }

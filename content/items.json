@@ -331,6 +331,11 @@
    "name": "Maya's Page",
    "kind": "key",
    "text": "Her last words in 1951, which the Keeper hid in the Archive: \"Tell them to keep the doors open. Don't let this make anyone afraid.\""
+  },
+  "item_renewed_promise": {
+   "name": "The Renewed Promise",
+   "kind": "key",
+   "text": "Not a contract. An invitation: anyone who wants to cross may cross, and anyone who wants to stay may stay. Signed by everyone who was there."
   }
  }
 }

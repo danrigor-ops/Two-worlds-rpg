@@ -136,6 +136,19 @@
    "heal_pct_miss": 10,
    "requires_flag": "ch01_guardian_bloom_learned",
    "text": "Both heroes' turns, 5 MP each. Shields both (damage x0.7 for 2 turns) and heals 15% of max HP (10% if a cue is missed)."
+  },
+  "promise_renewed": {
+   "name": "Promise Renewed",
+   "short": "Promise",
+   "users": [
+    "reno",
+    "lumi"
+   ],
+   "mp_each": 6,
+   "cues": 4,
+   "mult": 3.2,
+   "requires_flag": "ch10_promise_learned",
+   "text": "Reno holds up Maya's token, Lumi shines with Seri's light. Both heroes' turns, 6 MP each. Four timed presses."
   }
  }
 }
