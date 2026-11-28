@@ -561,7 +561,7 @@
    "solid": false,
    "color": "#4a4470",
    "accent": "#e8b84a",
-   "pattern": "stone"
+   "pattern": "speckle"
   },
   "spill": {
    "index": 80,
@@ -646,6 +646,13 @@
    "color": "#c9a84a",
    "accent": "#f4ecd2",
    "pattern": "checker"
+  },
+  "platform": {
+   "index": 92,
+   "solid": false,
+   "color": "#b8a888",
+   "accent": "#e8d8b0",
+   "pattern": "planks"
   }
  }
 }

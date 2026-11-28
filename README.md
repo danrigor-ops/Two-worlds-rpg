@@ -194,6 +194,12 @@ Party rules from Chapter 3: up to three heroes fight; anyone else waits in reser
 80. At **the Heart of the Crossing**, fight the Keeper (BOSS-1001), who breaks at 30%. Then fight **the Great Silence** (BOSS-1002) with the new team skill **Promise Renewed**.
 81. Echoes of Maya and Seri say goodbye, the Keeper chooses to help, and the Promise is renewed as a choice: anyone who wants to cross may cross.
 
+**Epilogue: The First Train of Tomorrow.** Design: `docs/epilogue/EPILOGUE_PRODUCTION.md`.
+
+82. From the Chapter 10 screen, press A. Take the train of morning light home to **Bandar Senja Station** on the morning a new line opens.
+83. Say goodbye to Elias, Maris, Taro, Galen and the Keeper, now an Oathkeeper again.
+84. Reno and Lumi board the first train of tomorrow. THE END.
+
 ### Saving
 
 - The game autosaves after every map change and after each battle win.
@@ -266,4 +272,4 @@ Put a PNG under `assets/` and set its `path` in `content/asset_manifest.json`:
 15. ✅ Chapter 8: The Night the Worlds Touched (mission parties, three split-up missions)
 16. ✅ Chapter 9: The Keeper of Forgotten Years (the Archive, the truth about 1951)
 17. ✅ Chapter 10: Where Two Worlds Meet (two-stage finale, Promise Renewed)
-18. Epilogue
+18. ✅ Epilogue: The First Train of Tomorrow (character epilogues, the duo boards another train)

@@ -1,0 +1,168 @@
+{
+ "id": "EP-01",
+ "name": "Bandar Senja Station, Morning",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 34,
+ "height": 20,
+ "legend": {
+  "w": "wall",
+  "p": "platform",
+  "r": "rail",
+  "b": "table"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "wppppppppppppppppppppppppppppppppw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wpppppbpppppppbpppppppbpppppbppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wppppppppppppppppppppppppppppppppw",
+  "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+ ],
+ "tint": "#fff0d8",
+ "spawns": {
+  "start": {
+   "x": 17,
+   "y": 16,
+   "facing": "up"
+  },
+  "from_crossing": {
+   "x": 17,
+   "y": 16,
+   "facing": "up"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "elias_ep",
+   "character": "elias_ep",
+   "x": 6,
+   "y": 9,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "EP_elias"
+    }
+   ]
+  },
+  {
+   "id": "maris_ep",
+   "character": "maris_ep",
+   "x": 11,
+   "y": 12,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "EP_maris"
+    }
+   ]
+  },
+  {
+   "id": "taro_ep",
+   "character": "taro_ep",
+   "x": 22,
+   "y": 9,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "EP_taro"
+    }
+   ]
+  },
+  {
+   "id": "galen_ep",
+   "character": "galen_ep",
+   "x": 28,
+   "y": 12,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "EP_galen"
+    }
+   ]
+  },
+  {
+   "id": "keeper_ep",
+   "character": "keeper_ep",
+   "x": 17,
+   "y": 10,
+   "facing": "down",
+   "talk": [
+    {
+     "scene": "EP_keeper"
+    }
+   ]
+  },
+  {
+   "id": "stationmaster",
+   "character": "stationmaster",
+   "x": 3,
+   "y": 15,
+   "facing": "right",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "EP_human_stationmaster"
+    }
+   ]
+  },
+  {
+   "id": "moon_girl",
+   "character": "moon_girl",
+   "x": 31,
+   "y": 16,
+   "facing": "left",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "EP_human_girl"
+    }
+   ]
+  },
+  {
+   "id": "dawn_train",
+   "character": "dawn_train",
+   "x": 17,
+   "y": 5,
+   "facing": "down",
+   "talk": [
+    {
+     "if_flags": [
+      "ep_said_goodbye"
+     ],
+     "scene": "EP_02_board"
+    },
+    {
+     "scene": "EP_train_wait"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "EP_01_morning",
+   "if_not_flags": [
+    "epilogue_started"
+   ]
+  }
+ ],
+ "movables": []
+}

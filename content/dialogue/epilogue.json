@@ -1,0 +1,323 @@
+{
+ "status": "WORKING_PROPOSAL",
+ "note": "Epilogue from docs/epilogue/EPILOGUE_PRODUCTION.md.",
+ "speakers": {
+  "keeper_ep": {
+   "name": "The Oathkeeper",
+   "character": "keeper_ep"
+  }
+ },
+ "scenes": {
+  "EP_00_train": [
+   {
+    "speaker": "narrator",
+    "text": "A train made of morning light pulls up at the edge of the Crossing. The sign on the front says BANDAR SENJA."
+   },
+   {
+    "choice": [
+     {
+      "text": "Ride home",
+      "then": [
+       {
+        "event": "travel:EP-01:from_crossing:save_first"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "then": []
+     }
+    ]
+   }
+  ],
+  "EP_01_morning": [
+   {
+    "set_flag": "epilogue_started"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Bandar Senja Station, the morning after. 1963. A brand-new line opens today, and the first train of the day is due."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The humans on the platform can't see the spirits. But they all agree the station feels crowded this morning, in a nice way."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Everyone came to see us off."
+   },
+   {
+    "speaker": "reno",
+    "text": "See us off? Where are we going?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Wherever the next train goes, I think."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Say goodbye to your friends, then board the first train."
+   }
+  ],
+  "EP_human_stationmaster": [
+   {
+    "speaker": "stationmaster",
+    "text": "(polishing a brass bell) First train on the new line, and I've got goosebumps. Like the whole station's holding its breath. Good kind of holding."
+   }
+  ],
+  "EP_human_girl": [
+   {
+    "speaker": "moon_girl",
+    "text": "(to nobody) Thank you for the door in the moon. I knew it was real."
+   }
+  ],
+  "EP_elias": [
+   {
+    "speaker": "elias",
+    "text": "I'm going back to Bandar Kencana. The town wants a radio programme: \"Things We Remembered Today\". Every evening at seven. Spirits AND humans can tune in, if they know how to listen."
+   },
+   {
+    "speaker": "reno",
+    "text": "I'll listen every night!"
+   },
+   {
+    "speaker": "elias",
+    "text": "You'll fall asleep by seven fifteen."
+   },
+   {
+    "set_flag": "ep_bye_elias"
+   },
+   {
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ],
+    "set_flag": "ep_said_goodbye"
+   },
+   {
+    "speaker": "narrator",
+    "text": "That's everyone. The first train is waiting.",
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ]
+   }
+  ],
+  "EP_maris": [
+   {
+    "speaker": "maris",
+    "text": "Hutan Seribu Bunga is blooming again. All thousand flowers. I'm going to plant a few here, too. Stations should have flowers."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Will they remember us?"
+   },
+   {
+    "speaker": "maris",
+    "text": "Flowers remember everything. That's the whole trouble with them. And the whole joy."
+   },
+   {
+    "set_flag": "ep_bye_maris"
+   },
+   {
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ],
+    "set_flag": "ep_said_goodbye"
+   },
+   {
+    "speaker": "narrator",
+    "text": "That's everyone. The first train is waiting.",
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ]
+   }
+  ],
+  "EP_taro": [
+   {
+    "speaker": "taro",
+    "text": "The carnival's coming back next month, and guess who's the new Ringmaster's assistant. Me! Officially honest! ...Mostly honest."
+   },
+   {
+    "speaker": "reno",
+    "text": "Do one more trick?"
+   },
+   {
+    "speaker": "narrator",
+    "text": "Taro pulls a paper bird from behind Reno's ear. It flies off down the line, ahead of the train."
+   },
+   {
+    "set_flag": "ep_bye_taro"
+   },
+   {
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ],
+    "set_flag": "ep_said_goodbye"
+   },
+   {
+    "speaker": "narrator",
+    "text": "That's everyone. The first train is waiting.",
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ]
+   }
+  ],
+  "EP_galen": [
+   {
+    "speaker": "galen",
+    "text": "I'll go back to my gate. I'll leave it open this time. Anyone who climbs the mountain can come and sit with me."
+   },
+   {
+    "speaker": "galen",
+    "text": "It is very quiet up there. The good kind of quiet."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Not the Keeper's kind?"
+   },
+   {
+    "speaker": "galen",
+    "text": "No. The kind where you can hear birds."
+   },
+   {
+    "set_flag": "ep_bye_galen"
+   },
+   {
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ],
+    "set_flag": "ep_said_goodbye"
+   },
+   {
+    "speaker": "narrator",
+    "text": "That's everyone. The first train is waiting.",
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ]
+   }
+  ],
+  "EP_keeper": [
+   {
+    "speaker": "keeper_ep",
+    "text": "(at the ticket booth, in a clean blue coat) Free tickets, today only. For crossings. Anyone who wants to visit, may."
+   },
+   {
+    "speaker": "keeper_ep",
+    "text": "I'm going to be an Oathkeeper again. A proper one. The kind that keeps doors open and catches people, instead of locking everything."
+   },
+   {
+    "speaker": "reno",
+    "text": "You'll be great at catching. You've got really long arms."
+   },
+   {
+    "speaker": "keeper_ep",
+    "text": "...Thank you, Reno. For the page. For all of it."
+   },
+   {
+    "set_flag": "ep_bye_keeper"
+   },
+   {
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ],
+    "set_flag": "ep_said_goodbye"
+   },
+   {
+    "speaker": "narrator",
+    "text": "That's everyone. The first train is waiting.",
+    "if_flags": [
+     "ep_bye_elias",
+     "ep_bye_maris",
+     "ep_bye_taro",
+     "ep_bye_galen",
+     "ep_bye_keeper"
+    ]
+   }
+  ],
+  "EP_train_wait": [
+   {
+    "speaker": "narrator",
+    "text": "The first train of tomorrow hums at the platform. It will wait. Trains in this world are patient."
+   },
+   {
+    "speaker": "lumi",
+    "text": "Let's say goodbye to everyone first."
+   }
+  ],
+  "EP_02_board": [
+   {
+    "speaker": "narrator",
+    "text": "The guard blows a whistle. Only the spirits hear the second whistle, softer and higher, that answers it from somewhere on the other side."
+   },
+   {
+    "speaker": "reno",
+    "text": "Lumi. Do you think Maya and Seri can see us?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "Every Lantern Moon, remember? We'll visit."
+   },
+   {
+    "speaker": "reno",
+    "text": "Every single one. ...Hey. Where does this train actually go?"
+   },
+   {
+    "speaker": "lumi",
+    "text": "I don't know. Somewhere neither of us has been."
+   },
+   {
+    "speaker": "reno",
+    "text": "PERFECT."
+   },
+   {
+    "speaker": "narrator",
+    "text": "Reno and Lumi climb aboard the first train of tomorrow. On the platform their friends wave: a radio, a flower, a juggler, a boulder, and a man in a blue coat. The humans wave too, at the train, without quite knowing why."
+   },
+   {
+    "speaker": "narrator",
+    "text": "The train pulls out into the morning, between two worlds that have decided, together, to stay open."
+   },
+   {
+    "set_flag": "epilogue_completed"
+   },
+   {
+    "event": "chapter_end"
+   }
+  ]
+ }
+}

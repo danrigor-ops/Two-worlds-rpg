@@ -2470,6 +2470,52 @@
     "accent": "#e8b84a",
     "legs": "#a8c8e8"
    }
+  },
+  "keeper_ep_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#3a3a3a",
+    "skin": "#c9b8a0",
+    "body": "#2a4a6a",
+    "accent": "#e8b84a",
+    "legs": "#2a2a3a"
+   }
+  },
+  "dawn_train_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "item",
+    "hair": "#e8b84a",
+    "skin": "#f4ecd2",
+    "body": "#c94f4f",
+    "accent": "#f4ecd2",
+    "legs": "#3a2a20"
+   }
   }
  },
  "characters": {
@@ -2579,6 +2625,12 @@
   "silence_shard": "silence_shard_overworld",
   "great_silence": "great_silence_overworld",
   "maya_echo": "maya_echo_overworld",
-  "seri_echo": "seri_echo_overworld"
+  "seri_echo": "seri_echo_overworld",
+  "elias_ep": "elias_overworld",
+  "maris_ep": "maris_overworld",
+  "taro_ep": "taro_overworld",
+  "galen_ep": "galen_overworld",
+  "keeper_ep": "keeper_ep_overworld",
+  "dawn_train": "dawn_train_overworld"
  }
 }
