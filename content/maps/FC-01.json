@@ -1,0 +1,228 @@
+{
+ "id": "FC-01",
+ "name": "The Bridge of Lanterns",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 32,
+ "height": 24,
+ "legend": {
+  "v": "void",
+  "b": "lantern_bridge",
+  "l": "lantern_dark",
+  "S": "silence_wall",
+  "D": "door"
+ },
+ "rows": [
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvlvvvvvvvvvvvvlvvvvvvvvvvvv",
+  "vbbbbbbbbbbbbbbbbbbbbbbbbbbbSbbv",
+  "vbbbbbbbbbbbbbbbbbbbbbbbbbbbSbbD",
+  "vbbbbbbbbbbbbbbbbbbbbbbbbbbbSbbv",
+  "vvvvvvvvvvvvlvvvvvvvvvvvvlvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+ ],
+ "spawns": {
+  "start": {
+   "x": 2,
+   "y": 12,
+   "facing": "right"
+  },
+  "from_door": {
+   "x": 2,
+   "y": 12,
+   "facing": "right"
+  },
+  "from_heart": {
+   "x": 30,
+   "y": 12,
+   "facing": "left"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_heart",
+   "x": 31,
+   "y": 12,
+   "to_map": "FC-02",
+   "to_spawn": "from_bridge"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "shards",
+   "character": "silence_shard",
+   "x": 16,
+   "y": 12,
+   "facing": "left",
+   "hide_if_flag": "fc01_shards_beaten",
+   "encounter": {
+    "id": "fc01_shards",
+    "outro_scene": "fc01_shards_beaten"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "lantern_1",
+   "x": 6,
+   "y": 10,
+   "talk": [
+    {
+     "if_flags": [
+      "ch10_lit_1"
+     ],
+     "scene": "lantern_lit"
+    },
+    {
+     "scene": "C10_01_lantern_1"
+    }
+   ]
+  },
+  {
+   "id": "lantern_2",
+   "x": 12,
+   "y": 14,
+   "talk": [
+    {
+     "if_flags": [
+      "ch10_lit_2"
+     ],
+     "scene": "lantern_lit"
+    },
+    {
+     "scene": "C10_01_lantern_2"
+    }
+   ]
+  },
+  {
+   "id": "lantern_3",
+   "x": 19,
+   "y": 10,
+   "talk": [
+    {
+     "if_flags": [
+      "ch10_lit_3"
+     ],
+     "scene": "lantern_lit"
+    },
+    {
+     "scene": "C10_01_lantern_3"
+    }
+   ]
+  },
+  {
+   "id": "lantern_4",
+   "x": 25,
+   "y": 14,
+   "talk": [
+    {
+     "if_flags": [
+      "ch10_lit_4"
+     ],
+     "scene": "lantern_lit"
+    },
+    {
+     "scene": "C10_01_lantern_4"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch10_lit_1"
+   ],
+   "tile": "lantern_lit",
+   "cells": [
+    [
+     6,
+     10
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch10_lit_2"
+   ],
+   "tile": "lantern_lit",
+   "cells": [
+    [
+     12,
+     14
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch10_lit_3"
+   ],
+   "tile": "lantern_lit",
+   "cells": [
+    [
+     19,
+     10
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch10_lit_4"
+   ],
+   "tile": "lantern_lit",
+   "cells": [
+    [
+     25,
+     14
+    ]
+   ]
+  },
+  {
+   "if_flags": [
+    "ch10_bridge_open"
+   ],
+   "tile": "lantern_bridge",
+   "cells": [
+    [
+     28,
+     11
+    ],
+    [
+     28,
+     12
+    ],
+    [
+     28,
+     13
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C10_01_bridge",
+   "if_not_flags": [
+    "ch10_started"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#d8c8f0"
+}

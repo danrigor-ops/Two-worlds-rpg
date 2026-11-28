@@ -1,0 +1,103 @@
+{
+ "id": "FC-02",
+ "name": "The Heart of the Crossing",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 24,
+ "legend": {
+  "v": "void",
+  "c": "crossing_floor",
+  "b": "lantern_bridge",
+  "D": "door"
+ },
+ "rows": [
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "Dbbccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvccccccccccccccccccccccccvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
+  "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv"
+ ],
+ "spawns": {
+  "start": {
+   "x": 4,
+   "y": 12,
+   "facing": "right"
+  },
+  "from_bridge": {
+   "x": 1,
+   "y": 12,
+   "facing": "right"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_bridge",
+   "x": 0,
+   "y": 12,
+   "to_map": "FC-01",
+   "to_spawn": "from_heart"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "keeper",
+   "character": "keeper",
+   "x": 15,
+   "y": 12,
+   "facing": "left",
+   "hide_if_flag": "ch10_keeper_down",
+   "encounter": {
+    "id": "keeper_final",
+    "intro_scene": "C10_02_keeper_intro",
+    "outro_scene": "C10_02_silence_rises"
+   }
+  },
+  {
+   "id": "great_silence",
+   "character": "great_silence",
+   "x": 18,
+   "y": 12,
+   "facing": "left",
+   "show_if_flag": "ch10_keeper_down",
+   "hide_if_flag": "ch10_silence_beaten",
+   "encounter": {
+    "id": "silence_boss",
+    "intro_scene": "C10_03_silence_intro",
+    "outro_scene": "C10_03_promise"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C10_02_heart",
+   "if_not_flags": [
+    "ch10_heart_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#f4e8c8"
+}

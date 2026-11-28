@@ -1773,6 +1773,229 @@
      "enter_text": "Keeper: Please. Just let it be quiet."
     }
    ]
+  },
+  "silence_shard": {
+   "name": "Silence Shard",
+   "character": "silence_shard",
+   "stats": {
+    "level": 23,
+    "max_hp": 260,
+    "atk": 30,
+    "def": 28,
+    "mag": 46,
+    "res": 32,
+    "spd": 22
+   },
+   "xp": 84,
+   "attacks": [
+    {
+     "name": "Mute",
+     "kind": "status",
+     "applies": "fog",
+     "turns": 1
+    },
+    {
+     "name": "Shard Rain",
+     "kind": "magical",
+     "mult": 0.8,
+     "target": "all"
+    }
+   ]
+  },
+  "keeper_final": {
+   "name": "The Keeper of Silence",
+   "character": "keeper",
+   "stats": {
+    "level": 24,
+    "max_hp": 3000,
+    "atk": 42,
+    "def": 32,
+    "mag": 48,
+    "res": 34,
+    "spd": 19
+   },
+   "xp": 500,
+   "immune": [
+    "slow",
+    "fog",
+    "poison"
+   ],
+   "end_below": 0.3,
+   "attacks": [
+    {
+     "name": "Quiet Hand",
+     "kind": "physical",
+     "mult": 1.3
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.7,
+     "attacks": [
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      },
+      {
+       "name": "Silence Ink",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ]
+    },
+    {
+     "above": 0.45,
+     "attacks": [
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      },
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Silence Ink",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ],
+     "summon": "erased_page",
+     "enter_text": "Keeper: You read her page. It doesn't change what I saw."
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "Close Every Door",
+       "kind": "magical",
+       "mult": 2.2,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "Keeper: One by one... every door... (Close Every Door lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Grey Rain",
+       "kind": "magical",
+       "mult": 0.9,
+       "target": "all"
+      },
+      {
+       "name": "Quiet Hand",
+       "kind": "physical",
+       "mult": 1.3
+      }
+     ],
+     "enter_text": "Keeper: I can't lose anyone else. I CAN'T."
+    }
+   ]
+  },
+  "great_silence": {
+   "name": "The Great Silence",
+   "character": "great_silence",
+   "stats": {
+    "level": 25,
+    "max_hp": 3200,
+    "atk": 46,
+    "def": 30,
+    "mag": 50,
+    "res": 30,
+    "spd": 15
+   },
+   "xp": 800,
+   "immune": [
+    "slow",
+    "fog",
+    "poison",
+    "soaked"
+   ],
+   "attacks": [
+    {
+     "name": "Engulf",
+     "kind": "magical",
+     "mult": 1.0,
+     "target": "all"
+    }
+   ],
+   "phases": [
+    {
+     "above": 0.66,
+     "attacks": [
+      {
+       "name": "Engulf",
+       "kind": "magical",
+       "mult": 1.0,
+       "target": "all"
+      },
+      {
+       "name": "Crushing Quiet",
+       "kind": "physical",
+       "mult": 1.4
+      },
+      {
+       "name": "Silence Ink",
+       "kind": "status",
+       "applies": "fog",
+       "turns": 1
+      }
+     ]
+    },
+    {
+     "above": 0.33,
+     "attacks": [
+      {
+       "name": "Crushing Quiet",
+       "kind": "physical",
+       "mult": 1.4
+      },
+      {
+       "name": "Engulf",
+       "kind": "magical",
+       "mult": 1.0,
+       "target": "all"
+      }
+     ],
+     "summon": "silence_shard",
+     "enter_text": "Pieces of the Silence break off and come at you."
+    },
+    {
+     "above": 0.0,
+     "attacks": [
+      {
+       "name": "The End of All Sound",
+       "kind": "magical",
+       "mult": 2.4,
+       "target": "all",
+       "telegraph": true,
+       "telegraph_text": "The Great Silence swallows the light, the wind, your own heartbeat... (The End of All Sound lands next turn. Guard or Bloom!)"
+      },
+      {
+       "name": "Engulf",
+       "kind": "magical",
+       "mult": 1.0,
+       "target": "all"
+      },
+      {
+       "name": "Crushing Quiet",
+       "kind": "physical",
+       "mult": 1.4
+      }
+     ],
+     "enter_text": "Keeper (far away): Don't let it win. Please. I'm sorry. Don't let it win."
+    }
+   ]
   }
  },
  "encounters": {
@@ -2144,6 +2367,35 @@
    ],
    "win_key_items": [
     "equip_oathkeeper_pin"
+   ]
+  },
+  "fc01_shards": {
+   "enemies": [
+    "silence_shard",
+    "silence_shard"
+   ]
+  },
+  "keeper_final": {
+   "enemies": [
+    "keeper_final"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch10_keeper_down"
+   ]
+  },
+  "silence_boss": {
+   "enemies": [
+    "great_silence"
+   ],
+   "can_escape": false,
+   "boss": true,
+   "win_flags": [
+    "ch10_silence_beaten"
+   ],
+   "win_key_items": [
+    "item_renewed_promise"
    ]
   }
  }

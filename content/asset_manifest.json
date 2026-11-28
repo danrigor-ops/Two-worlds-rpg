@@ -2378,6 +2378,98 @@
     "accent": "#f4f8ff",
     "legs": "#8a6a2a"
    }
+  },
+  "silence_shard_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "flicker",
+    "hair": "#2a2050",
+    "skin": "#9fb0d8",
+    "body": "#3a3450",
+    "accent": "#f4f8ff",
+    "legs": "#1a1430"
+   }
+  },
+  "great_silence_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "dust",
+    "hair": "#100c20",
+    "skin": "#2a2050",
+    "body": "#05030a",
+    "accent": "#9fb0d8",
+    "legs": "#000000"
+   }
+  },
+  "maya_echo_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "human",
+    "hair": "#2b2420",
+    "skin": "#c9a87a",
+    "body": "#3a4a6a",
+    "accent": "#e8b84a",
+    "legs": "#2a2a3a"
+   }
+  },
+  "seri_echo_overworld": {
+   "kind": "character_sheet",
+   "status": "PLACEHOLDER",
+   "path": "",
+   "frame_width": 32,
+   "frame_height": 40,
+   "frame_order": [
+    "down",
+    "left",
+    "right",
+    "up"
+   ],
+   "origin_x": 0.5,
+   "origin_y": 0.95,
+   "placeholder": {
+    "style": "lumi",
+    "hair": "#f4f8ff",
+    "skin": "#f4f8ff",
+    "body": "#c8e0f4",
+    "accent": "#e8b84a",
+    "legs": "#a8c8e8"
+   }
   }
  },
  "characters": {
@@ -2483,6 +2575,10 @@
   "erased_page": "erased_page_overworld",
   "ink_wraith": "ink_wraith_overworld",
   "hidden_page": "hidden_page_overworld",
-  "crossing_door": "crossing_door_overworld"
+  "crossing_door": "crossing_door_overworld",
+  "silence_shard": "silence_shard_overworld",
+  "great_silence": "great_silence_overworld",
+  "maya_echo": "maya_echo_overworld",
+  "seri_echo": "seri_echo_overworld"
  }
 }
