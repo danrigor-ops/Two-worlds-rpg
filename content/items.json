@@ -301,6 +301,21 @@
    "name": "Oath Stone Rubbing",
    "kind": "key",
    "text": "Charcoal on paper: the Oathkeepers' names. One has been scraped away, by the same hand that wrote it."
+  },
+  "equip_lantern_charm": {
+   "name": "Lantern Moon Charm",
+   "kind": "charm",
+   "equip_to": "lumi",
+   "bonus": {
+    "mag": 3,
+    "res": 2
+   },
+   "text": "A sliver of the Lantern Moon. Lumi wears it: MAG +3, RES +2."
+  },
+  "item_archive_ticket": {
+   "name": "Ticket to Nowhere",
+   "kind": "key",
+   "text": "Dropped by the Keeper. It says ARCHIVE BETWEEN WORLDS, and the date is 1951."
   }
  }
 }

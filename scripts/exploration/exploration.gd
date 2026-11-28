@@ -134,9 +134,8 @@ func load_map(map_id: String, spawn_name: String = "") -> void:
 
 	var start := _pick_start(spawn_name)
 	var pos := MapData.cell_to_feet(start["cell"])
-	for id: String in GameState.party():
-		if GameState.walks(id):
-			members[id] = _spawn_member(id, pos, start["facing"])
+	for id: String in GameState.walking_party():
+		members[id] = _spawn_member(id, pos, start["facing"])
 	trail.reset(pos)
 	_last_safe = pos
 
@@ -545,6 +544,14 @@ func _on_story_event(name: String) -> void:
 			await dialogue.finished
 			await _wait_for_explore()
 			travel(map.id, parts[1])
+			return
+		"mission":
+			# "mission:lumi,maris,elias" splits the party; "mission:" brings it back together.
+			# A travel step right after reloads the map with the new walkers.
+			if parts.size() > 1 and parts[1] != "":
+				GameState.set_mission(Array(parts[1].split(",")))
+			else:
+				GameState.clear_mission()
 			return
 		"autosave":
 			await dialogue.finished

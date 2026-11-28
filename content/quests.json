@@ -655,6 +655,59 @@
     "active": "Galen can break the silent stones. The Oath Stone is at the summit.",
     "completed": "The Hush is gone. The stone remembered a warning."
    }
+  },
+  {
+   "id": "C08-001",
+   "name": "The River Tear",
+   "start": "locked",
+   "start_flags": [
+    "ch08_started"
+   ],
+   "complete_flags": [
+    "ch08_river_sealed"
+   ],
+   "reward": {
+    "dewdrops": 8
+   },
+   "journal": {
+    "active": "Lumi, Maris and Elias hold the tear where the river spirit world is spilling into town.",
+    "completed": "The river tear is sealed."
+   }
+  },
+  {
+   "id": "C08-002",
+   "name": "The Market Tear",
+   "start": "locked",
+   "start_flags": [
+    "ch08_started"
+   ],
+   "complete_flags": [
+    "ch08_market_sealed"
+   ],
+   "reward": {
+    "items": {
+     "item_cloud_honey": 2
+    }
+   },
+   "journal": {
+    "active": "Reno, Taro and Galen hold the tear in the night market, where a human watchman is standing far too close.",
+    "completed": "The market tear is sealed."
+   }
+  },
+  {
+   "id": "C08-003",
+   "name": "The Railway Tear",
+   "start": "locked",
+   "start_flags": [
+    "ch08_two_sealed"
+   ],
+   "complete_flags": [
+    "ch08_echo_beaten"
+   ],
+   "journal": {
+    "active": "The last tear is on the old railway. Just Reno and Lumi, together.",
+    "completed": "We saw 1951. And we saw him."
+   }
   }
  ]
 }

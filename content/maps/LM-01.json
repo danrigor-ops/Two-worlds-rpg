@@ -1,0 +1,177 @@
+{
+ "id": "LM-01",
+ "name": "Bandar Senja, Lantern Moon",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 34,
+ "height": 26,
+ "legend": {
+  "h": "shophouse",
+  "s": "lantern_street",
+  "r": "rail"
+ },
+ "rows": [
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+  "hrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrh",
+  "hrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hsshhhhsshhhhsssssssshhhhsshhhhssh",
+  "hsshhhhsshhhhsssssssshhhhsshhhhssh",
+  "hsshhhhsshhhhsssssssshhhhsshhhhssh",
+  "hsshhhhsshhhhsssssssshhhhsshhhhssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hssssssssssssssssssssssssssssssssh",
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+ ],
+ "spawns": {
+  "start": {
+   "x": 17,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_path": {
+   "x": 17,
+   "y": 22,
+   "facing": "up"
+  },
+  "from_river": {
+   "x": 6,
+   "y": 12,
+   "facing": "right"
+  },
+  "from_market": {
+   "x": 27,
+   "y": 12,
+   "facing": "left"
+  },
+  "from_railway": {
+   "x": 17,
+   "y": 6,
+   "facing": "down"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "river_tear",
+   "character": "world_tear",
+   "x": 4,
+   "y": 12,
+   "facing": "right",
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_river_sealed"
+     ],
+     "scene": "tear_sealed"
+    },
+    {
+     "scene": "C8_02_river_go"
+    }
+   ]
+  },
+  {
+   "id": "market_tear",
+   "character": "world_tear",
+   "x": 29,
+   "y": 12,
+   "facing": "left",
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_market_sealed"
+     ],
+     "scene": "tear_sealed"
+    },
+    {
+     "scene": "C8_03_market_go"
+    }
+   ]
+  },
+  {
+   "id": "railway_tear",
+   "character": "world_tear",
+   "x": 17,
+   "y": 4,
+   "facing": "down",
+   "show_if_flag": "ch08_two_sealed",
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_echo_beaten"
+     ],
+     "scene": "archive_door_shut"
+    },
+    {
+     "scene": "C8_04_railway_go"
+    }
+   ]
+  },
+  {
+   "id": "stationmaster",
+   "character": "stationmaster",
+   "x": 12,
+   "y": 8,
+   "facing": "down",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_stationmaster"
+    }
+   ]
+  },
+  {
+   "id": "moon_girl",
+   "character": "moon_girl",
+   "x": 22,
+   "y": 14,
+   "facing": "up",
+   "unaware": true,
+   "talk": [
+    {
+     "scene": "human_moon_girl"
+    }
+   ]
+  },
+  {
+   "id": "sprites",
+   "character": "tear_sprite",
+   "x": 10,
+   "y": 13,
+   "facing": "right",
+   "hide_if_flag": "lm_sprites_beaten",
+   "encounter": {
+    "id": "lm_sprites",
+    "outro_scene": "lm_sprites_beaten"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C8_01_hub",
+   "if_not_flags": [
+    "ch08_started"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#c8b8e8"
+}

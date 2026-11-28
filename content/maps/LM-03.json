@@ -1,0 +1,122 @@
+{
+ "id": "LM-03",
+ "name": "The Market Tear",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 20,
+ "legend": {
+  "h": "shophouse",
+  "s": "lantern_street",
+  "t": "stall",
+  "x": "silent_stone"
+ },
+ "rows": [
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hsssssssssssssssssssssxssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssstttsstttsstttssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hssssssssssssssssssssshssssssh",
+  "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+ ],
+ "spawns": {
+  "start": {
+   "x": 3,
+   "y": 10,
+   "facing": "right"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "watchman",
+   "character": "watchman",
+   "x": 20,
+   "y": 10,
+   "facing": "right",
+   "unaware": true,
+   "hide_if_flag": "ch08_watchman_gone",
+   "talk": [
+    {
+     "scene": "C8_03_watchman"
+    }
+   ]
+  },
+  {
+   "id": "glutton",
+   "character": "lantern_glutton",
+   "x": 26,
+   "y": 10,
+   "facing": "left",
+   "hide_if_flag": "ch08_glutton_beaten",
+   "encounter": {
+    "id": "market_boss",
+    "intro_scene": "C8_03_glutton_intro",
+    "outro_scene": "C8_03_market_sealed"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "id": "stone",
+   "x": 22,
+   "y": 10,
+   "talk": [
+    {
+     "if_flags": [
+      "ch08_market_stone"
+     ],
+     "scene": "stone_gone"
+    },
+    {
+     "if_flags": [
+      "ch08_watchman_gone"
+     ],
+     "scene": "C8_03_break"
+    },
+    {
+     "scene": "C8_03_stone_wait"
+    }
+   ]
+  }
+ ],
+ "signs": [],
+ "overrides": [
+  {
+   "if_flags": [
+    "ch08_market_stone"
+   ],
+   "tile": "rubble",
+   "cells": [
+    [
+     22,
+     10
+    ]
+   ]
+  }
+ ],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C8_03_arrive",
+   "if_not_flags": [
+    "ch08_market_arrived"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#e8c8a8"
+}

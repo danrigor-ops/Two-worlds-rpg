@@ -1,0 +1,73 @@
+{
+ "id": "LM-04",
+ "name": "The Railway Tear",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 22,
+ "legend": {
+  "w": "wall",
+  "s": "lantern_street",
+  "r": "rail"
+ },
+ "rows": [
+  "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wrrrrrrrrrrrrrrrrrrrrrrrrrrrrw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wssssssssssssssssssssssssssssw",
+  "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 18,
+   "facing": "up"
+  }
+ },
+ "doors": [],
+ "npcs": [
+  {
+   "id": "echo",
+   "character": "echo_1951",
+   "x": 15,
+   "y": 10,
+   "facing": "down",
+   "hide_if_flag": "ch08_echo_beaten",
+   "encounter": {
+    "id": "railway_boss",
+    "intro_scene": "C8_04_echo_intro",
+    "outro_scene": "C8_04_keeper"
+   }
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C8_04_arrive",
+   "if_not_flags": [
+    "ch08_railway_arrived"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#b0a8d0"
+}

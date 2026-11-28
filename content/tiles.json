@@ -555,6 +555,20 @@
    "color": "#6a6458",
    "accent": "#4a4438",
    "pattern": "stone"
+  },
+  "lantern_street": {
+   "index": 79,
+   "solid": false,
+   "color": "#4a4470",
+   "accent": "#e8b84a",
+   "pattern": "stone"
+  },
+  "spill": {
+   "index": 80,
+   "solid": true,
+   "color": "#5a8ab0",
+   "accent": "#c8e0f4",
+   "pattern": "water"
   }
  }
 }
