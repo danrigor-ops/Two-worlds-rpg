@@ -1,0 +1,101 @@
+{
+ "id": "AR-03",
+ "name": "The Keeper's Desk",
+ "status": "PLACEHOLDER geometry, not the painted map",
+ "width": 30,
+ "height": 22,
+ "legend": {
+  "#": "archive_shelf",
+  "f": "archive_floor",
+  "G": "archive_gate",
+  "P": "memory_page",
+  "D": "door"
+ },
+ "rows": [
+  "##############################",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#fffffffffffPPPPPPPffffffffff#",
+  "#fffffffffffPPPPPPPffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "#ffffffffffffffffffffffffffff#",
+  "###############D##############"
+ ],
+ "spawns": {
+  "start": {
+   "x": 15,
+   "y": 19,
+   "facing": "up"
+  },
+  "from_reading": {
+   "x": 15,
+   "y": 20,
+   "facing": "up"
+  }
+ },
+ "doors": [
+  {
+   "id": "to_reading",
+   "x": 15,
+   "y": 21,
+   "to_map": "AR-02",
+   "to_spawn": "from_desk"
+  }
+ ],
+ "npcs": [
+  {
+   "id": "keeper",
+   "character": "keeper",
+   "x": 15,
+   "y": 7,
+   "facing": "down",
+   "hide_if_flag": "ch09_keeper_confronted",
+   "encounter": {
+    "id": "keeper_first",
+    "intro_scene": "C9_04_keeper_intro",
+    "outro_scene": "C9_04_keeper_flees"
+   }
+  },
+  {
+   "id": "crossing_door",
+   "character": "crossing_door",
+   "x": 15,
+   "y": 6,
+   "facing": "down",
+   "show_if_flag": "chapter_10_unlocked",
+   "talk": [
+    {
+     "scene": "crossing_door_wait"
+    }
+   ]
+  }
+ ],
+ "objects": [],
+ "signs": [],
+ "overrides": [],
+ "triggers": [],
+ "on_enter": [
+  {
+   "scene": "C9_04_desk",
+   "if_not_flags": [
+    "ch09_desk_seen"
+   ]
+  }
+ ],
+ "movables": [],
+ "tint": "#a8a0c0"
+}

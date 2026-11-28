@@ -569,6 +569,41 @@
    "color": "#5a8ab0",
    "accent": "#c8e0f4",
    "pattern": "water"
+  },
+  "archive_floor": {
+   "index": 81,
+   "solid": false,
+   "color": "#3a3458",
+   "accent": "#8a7aa8",
+   "pattern": "checker"
+  },
+  "archive_shelf": {
+   "index": 82,
+   "solid": true,
+   "color": "#5a3a28",
+   "accent": "#e8d8b0",
+   "pattern": "shelf"
+  },
+  "archive_gate": {
+   "index": 83,
+   "solid": true,
+   "color": "#6a5a8a",
+   "accent": "#e8b84a",
+   "pattern": "gate"
+  },
+  "gate_open": {
+   "index": 84,
+   "solid": false,
+   "color": "#3a3458",
+   "accent": "#e8b84a",
+   "pattern": "checker"
+  },
+  "memory_page": {
+   "index": 85,
+   "solid": true,
+   "color": "#3a3458",
+   "accent": "#f4ecd2",
+   "pattern": "desk"
   }
  }
 }

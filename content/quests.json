@@ -708,6 +708,59 @@
     "active": "The last tear is on the old railway. Just Reno and Lumi, together.",
     "completed": "We saw 1951. And we saw him."
    }
+  },
+  {
+   "id": "C09-001",
+   "name": "The Catalogue",
+   "start": "locked",
+   "start_flags": [
+    "ch09_started"
+   ],
+   "complete_flags": [
+    "ch09_gates_open"
+   ],
+   "reward": {
+    "dewdrops": 10
+   },
+   "journal": {
+    "active": "The Archive Between Worlds. Three catalogue gates block the stacks. Each one wants something we carried here.",
+    "completed": "The stacks are open."
+   }
+  },
+  {
+   "id": "C09-002",
+   "name": "The Truth About 1951",
+   "start": "locked",
+   "start_flags": [
+    "ch09_gates_open"
+   ],
+   "complete_flags": [
+    "ch09_truth_known"
+   ],
+   "reward": {
+    "items": {
+     "item_cloud_honey": 3
+    }
+   },
+   "journal": {
+    "active": "Lumi can read the memory pages of 1951 with Echo Sight.",
+    "completed": "Now we know what happened on the platform. And who we are."
+   }
+  },
+  {
+   "id": "C09-003",
+   "name": "The Keeper of Forgotten Years",
+   "start": "locked",
+   "start_flags": [
+    "ch09_truth_known"
+   ],
+   "complete_flags": [
+    "ch09_keeper_confronted"
+   ],
+   "journal": {
+    "active": "The Keeper is at his desk at the heart of the Archive. Show him Maya's page.",
+    "completed": "He ran to the First Crossing. This ends there."
+   }
   }
  ]
 }

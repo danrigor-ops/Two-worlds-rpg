@@ -316,6 +316,21 @@
    "name": "Ticket to Nowhere",
    "kind": "key",
    "text": "Dropped by the Keeper. It says ARCHIVE BETWEEN WORLDS, and the date is 1951."
+  },
+  "equip_oathkeeper_pin": {
+   "name": "Oathkeeper's Pin",
+   "kind": "charm",
+   "equip_to": "reno",
+   "bonus": {
+    "atk": 3,
+    "spd": 2
+   },
+   "text": "Dropped by the Keeper. An old Oathkeeper badge, polished by worried thumbs. Reno wears it: ATK +3, SPD +2."
+  },
+  "item_mayas_page": {
+   "name": "Maya's Page",
+   "kind": "key",
+   "text": "Her last words in 1951, which the Keeper hid in the Archive: \"Tell them to keep the doors open. Don't let this make anyone afraid.\""
   }
  }
 }
